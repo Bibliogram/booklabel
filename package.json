@@ -1,0 +1,27 @@
+{
+	"name": "BiblioLabel",
+	"private": true,
+	"version": "0.1.0",
+	"type": "module",
+	"description": "A JavaScript library for generating and printing book labels",
+	"main": "./dist/booklabel.umd.cjs",
+	"exports": {
+    ".": {
+      "import": "./dist/booklabel.js",         
+      "require": "./dist/booklabel.umd.cjs"   
+    }
+	},
+	"scripts": {
+		"dev": "vite",
+		"preview": "vite preview",
+		"build:css": "sass src/bibliolabel.scss src/bibliolabel.css",
+  	"build": "npm run build:css && vite build"
+	},
+	"devDependencies": {
+		"vite": "^6.0.5",
+		"sass": "^1.83.4"
+	},
+	"dependencies": {
+		"@bwip-js/browser": "^4.5.1"
+	}
+}
