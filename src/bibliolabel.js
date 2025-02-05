@@ -71,8 +71,8 @@ class BiblioLabel extends HTMLElement {
     this.setTextContent(".title", this.config.title);
     this.setTextContent(".author", this.config.author);
     this.setTextContent(".unique-code", this.config.unique_code);
-    this.setTextContent(".internal-code", this.config.internal_code);
-    this.setTextContent(".isbn", this.config.isbn);
+    this.setTextContent(".internal-code", "#" + this.config.internal_code);
+    this.setTextContent(".isbn", "ISBN" + " " + this.config.isbn);
 
     BwipJs.toCanvas(this.shadowRoot.querySelector(".qrcode"), {
       bcid: 'qrcode',
