@@ -20,26 +20,31 @@ export class BookLabel {
     const iFrame = document.createElement("iframe");
     iFrame.setAttribute("width", "0px");
     iFrame.setAttribute("height", "0px");
-    iFrame.style.display = "none";
+    iFrame.style.visibility = 'hidden';
     document.body.appendChild(iFrame);
-
     const frameDoc = iFrame.contentDocument;
-    const frameStyle = document.createElement("style");
-    frameStyle.innerHTML = `
-      @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
-      html { font-family: 'Roboto Condensed', 'Roboto', sans-serif; }
-    `;
-    frameDoc.body.appendChild(frameStyle);
+    iFrame.contentWindow.addEventListener('afterprint', () => {
+      document.body.removeChild(iFrame);
+    });
 
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap';
+    link.addEventListener("load", () => {
+      frameDoc.fonts.ready.then(() => {
+        setTimeout(() => { // give time to qr-code and barcode to be generated before print
+          iFrame.contentWindow.print();
+        }, 500);
+      });
+    })
+    frameDoc.head.appendChild(link);
+
+    const frameStyle = document.createElement("style");
+    frameStyle.innerText = `html { font-family: 'Roboto Condensed', 'Roboto', sans-serif; } html, body { margin: 0; padding: 0; } @page { size: auto; margin: 0; }`;
+    frameDoc.body.appendChild(frameStyle);
+    
     const biblioLabel = new BiblioLabel(this.config);
     frameDoc.body.appendChild(biblioLabel);
-
-    setTimeout(() => {
-      iFrame.contentWindow.print();
-      iFrame.contentWindow.onafterprint = () => {
-        document.body.removeChild(iFrame);
-      };
-    }, 500);
   }
 }
 
@@ -71,8 +76,8 @@ class BiblioLabel extends HTMLElement {
     this.setTextContent(".title", this.config.title);
     this.setTextContent(".author", this.config.author);
     this.setTextContent(".unique-code", this.config.unique_code);
-    this.setTextContent(".internal-code", "#" + this.config.internal_code);
-    this.setTextContent(".isbn", "ISBN" + " " + this.config.isbn);
+    this.setTextContent(".internal-code", `#${this.config.internal_code}`);
+    this.setTextContent(".isbn", `ISBN ${this.config.isbn}`);
 
     BwipJs.toCanvas(this.shadowRoot.querySelector(".qrcode"), {
       bcid: 'qrcode',

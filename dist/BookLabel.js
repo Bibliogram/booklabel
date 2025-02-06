@@ -20589,18 +20589,23 @@ class Xl {
   }
   print() {
     const f = document.createElement("iframe");
-    f.setAttribute("width", "0px"), f.setAttribute("height", "0px"), f.style.display = "none", document.body.appendChild(f);
-    const v = f.contentDocument, d = document.createElement("style");
-    d.innerHTML = `
-      @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
-      html { font-family: 'Roboto Condensed', 'Roboto', sans-serif; }
-    `, v.body.appendChild(d);
-    const y = new Ho(this.config);
-    v.body.appendChild(y), setTimeout(() => {
-      f.contentWindow.print(), f.contentWindow.onafterprint = () => {
-        document.body.removeChild(f);
-      };
-    }, 500);
+    f.setAttribute("width", "0px"), f.setAttribute("height", "0px"), f.style.visibility = "hidden", document.body.appendChild(f);
+    const v = f.contentDocument;
+    f.contentWindow.addEventListener("afterprint", () => {
+      document.body.removeChild(f);
+    });
+    const d = document.createElement("link");
+    d.rel = "stylesheet", d.href = "https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap", d.addEventListener("load", () => {
+      v.fonts.ready.then(() => {
+        setTimeout(() => {
+          f.contentWindow.print();
+        }, 500);
+      });
+    }), v.head.appendChild(d);
+    const y = document.createElement("style");
+    y.innerText = "html { font-family: 'Roboto Condensed', 'Roboto', sans-serif; } html, body { margin: 0; padding: 0; } @page { size: auto; margin: 0; }", v.body.appendChild(y);
+    const g = new Ho(this.config);
+    v.body.appendChild(g);
   }
 }
 class Ho extends HTMLElement {
@@ -20614,7 +20619,7 @@ class Ho extends HTMLElement {
       ${Sf}
     `, this.shadowRoot.appendChild(d), this.shadowRoot.appendChild(v);
     const y = "f";
-    this.shadowRoot.querySelector("#label").className = y.concat(this.config.size.trim()), this.shadowRoot.querySelector(".logo.vertical").src = Pf, this.shadowRoot.querySelector(".logo.horizontal").src = Uf, this.setTextContent(".title", this.config.title), this.setTextContent(".author", this.config.author), this.setTextContent(".unique-code", this.config.unique_code), this.setTextContent(".internal-code", "#" + this.config.internal_code), this.setTextContent(".isbn", "ISBN " + this.config.isbn), Oo.toCanvas(this.shadowRoot.querySelector(".qrcode"), {
+    this.shadowRoot.querySelector("#label").className = y.concat(this.config.size.trim()), this.shadowRoot.querySelector(".logo.vertical").src = Pf, this.shadowRoot.querySelector(".logo.horizontal").src = Uf, this.setTextContent(".title", this.config.title), this.setTextContent(".author", this.config.author), this.setTextContent(".unique-code", this.config.unique_code), this.setTextContent(".internal-code", `#${this.config.internal_code}`), this.setTextContent(".isbn", `ISBN ${this.config.isbn}`), Oo.toCanvas(this.shadowRoot.querySelector(".qrcode"), {
       bcid: "qrcode",
       text: `https://backoffice.bibliogram.it/locate/hex/${this.config.unique_code}`
     }), Oo.toCanvas(this.shadowRoot.querySelector(".barcode"), {
