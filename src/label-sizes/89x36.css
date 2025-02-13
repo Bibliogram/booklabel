@@ -1,0 +1,17 @@
+#label.f89x36 {
+  flex-direction: row;
+  width: 79mm;
+  height: 32mm;
+  margin: 2.5mm 0 0 3mm;
+}
+#label.f89x36 .logo.vertical {
+  display: block;
+}
+#label.f89x36 .logo.horizontal {
+  display: none;
+}
+#label.f89x36 .block3 {
+  writing-mode: sideways-lr;
+}
+
+/*# sourceMappingURL=89x36.css.map */

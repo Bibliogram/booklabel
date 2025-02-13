@@ -2,10 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  border: 0.5pt solid black;
-  padding: 4mm;
-  gap: 4mm;
+  border: none;
+  gap: 2mm;
   font-family: "Roboto Condensed", "Roboto", sans-serif;
+  box-sizing: border-box;
 }
 #label .block1 {
   display: flex;
@@ -104,11 +104,6 @@
 #label.f32x57 .block3 {
   display: none !important;
 }
-#label.f89x36 {
-  flex-direction: row;
-  width: 89mm;
-  height: 36mm;
-}
 #label.f36x89 {
   flex-direction: column;
   width: 36mm;
@@ -123,15 +118,6 @@
   flex-direction: column;
   width: 51mm;
   height: 89mm;
-}
-#label.f89x36 .logo.vertical {
-  display: block;
-}
-#label.f89x36 .logo.horizontal {
-  display: none;
-}
-#label.f89x36 .block3 {
-  writing-mode: sideways-lr;
 }
 #label.f57x32 .block1, #label.f89x51 .block1 {
   flex-direction: column;

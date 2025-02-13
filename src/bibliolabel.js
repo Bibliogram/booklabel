@@ -3,6 +3,7 @@ import labelStyle from "./bibliolabel.css?raw";
 import logoH from "./images/logo-h.png?inline"
 import logoV from "./images/logo-v.png?inline";
 import BwipJs from "@bwip-js/browser";
+import mediumLandscape from "./label-sizes/89x36.css?raw";
 
 export class BookLabel {
   config = {
@@ -34,13 +35,24 @@ export class BookLabel {
       frameDoc.fonts.ready.then(() => {
         setTimeout(() => { // give time to qr-code and barcode to be generated before print
           iFrame.contentWindow.print();
-        }, 500);
+        }, 1000); //??
       });
     })
     frameDoc.head.appendChild(link);
 
+    function parseLabelsize(value) {
+      let [width, height] = value.split("x");
+        
+      return {
+        width: width ? width : null,
+        height: height ? height : null
+      };
+    }
+
+    const sizes = parseLabelsize(this.config.size);
+      
     const frameStyle = document.createElement("style");
-    frameStyle.innerText = `html { font-family: 'Roboto Condensed', 'Roboto', sans-serif; } html, body { margin: 0; padding: 0; } @page { size: auto; margin: 0; }`;
+    frameStyle.innerText = `html { font-family: 'Roboto Condensed', 'Roboto', sans-serif; } html, body { margin: 0; padding: 0; } @page { size: ${sizes.width}mm ${sizes.height}mm; margin: 0; }`;
     frameDoc.body.appendChild(frameStyle);
     
     const biblioLabel = new BiblioLabel(this.config);
@@ -63,6 +75,7 @@ class BiblioLabel extends HTMLElement {
     style.textContent = `
       :host { font-family: 'Roboto Condensed', 'Roboto', sans-serif; }
       ${labelStyle}
+      ${mediumLandscape}
     `;
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(template);

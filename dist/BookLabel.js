@@ -35,10 +35,10 @@ const Df = `<template id="label-template">
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  border: 0.5pt solid black;
-  padding: 4mm;
-  gap: 4mm;
+  border: none;
+  gap: 2mm;
   font-family: "Roboto Condensed", "Roboto", sans-serif;
+  box-sizing: border-box;
 }
 #label .block1 {
   display: flex;
@@ -137,11 +137,6 @@ const Df = `<template id="label-template">
 #label.f32x57 .block3 {
   display: none !important;
 }
-#label.f89x36 {
-  flex-direction: row;
-  width: 89mm;
-  height: 36mm;
-}
 #label.f36x89 {
   flex-direction: column;
   width: 36mm;
@@ -156,15 +151,6 @@ const Df = `<template id="label-template">
   flex-direction: column;
   width: 51mm;
   height: 89mm;
-}
-#label.f89x36 .logo.vertical {
-  display: block;
-}
-#label.f89x36 .logo.horizontal {
-  display: none;
-}
-#label.f89x36 .block3 {
-  writing-mode: sideways-lr;
 }
 #label.f57x32 .block1, #label.f89x51 .block1 {
   flex-direction: column;
@@ -327,8 +313,8 @@ function l(c, f, v) {
       for (var d = v.length - 1; d >= 0; d--)
         c[f + d] = v[d];
   else if (c instanceof Array)
-    for (var g = c.b, A = f + c.o, b = v.b, h = v.o, d = 0, y = v.length; d < y; d++)
-      g[A + d] = b[h + d];
+    for (var g = c.b, h = f + c.o, b = v.b, A = v.o, d = 0, y = v.length; d < y; d++)
+      g[h + d] = b[A + d];
   else
     throw new Error("putinterval-not-writable-" + typeof c);
 }
@@ -357,8 +343,8 @@ function Ie(c, f) {
     f instanceof Uint8Array || (f = C(f));
     for (var d = f.length, y = f[0], g = 0; g < v && c[g] != y; g++) ;
     for (; g < v; ) {
-      for (var A = 1; A < d && c[g + A] === f[A]; A++) ;
-      if (A === d)
+      for (var h = 1; h < d && c[g + h] === f[h]; h++) ;
+      if (h === d)
         break;
       for (g++; g < v && c[g] != y; g++) ;
     }
@@ -377,12 +363,12 @@ function L(c, f) {
       ;
   else if (c instanceof Map)
     for (var g = c.keys(), v = 0, d = c.size; v < d; v++) {
-      var A = g.next().value;
-      if (a[r++] = A, a[r++] = c.get(A), f && f()) break;
+      var h = g.next().value;
+      if (a[r++] = h, a[r++] = c.get(h), f && f()) break;
     }
   else
-    for (var A in c)
-      if (a[r++] = A, a[r++] = c[A], f && f()) break;
+    for (var h in c)
+      if (a[r++] = h, a[r++] = c[h], f && f()) break;
 }
 function Qi() {
   for (; r > 0 && a[--r] !== 1 / 0; ) ;
@@ -391,7 +377,7 @@ function rr() {
   for (var c = r - 1; c >= 0 && a[c] !== 1 / 0; c--) ;
   return r - c - 1;
 }
-function w(c) {
+function x(c) {
   for (var f = 0, v = c.length, d = c.b, y = c.o; f < v; f++)
     a[r++] = d[y + f];
 }
@@ -434,7 +420,7 @@ function li(c, f) {
 function Gs(c, f) {
   return typeof c == "boolean" ? c || f : c | f;
 }
-function Ar(c, f) {
+function hr(c, f) {
   return typeof c == "boolean" ? !c && f || c && !f : c ^ f;
 }
 function ke(c) {
@@ -462,12 +448,12 @@ function E1() {
         continue;
       y = f[d];
     }
-    var g = c[d], A = typeof g;
-    if (g == null || A == "number") {
+    var g = c[d], h = typeof g;
+    if (g == null || h == "number") {
       if (!isFinite(+y))
         throw new Error("bwipp.invalidOptionType: " + d + ": not a realtype: " + y);
       typeof y == "string" && (y = +y, v ? f.set(d, y) : f[d] = y);
-    } else if (A == "boolean") {
+    } else if (h == "boolean") {
       if (y !== !0 && y !== !1) {
         if (y == null || (y | 0) === y)
           y = !!y;
@@ -479,7 +465,7 @@ function E1() {
           throw new Error("bwipp.invalidOptionType: " + d + ": not a booleantype: " + y);
         v ? f.set(d, y) : f[d] = y;
       }
-    } else if (A == "string" || g instanceof Uint8Array) {
+    } else if (h == "string" || g instanceof Uint8Array) {
       if (typeof y == "number")
         y = "" + y, v ? f.set(d, y) : f[d] = y;
       else if (typeof y != "string" && !(y instanceof Uint8Array))
@@ -504,11 +490,11 @@ function sr() {
   var y = "eci", g = i(e.fncvals, y) !== void 0;
   if (e[y] = g, delete e.fncvals[y], !sr.__225__) {
     e = Object.create(e), a[r++] = 1 / 0;
-    var A = t(["NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", "BS", "TAB", "LF", "VT", "FF", "CR", "", "", "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB", "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"]);
+    var h = t(["NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", "BS", "TAB", "LF", "VT", "FF", "CR", "", "", "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB", "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"]);
     a[r++] = 0;
-    for (var b = 0, h = A.length; b < h; b++) {
-      var x = a[--r];
-      a[r++] = i(A, b), a[r++] = x, a[r++] = n(x + 1);
+    for (var b = 0, A = h.length; b < A; b++) {
+      var w = a[--r];
+      a[r++] = i(h, b), a[r++] = w, a[r++] = n(w + 1);
     }
     r--, e.ctrl = C1();
     for (var m in e) e.hasOwnProperty(m) && (sr.$ctx[m] = e[m]);
@@ -557,8 +543,8 @@ function sr() {
           }
           var _ = a[--r];
           if (a[r++] = _, _.length >= 3) {
-            var h1 = a[--r], g1 = o(h1, 0, 3);
-            a[r++] = h1, a[r++] = !0;
+            var A1 = a[--r], g1 = o(A1, 0, 3);
+            a[r++] = A1, a[r++] = !0;
             for (var u1 = 0, x1 = g1.length; u1 < x1; u1++) {
               var Q1 = i(g1, u1);
               (Q1 < 48 || Q1 > 57) && (r--, a[r++] = !1);
@@ -614,8 +600,8 @@ function sr() {
           a[r++] = "bwipp.unknownFNC#335", a[r++] = De, u();
         }
         s(e.msg, e.j, i(e.fncvals, a[--r])), e.j = n(e.j + 1);
-        var Ae = a[--r];
-        a[r++] = o(Ae, 4, Ae.length - 4);
+        var he = a[--r];
+        a[r++] = o(he, 4, he.length - 4);
         break;
       }
     } else
@@ -650,8 +636,8 @@ function s2() {
       ["max", 14],
       ["opt", !1],
       ["linters", y]
-    ]), A = t([g]), b = t(["255", "37"]), h = t(["22", "10", "21"]), x = t(["235"]), m = t([h, x]), B = /* @__PURE__ */ new Map([
-      ["parts", A],
+    ]), h = t([g]), b = t(["255", "37"]), A = t(["22", "10", "21"]), w = t(["235"]), m = t([A, w]), B = /* @__PURE__ */ new Map([
+      ["parts", h],
       ["ex", b],
       ["dlpkey", m]
     ]), I = t(["lintcsum", "lintkey"]), M = /* @__PURE__ */ new Map([
@@ -719,14 +705,14 @@ function s2() {
     ]), _ = /* @__PURE__ */ new Map([
       ["parts", t([l1])],
       ["req", t([t([t(["01"]), t(["02"]), t(["255"]), t(["8006"]), t(["8026"])])])]
-    ]), h1 = /* @__PURE__ */ new Map([
+    ]), A1 = /* @__PURE__ */ new Map([
       ["cset", "N"],
       ["min", 2],
       ["max", 2],
       ["opt", !1],
       ["linters", t([])]
     ]), g1 = /* @__PURE__ */ new Map([
-      ["parts", t([h1])],
+      ["parts", t([A1])],
       ["req", t([t([t(["01"]), t(["02"]), t(["8006"]), t(["8026"])])])]
     ]), u1 = /* @__PURE__ */ new Map([
       ["cset", "X"],
@@ -851,7 +837,7 @@ function s2() {
       ["max", 8],
       ["opt", !1],
       ["linters", t([])]
-    ]), Ae = /* @__PURE__ */ new Map([
+    ]), he = /* @__PURE__ */ new Map([
       ["parts", t([De])],
       ["req", t([t([t(["01"]), t(["02"])])])]
     ]), Fe = /* @__PURE__ */ new Map([
@@ -964,14 +950,14 @@ function s2() {
       ["parts", t([r1])],
       ["ex", t(["323n"])],
       ["req", t([t([t(["01"]), t(["02"])])])]
-    ]), A1 = /* @__PURE__ */ new Map([
+    ]), h1 = /* @__PURE__ */ new Map([
       ["cset", "N"],
       ["min", 6],
       ["max", 6],
       ["opt", !1],
       ["linters", t([])]
     ]), p1 = /* @__PURE__ */ new Map([
-      ["parts", t([A1])],
+      ["parts", t([h1])],
       ["ex", t(["324n"])],
       ["req", t([t([t(["01"]), t(["02"])])])]
     ]), K = /* @__PURE__ */ new Map([
@@ -1044,14 +1030,14 @@ function s2() {
       ["parts", t([Y1])],
       ["ex", t(["331n"])],
       ["req", t([t([t(["00"]), t(["01"])])])]
-    ]), he = /* @__PURE__ */ new Map([
+    ]), Ae = /* @__PURE__ */ new Map([
       ["cset", "N"],
       ["min", 6],
       ["max", 6],
       ["opt", !1],
       ["linters", t([])]
     ]), re = /* @__PURE__ */ new Map([
-      ["parts", t([he])],
+      ["parts", t([Ae])],
       ["ex", t(["332n"])],
       ["req", t([t([t(["00"]), t(["01"])])])]
     ]), Me = /* @__PURE__ */ new Map([
@@ -1184,14 +1170,14 @@ function s2() {
       ["parts", t([p2])],
       ["ex", t(["347n"])],
       ["req", t([t([t(["00"]), t(["01"])])])]
-    ]), A2 = /* @__PURE__ */ new Map([
+    ]), h2 = /* @__PURE__ */ new Map([
       ["cset", "N"],
       ["min", 6],
       ["max", 6],
       ["opt", !1],
       ["linters", t([])]
     ]), Ze = /* @__PURE__ */ new Map([
-      ["parts", t([A2])],
+      ["parts", t([h2])],
       ["ex", t(["348n"])],
       ["req", t([t([t(["00"]), t(["01"])])])]
     ]), E2 = /* @__PURE__ */ new Map([
@@ -1254,14 +1240,14 @@ function s2() {
       ["parts", t([vr])],
       ["ex", t(["354n"])],
       ["req", t([t([t(["00"]), t(["01"])])])]
-    ]), hr = /* @__PURE__ */ new Map([
+    ]), Ar = /* @__PURE__ */ new Map([
       ["cset", "N"],
       ["min", 6],
       ["max", 6],
       ["opt", !1],
       ["linters", t([])]
     ]), U2 = /* @__PURE__ */ new Map([
-      ["parts", t([hr])],
+      ["parts", t([Ar])],
       ["ex", t(["355n"])],
       ["req", t([t([t(["00"]), t(["01"])])])]
     ]), Mr = /* @__PURE__ */ new Map([
@@ -1384,14 +1370,14 @@ function s2() {
       ["parts", t([sa])],
       ["ex", t(["369n"])],
       ["req", t([t([t(["00"]), t(["01"])])])]
-    ]), Aa = /* @__PURE__ */ new Map([
+    ]), ha = /* @__PURE__ */ new Map([
       ["cset", "N"],
       ["min", 1],
       ["max", 8],
       ["opt", !1],
       ["linters", t([])]
-    ]), ha = /* @__PURE__ */ new Map([
-      ["parts", t([Aa])],
+    ]), Aa = /* @__PURE__ */ new Map([
+      ["parts", t([ha])],
       ["req", t([t([t(["00"])]), t([t(["02"]), t(["8026"])])])]
     ]), ma = /* @__PURE__ */ new Map([
       ["cset", "N"],
@@ -1578,14 +1564,14 @@ function s2() {
       ["parts", t([X2])],
       ["ex", t(["426"])],
       ["req", t([t([t(["01"]), t(["02"]), t(["8006"]), t(["8026"])])])]
-    ]), h2 = /* @__PURE__ */ new Map([
+    ]), A2 = /* @__PURE__ */ new Map([
       ["cset", "N"],
       ["min", 1],
       ["max", 15],
       ["opt", !1],
       ["linters", t(["lintiso3166list"])]
     ]), q2 = /* @__PURE__ */ new Map([
-      ["parts", t([h2])],
+      ["parts", t([A2])],
       ["ex", t(["426"])],
       ["req", t([t([t(["01"]), t(["02"])])])]
     ]), g2 = /* @__PURE__ */ new Map([
@@ -1704,14 +1690,14 @@ function s2() {
     ]), Nr = /* @__PURE__ */ new Map([
       ["parts", t([wa])],
       ["req", t([t([t(["00"])])])]
-    ]), At = /* @__PURE__ */ new Map([
+    ]), ht = /* @__PURE__ */ new Map([
       ["cset", "X"],
       ["min", 1],
       ["max", 70],
       ["opt", !1],
       ["linters", t(["lintpcenc"])]
     ]), La = /* @__PURE__ */ new Map([
-      ["parts", t([At])],
+      ["parts", t([ht])],
       ["req", t([t([t(["00"])])])]
     ]), Ka = /* @__PURE__ */ new Map([
       ["cset", "X"],
@@ -1737,7 +1723,7 @@ function s2() {
       ["max", 2],
       ["opt", !1],
       ["linters", t(["lintiso3166alpha2"])]
-    ]), ht = /* @__PURE__ */ new Map([
+    ]), At = /* @__PURE__ */ new Map([
       ["parts", t([it])],
       ["req", t([t([t(["00"])])])]
     ]), nt = /* @__PURE__ */ new Map([
@@ -2014,7 +2000,7 @@ function s2() {
       ["max", 30],
       ["opt", !1],
       ["linters", t(["lintkey"])]
-    ]), Ai = /* @__PURE__ */ new Map([
+    ]), hi = /* @__PURE__ */ new Map([
       ["parts", t([Ii])]
     ]), qt = /* @__PURE__ */ new Map([
       ["cset", "N"],
@@ -2031,7 +2017,7 @@ function s2() {
     ]), Ua = /* @__PURE__ */ new Map([
       ["parts", t([qt, Bi])],
       ["req", t([t([t(["01"]), t(["02"])])])]
-    ]), hi = /* @__PURE__ */ new Map([
+    ]), Ai = /* @__PURE__ */ new Map([
       ["cset", "N"],
       ["min", 1],
       ["max", 1],
@@ -2056,7 +2042,7 @@ function s2() {
       ["opt", !1],
       ["linters", t(["lintimporteridx"])]
     ]), Oi = /* @__PURE__ */ new Map([
-      ["parts", t([hi, ii, Mi, Ei])],
+      ["parts", t([Ai, ii, Mi, Ei])],
       ["dlattr", !1]
     ]), ji = /* @__PURE__ */ new Map([
       ["cset", "X"],
@@ -2382,18 +2368,18 @@ function s2() {
       ["max", 25],
       ["opt", !1],
       ["linters", t(["lintcsumalpha", "lintkey", "linthasnondigit"])]
-    ]), Ac = /* @__PURE__ */ new Map([
+    ]), hc = /* @__PURE__ */ new Map([
       ["parts", t([bc])],
       ["req", t([t([t(["01"])])])],
       ["dlattr", !1]
-    ]), hc = /* @__PURE__ */ new Map([
+    ]), Ac = /* @__PURE__ */ new Map([
       ["cset", "N"],
       ["min", 18],
       ["max", 18],
       ["opt", !1],
       ["linters", t(["lintcsum", "lintkey"])]
     ]), mc = /* @__PURE__ */ new Map([
-      ["parts", t([hc])],
+      ["parts", t([Ac])],
       ["ex", t(["8018"])],
       ["dlpkey", t([t(["8019"])])]
     ]), gc = /* @__PURE__ */ new Map([
@@ -2526,7 +2512,7 @@ function s2() {
       ["253", be],
       ["254", Te],
       ["255", ue],
-      ["30", Ae],
+      ["30", he],
       ["3100", ce],
       ["3101", ce],
       ["3102", ce],
@@ -2845,7 +2831,7 @@ function s2() {
       ["3693", aa],
       ["3694", aa],
       ["3695", aa],
-      ["37", ha],
+      ["37", Aa],
       ["3900", pr],
       ["3901", pr],
       ["3902", pr],
@@ -2933,7 +2919,7 @@ function s2() {
       ["4314", Za],
       ["4315", Za],
       ["4316", Za],
-      ["4317", ht],
+      ["4317", At],
       ["4318", Ra],
       ["4319", Na],
       ["4320", gt],
@@ -2961,7 +2947,7 @@ function s2() {
       ["7020", kt],
       ["7021", bi],
       ["7022", ti],
-      ["7023", Ai],
+      ["7023", hi],
       ["7030", Ua],
       ["7031", Ua],
       ["7032", Ua],
@@ -3015,7 +3001,7 @@ function s2() {
       ["8011", fc],
       ["8012", vc],
       ["8013", dc],
-      ["8014", Ac],
+      ["8014", hc],
       ["8017", mc],
       ["8018", uc],
       ["8019", xc],
@@ -3181,8 +3167,8 @@ function s2() {
         a[--r];
         var b4 = a[--r], Ks = a[--r];
         if (s(e.ais, Ks, d4), a[r++] = Ks, Ie(b4, "/"), a[--r]) {
-          var A4 = a[--r], h4 = a[--r];
-          a[r++] = A4, a[r++] = h4, r--;
+          var h4 = a[--r], A4 = a[--r];
+          a[r++] = h4, a[r++] = A4, r--;
         } else {
           var m4 = a[--r];
           a[r++] = "", a[r++] = m4;
@@ -3260,7 +3246,7 @@ function s2() {
       a[r++] = i(s0, vs);
       for (var ps = e.plen; ps >= 1; ps -= 1) {
         var o0 = a[--r];
-        a[r++] = o0, a[r++] = ps, a[r++] = o0, a[r++] = 1 / 0, w(o(e.ais, 0, e.plen)), an(rr() + 3, -2);
+        a[r++] = o0, a[r++] = ps, a[r++] = o0, a[r++] = 1 / 0, x(o(e.ais, 0, e.plen)), an(rr() + 3, -2);
         var z4 = a[--r], q4 = a[--r];
         a[r++] = z4, an(q4, 1);
         var V4 = t();
@@ -3281,8 +3267,8 @@ function s2() {
     e.ais = o(e.ais, 0, c0), e.vals = o(e.vals, 0, c0);
     for (var Rn = 0, Z4 = e.ais.length - 1; Rn <= Z4; Rn += 1) {
       if (a[r++] = Rn, k(i(e.ais, Rn), "01")) {
-        var f0 = a[--r], l0 = i(e.vals, f0), As = l0.length;
-        if (a[r++] = f0, a[r++] = l0, As == 8 || As == 12 || As == 13) {
+        var f0 = a[--r], l0 = i(e.vals, f0), hs = l0.length;
+        if (a[r++] = f0, a[r++] = l0, hs == 8 || hs == 12 || hs == 13) {
           var v0 = H2(C(14), "00000000000000"), p0 = a[--r];
           l(v0, 14 - p0.length, p0);
           var d0 = a[--r];
@@ -3295,17 +3281,17 @@ function s2() {
   }
   if (!s2.__2714__) {
     e = Object.create(e), a[r++] = 1 / 0;
-    for (var b0 = t(["00", "01", "02", "03", "04", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "31", "32", "33", "34", "35", "36", "41"]), hs = 0, $4 = b0.length; hs < $4; hs++) {
-      var A0 = i(b0, hs);
-      a[r++] = A0, a[r++] = A0;
+    for (var b0 = t(["00", "01", "02", "03", "04", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "31", "32", "33", "34", "35", "36", "41"]), As = 0, $4 = b0.length; As < $4; As++) {
+      var h0 = i(b0, As);
+      a[r++] = h0, a[r++] = h0;
     }
     e.aifixed = C1();
     for (var br in e) e.hasOwnProperty(br) && (s2.$ctx[br] = e[br]);
     s2.__2714__ = 1, e = Object.getPrototypeOf(e);
   }
   a[r++] = 1 / 0;
-  for (var h0 = e.ais, ms = 0, _4 = h0.length; ms < _4; ms++) {
-    var m0 = i(h0, ms);
+  for (var A0 = e.ais, ms = 0, _4 = A0.length; ms < _4; ms++) {
+    var m0 = i(A0, ms);
     if (a[r++] = !0, a[r++] = m0, m0.length >= 2) {
       var ef = i(e.aifixed, o(a[--r], 0, 2)) !== void 0;
       ef && (r--, a[r++] = !1);
@@ -3831,7 +3817,7 @@ function s2() {
         var d3 = a[--r], b3 = a[--r];
         if (a[r++] = b3, a[r++] = n(d3 + 1), n(d3 + 1) > b3.length)
           return r -= 3, a[r++] = "bwipp.GS1couponTooShort3rdPurchaseRequirement#3221", a[r++] = "Coupon too short: 3rd Purchase Requirement truncated", a[r++] = !1, !0;
-        var A3 = a[--r], h3 = a[--r], m3 = o(h3, A3, n(h3.length - A3));
+        var h3 = a[--r], A3 = a[--r], m3 = o(A3, h3, n(A3.length - h3));
         if (a[r++] = m3, m3.length < 1)
           return r -= 2, a[r++] = "bwipp.GS1couponTooShort3rdPurchaseRequirementCode#3227", a[r++] = "Coupon too short: Missing 3rd Purchase Requirement Code", a[r++] = !1, !0;
         var g3 = a[--r], u3 = b1(o(g3, 0, 1));
@@ -3960,10 +3946,10 @@ function s2() {
         a[r++] = o(bo, po, n(bo.length - po));
       }
     }
-    var Ao = a[--r];
-    if (a[r++] = Ao, Ao.length >= 1) {
-      var ho = a[--r];
-      if (a[r++] = ho, b1(o(ho, 0, 1)) == 9) {
+    var ho = a[--r];
+    if (a[r++] = ho, ho.length >= 1) {
+      var Ao = a[--r];
+      if (a[r++] = Ao, b1(o(Ao, 0, 1)) == 9) {
         var mo = a[--r], go = o(mo, 1, mo.length - 1);
         if (a[r++] = go, go.length < 1)
           return r -= 2, a[r++] = "bwipp.GS1couponTooShortSaveValueCode#3342", a[r++] = "Coupon too short: Missing Save Value Code", a[r++] = !1, !0;
@@ -4170,10 +4156,10 @@ function s2() {
     }
     for (var Ms = 0, bf = e.vals.length - 1; Ms <= bf; Ms += 1) {
       e.ai = i(e.ais, Ms);
-      var N0 = i(e.gs1syntax, e.ai), Af = i(N0, "ex") !== void 0;
-      if (a[r++] = N0, a[r++] = "ex", Af) {
-        var hf = a[--r];
-        L(i(a[--r], hf), function() {
+      var N0 = i(e.gs1syntax, e.ai), hf = i(N0, "ex") !== void 0;
+      if (a[r++] = N0, a[r++] = "ex", hf) {
+        var Af = a[--r];
+        L(i(a[--r], Af), function() {
           if (e.patt = a[--r], a[r++] = e.patt, a[r++] = e.ai, e.aiexists(), a[--r]) {
             var y1 = C(e.ai.length + e.patt.length + 36);
             l(y1, 0, "AIs ("), l(y1, 5, e.ai), l(y1, 5 + e.ai.length, ") and ("), l(y1, 12 + e.ai.length, e.patt), l(y1, 12 + e.ai.length + e.patt.length, ") are mutually exclusive"), a[r++] = "bwipp.GS1exclusiveAIs#3567", a[r++] = y1, u();
@@ -4226,9 +4212,9 @@ function K1() {
     }, e.abcd = function() {
       a[r++] = C(4), a[r++] = 0, a[r++] = 1 / 0;
       var I1 = a[--r], F1 = a[--r], P1 = a[--r], N1 = a[--r], H1 = n(a[--r] + N1 * e.pixx);
-      a[r++] = P1, a[r++] = F1, a[r++] = I1, a[r++] = H1, w(o(e.pixs, H1, 2));
+      a[r++] = P1, a[r++] = F1, a[r++] = I1, a[r++] = H1, x(o(e.pixs, H1, 2));
       var D1 = a[--r], G1 = a[--r], S1 = o(e.pixs, n(a[--r] + e.pixx), 2);
-      a[r++] = G1, a[r++] = D1, w(S1);
+      a[r++] = G1, a[r++] = D1, x(S1);
       for (var _1 = t(), Z1 = 0, J1 = _1.length; Z1 < J1; Z1++) {
         var te = a[--r], se = a[--r];
         s(se, te, n(i(_1, Z1) + 48)), a[r++] = se, a[r++] = n(te + 1);
@@ -4296,7 +4282,7 @@ function K1() {
       for (var I1 = 0, F1 = e.pixx + 2; I1 < F1; I1++)
         a[r++] = 0;
       for (var P1 = 0, N1 = e.pixx, H1 = e.pixs.length - 1; N1 < 0 ? P1 >= H1 : P1 <= H1; P1 += N1)
-        a[r++] = 0, w(o(e.pixs, P1, e.pixx)), a[r++] = 0;
+        a[r++] = 0, x(o(e.pixs, P1, e.pixx)), a[r++] = 0;
       for (var D1 = 0, G1 = e.pixx + 2; D1 < G1; D1++)
         a[r++] = 0;
       e.pixs = t(), e.pixx = e.pixx + 2, e.pixy = e.pixy + 2, a[r++] = 1 / 0;
@@ -4313,11 +4299,11 @@ function K1() {
       }
       e.paths = t(), e.pixx = e.pixx - 2, e.pixy = e.pixy - 2, z.newpath();
       for (var ie = e.paths, pe = 0, be = ie.length; pe < be; pe++) {
-        e.p = i(ie, pe), e.len = e.p.length, w(i(e.p, e.len - 1)), w(i(e.p, 0));
+        e.p = i(ie, pe), e.len = e.p.length, x(i(e.p, e.len - 1)), x(i(e.p, 0));
         for (var fe = 0, Te = e.len - 1; fe <= Te; fe += 1) {
-          e.i = fe, w(i(e.p, (e.i + 1) % e.len));
-          var V1 = a[--r], Ce = a[--r], ue = a[--r], De = a[--r], Ae = a[--r], Fe = a[--r];
-          if (a[r++] = De, a[r++] = ue, a[r++] = Ce, a[r++] = V1, a[r++] = Fe, a[r++] = De, a[r++] = e.inkspreadh, za(V1, Ae)) {
+          e.i = fe, x(i(e.p, (e.i + 1) % e.len));
+          var V1 = a[--r], Ce = a[--r], ue = a[--r], De = a[--r], he = a[--r], Fe = a[--r];
+          if (a[r++] = De, a[r++] = ue, a[r++] = Ce, a[r++] = V1, a[r++] = Fe, a[r++] = De, a[r++] = e.inkspreadh, za(V1, he)) {
             var ce = a[--r], Ye = a[--r];
             a[r++] = n(Ye + ce);
           } else {
@@ -4352,22 +4338,22 @@ function K1() {
     }, z.save();
     var c = z.currpos();
     if (z.translate(c.x, c.y), e.inkspread = e.inkspread / 2, e.inkspreadh = e.inkspreadh / 2, e.inkspreadv = e.inkspreadv / 2, z.scale(e.width / e.pixx * 72, e.height / e.pixy * 72), e.tl = t([-n(e.borderleft + e.borderwidth / 2), n(e.pixy + e.bordertop + e.borderwidth / 2)]), e.tr = t([n(e.pixx + e.borderright + e.borderwidth / 2), n(e.pixy + e.bordertop + e.borderwidth / 2)]), e.bl = t([-n(e.borderleft + e.borderwidth / 2), -n(e.borderbottom + e.borderwidth / 2)]), e.br = t([n(e.pixx + e.borderright + e.borderwidth / 2), -n(e.borderbottom + e.borderwidth / 2)]), v1(e.backgroundcolor, "unset")) {
-      z.save(), z.newpath(), w(e.bl);
+      z.save(), z.newpath(), x(e.bl);
       var f = a[--r];
       z.moveto(a[--r], f);
       for (var v = t([e.br, e.tr, e.tl]), d = 0, y = v.length; d < y; d++) {
-        w(i(v, d));
+        x(i(v, d));
         var g = a[--r];
         z.lineto(a[--r], g);
       }
       z.closepath(), z.setcolor(e.backgroundcolor), z.fill(), z.restore();
     }
     if (e.showborder) {
-      z.save(), z.newpath(), w(e.bl);
-      var A = a[--r];
-      z.moveto(a[--r], A);
-      for (var b = t([e.br, e.tr, e.tl]), h = 0, x = b.length; h < x; h++) {
-        w(i(b, h));
+      z.save(), z.newpath(), x(e.bl);
+      var h = a[--r];
+      z.moveto(a[--r], h);
+      for (var b = t([e.br, e.tr, e.tl]), A = 0, w = b.length; A < w; A++) {
+        x(i(b, A));
         var m = a[--r];
         z.lineto(a[--r], m);
       }
@@ -4408,7 +4394,7 @@ function K1() {
       } else {
         if (z.selectfont(e.textfont, e.textsize), k(e.alttext, "")) {
           a[r++] = 1 / 0;
-          for (var l1 = e.txt, _ = 0, h1 = l1.length; _ < h1; _++)
+          for (var l1 = e.txt, _ = 0, A1 = l1.length; _ < A1; _++)
             L(i(i(l1, _), 0));
           e.txt = t(), e.tstr = C(e.txt.length);
           for (var g1 = 0, u1 = e.txt.length - 1; g1 <= u1; g1 += 1)
@@ -4452,18 +4438,18 @@ function si() {
     l(e.sbs, e.i * 6 + 3, e.enc), s(e.txt, e.i, t([o(e.barcode, e.i, 1), (e.i - 1) * 9 + 10 + e.textxoffset, e.textyoffset, e.textfont, e.textsize]));
   }
   a[r++] = 1 / 0, a[r++] = 1 / 0;
-  for (var g = e.sbs, A = 0, b = g.length; A < b; A++)
-    a[r++] = i(g, A) - 48;
-  var h = t();
+  for (var g = e.sbs, h = 0, b = g.length; h < b; h++)
+    a[r++] = i(g, h) - 48;
+  var A = t();
   a[r++] = 1 / 0;
-  for (var x = 0, m = 16; x < m; x++)
+  for (var w = 0, m = 16; w < m; w++)
     a[r++] = e.height;
   var B = t();
   a[r++] = 1 / 0;
   for (var I = 0, M = 16; I < M; I++)
     a[r++] = 0;
   var R = t();
-  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = h, a[r++] = "bhs", a[r++] = B, a[r++] = "bbs", a[r++] = R, e.includetext && (a[r++] = "txt", a[r++] = e.txt), a[r++] = "opt", a[r++] = e.options, a[r++] = "guardrightpos", a[r++] = 5, a[r++] = "guardrightypos", a[r++] = n(e.textyoffset + 4), a[r++] = "borderleft", a[r++] = 12, a[r++] = "borderright", a[r++] = 5, a[r++] = "bordertop", a[r++] = 10;
+  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = A, a[r++] = "bhs", a[r++] = B, a[r++] = "bbs", a[r++] = R, e.includetext && (a[r++] = "txt", a[r++] = e.txt), a[r++] = "opt", a[r++] = e.options, a[r++] = "guardrightpos", a[r++] = 5, a[r++] = "guardrightypos", a[r++] = n(e.textyoffset + 4), a[r++] = "borderleft", a[r++] = 12, a[r++] = "borderright", a[r++] = 5, a[r++] = "bordertop", a[r++] = 10;
   var Q = C1();
   a[r++] = Q, e.dontdraw || ve(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
 }
@@ -4487,11 +4473,11 @@ function oi() {
     l(e.sbs, e.i * 6 + 3, e.enc), s(e.txt, e.i, t([o(e.barcode, e.i, 1), (e.i - 1) * 9 + 10 + e.textxoffset, e.textyoffset, e.textfont, e.textsize]));
   }
   a[r++] = 1 / 0, a[r++] = 1 / 0;
-  for (var y = e.sbs, g = 0, A = y.length; g < A; g++)
+  for (var y = e.sbs, g = 0, h = y.length; g < h; g++)
     a[r++] = i(y, g) - 48;
   var b = t();
   a[r++] = 1 / 0;
-  for (var h = 0, x = 12; h < x; h++)
+  for (var A = 0, w = 12; A < w; A++)
     a[r++] = e.height;
   var m = t();
   a[r++] = 1 / 0;
@@ -4528,11 +4514,11 @@ function ci() {
   for (var g = 7; g <= 12; g += 1)
     e.i = g, Ie(e.barchars, o(e.barcode, e.i, 1)), r--, e.indx = a[--r].length, r -= 2, e.enc = i(e.encs, e.indx), l(e.sbs, (e.i - 1) * 4 + 8, e.enc), s(e.txt, e.i, t([o(e.barcode, e.i, 1), (e.i - 1) * 7 + 19 + e.textxoffset, e.textyoffset, e.textfont, e.textsize]));
   l(e.sbs, 56, i(e.encs, 12)), a[r++] = 1 / 0;
-  for (var A = e.sbs, b = 0, h = A.length; b < h; b++)
-    a[r++] = i(A, b) - 48;
+  for (var h = e.sbs, b = 0, A = h.length; b < A; b++)
+    a[r++] = i(h, b) - 48;
   if (e.sbs = t(), e.includetext) {
     a[r++] = 1 / 0, a[r++] = e.height, a[r++] = e.height;
-    for (var x = 0, m = 12; x < m; x++)
+    for (var w = 0, m = 12; w < m; w++)
       a[r++] = n(e.height - 0.075);
     a[r++] = e.height, a[r++] = e.height;
     for (var B = 0, I = 12; B < I; B++)
@@ -4556,13 +4542,13 @@ function ci() {
   if (e.guardrightypos = 0, v1(e.addon, "")) {
     a[r++] = 1 / 0, a[r++] = "dontdraw", a[r++] = !0, a[r++] = "includetext", a[r++] = !0, a[r++] = "height", a[r++] = n(e.height - 0.15), a[r++] = "textxoffset", v1(e.addontextxoffset, null) ? a[r++] = e.addontextxoffset : a[r++] = 95 + e.addongap, v1(e.addontextyoffset, null) && (a[r++] = "textyoffset", a[r++] = e.addontextyoffset), a[r++] = "textsize", v1(e.addontextsize, null) ? a[r++] = e.addontextsize : a[r++] = e.textsize;
     var G = v1(e.addontextfont, "unset") ? e.addontextfont : e.textfont;
-    a[r++] = "textfont", a[r++] = G, e.addopts = C1(), e.addon.length == 2 && (a[r++] = e.addon, a[r++] = e.addopts, oi()), e.addon.length == 5 && (a[r++] = e.addon, a[r++] = e.addopts, si()), e.addcode = a[--r], a[r++] = 1 / 0, w(e.sbs), a[r++] = e.addongap, w(i(e.addcode, "sbs")), e.sbs = t(), a[r++] = 1 / 0, w(e.bhs), L(i(e.addcode, "bhs"), function() {
+    a[r++] = "textfont", a[r++] = G, e.addopts = C1(), e.addon.length == 2 && (a[r++] = e.addon, a[r++] = e.addopts, oi()), e.addon.length == 5 && (a[r++] = e.addon, a[r++] = e.addopts, si()), e.addcode = a[--r], a[r++] = 1 / 0, x(e.sbs), a[r++] = e.addongap, x(i(e.addcode, "sbs")), e.sbs = t(), a[r++] = 1 / 0, x(e.bhs), L(i(e.addcode, "bhs"), function() {
       var U = a[--r];
       a[r++] = n(U - 0.075);
-    }), e.bhs = t(), a[r++] = 1 / 0, w(e.bbs), L(i(e.addcode, "bbs"), function() {
+    }), e.bhs = t(), a[r++] = 1 / 0, x(e.bbs), L(i(e.addcode, "bbs"), function() {
       var U = a[--r];
       a[r++] = n(U + 0.075);
-    }), e.bbs = t(), a[r++] = 1 / 0, w(e.txt), w(i(e.addcode, "txt")), e.txt = t(), e.guardrightypos = e.height * 72 - 6;
+    }), e.bbs = t(), a[r++] = 1 / 0, x(e.txt), x(i(e.addcode, "txt")), e.txt = t(), e.guardrightypos = e.height * 72 - 6;
   }
   a[r++] = 1 / 0, a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = e.sbs, a[r++] = "bhs", a[r++] = e.bhs, a[r++] = "bbs", a[r++] = e.bbs, a[r++] = "txt", a[r++] = e.txt, a[r++] = "opt", a[r++] = e.options, a[r++] = "guardrightpos", k(e.addon, "") ? a[r++] = 7 : a[r++] = 5, a[r++] = "guardrightypos", a[r++] = e.guardrightypos, a[r++] = "borderleft", a[r++] = 11, a[r++] = "borderright", k(e.addon, "") ? a[r++] = 7 : a[r++] = 5, a[r++] = "bordertop", a[r++] = 0, a[r++] = "borderbottom", a[r++] = 5;
   var H = C1();
@@ -4587,14 +4573,14 @@ function Fi() {
   for (var d = 4; d <= 7; d += 1)
     e.i = d, Ie(e.barchars, o(e.barcode, e.i, 1)), r--, e.indx = a[--r].length, r -= 2, e.enc = i(e.encs, e.indx), l(e.sbs, e.i * 4 + 8, e.enc), s(e.txt, e.i, t([o(e.barcode, e.i, 1), e.i * 7 + e.textxoffset + 4, e.textyoffset, e.textfont, e.textsize]));
   l(e.sbs, 40, i(e.encs, 12)), a[r++] = 1 / 0;
-  for (var y = e.sbs, g = 0, A = y.length; g < A; g++)
+  for (var y = e.sbs, g = 0, h = y.length; g < h; g++)
     a[r++] = i(y, g) - 48;
   if (e.sbs = t(), e.includetext) {
     a[r++] = 1 / 0, a[r++] = e.height, a[r++] = e.height;
-    for (var b = 0, h = 8; b < h; b++)
+    for (var b = 0, A = 8; b < A; b++)
       a[r++] = n(e.height - 0.075);
     a[r++] = e.height, a[r++] = e.height;
-    for (var x = 0, m = 8; x < m; x++)
+    for (var w = 0, m = 8; w < m; w++)
       a[r++] = n(e.height - 0.075);
     a[r++] = e.height, a[r++] = e.height, e.bhs = t(), a[r++] = 1 / 0, a[r++] = 0, a[r++] = 0;
     for (var B = 0, I = 8; B < I; B++)
@@ -4615,13 +4601,13 @@ function Fi() {
   if (e.guardrightypos = 0, v1(e.addon, "")) {
     a[r++] = 1 / 0, a[r++] = "dontdraw", a[r++] = !0, a[r++] = "includetext", a[r++] = !0, a[r++] = "height", a[r++] = n(e.height - 0.15), a[r++] = "textxoffset", v1(e.addontextxoffset, null) ? a[r++] = e.addontextxoffset : a[r++] = 67 + e.addongap, v1(e.addontextyoffset, null) && (a[r++] = "textyoffset", a[r++] = e.addontextyoffset), a[r++] = "textsize", v1(e.addontextsize, null) ? a[r++] = e.addontextsize : a[r++] = e.textsize;
     var W = v1(e.addontextfont, "unset") ? e.addontextfont : e.textfont;
-    a[r++] = "textfont", a[r++] = W, e.addopts = C1(), e.addon.length == 2 && (a[r++] = e.addon, a[r++] = e.addopts, oi()), e.addon.length == 5 && (a[r++] = e.addon, a[r++] = e.addopts, si()), e.addcode = a[--r], a[r++] = 1 / 0, w(e.sbs), a[r++] = e.addongap, w(i(e.addcode, "sbs")), e.sbs = t(), a[r++] = 1 / 0, w(e.bhs), L(i(e.addcode, "bhs"), function() {
+    a[r++] = "textfont", a[r++] = W, e.addopts = C1(), e.addon.length == 2 && (a[r++] = e.addon, a[r++] = e.addopts, oi()), e.addon.length == 5 && (a[r++] = e.addon, a[r++] = e.addopts, si()), e.addcode = a[--r], a[r++] = 1 / 0, x(e.sbs), a[r++] = e.addongap, x(i(e.addcode, "sbs")), e.sbs = t(), a[r++] = 1 / 0, x(e.bhs), L(i(e.addcode, "bhs"), function() {
       var G = a[--r];
       a[r++] = n(G - 0.075);
-    }), e.bhs = t(), a[r++] = 1 / 0, w(e.bbs), L(i(e.addcode, "bbs"), function() {
+    }), e.bhs = t(), a[r++] = 1 / 0, x(e.bbs), L(i(e.addcode, "bbs"), function() {
       var G = a[--r];
       a[r++] = n(G + 0.075);
-    }), e.bbs = t(), a[r++] = 1 / 0, w(e.txt), w(i(e.addcode, "txt")), e.txt = t(), e.guardrightypos = e.height * 72 - 6;
+    }), e.bbs = t(), a[r++] = 1 / 0, x(e.txt), x(i(e.addcode, "txt")), e.txt = t(), e.guardrightypos = e.height * 72 - 6;
   }
   a[r++] = 1 / 0, a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = e.sbs, a[r++] = "bhs", a[r++] = e.bhs, a[r++] = "bbs", a[r++] = e.bbs, a[r++] = "txt", a[r++] = e.txt, a[r++] = "opt", a[r++] = e.options, a[r++] = "guardleftpos", a[r++] = 7, a[r++] = "guardrightpos", k(e.addon, "") ? a[r++] = 7 : a[r++] = 5, a[r++] = "guardrightypos", a[r++] = e.guardrightypos, a[r++] = "borderleft", a[r++] = 7, a[r++] = "borderright", k(e.addon, "") ? a[r++] = 7 : a[r++] = 5, a[r++] = "bordertop", a[r++] = 0, a[r++] = "borderbottom", a[r++] = 5;
   var e1 = C1();
@@ -4657,16 +4643,16 @@ function Ui() {
     e.barcode.length == 8 && l(e.upcacode, 11, o(e.barcode, 7, 1)), e.barcode = e.upcacode;
   }
   e.barcode.length != 11 && e.barcode.length != 12 && (a[r++] = "bwipp.upcAbadLength#5177", a[r++] = "UPC-A must be 11 or 12 digits", u());
-  for (var y = e.barcode, g = 0, A = y.length; g < A; g++) {
+  for (var y = e.barcode, g = 0, h = y.length; g < h; g++) {
     var b = i(y, g);
     (b < 48 || b > 57) && (a[r++] = "bwipp.upcAbadCharacter#5181", a[r++] = "UPC-A must contain only digits", u());
   }
   e.addon.length != 0 && e.addon.length != 2 && e.addon.length != 5 && (a[r++] = "bwipp.upcAbadAddOnLength#5185", a[r++] = "Add-on for UPC-A must be 2 or 5 digits", u()), e.pad = C(12), e.checksum = 0;
-  for (var h = 0; h <= 10; h += 1)
-    e.i = h, e.barchar = i(e.barcode, e.i) - 48, e.i % 2 != 0 ? e.checksum = e.checksum + e.barchar : e.checksum = e.checksum + e.barchar * 3;
+  for (var A = 0; A <= 10; A += 1)
+    e.i = A, e.barchar = i(e.barcode, e.i) - 48, e.i % 2 != 0 ? e.checksum = e.checksum + e.barchar : e.checksum = e.checksum + e.barchar * 3;
   if (e.checksum = (10 - e.checksum % 10) % 10, e.barcode.length == 12 && i(e.barcode, 11) != e.checksum + 48 && (a[r++] = "bwipp.upcAbadCheckDigit#5203", a[r++] = "Incorrect UPC check digit provided", u()), l(e.pad, 0, e.barcode), s(e.pad, 11, e.checksum + 48), e.barcode = e.pad, !Ui.__5220__) {
     e = Object.create(e), e.encs = t(["3211", "2221", "2122", "1411", "1132", "1231", "1114", "1312", "1213", "3112", "111", "11111", "111"]), e.barchars = "0123456789";
-    for (var x in e) e.hasOwnProperty(x) && (Ui.$ctx[x] = e[x]);
+    for (var w in e) e.hasOwnProperty(w) && (Ui.$ctx[w] = e[w]);
     Ui.__5220__ = 1, e = Object.getPrototypeOf(e);
   }
   e.sbs = C(59), e.txt = t(12), l(e.sbs, 0, i(e.encs, 10));
@@ -4708,13 +4694,13 @@ function Ui() {
   if (e.guardrightypos = 0, v1(e.addon, "")) {
     a[r++] = 1 / 0, a[r++] = "dontdraw", a[r++] = !0, a[r++] = "includetext", a[r++] = !0, a[r++] = "height", a[r++] = n(e.height - 0.15), a[r++] = "textxoffset", v1(e.addontextxoffset, null) ? a[r++] = e.addontextxoffset : a[r++] = 95 + e.addongap, v1(e.addontextyoffset, null) && (a[r++] = "textyoffset", a[r++] = e.addontextyoffset), a[r++] = "textsize", v1(e.addontextsize, null) ? a[r++] = e.addontextsize : a[r++] = e.textsize;
     var i1 = v1(e.addontextfont, "unset") ? e.addontextfont : e.textfont;
-    a[r++] = "textfont", a[r++] = i1, e.addopts = C1(), e.addon.length == 2 && (a[r++] = e.addon, a[r++] = e.addopts, oi()), e.addon.length == 5 && (a[r++] = e.addon, a[r++] = e.addopts, si()), e.addcode = a[--r], a[r++] = 1 / 0, w(e.sbs), a[r++] = e.addongap, w(i(e.addcode, "sbs")), e.sbs = t(), a[r++] = 1 / 0, w(e.bhs), L(i(e.addcode, "bhs"), function() {
+    a[r++] = "textfont", a[r++] = i1, e.addopts = C1(), e.addon.length == 2 && (a[r++] = e.addon, a[r++] = e.addopts, oi()), e.addon.length == 5 && (a[r++] = e.addon, a[r++] = e.addopts, si()), e.addcode = a[--r], a[r++] = 1 / 0, x(e.sbs), a[r++] = e.addongap, x(i(e.addcode, "sbs")), e.sbs = t(), a[r++] = 1 / 0, x(e.bhs), L(i(e.addcode, "bhs"), function() {
       var _ = a[--r];
       a[r++] = n(_ - 0.075);
-    }), e.bhs = t(), a[r++] = 1 / 0, w(e.bbs), L(i(e.addcode, "bbs"), function() {
+    }), e.bhs = t(), a[r++] = 1 / 0, x(e.bbs), L(i(e.addcode, "bbs"), function() {
       var _ = a[--r];
       a[r++] = n(_ + 0.075);
-    }), e.bbs = t(), a[r++] = 1 / 0, w(e.txt), w(i(e.addcode, "txt")), e.txt = t(), e.guardrightypos = e.height * 72 - 6;
+    }), e.bbs = t(), a[r++] = 1 / 0, x(e.txt), x(i(e.addcode, "txt")), e.txt = t(), e.guardrightypos = e.height * 72 - 6;
   }
   a[r++] = 1 / 0, a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = e.sbs, a[r++] = "bhs", a[r++] = e.bhs, a[r++] = "bbs", a[r++] = e.bbs, a[r++] = "txt", a[r++] = e.txt, a[r++] = "opt", a[r++] = e.options, a[r++] = "guardrightpos", k(e.addon, "") ? a[r++] = 9 : a[r++] = 5, a[r++] = "guardrightypos", a[r++] = e.guardrightypos, a[r++] = "borderleft", a[r++] = 9, a[r++] = "borderright", k(e.addon, "") ? a[r++] = 9 : a[r++] = 5, a[r++] = "bordertop", a[r++] = 0, a[r++] = "borderbottom", a[r++] = 5;
   var l1 = C1();
@@ -4750,17 +4736,17 @@ function Pi() {
   }
   e.barcode.length != 7 && e.barcode.length != 8 && (a[r++] = "bwipp.upcEbadLength#5426", a[r++] = "UPC-E must be 7 or 8 digits", u());
   for (var d = e.barcode, y = 0, g = d.length; y < g; y++) {
-    var A = i(d, y);
-    (A < 48 || A > 57) && (a[r++] = "bwipp.upcEbadCharacter#5430", a[r++] = "UPC-E must contain only digits", u());
+    var h = i(d, y);
+    (h < 48 || h > 57) && (a[r++] = "bwipp.upcEbadCharacter#5430", a[r++] = "UPC-E must contain only digits", u());
   }
   e.addon.length != 0 && e.addon.length != 2 && e.addon.length != 5 && (a[r++] = "bwipp.upcEbadAddOnLength#5434", a[r++] = "Add-on for UPC-E must be 2 or 5 digits", u());
   var b = i(e.barcode, 0);
   if (b != 48 && b != 49 && (a[r++] = "bwipp.upcEbadNumberSystem#5439", a[r++] = "UPC-E must have number system 0 or 1", u()), !Pi.__5457__) {
     e = Object.create(e), e.encs = t(["3211", "2221", "2122", "1411", "1132", "1231", "1114", "1312", "1213", "3112", "111", "111111"]), e.barchars = "0123456789", e.mirrormaps = t(["000111", "001011", "001101", "001110", "010011", "011001", "011100", "010101", "010110", "011010"]);
-    for (var h in e) e.hasOwnProperty(h) && (Pi.$ctx[h] = e[h]);
+    for (var A in e) e.hasOwnProperty(A) && (Pi.$ctx[A] = e[A]);
     Pi.__5457__ = 1, e = Object.getPrototypeOf(e);
   }
-  for (var x = 0, m = 1; x < m; x++) {
+  for (var w = 0, m = 1; w < m; w++) {
     if (e.upcacode = C(11), i(e.barcode, 6) - 48 <= 2) {
       l(e.upcacode, 0, o(e.barcode, 0, 3)), l(e.upcacode, 3, o(e.barcode, 6, 1)), l(e.upcacode, 4, "0000"), l(e.upcacode, 8, o(e.barcode, 3, 3));
       break;
@@ -4820,13 +4806,13 @@ function Pi() {
   if (e.guardrightypos = 0, v1(e.addon, "")) {
     a[r++] = 1 / 0, a[r++] = "dontdraw", a[r++] = !0, a[r++] = "includetext", a[r++] = !0, a[r++] = "height", a[r++] = n(e.height - 0.15), a[r++] = "textxoffset", v1(e.addontextxoffset, null) ? a[r++] = e.addontextxoffset : a[r++] = 51 + e.addongap, v1(e.addontextyoffset, null) && (a[r++] = "textyoffset", a[r++] = e.addontextyoffset), a[r++] = "textsize", v1(e.addontextsize, null) ? a[r++] = e.addontextsize : a[r++] = e.textsize;
     var J = v1(e.addontextfont, "unset") ? e.addontextfont : e.textfont;
-    a[r++] = "textfont", a[r++] = J, e.addopts = C1(), e.addon.length == 2 && (a[r++] = e.addon, a[r++] = e.addopts, oi()), e.addon.length == 5 && (a[r++] = e.addon, a[r++] = e.addopts, si()), e.addcode = a[--r], a[r++] = 1 / 0, w(e.sbs), a[r++] = e.addongap, w(i(e.addcode, "sbs")), e.sbs = t(), a[r++] = 1 / 0, w(e.bhs), L(i(e.addcode, "bhs"), function() {
+    a[r++] = "textfont", a[r++] = J, e.addopts = C1(), e.addon.length == 2 && (a[r++] = e.addon, a[r++] = e.addopts, oi()), e.addon.length == 5 && (a[r++] = e.addon, a[r++] = e.addopts, si()), e.addcode = a[--r], a[r++] = 1 / 0, x(e.sbs), a[r++] = e.addongap, x(i(e.addcode, "sbs")), e.sbs = t(), a[r++] = 1 / 0, x(e.bhs), L(i(e.addcode, "bhs"), function() {
       var a1 = a[--r];
       a[r++] = n(a1 - 0.075);
-    }), e.bhs = t(), a[r++] = 1 / 0, w(e.bbs), L(i(e.addcode, "bbs"), function() {
+    }), e.bhs = t(), a[r++] = 1 / 0, x(e.bbs), L(i(e.addcode, "bbs"), function() {
       var a1 = a[--r];
       a[r++] = n(a1 + 0.075);
-    }), e.bbs = t(), a[r++] = 1 / 0, w(e.txt), w(i(e.addcode, "txt")), e.txt = t(), e.guardrightypos = e.height * 72 - 6;
+    }), e.bbs = t(), a[r++] = 1 / 0, x(e.txt), x(i(e.addcode, "txt")), e.txt = t(), e.guardrightypos = e.height * 72 - 6;
   }
   a[r++] = 1 / 0, a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = e.sbs, a[r++] = "bhs", a[r++] = e.bhs, a[r++] = "bbs", a[r++] = e.bbs, a[r++] = "txt", a[r++] = e.txt, a[r++] = "opt", a[r++] = e.options, a[r++] = "guardrightpos", k(e.addon, "") ? a[r++] = 9 : a[r++] = 5, a[r++] = "guardrightypos", a[r++] = e.guardrightypos, a[r++] = "borderleft", a[r++] = 9, a[r++] = "borderright", k(e.addon, "") ? a[r++] = 9 : a[r++] = 5, a[r++] = "bordertop", a[r++] = 0, a[r++] = "borderbottom", a[r++] = 5;
   var X = C1();
@@ -4843,17 +4829,17 @@ function Tf() {
       g >= 48 && g <= 57 && (e.wasdash = !1, e.numdigit = e.numdigit + 1);
     }
     (e.numdash != 2 || e.numdigit != 7) && (a[r++] = "bwipp.isbn13numDashesDigits#5695", a[r++] = "Incorrect number of dashes and digits for ISBN-13", u());
-    var A = i(e.barcode, 14);
-    if ((A < 48 || A > 57) && (a[r++] = "bwipp.isbn13character15#5698", a[r++] = "ISBN-13 character 15 must be a digit", u()), e.barcode.length == 17) {
+    var h = i(e.barcode, 14);
+    if ((h < 48 || h > 57) && (a[r++] = "bwipp.isbn13character15#5698", a[r++] = "ISBN-13 character 15 must be a digit", u()), e.barcode.length == 17) {
       v1(o(e.barcode, 15, 1), "-") && (a[r++] = "bwipp.isbn13character16#5702", a[r++] = "ISBN-13 penultimate character must be a dash", u());
       var b = i(e.barcode, 16);
       (b < 48 || b > 57) && (a[r++] = "bwipp.isbn13character17#5705", a[r++] = "ISBN-13 final character must be a digit", u());
     }
   } else {
-    var h = i(e.barcode, 0);
-    (h < 48 || h > 57) && (a[r++] = "bwipp.isbn10FirstDigit#5710", a[r++] = "ISBN-10 first character must be a digit", u()), e.wasdash = !1, e.numdash = 0, e.numdigit = 0;
-    for (var x = o(e.barcode, 1, 9), m = 0, B = x.length; m < B; m++) {
-      var I = i(x, m);
+    var A = i(e.barcode, 0);
+    (A < 48 || A > 57) && (a[r++] = "bwipp.isbn10FirstDigit#5710", a[r++] = "ISBN-10 first character must be a digit", u()), e.wasdash = !1, e.numdash = 0, e.numdigit = 0;
+    for (var w = o(e.barcode, 1, 9), m = 0, B = w.length; m < B; m++) {
+      var I = i(w, m);
       a[r++] = I, I == 45 && (e.wasdash && (a[r++] = "bwipp.isbn10adjacentDashes#5717", a[r++] = "ISBN-10 does not permit adjacent dashes", u()), e.wasdash = !0, e.numdash = e.numdash + 1);
       var M = a[--r];
       M >= 48 && M <= 57 && (e.wasdash = !1, e.numdigit = e.numdigit + 1);
@@ -4924,15 +4910,15 @@ function Gf() {
     var g = i(e.barcode, 14);
     if ((g < 48 || g > 57) && (a[r++] = "bwipp.ismn13character15#5948", a[r++] = "ISMN-13 character 15 must be a digit", u()), e.barcode.length == 17) {
       v1(o(e.barcode, 15, 1), "-") && (a[r++] = "bwipp.ismn13character16#5952", a[r++] = "ISMN-13 penultimate character must be a dash", u());
-      var A = i(e.barcode, 16);
-      (A < 48 || A > 57) && (a[r++] = "bwipp.ismn13character17#5955", a[r++] = "ISMN-13 final character must be a digit", u());
+      var h = i(e.barcode, 16);
+      (h < 48 || h > 57) && (a[r++] = "bwipp.ismn13character17#5955", a[r++] = "ISMN-13 final character must be a digit", u());
     }
   } else {
     v1(o(e.barcode, 0, 2), "M-") && (a[r++] = "bwipp.ismn10badPrefix#5960", a[r++] = "ISMN-10 prefix must be M-", u());
     var b = i(e.barcode, 2);
     (b < 48 || b > 57) && (a[r++] = "bwipp.ismn10character3#5963", a[r++] = "ISMN-10 character 3 must be a digit", u()), e.wasdash = !1, e.numdash = 0, e.numdigit = 0;
-    for (var h = o(e.barcode, 3, 7), x = 0, m = h.length; x < m; x++) {
-      var B = i(h, x);
+    for (var A = o(e.barcode, 3, 7), w = 0, m = A.length; w < m; w++) {
+      var B = i(A, w);
       a[r++] = B, B == 45 && (e.wasdash && (a[r++] = "bwipp.ismn10adjacentDashes#5970", a[r++] = "ISMN-10 does not permit adjacent dashes", u()), e.wasdash = !0, e.numdash = e.numdash + 1);
       var I = a[--r];
       I >= 48 && I <= 57 && (e.wasdash = !1, e.numdigit = e.numdigit + 1);
@@ -4977,13 +4963,13 @@ function Yf() {
     (d < 48 || d > 57) && (a[r++] = "bwipp.issnFirstThroughFourthNotNumeric#6161", a[r++] = "ISSN first four characters must be numeral characters", u());
   }
   v1(o(e.issntxt, 4, 1), "-") && (a[r++] = "bwipp.issnNeedsDash#6165", a[r++] = "ISSN fifth character must be a dash", u());
-  for (var y = o(e.issntxt, 5, 3), g = 0, A = y.length; g < A; g++) {
+  for (var y = o(e.issntxt, 5, 3), g = 0, h = y.length; g < h; g++) {
     var b = i(y, g);
     (b < 48 || b > 57) && (a[r++] = "bwipp.issnSixthThroughEighthNotNumeric#6169", a[r++] = "ISSN sixth through eighth characters must be numerals", u());
   }
   if (e.issntxt.length == 9) {
-    var h = i(e.issntxt, 8);
-    (h < 48 || h > 57) && h != 88 && (a[r++] = "bwipp.issnNinthCharacterBadFormat#6174", a[r++] = "ISSN ninth character must be a number or the character X", u());
+    var A = i(e.issntxt, 8);
+    (A < 48 || A > 57) && A != 88 && (a[r++] = "bwipp.issnNinthCharacterBadFormat#6174", a[r++] = "ISSN ninth character must be a number or the character X", u());
   }
   for (e.seqvar.length != 2 && (a[r++] = "bwipp.issnBadSequenceVariantLength#6178", a[r++] = "Sequence variant for ISSN must be 2 digits", u()), L(e.seqvar, function() {
     var Q = a[--r];
@@ -4991,8 +4977,8 @@ function Yf() {
   }), e.addon.length != 0 && e.addon.length != 2 && e.addon.length != 5 && (a[r++] = "bwipp.issnBadAddOnLength#6186", a[r++] = "Add-on for ISSN must be 2 or 5 digits", u()), e.issn = C(8), e.checksum = 0, e.i = 0, e.n = 0; e.issnchar = n(i(e.issntxt, e.i) - 48), e.issnchar != -3 && (s(e.issn, e.n, n(e.issnchar + 48)), e.n < 7 && (e.checksum = n(e.checksum + e.issnchar * (8 - e.n))), e.n = e.n + 1), e.i = e.i + 1, e.i != e.issntxt.length; )
     ;
   e.checksum = n(11 - e.checksum % 11) % 11;
-  var x = n(e.checksum + 48);
-  a[r++] = "checksum", a[r++] = x, x == 58 && (r--, a[r++] = 88);
+  var w = n(e.checksum + 48);
+  a[r++] = "checksum", a[r++] = w, w == 58 && (r--, a[r++] = 88);
   var m = a[--r], B = a[--r];
   if (e[B] = m, e.issntxt.length == 9 && i(e.issntxt, 8) != e.checksum && (a[r++] = "bwipp.issnBadCheckDigit#6209", a[r++] = "Incorrect ISSN check digit provided", u()), e.pad = C(14), l(e.pad, 0, "ISSN "), l(e.pad, 5, e.issntxt), s(e.pad, 13, e.checksum), e.issntxt = e.pad, e.barcode = o(e.issn, 0, 7), e.barcode = C(12), l(e.barcode, 0, "977"), l(e.barcode, 3, e.issn), l(e.barcode, 10, e.seqvar), v1(e.addon, "")) {
     var I = C(12 + e.addon.length + 1);
@@ -5025,14 +5011,14 @@ function Hf() {
     }
     l(i(i(e.txt, 7), 0), 0, " ");
   }
-  var A = t(10);
-  l(A, 0, e.txt), e.txt = A;
+  var h = t(10);
+  l(h, 0, e.txt), e.txt = h;
   var b = i(e.txt, 0);
   s(e.txt, 8, Yi(t(b.length), b));
-  var h = i(e.txt, 0);
-  s(e.txt, 9, Yi(t(h.length), h)), s(i(e.txt, 8), 0, "M"), s(i(e.txt, 8), 1, -12), s(i(e.txt, 9), 0, "S");
-  var x = i(e.txt, 9);
-  s(x, 1, 69), s(e.args, "txt", e.txt), s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
+  var A = i(e.txt, 0);
+  s(e.txt, 9, Yi(t(A.length), A)), s(i(e.txt, 8), 0, "M"), s(i(e.txt, 8), 1, -12), s(i(e.txt, 9), 0, "S");
+  var w = i(e.txt, 9);
+  s(w, 1, 69), s(e.args, "txt", e.txt), s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
 }
 function rt() {
   if (e = Object.create(e), e.dontdraw = !1, e.includetext = !1, e.textfont = "OCR-B", e.textsize = 10, e.textxoffset = 0, e.textyoffset = -8, e.height = 1, e.encoding = "auto", e.raw = !1, e.parse = !1, e.parsefnc = !1, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], Ne(rt), !rt.__6406__) {
@@ -5056,12 +5042,12 @@ function rt() {
     e = Object.create(e), e.charmaps = t([t([32, 32, "00"]), t(["!", "!", "01"]), t(['"', '"', "02"]), t(["#", "#", "03"]), t(["$", "$", "04"]), t(["%", "%", "05"]), t(["&", "&", "06"]), t(["'", "'", "07"]), t([40, 40, "08"]), t([41, 41, "09"]), t(["*", "*", "10"]), t(["+", "+", "11"]), t([",", ",", "12"]), t(["-", "-", "13"]), t([".", ".", "14"]), t(["/", "/", "15"]), t(["0", "0", "16"]), t(["1", "1", "17"]), t(["2", "2", "18"]), t(["3", "3", "19"]), t(["4", "4", "20"]), t(["5", "5", "21"]), t(["6", "6", "22"]), t(["7", "7", "23"]), t(["8", "8", "24"]), t(["9", "9", "25"]), t([":", ":", "26"]), t([";", ";", "27"]), t(["<", "<", "28"]), t(["=", "=", "29"]), t([">", ">", "30"]), t(["?", "?", "31"]), t(["@", "@", "32"]), t(["A", "A", "33"]), t(["B", "B", "34"]), t(["C", "C", "35"]), t(["D", "D", "36"]), t(["E", "E", "37"]), t(["F", "F", "38"]), t(["G", "G", "39"]), t(["H", "H", "40"]), t(["I", "I", "41"]), t(["J", "J", "42"]), t(["K", "K", "43"]), t(["L", "L", "44"]), t(["M", "M", "45"]), t(["N", "N", "46"]), t(["O", "O", "47"]), t(["P", "P", "48"]), t(["Q", "Q", "49"]), t(["R", "R", "50"]), t(["S", "S", "51"]), t(["T", "T", "52"]), t(["U", "U", "53"]), t(["V", "V", "54"]), t(["W", "W", "55"]), t(["X", "X", "56"]), t(["Y", "Y", "57"]), t(["Z", "Z", "58"]), t(["[", "[", "59"]), t([92, 92, "60"]), t(["]", "]", "61"]), t(["^", "^", "62"]), t(["_", "_", "63"]), t([0, "`", "64"]), t([1, "a", "65"]), t([2, "b", "66"]), t([3, "c", "67"]), t([4, "d", "68"]), t([5, "e", "69"]), t([6, "f", "70"]), t([7, "g", "71"]), t([8, "h", "72"]), t([9, "i", "73"]), t([10, "j", "74"]), t([11, "k", "75"]), t([12, "l", "76"]), t([13, "m", "77"]), t([14, "n", "78"]), t([15, "o", "79"]), t([16, "p", "80"]), t([17, "q", "81"]), t([18, "r", "82"]), t([19, "s", "83"]), t([20, "t", "84"]), t([21, "u", "85"]), t([22, "v", "86"]), t([23, "w", "87"]), t([24, "x", "88"]), t([25, "y", "89"]), t([26, "z", "90"]), t([27, "{", "91"]), t([28, "|", "92"]), t([29, "}", "93"]), t([30, "~", "94"]), t([31, 127, "95"]), t([e.fn3, e.fn3, "96"]), t([e.fn2, e.fn2, "97"]), t([e.sft, e.sft, "98"]), t([e.swc, e.swc, "99"]), t([e.swb, e.fn4, e.swb]), t([e.fn4, e.swa, e.swa]), t([e.fn1, e.fn1, e.fn1]), t([e.sta, e.sta, e.sta]), t([e.stb, e.stb, e.stb]), t([e.stc, e.stc, e.stc]), t([e.stp, e.stp, e.stp])]), e.charvals = t([/* @__PURE__ */ new Map(), /* @__PURE__ */ new Map(), /* @__PURE__ */ new Map()]);
     for (var y = 0, g = e.charmaps.length - 1; y <= g; y += 1) {
       e.i = y, e.encs = i(e.charmaps, e.i);
-      for (var A = 0; A <= 2; A += 1) {
-        e.j = A;
+      for (var h = 0; h <= 2; h += 1) {
+        e.j = h;
         var b = i(e.encs, e.j);
         if (a[r++] = b, k(ba(b), "stringtype")) {
-          var h = i(a[--r], 0);
-          a[r++] = h;
+          var A = i(a[--r], 0);
+          a[r++] = A;
         }
         s(i(e.charvals, e.j), a[--r], e.i);
       }
@@ -5077,8 +5063,8 @@ function rt() {
   }
   if (k(e.encoding, "auto")) {
     e.text = C(e.msglen);
-    for (var x = 0, m = e.msglen - 1; x <= m; x += 1) {
-      e.i = x;
+    for (var w = 0, m = e.msglen - 1; w <= m; w += 1) {
+      e.i = w;
       var B = i(e.msg, e.i);
       a[r++] = e.text, a[r++] = e.i, a[r++] = B, B < 0 && (r--, a[r++] = 32);
       var I = a[--r], M = a[--r];
@@ -5095,12 +5081,12 @@ function rt() {
       e.i = Y, i(e.msg, e.i) >= 0 && (i(e.msg, e.i) >= 128 ? s(e.numEA, e.i, n(i(e.numEA, e.i + 1) + 1)) : s(e.numSA, e.i, n(i(e.numSA, e.i + 1) + 1)));
     e.ea = !1, e.msgtmp = t([]);
     for (var W = 0, e1 = e.msglen - 1; W <= e1; W += 1) {
-      if (e.i = W, e.c = i(e.msg, e.i), !Ar(e.ea, e.c < 128) && e.c >= 0) {
+      if (e.i = W, e.c = i(e.msg, e.i), !hr(e.ea, e.c < 128) && e.c >= 0) {
         e.ea ? a[r++] = e.numSA : a[r++] = e.numEA;
         var G = i(a[--r], e.i), H = n(G + e.i) == e.msglen ? 3 : 5;
-        G < H ? (a[r++] = 1 / 0, w(e.msgtmp), a[r++] = e.fn4, e.msgtmp = t()) : (a[r++] = 1 / 0, w(e.msgtmp), a[r++] = e.fn4, a[r++] = e.fn4, e.msgtmp = t(), e.ea = !e.ea);
+        G < H ? (a[r++] = 1 / 0, x(e.msgtmp), a[r++] = e.fn4, e.msgtmp = t()) : (a[r++] = 1 / 0, x(e.msgtmp), a[r++] = e.fn4, a[r++] = e.fn4, e.msgtmp = t(), e.ea = !e.ea);
       }
-      a[r++] = 1 / 0, w(e.msgtmp), e.c >= 0 ? a[r++] = e.c & 127 : a[r++] = e.c, e.msgtmp = t();
+      a[r++] = 1 / 0, x(e.msgtmp), e.c >= 0 ? a[r++] = e.c & 127 : a[r++] = e.c, e.msgtmp = t();
     }
     e.msg = e.msgtmp, e.msglen = e.msg.length, e.numsscr = function() {
       for (e.n = 0, e.s = 0, e.p = a[--r]; !(e.p >= e.msglen); ) {
@@ -5131,7 +5117,7 @@ function rt() {
         var te = i(e.setc, a[--r]);
         a[r++] = te;
       } else {
-        w(a[--r]);
+        x(a[--r]);
         var se = a[--r], ee = a[--r];
         a[r++] = n(n(se - 48) + n(ee - 48) * 10);
       }
@@ -5233,7 +5219,7 @@ function rt() {
   }
   var l1 = t(e.j + 2);
   l(l1, 0, e.cws), e.cws = l1, e.csum = i(e.cws, 0);
-  for (var _ = 1, h1 = e.j - 1; _ <= h1; _ += 1)
+  for (var _ = 1, A1 = e.j - 1; _ <= A1; _ += 1)
     e.i = _, e.csum = n(e.csum + i(e.cws, e.i) * e.i);
   e.csum = e.csum % 103, s(e.cws, e.j, e.csum), s(e.cws, e.j + 1, i(e.seta, e.stp));
   var g1 = i(e.options, "debugcws") !== void 0;
@@ -5269,12 +5255,12 @@ function Ts() {
     l(v, 0, e.c128), a[r++] = v, a[r++] = v, a[r++] = e.c128.length, a[r++] = e.ai, a[r++] = 1 / 0;
     var d = a[--r], y = a[--r];
     a[r++] = d, L(y);
-    var g = t(), A = a[--r];
-    l(a[--r], A, g);
+    var g = t(), h = a[--r];
+    l(a[--r], h, g);
     var b = a[--r];
     a[r++] = b, a[r++] = b, a[r++] = e.c128.length + e.ai.length, a[r++] = e.val, a[r++] = 1 / 0;
-    var h = a[--r], x = a[--r];
-    a[r++] = h, L(x);
+    var A = a[--r], w = a[--r];
+    a[r++] = A, L(w);
     var m = t(), B = a[--r];
     if (l(a[--r], B, m), e.c128 = a[--r], e.i != e.ais.length - 1 && i(e.fncs, e.i)) {
       var I = t(e.c128.length + 1);
@@ -5312,13 +5298,13 @@ function zf() {
     (g < 48 || g > 57) && (a[r++] = "bwipp.ean14badCharacter#6957", a[r++] = "GS1-14 must contain only digits", u());
   }
   e.checksum = 0;
-  for (var A = 0; A <= 12; A += 1) {
-    if (e.i = A, a[r++] = "checksum", a[r++] = e.checksum, a[r++] = n(i(e.barcode, e.i + 4) - 48), e.i % 2 == 0) {
+  for (var h = 0; h <= 12; h += 1) {
+    if (e.i = h, a[r++] = "checksum", a[r++] = e.checksum, a[r++] = n(i(e.barcode, e.i + 4) - 48), e.i % 2 == 0) {
       var b = a[--r];
       a[r++] = b * 3;
     }
-    var h = a[--r], x = a[--r];
-    e[a[--r]] = n(x + h);
+    var A = a[--r], w = a[--r];
+    e[a[--r]] = n(w + A);
   }
   if (e.checksum = (10 - e.checksum % 10) % 10, e.barcode.length == 18)
     i(e.barcode, 17) != e.checksum + 48 && (a[r++] = "bwipp.ean14badCheckDigit#6970", a[r++] = "Incorrect GS1-14 check digit provided", u());
@@ -5352,13 +5338,13 @@ function qf() {
     (g < 48 || g > 57) && (a[r++] = "bwipp.sscc18badCharacter#7061", a[r++] = "SSCC-18 must contain only digits", u());
   }
   e.checksum = 0;
-  for (var A = 0; A <= 16; A += 1) {
-    if (e.i = A, a[r++] = "checksum", a[r++] = e.checksum, a[r++] = n(i(e.barcode, e.i + 4) - 48), e.i % 2 == 0) {
+  for (var h = 0; h <= 16; h += 1) {
+    if (e.i = h, a[r++] = "checksum", a[r++] = e.checksum, a[r++] = n(i(e.barcode, e.i + 4) - 48), e.i % 2 == 0) {
       var b = a[--r];
       a[r++] = b * 3;
     }
-    var h = a[--r], x = a[--r];
-    e[a[--r]] = n(x + h);
+    var A = a[--r], w = a[--r];
+    e[a[--r]] = n(w + A);
   }
   if (e.checksum = (10 - e.checksum % 10) % 10, e.barcode.length == 22)
     i(e.barcode, 21) != e.checksum + 48 && (a[r++] = "bwipp.sscc18badCheckDigit#7074", a[r++] = "Incorrect SSCC-18 check digit provided", u());
@@ -5390,13 +5376,13 @@ function fi() {
     var g = a[--r];
     a[r++] = n(g - 1);
   }
-  var A = a[--r];
-  e[a[--r]] = A, e.checksum = 0;
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1)
+  var h = a[--r];
+  e[a[--r]] = h, e.checksum = 0;
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1)
     e.checksum = n(i(e.charvals, o(e.barcode, b, 1)) + e.checksum);
   e.checksum = e.checksum % 43, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.code39badCheckDigit#7196", a[r++] = "Incorrect Code 39 check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen), e.includecheck = !0);
-  var x = e.includecheck ? 3 : 2;
-  e.sbs = C(n(e.barlen + x) * 10);
+  var w = e.includecheck ? 3 : 2;
+  e.sbs = C(n(e.barlen + w) * 10);
   var m = e.includecheck ? 3 : 2;
   e.txt = t(n(e.barlen + m)), l(e.sbs, 0, i(e.encs, 43)), e.hidestars ? s(e.txt, 0, t(["", 0, e.textyoffset, e.textfont, e.textsize])) : s(e.txt, 0, t(["*", 0, e.textyoffset, e.textfont, e.textsize]));
   for (var B = 0, I = n(e.barlen - 1); B <= I; B += 1)
@@ -5438,15 +5424,15 @@ function tn() {
     e.i = d, e.extchar = i(e.extencs, i(e.barcode, e.i)), l(e.newcode, e.j, e.extchar);
     var g = i(e.barcode, e.i);
     a[r++] = e.newtext, a[r++] = e.j, a[r++] = g, (g < 32 || g == 127) && (r--, a[r++] = 32);
-    var A = a[--r], b = a[--r];
-    s(a[--r], b, A), e.extchar.length != 1 && s(e.newtext, e.j + 1, 32), e.j = e.j + e.extchar.length;
+    var h = a[--r], b = a[--r];
+    s(a[--r], b, h), e.extchar.length != 1 && s(e.newtext, e.j + 1, 32), e.j = e.j + e.extchar.length;
   }
   e.newcode = o(e.newcode, 0, e.j), e.newtext = o(e.newtext, 0, e.j), s(e.options, "dontdraw", !0), a[r++] = "args", a[r++] = e.newcode, a[r++] = e.options, fi();
-  var h = a[--r];
-  if (e[a[--r]] = h, e.includetext) {
+  var A = a[--r];
+  if (e[a[--r]] = A, e.includetext) {
     e.txt = i(e.args, "txt");
-    for (var x = 0, m = e.newtext.length - 1; x <= m; x += 1)
-      e.i = x, e.txtentry = i(e.txt, e.i + 1), s(e.txtentry, 0, o(e.newtext, e.i, 1)), s(e.txt, e.i + 1, e.txtentry);
+    for (var w = 0, m = e.newtext.length - 1; w <= m; w += 1)
+      e.i = w, e.txtentry = i(e.txt, e.i + 1), s(e.txtentry, 0, o(e.newtext, e.i, 1)), s(e.txt, e.i + 1, e.txtentry);
     s(e.args, "txt", e.txt);
   }
   s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || ve(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
@@ -5474,11 +5460,11 @@ function Vf() {
   for (var g = 0; g <= 5; g += 1)
     s(e.barcode, g, 48);
   l(e.barcode, 6 - e.val.length, e.val);
-  for (var A = 0; A <= 5; A += 1) {
-    var b = i(e.barcode, A);
-    a[r++] = A, a[r++] = b, a[r++] = b;
-    for (var h = 0, x = 4; h < x; h++) {
-      if (a[--r] >= i("AEIO", h)) {
+  for (var h = 0; h <= 5; h += 1) {
+    var b = i(e.barcode, h);
+    a[r++] = h, a[r++] = b, a[r++] = b;
+    for (var A = 0, w = 4; A < w; A++) {
+      if (a[--r] >= i("AEIO", A)) {
         var m = a[--r];
         a[r++] = n(m + 1);
       }
@@ -5510,8 +5496,8 @@ function Jf() {
   s(y, 0, 45), l(y, 1, e.barcode), s(y, e.msglen - 1, n(e.checksum + 48)), e.msg = y, s(e.options, "dontdraw", !0), a[r++] = "args", a[r++] = e.msg, a[r++] = e.options, fi();
   var g = a[--r];
   e[a[--r]] = g, e.text = C(e.msglen + 5), l(e.text, 0, "PZN - "), l(e.text, 6, o(e.msg, 1, e.msglen - 1));
-  var A = t([t([e.text, e.textxoffset, e.textyoffset, e.textfont, e.textsize])]);
-  s(e.args, "txt", A), s(e.args, "textxalign", "center"), s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
+  var h = t([t([e.text, e.textxoffset, e.textyoffset, e.textfont, e.textsize])]);
+  s(e.args, "txt", h), s(e.args, "textxalign", "center"), s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
 }
 function Ti() {
   if (e = Object.create(e), e.dontdraw = !1, e.includecheck = !1, e.includetext = !1, e.textfont = "OCR-B", e.textsize = 10, e.textyoffset = -8, e.height = 1, e.parse = !1, e.parsefnc = !1, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], Ne(Ti), !Ti.__7643__) {
@@ -5538,17 +5524,17 @@ function Ti() {
     var G = i(e.charvals, a[--r]) !== void 0;
     G || (a[r++] = "bwipp.code93BadCharacter#7660", a[r++] = "Code 93 must only contain digits, capital letters, spaces, the symbols -.$/+ and shift non-data characters", u());
   }), e.includecheck ? e.sbs = C(e.msglen * 6 + 25) : e.sbs = C(e.msglen * 6 + 13), e.txt = t(e.msglen), l(e.sbs, 0, i(e.encs, 47)), e.checksum1 = 0, e.checksum2 = 0;
-  for (var g = 0, A = e.msglen - 1; g <= A; g += 1) {
+  for (var g = 0, h = e.msglen - 1; g <= h; g += 1) {
     e.i = g, e.indx = i(e.charvals, i(e.msg, e.i)), l(e.sbs, e.i * 6 + 6, i(e.encs, e.indx));
     var b = i(e.msg, e.i);
     if (a[r++] = "char", a[r++] = b, b < 0)
       r--, a[r++] = " ";
     else {
-      var h = C(1);
-      s(h, 0, a[--r]), a[r++] = h;
+      var A = C(1);
+      s(A, 0, a[--r]), a[r++] = A;
     }
-    var x = a[--r];
-    e[a[--r]] = x, s(e.txt, e.i, t([e.char, e.i * 9 + 9, e.textyoffset, e.textfont, e.textsize])), e.checksum1 = n(e.checksum1 + ((e.msglen - e.i - 1) % 20 + 1) * e.indx), e.checksum2 = n(e.checksum2 + ((e.msglen - e.i) % 15 + 1) * e.indx);
+    var w = a[--r];
+    e[a[--r]] = w, s(e.txt, e.i, t([e.char, e.i * 9 + 9, e.textyoffset, e.textfont, e.textsize])), e.checksum1 = n(e.checksum1 + ((e.msglen - e.i - 1) % 20 + 1) * e.indx), e.checksum2 = n(e.checksum2 + ((e.msglen - e.i) % 15 + 1) * e.indx);
   }
   e.includecheck ? (e.checksum1 = e.checksum1 % 47, e.checksum2 = n(e.checksum2 + e.checksum1) % 47, l(e.sbs, e.msglen * 6 + 6, i(e.encs, e.checksum1)), l(e.sbs, e.msglen * 6 + 12, i(e.encs, e.checksum2)), l(e.sbs, e.msglen * 6 + 18, i(e.encs, 48))) : l(e.sbs, e.msglen * 6 + 6, i(e.encs, 48)), a[r++] = 1 / 0, a[r++] = 1 / 0;
   for (var m = e.sbs, B = 0, I = m.length; B < I; B++)
@@ -5583,12 +5569,12 @@ function nn() {
   e.newcode = C(e.barlen * 6), e.newtext = C(e.barlen * 6), e.j = 0, e.k = 0;
   for (var y = 0, g = e.barlen - 1; y <= g; y += 1) {
     e.i = y;
-    var A = i(e.barcode, e.i);
-    a[r++] = A, A > 127 && (r--, a[r++] = "bwipp.code93extbadCharacter#7797", a[r++] = "Code 93 Extended only support ASCII characters with values 0 to 127", u()), e.extchar = i(e.extencs, a[--r]), e.extlen = e.extchar.length, l(e.newcode, e.j, e.extchar);
+    var h = i(e.barcode, e.i);
+    a[r++] = h, h > 127 && (r--, a[r++] = "bwipp.code93extbadCharacter#7797", a[r++] = "Code 93 Extended only support ASCII characters with values 0 to 127", u()), e.extchar = i(e.extencs, a[--r]), e.extlen = e.extchar.length, l(e.newcode, e.j, e.extchar);
     var b = i(e.barcode, e.i);
     a[r++] = e.newtext, a[r++] = e.k, a[r++] = b, (b < 32 || b == 127) && (r--, a[r++] = 32);
-    var h = a[--r], x = a[--r];
-    s(a[--r], x, h), e.extlen != 1 && s(e.newtext, e.k + 1, 32), e.j = e.j + e.extlen;
+    var A = a[--r], w = a[--r];
+    s(a[--r], w, A), e.extlen != 1 && s(e.newtext, e.k + 1, 32), e.j = e.j + e.extlen;
     var m = e.extlen == 1 ? 1 : 2;
     e.k = e.k + m;
   }
@@ -5620,13 +5606,13 @@ function yi() {
   e.sbs = C(e.barlen * 5 + 8), e.txt = t(e.barlen), l(e.sbs, 0, i(e.encs, 10));
   for (var d = 0, y = e.barlen - 1; d <= y; d += 2) {
     e.i = d, Ie(e.barchars, o(e.barcode, e.i, 1)), r--, e.indx = a[--r].length, r -= 2, e.enca = i(e.encs, e.indx), Ie(e.barchars, o(e.barcode, e.i + 1, 1)), r--, e.indx = a[--r].length, r -= 2, e.encb = i(e.encs, e.indx), e.intl = C(e.enca.length * 2);
-    for (var g = 0, A = e.enca.length - 1; g <= A; g += 1)
+    for (var g = 0, h = e.enca.length - 1; g <= h; g += 1)
       e.j = g, e.achar = i(e.enca, e.j), e.bchar = i(e.encb, e.j), s(e.intl, e.j * 2, e.achar), s(e.intl, e.j * 2 + 1, e.bchar);
     l(e.sbs, e.i * 5 + 4, e.intl), s(e.txt, e.i, t([o(e.barcode, e.i, 1), e.i * 9 + 4, e.textyoffset, e.textfont, e.textsize])), e.includecheck && !e.includecheckintext && e.barlen - 2 == e.i ? s(e.txt, e.i + 1, t([" ", (e.i + 1) * 9 + 4, e.textyoffset, e.textfont, e.textsize])) : s(e.txt, e.i + 1, t([o(e.barcode, e.i + 1, 1), (e.i + 1) * 9 + 4, e.textyoffset, e.textfont, e.textsize]));
   }
   l(e.sbs, e.barlen * 5 + 4, i(e.encs, 11)), a[r++] = 1 / 0, a[r++] = 1 / 0;
-  for (var b = e.sbs, h = 0, x = b.length; h < x; h++)
-    a[r++] = i(b, h) - 48;
+  for (var b = e.sbs, A = 0, w = b.length; A < w; A++)
+    a[r++] = i(b, A) - 48;
   var m = t();
   a[r++] = 1 / 0;
   for (var B = 0, I = ~~((e.sbs.length + 1) / 2); B < I; B++)
@@ -5658,13 +5644,13 @@ function Xf() {
     (g < 48 || g > 57) && (a[r++] = "bwipp.itf14badCharacter#8055", a[r++] = "ITF-14 must contain only digits", u());
   }
   e.checksum = 0;
-  for (var A = 0; A <= 12; A += 1) {
-    if (e.i = A, a[r++] = "checksum", a[r++] = e.checksum, a[r++] = n(i(e.barcode, e.i) - 48), e.i % 2 == 0) {
+  for (var h = 0; h <= 12; h += 1) {
+    if (e.i = h, a[r++] = "checksum", a[r++] = e.checksum, a[r++] = n(i(e.barcode, e.i) - 48), e.i % 2 == 0) {
       var b = a[--r];
       a[r++] = b * 3;
     }
-    var h = a[--r], x = a[--r];
-    e[a[--r]] = n(x + h);
+    var A = a[--r], w = a[--r];
+    e[a[--r]] = n(w + A);
   }
   if (e.checksum = (10 - e.checksum % 10) % 10, e.barcode.length == 14)
     i(e.barcode, 13) != e.checksum + 48 && (a[r++] = "bwipp.itf14badCheckDigit#8068", a[r++] = "Incorrect ITF-14 check digit provided", u());
@@ -5683,8 +5669,8 @@ function Xf() {
 }
 function Wf() {
   e = Object.create(e), e.dontdraw = !1, e.includetext = !1, e.textfont = "OCR-B", e.textsize = 10, e.textxoffset = 0, e.textyoffset = -8, e.height = 1, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], e.barcode.length != 11 && e.barcode.length != 12 && (a[r++] = "bwipp.identcodeBadLength#8146", a[r++] = "Deutsche Post Identcode must be 11 or 12 digits", u()), L(e.barcode, function() {
-    var x = a[--r];
-    (x < 48 || x > 57) && (a[r++] = "bwipp.identcodeBadCharacter#8150", a[r++] = "Deutsche Post Identcode must contain only digits", u());
+    var w = a[--r];
+    (w < 48 || w > 57) && (a[r++] = "bwipp.identcodeBadCharacter#8150", a[r++] = "Deutsche Post Identcode must contain only digits", u());
   }), e.checksum = 0;
   for (var c = 0; c <= 10; c += 1) {
     if (e.i = c, a[r++] = "checksum", a[r++] = e.checksum, a[r++] = n(i(e.barcode, e.i) - 48), e.i % 2 == 0) {
@@ -5700,17 +5686,17 @@ function Wf() {
   e.checksum = (10 - e.checksum % 10) % 10, e.barcode.length == 12 && i(e.barcode, 11) != e.checksum + 48 && (a[r++] = "bwipp.identcodeBadCheckDigit#8163", a[r++] = "Incorrect Deutsche Post Identcode check digit provided", u());
   var g = C(12);
   l(g, 0, e.barcode), s(g, 11, e.checksum + 48), e.barcode = g, e.text = H2(C(16), "  .       .     "), l(e.text, 0, o(e.barcode, 0, 2)), l(e.text, 3, o(e.barcode, 2, 3)), l(e.text, 7, o(e.barcode, 5, 3)), l(e.text, 11, o(e.barcode, 8, 3)), l(e.text, 15, o(e.barcode, 11, 1)), s(e.options, "dontdraw", !0), s(e.options, "includecheck", !1);
-  var A = e.barcode;
-  a[r++] = "args", a[r++] = A, a[r++] = e.options, yi();
+  var h = e.barcode;
+  a[r++] = "args", a[r++] = h, a[r++] = e.options, yi();
   var b = a[--r];
   e[a[--r]] = b;
-  var h = e.textsize;
-  s(e.args, "txt", t([t([e.text, e.textxoffset, e.textyoffset, e.textfont, h])])), s(e.args, "textxalign", "center"), s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
+  var A = e.textsize;
+  s(e.args, "txt", t([t([e.text, e.textxoffset, e.textyoffset, e.textfont, A])])), s(e.args, "textxalign", "center"), s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
 }
 function Lf() {
   e = Object.create(e), e.dontdraw = !1, e.includetext = !1, e.textfont = "OCR-B", e.textsize = 10, e.textxoffset = 0, e.textyoffset = -8, e.height = 1, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], e.barcode.length != 13 && e.barcode.length != 14 && (a[r++] = "bwipp.leitcodeBadLength#8236", a[r++] = "Deutsche Post Leitcode must be 13 or 14 digits", u()), L(e.barcode, function() {
-    var x = a[--r];
-    (x < 48 || x > 57) && (a[r++] = "bwipp.leitcodeBadCharacter#8240", a[r++] = "Deutsche Post Leitcode must contain only digits", u());
+    var w = a[--r];
+    (w < 48 || w > 57) && (a[r++] = "bwipp.leitcodeBadCharacter#8240", a[r++] = "Deutsche Post Leitcode must contain only digits", u());
   }), e.checksum = 0;
   for (var c = 0; c <= 12; c += 1) {
     if (e.i = c, a[r++] = "checksum", a[r++] = e.checksum, a[r++] = n(i(e.barcode, e.i) - 48), e.i % 2 == 0) {
@@ -5726,12 +5712,12 @@ function Lf() {
   e.checksum = (10 - e.checksum % 10) % 10, e.barcode.length == 14 && i(e.barcode, 13) != e.checksum + 48 && (a[r++] = "bwipp.leitcodeBadCheckDigit#8253", a[r++] = "Incorrect Deutsche Post Leitcode check digit provided", u());
   var g = C(14);
   l(g, 0, e.barcode), s(g, 13, e.checksum + 48), e.barcode = g, e.text = H2(C(18), "     .   .   .    "), l(e.text, 0, o(e.barcode, 0, 5)), l(e.text, 6, o(e.barcode, 5, 3)), l(e.text, 10, o(e.barcode, 8, 3)), l(e.text, 14, o(e.barcode, 11, 2)), l(e.text, 17, o(e.barcode, 13, 1)), s(e.options, "dontdraw", !0), s(e.options, "includecheck", !1);
-  var A = e.barcode;
-  a[r++] = "args", a[r++] = A, a[r++] = e.options, yi();
+  var h = e.barcode;
+  a[r++] = "args", a[r++] = h, a[r++] = e.options, yi();
   var b = a[--r];
   e[a[--r]] = b;
-  var h = e.textsize;
-  s(e.args, "txt", t([t([e.text, e.textxoffset, e.textyoffset, e.textfont, h])])), s(e.args, "textxalign", "center"), s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
+  var A = e.textsize;
+  s(e.args, "txt", t([t([e.text, e.textxoffset, e.textyoffset, e.textfont, A])])), s(e.args, "textxalign", "center"), s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
 }
 function Ct() {
   e = Object.create(e), e.dontdraw = !1, e.height = 33 / 72, e.linkage = !1, e.format = "omni", e.barxmult = 33, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], e.barcode.length != 17 && e.barcode.length != 18 && (a[r++] = "bwipp.databaromniBadLength#8325", a[r++] = "GS1 DataBar Omnidirectional must be 13 or 14 digits", u()), v1(o(e.barcode, 0, 4), "(01)") && (a[r++] = "bwipp.databaromniBadAI#8328", a[r++] = "GS1 DataBar Omnidirectional must begin with (01) application identifier", u());
@@ -5745,14 +5731,14 @@ function Ct() {
       var g = a[--r];
       a[r++] = g * 3;
     }
-    var A = a[--r], b = a[--r];
-    e[a[--r]] = n(b + A);
+    var h = a[--r], b = a[--r];
+    e[a[--r]] = n(b + h);
   }
   e.checksum = (10 - e.checksum % 10) % 10, e.barcode.length == 18 && i(e.barcode, 17) != e.checksum + 48 && (a[r++] = "bwipp.databaromniBadCheckDigit#8357", a[r++] = "Incorrect GS1 DataBar Omnidirectional check digit provided", u());
-  var h = C(18);
-  l(h, 0, e.barcode), s(h, 17, e.checksum + 48), e.barcode = h, e.txt = t(e.barcode.length);
-  for (var x = 0, m = e.barcode.length - 1; x <= m; x += 1)
-    e.i = x, s(e.txt, e.i, t([o(e.barcode, e.i, 1), 0, 0, "", 0]));
+  var A = C(18);
+  l(A, 0, e.barcode), s(A, 17, e.checksum + 48), e.barcode = A, e.txt = t(e.barcode.length);
+  for (var w = 0, m = e.barcode.length - 1; w <= m; w += 1)
+    e.i = w, s(e.txt, e.i, t([o(e.barcode, e.i, 1), 0, 0, "", 0]));
   e.ncr = function() {
     var Ue = a[--r], z2 = a[--r], _e = n(z2 - Ue);
     if (Ue < n(z2 - Ue)) {
@@ -5768,8 +5754,8 @@ function Ct() {
       }
     }
     for (; ; ) {
-      var hr = a[--r], U2 = a[--r], Mr = a[--r];
-      if (a[r++] = Mr, a[r++] = U2, a[r++] = hr, Kt(U2, Mr))
+      var Ar = a[--r], U2 = a[--r], Mr = a[--r];
+      if (a[r++] = Mr, a[r++] = U2, a[r++] = Ar, Kt(U2, Mr))
         break;
       var ar = a[--r], Er = a[--r];
       a[r++] = n(Er + 1), a[r++] = ~~(ar / Er);
@@ -5868,8 +5854,8 @@ function Ct() {
     e.i = e.i + 8;
   }
   a[r++] = "d1wo", a[r++] = ~~(n(e.d1 - e.d1gs) / e.d1te), a[r++] = e.d1elo, a[r++] = e.d1mwo, a[r++] = 4, a[r++] = !1, e.getRSSwidths();
-  var h1 = a[--r];
-  e[a[--r]] = h1, a[r++] = "d1we", a[r++] = n(e.d1 - e.d1gs) % e.d1te, a[r++] = e.d1ele, a[r++] = e.d1mwe, a[r++] = 4, a[r++] = !0, e.getRSSwidths();
+  var A1 = a[--r];
+  e[a[--r]] = A1, a[r++] = "d1we", a[r++] = n(e.d1 - e.d1gs) % e.d1te, a[r++] = e.d1ele, a[r++] = e.d1mwe, a[r++] = 4, a[r++] = !0, e.getRSSwidths();
   var g1 = a[--r];
   e[a[--r]] = g1, a[r++] = "d2wo", a[r++] = n(e.d2 - e.d2gs) % e.d2to, a[r++] = e.d2elo, a[r++] = e.d2mwo, a[r++] = 4, a[r++] = !0, e.getRSSwidths();
   var u1 = a[--r];
@@ -5919,7 +5905,7 @@ function Ct() {
     a[r++] = 1 / 0;
     var ue = e.d1w;
     a[r++] = 1;
-    for (var De = 0, Ae = ue.length; De < Ae; De++)
+    for (var De = 0, he = ue.length; De < he; De++)
       a[r++] = i(ue, De);
     for (var Fe = e.checklt, ce = 0, Ye = Fe.length; ce < Ye; ce++)
       a[r++] = i(Fe, ce);
@@ -5942,8 +5928,8 @@ function Ct() {
       a[r++] = 0;
     var D = t();
     a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = O, a[r++] = "bhs", a[r++] = Z, a[r++] = "bbs", a[r++] = D, a[r++] = "txt", a[r++] = e.txt, a[r++] = "textxalign", a[r++] = "center", a[r++] = "borderleft", a[r++] = 0, a[r++] = "borderright", a[r++] = 0, a[r++] = "opt", a[r++] = e.options;
-    var A1 = C1();
-    a[r++] = A1, e.dontdraw || ve();
+    var h1 = C1();
+    a[r++] = h1, e.dontdraw || ve();
   } else {
     a[r++] = 1 / 0;
     var p1 = e.d1w;
@@ -5961,8 +5947,8 @@ function Ct() {
       a[r++] = i(U1, j1);
     for (var T1 = e.checkrt, Y1 = 0, ne = T1.length; Y1 < ne; Y1++)
       a[r++] = i(T1, Y1);
-    for (var he = e.d3w, re = 0, Me = he.length; re < Me; re++)
-      a[r++] = i(he, re);
+    for (var Ae = e.d3w, re = 0, Me = Ae.length; re < Me; re++)
+      a[r++] = i(Ae, re);
     a[r++] = 1, a[r++] = 1, a[r++] = 0, e.bot = t();
     for (var z1 = 0; z1 <= 24; z1 += 2) {
       e.i = z1;
@@ -5985,10 +5971,10 @@ function Ct() {
         e.i = f2, k(i(e.top, e.i), i(e.bot, e.i)) ? s(e.sep, e.i, n(1 - i(e.top, e.i))) : s(e.sep, e.i, n(1 - i(e.sep, e.i - 1)));
       l(e.sep, 0, t([0, 0, 0, 0])), l(e.sep, 46, t([0, 0, 0, 0])), a[r++] = 1 / 0;
       for (var u2 = 0, Ve = 5; u2 < Ve; u2++)
-        w(e.top);
-      w(e.sep);
+        x(e.top);
+      x(e.sep);
       for (var l2 = 0, w2 = 7; l2 < w2; l2++)
-        w(e.bot);
+        x(e.bot);
       e.pixs = t(), e.pixy = ~~(e.pixs.length / 50);
     }
     if (k(e.format, "stackedomni")) {
@@ -6034,10 +6020,10 @@ function Ct() {
       }
       a[--r] && l(e.sep3, 19, t([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0])), a[r++] = 1 / 0;
       for (var p2 = 0, oe = e.barxmult; p2 < oe; p2++)
-        w(e.top);
-      w(e.sep1), w(e.sep2), w(e.sep3);
-      for (var A2 = 0, Ze = e.barxmult; A2 < Ze; A2++)
-        w(e.bot);
+        x(e.top);
+      x(e.sep1), x(e.sep2), x(e.sep3);
+      for (var h2 = 0, Ze = e.barxmult; h2 < Ze; h2++)
+        x(e.bot);
       e.pixs = t(), e.pixy = ~~(e.pixs.length / 50);
     }
     var E2 = /* @__PURE__ */ new Map([
@@ -6069,14 +6055,14 @@ function Ro() {
       var g = a[--r];
       a[r++] = g * 3;
     }
-    var A = a[--r], b = a[--r];
-    e[a[--r]] = n(b + A);
+    var h = a[--r], b = a[--r];
+    e[a[--r]] = n(b + h);
   }
   e.checksum = (10 - e.checksum % 10) % 10, e.barcode.length == 18 && i(e.barcode, 17) != e.checksum + 48 && (a[r++] = "bwipp.databarstackedBadCheckDigit#8789", a[r++] = "Incorrect GS1 DataBar Stacked check digit provided", u());
-  var h = C(18);
-  l(h, 0, e.barcode), s(h, 17, e.checksum + 48), e.barcode = h, s(e.options, "dontdraw", !0), s(e.options, "format", "stacked"), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, Ct();
-  var x = a[--r];
-  e[a[--r]] = x, s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || K1(), e = Object.getPrototypeOf(e);
+  var A = C(18);
+  l(A, 0, e.barcode), s(A, 17, e.checksum + 48), e.barcode = A, s(e.options, "dontdraw", !0), s(e.options, "format", "stacked"), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, Ct();
+  var w = a[--r];
+  e[a[--r]] = w, s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || K1(), e = Object.getPrototypeOf(e);
 }
 function No() {
   e = Object.create(e), e.dontdraw = !1, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], v1(o(e.barcode, 0, 4), "(01)") && (a[r++] = "bwipp.databarstackedomniBadAI#8847", a[r++] = "GS1 DataBar Stacked Omnidirectional must begin with (01) application identifier", u()), e.barcode.length != 17 && e.barcode.length != 18 && (a[r++] = "bwipp.databarstackedomniBadLength#8850", a[r++] = "GS1 DataBar Stacked Omnidirectional must be 13 or 14 digits", u());
@@ -6090,14 +6076,14 @@ function No() {
       var g = a[--r];
       a[r++] = g * 3;
     }
-    var A = a[--r], b = a[--r];
-    e[a[--r]] = n(b + A);
+    var h = a[--r], b = a[--r];
+    e[a[--r]] = n(b + h);
   }
   e.checksum = (10 - e.checksum % 10) % 10, e.barcode.length == 18 && i(e.barcode, 17) != e.checksum + 48 && (a[r++] = "bwipp.databarstackedomniBadCheckDigit#8867", a[r++] = "Incorrect GS1 DataBar Stacked Omnidirectional check digit provided", u());
-  var h = C(18);
-  l(h, 0, e.barcode), s(h, 17, e.checksum + 48), e.barcode = h, s(e.options, "dontdraw", !0), s(e.options, "format", "stackedomni"), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, Ct();
-  var x = a[--r];
-  e[a[--r]] = x, s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || K1(), e = Object.getPrototypeOf(e);
+  var A = C(18);
+  l(A, 0, e.barcode), s(A, 17, e.checksum + 48), e.barcode = A, s(e.options, "dontdraw", !0), s(e.options, "format", "stackedomni"), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, Ct();
+  var w = a[--r];
+  e[a[--r]] = w, s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || K1(), e = Object.getPrototypeOf(e);
 }
 function Do() {
   e = Object.create(e), e.dontdraw = !1, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], e.barcode.length != 17 && e.barcode.length != 18 && (a[r++] = "bwipp.databartruncatedBadLength#8925", a[r++] = "GS1 DataBar Truncated must be 13 or 14 digits", u()), v1(o(e.barcode, 0, 4), "(01)") && (a[r++] = "bwipp.databartruncatedBadAI#8928", a[r++] = "GS1 DataBar Truncated must begin with (01) application identifier", u());
@@ -6111,14 +6097,14 @@ function Do() {
       var g = a[--r];
       a[r++] = g * 3;
     }
-    var A = a[--r], b = a[--r];
-    e[a[--r]] = n(b + A);
+    var h = a[--r], b = a[--r];
+    e[a[--r]] = n(b + h);
   }
   e.checksum = (10 - e.checksum % 10) % 10, e.barcode.length == 18 && i(e.barcode, 17) != e.checksum + 48 && (a[r++] = "bwipp.databartruncatedBadCheckDigit#8945", a[r++] = "Incorrect GS1 DataBar Truncated check digit provided", u());
-  var h = C(18);
-  l(h, 0, e.barcode), s(h, 17, e.checksum + 48), e.barcode = h, s(e.options, "dontdraw", !0), s(e.options, "format", "truncated"), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, Ct();
-  var x = a[--r];
-  e[a[--r]] = x, s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
+  var A = C(18);
+  l(A, 0, e.barcode), s(A, 17, e.checksum + 48), e.barcode = A, s(e.options, "dontdraw", !0), s(e.options, "format", "truncated"), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, Ct();
+  var w = a[--r];
+  e[a[--r]] = w, s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
 }
 function Et() {
   e = Object.create(e), e.dontdraw = !1, e.height = 10 / 72, e.linkage = !1, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], Ne(Et), e.barcode.length != 17 && e.barcode.length != 18 && (a[r++] = "bwipp.databarlimitedBadLength#9008", a[r++] = "GS1 DataBar Limited must be 13 or 14 digits", u()), v1(o(e.barcode, 0, 4), "(01)") && (a[r++] = "bwipp.databarlimitedBadAI#9011", a[r++] = "GS1 DataBar Limited must begin with (01) application identifier", u());
@@ -6131,15 +6117,15 @@ function Et() {
   e.checksum = 0;
   for (var g = 0; g <= 12; g += 1) {
     if (e.i = g, a[r++] = "checksum", a[r++] = e.checksum, a[r++] = n(i(e.barcode, e.i + 4) - 48), e.i % 2 == 0) {
-      var A = a[--r];
-      a[r++] = A * 3;
+      var h = a[--r];
+      a[r++] = h * 3;
     }
-    var b = a[--r], h = a[--r];
-    e[a[--r]] = n(h + b);
+    var b = a[--r], A = a[--r];
+    e[a[--r]] = n(A + b);
   }
   e.checksum = (10 - e.checksum % 10) % 10, e.barcode.length == 18 && i(e.barcode, 17) != e.checksum + 48 && (a[r++] = "bwipp.databarlimitedBadCheckDigit#9031", a[r++] = "Incorrect GS1 DataBar Limited check digit provided", u());
-  var x = C(18);
-  if (l(x, 0, e.barcode), s(x, 17, e.checksum + 48), e.barcode = x, !Et.__9042__) {
+  var w = C(18);
+  if (l(w, 0, e.barcode), s(w, 17, e.checksum + 48), e.barcode = w, !Et.__9042__) {
     e = Object.create(e), e.linkval = t([2, 0, 1, 5, 1, 3, 3, 5, 3, 1, 0, 9, 6]);
     for (var m in e) e.hasOwnProperty(m) && (Et.$ctx[m] = e[m]);
     Et.__9042__ = 1, e = Object.getPrototypeOf(e);
@@ -6171,8 +6157,8 @@ function Et() {
       var Z = a[--r], c1 = a[--r], r1 = a[--r];
       if (a[r++] = r1, a[r++] = c1, a[r++] = Z, Kt(c1, r1))
         break;
-      var D = a[--r], A1 = a[--r];
-      a[r++] = n(A1 + 1), a[r++] = ~~(D / A1);
+      var D = a[--r], h1 = a[--r];
+      a[r++] = n(h1 + 1), a[r++] = ~~(D / h1);
     }
     var p1 = a[--r], K = a[--r];
     a[r++] = p1, a[r++] = K, r--;
@@ -6253,8 +6239,8 @@ function Et() {
   e[a[--r]] = l1, a[r++] = "d2we", a[r++] = n(e.d2 - e.d2gs) % e.d2te, a[r++] = e.d2ele, a[r++] = e.d2mwe, a[r++] = 7, a[r++] = !0, e.getRSSwidths();
   var _ = a[--r];
   e[a[--r]] = _, e.d1w = t(14);
-  for (var h1 = 0; h1 <= 6; h1 += 1)
-    e.i = h1, s(e.d1w, e.i * 2, i(e.d1wo, e.i)), s(e.d1w, e.i * 2 + 1, i(e.d1we, e.i));
+  for (var A1 = 0; A1 <= 6; A1 += 1)
+    e.i = A1, s(e.d1w, e.i * 2, i(e.d1wo, e.i)), s(e.d1w, e.i * 2 + 1, i(e.d1we, e.i));
   e.d2w = t(14);
   for (var g1 = 0; g1 <= 6; g1 += 1)
     e.i = g1, s(e.d2w, e.i * 2, i(e.d2wo, e.i)), s(e.d2w, e.i * 2 + 1, i(e.d2we, e.i));
@@ -6307,7 +6293,7 @@ function Et() {
   for (var Ce = e.d2w, ue = 0, De = Ce.length; ue < De; ue++)
     a[r++] = i(Ce, ue);
   a[r++] = 1, a[r++] = 1, a[r++] = 5, e.sbs = t(), a[r++] = 1 / 0;
-  var Ae = e.sbs;
+  var he = e.sbs;
   a[r++] = 1 / 0;
   for (var Fe = 0, ce = ~~((e.sbs.length + 1) / 2); Fe < ce; Fe++)
     a[r++] = e.height;
@@ -6316,7 +6302,7 @@ function Et() {
   for (var le = 0, Be = ~~((e.sbs.length + 1) / 2); le < Be; le++)
     a[r++] = 0;
   var Qe = t();
-  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = Ae, a[r++] = "bhs", a[r++] = Ye, a[r++] = "bbs", a[r++] = Qe, a[r++] = "txt", a[r++] = e.txt, a[r++] = "textxalign", a[r++] = "center", a[r++] = "borderleft", a[r++] = 0, a[r++] = "borderright", a[r++] = 0, a[r++] = "opt", a[r++] = e.options;
+  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = he, a[r++] = "bhs", a[r++] = Ye, a[r++] = "bbs", a[r++] = Qe, a[r++] = "txt", a[r++] = e.txt, a[r++] = "textxalign", a[r++] = "center", a[r++] = "borderleft", a[r++] = 0, a[r++] = "borderright", a[r++] = 0, a[r++] = "opt", a[r++] = e.options;
   var a2 = C1();
   a[r++] = a2, e.dontdraw || ve(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
 }
@@ -6349,16 +6335,16 @@ function Ha() {
       var y = a[--r];
       e[a[--r]] = y, a[r++] = "ai320x", a[r++] = !1;
       for (var g = 3200; g <= 3209; g += 1) {
-        var A = a[--r];
-        a[r++] = A || k(Oe(C(4), g, 10), i(e.ais, 1));
+        var h = a[--r];
+        a[r++] = h || k(Oe(C(4), g, 10), i(e.ais, 1));
       }
       var b = a[--r];
       if (e[a[--r]] = b, e.ais.length == 3) {
-        var h = t(["11", "13", "15", "17"]);
+        var A = t(["11", "13", "15", "17"]);
         a[r++] = "aibad", a[r++] = !0;
-        for (var x = 0, m = h.length; x < m; x++) {
+        for (var w = 0, m = A.length; w < m; w++) {
           var B = a[--r];
-          a[r++] = B && v1(i(h, x), i(e.ais, 2));
+          a[r++] = B && v1(i(A, w), i(e.ais, 2));
         }
         var I = a[--r];
         e[a[--r]] = I;
@@ -6489,8 +6475,8 @@ function Ha() {
     e.cdf = C(55), a[r++] = e.cdf, a[r++] = 0, a[r++] = o(i(e.vals, 0), 1, 12), e.conv12to40();
     var l1 = a[--r], _ = a[--r];
     l(a[--r], _, l1), k(i(e.ais, 1), "3202") ? (a[r++] = b1(i(e.vals, 1)), a[r++] = 15, e.tobin()) : (a[r++] = b1(i(e.vals, 1)) + 1e4, a[r++] = 15, e.tobin()), l(e.cdf, 40, a[--r]), a[r++] = 1 / 0;
-    for (var h1 = e.cdf, g1 = 0, u1 = h1.length; g1 < u1; g1++)
-      a[r++] = i(h1, g1) - 48;
+    for (var A1 = e.cdf, g1 = 0, u1 = A1.length; g1 < u1; g1++)
+      a[r++] = i(A1, g1) - 48;
     e.cdf = t(), e.gpf = t([]), e.ais = t([]), e.vals = t([]), e.fncs = t([]);
   }
   if (e.method.length == 7) {
@@ -6529,8 +6515,8 @@ function Ha() {
     for (var Te = e.cdf, V1 = 0, Ce = Te.length; V1 < Ce; V1++)
       a[r++] = i(Te, V1) - 48;
     e.cdf = t(), a[r++] = 1 / 0;
-    for (var ue = i(e.vals, 1), De = o(ue, 3, ue.length - 3), Ae = 0, Fe = De.length; Ae < Fe; Ae++)
-      a[r++] = i(De, Ae);
+    for (var ue = i(e.vals, 1), De = o(ue, 3, ue.length - 3), he = 0, Fe = De.length; he < Fe; he++)
+      a[r++] = i(De, he);
     e.ais.length > 2 && (a[r++] = e.fnc1), e.gpf = t(), e.ais = o(e.ais, 2, e.ais.length - 2), e.vals = o(e.vals, 2, e.vals.length - 2), e.fncs = o(e.fncs, 2, e.fncs.length - 2);
   }
   if (e.gpfallow ? e.vlf = t(2) : e.vlf = t([]), !Ha.__9571__) {
@@ -6579,8 +6565,8 @@ function Ha() {
     e.i = c1, e.ai = i(e.ais, e.i), e.val = i(e.vals, e.i);
     var D = t(e.gpf.length + e.ai.length + e.val.length);
     l(D, 0, e.gpf), a[r++] = D, a[r++] = D, a[r++] = e.gpf.length, a[r++] = e.ai, a[r++] = 1 / 0;
-    var A1 = a[--r], p1 = a[--r];
-    a[r++] = A1, L(p1);
+    var h1 = a[--r], p1 = a[--r];
+    a[r++] = h1, L(p1);
     var K = t(), f1 = a[--r];
     l(a[--r], f1, K);
     var d1 = a[--r];
@@ -6633,8 +6619,8 @@ function Ha() {
   for (var Y1 = 0, ne = e.gpf.length; Y1 < ne; Y1++)
     a[r++] = 0;
   a[r++] = 9999, e.nextiso646only = t();
-  for (var he = e.gpf.length - 1; he >= 0; he -= 1) {
-    e.i = he;
+  for (var Ae = e.gpf.length - 1; Ae >= 0; Ae -= 1) {
+    e.i = Ae;
     var re = H2(C(2), "00"), Me = i(e.gpf, e.i);
     a[r++] = i(e.gpf, e.i), a[r++] = re, a[r++] = re, a[r++] = 0, a[r++] = Me, Me == e.fnc1 && (r--, a[r++] = 94);
     var z1 = a[--r], Ee = a[--r];
@@ -6679,8 +6665,8 @@ function Ha() {
           a[r++] = "rem", a[r++] = 13 + e.method.length + e.vlf.length + e.cdf.length + e.j, e.rembits();
           var p2 = a[--r];
           if (e[a[--r]] = p2, e.rem >= 4 && e.rem <= 6) {
-            var oe = o(H2(C(6), "000000"), 0, e.rem), A2 = Oe(C(4), n(i(e.gpf, e.i) - 47), 2);
-            l(oe, 4 - A2.length, A2), a[r++] = oe, a[r++] = "raw", e.encode(), e.i = e.i + 1;
+            var oe = o(H2(C(6), "000000"), 0, e.rem), h2 = Oe(C(4), n(i(e.gpf, e.i) - 47), 2);
+            l(oe, 4 - h2.length, h2), a[r++] = oe, a[r++] = "raw", e.encode(), e.i = e.i + 1;
             break;
           } else {
             var Ze = C(2);
@@ -6741,21 +6727,21 @@ function Ha() {
   if (e.pad.length > 0) {
     for (var t2 = 0, vr = e.pad.length - 1; t2 <= vr; t2 += 5) {
       e.i = t2;
-      var x2 = e.pad, hr = e.i, U2 = t([0, 0, 1, 0, 0]), Mr = e.pad, ar = e.i, Er = 5, $2 = Mr.length - ar;
+      var x2 = e.pad, Ar = e.i, U2 = t([0, 0, 1, 0, 0]), Mr = e.pad, ar = e.i, Er = 5, $2 = Mr.length - ar;
       if (Mr.length - ar > 5) {
         var Yr = Er;
         Er = $2, $2 = Yr;
       }
-      l(x2, hr, o(U2, 0, $2));
+      l(x2, Ar, o(U2, 0, $2));
     }
-    k(e.mode, "numeric") && (a[r++] = 1 / 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, w(e.pad), e.pad = o(t(), 0, e.pad.length));
+    k(e.mode, "numeric") && (a[r++] = 1 / 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, x(e.pad), e.pad = o(t(), 0, e.pad.length));
   }
   a[r++] = 1 / 0;
   var nr = e.linkage ? 1 : 0;
   if (a[r++] = nr, L(e.method, function() {
     var Pe = a[--r];
     a[r++] = n(Pe - 48);
-  }), w(e.vlf), w(e.cdf), w(e.gpf), w(e.pad), e.binval = t(), e.datalen = ~~(e.binval.length / 12), e.ncr = function() {
+  }), x(e.vlf), x(e.cdf), x(e.gpf), x(e.pad), e.binval = t(), e.datalen = ~~(e.binval.length / 12), e.ncr = function() {
     var Pe = a[--r], F2 = a[--r], Q2 = n(F2 - Pe);
     if (Pe < n(F2 - Pe)) {
       var tr = Q2;
@@ -6765,8 +6751,8 @@ function Ha() {
     for (var Z2 = F2, ur = n(Pe + 1); Z2 >= ur; Z2 -= 1) {
       var Xr = a[--r], wa = a[--r], Nr = a[--r];
       if (a[r++] = Nr, a[r++] = wa, a[r++] = Xr * Z2, Hi(wa, Nr)) {
-        var At = a[--r], La = a[--r];
-        a[r++] = n(La + 1), a[r++] = ~~(At / La);
+        var ht = a[--r], La = a[--r];
+        a[r++] = n(La + 1), a[r++] = ~~(ht / La);
       }
     }
     for (; ; ) {
@@ -6776,8 +6762,8 @@ function Ha() {
       var Za = a[--r], it = a[--r];
       a[r++] = n(it + 1), a[r++] = ~~(Za / it);
     }
-    var ht = a[--r], nt = a[--r];
-    a[r++] = ht, a[r++] = nt, r--;
+    var At = a[--r], nt = a[--r];
+    a[r++] = At, a[r++] = nt, r--;
     var Ra = a[--r], mt = a[--r];
     a[r++] = Ra, a[r++] = mt, r--;
   }, e.getRSSwidths = function() {
@@ -6858,15 +6844,15 @@ function Ha() {
     Ha.__9934__ = 1, e = Object.getPrototypeOf(e);
   }
   a[r++] = 1 / 0, L(e.seq, function() {
-    w(o(e.checkweights, a[--r] * 16, 16));
+    x(o(e.checkweights, a[--r] * 16, 16));
   });
   var Ia = t();
   e.checkweightseq = o(Ia, 8, Ia.length - 8), a[r++] = 1 / 0;
   for (var Zr = e.dxw, sa = 0, aa = Zr.length; sa < aa; sa++)
     L(i(Zr, sa));
   e.widths = t(), e.checksum = 0;
-  for (var Aa = 0, ha = e.widths.length - 1; Aa <= ha; Aa += 1)
-    e.i = Aa, e.checksum = n(e.checksum + i(e.widths, e.i) * i(e.checkweightseq, e.i));
+  for (var ha = 0, Aa = e.widths.length - 1; ha <= Aa; ha += 1)
+    e.i = ha, e.checksum = n(e.checksum + i(e.widths, e.i) * i(e.checkweightseq, e.i));
   for (e.checksum = n(e.checksum % 211 + (e.datalen - 3) * 211), e.i = 0; ; ) {
     if (e.checksum <= i(e.tab174, e.i)) {
       for (var ma = o(e.tab174, e.i + 1, 7), pr = 0, oa = ma.length; pr < oa; pr++)
@@ -6932,8 +6918,8 @@ function Ha() {
         a[r++] = P2;
       e.finderpos = t();
       for (var k2 = e.finderpos, j2 = 0, X2 = k2.length; j2 < X2; j2++)
-        for (var W2 = i(k2, j2), h2 = W2, q2 = n(W2 + 14); h2 <= q2; h2 += 1) {
-          if (e.i = h2, i(e.row, e.i) == 0)
+        for (var W2 = i(k2, j2), A2 = W2, q2 = n(W2 + 14); A2 <= q2; A2 += 1) {
+          if (e.i = A2, i(e.row, e.i) == 0)
             if (i(e.row, e.i - 1) == 1)
               a[r++] = 1;
             else {
@@ -6946,7 +6932,7 @@ function Ha() {
         }
       if (l(e.sep, 0, t([0, 0, 0, 0])), l(e.sep, e.row.length - 4, t([0, 0, 0, 0])), e.segments % 4 == 0 && e.r % 2 == 1)
         if (i(e.rows, e.r).length != i(e.rows, 0).length && e.finderpos.length % 2 == 1)
-          a[r++] = 1 / 0, a[r++] = 0, w(e.row), e.row = t(), a[r++] = 1 / 0, a[r++] = 0, w(e.sep), e.sep = t();
+          a[r++] = 1 / 0, a[r++] = 0, x(e.row), e.row = t(), a[r++] = 1 / 0, a[r++] = 0, x(e.sep), e.sep = t();
         else {
           for (var C2 = e.row.length - 1; C2 >= 0; C2 -= 1)
             a[r++] = i(e.row, C2);
@@ -6970,10 +6956,10 @@ function Ha() {
       a[r++] = 0, a[r++] = 1;
     e.sep = o(t(), 0, e.pixx), l(e.sep, 0, t([0, 0, 0, 0])), l(e.sep, e.pixx - 4, t([0, 0, 0, 0])), a[r++] = 1 / 0;
     for (var Or = 0, Pr = e.numrows - 1; Or <= Pr; Or += 1) {
-      e.r = Or, e.r != 0 && w(i(e.seps, e.r));
+      e.r = Or, e.r != 0 && x(i(e.seps, e.r));
       for (var Rr = 0, Ir = e.barxmult; Rr < Ir; Rr++)
-        w(i(e.rows, e.r));
-      e.r != e.numrows - 1 && (w(i(e.seps, e.r)), w(e.sep));
+        x(i(e.rows, e.r));
+      e.r != e.numrows - 1 && (x(i(e.seps, e.r)), x(e.sep));
     }
     e.pixs = t();
     var la = /* @__PURE__ */ new Map([
@@ -7023,14 +7009,14 @@ function Zf() {
   a[r++] = 1 / 0;
   var g = e.sbs;
   a[r++] = 1 / 0;
-  for (var A = 0, b = ~~((e.sbs.length + 1) / 2); A < b; A++)
+  for (var h = 0, b = ~~((e.sbs.length + 1) / 2); h < b; h++)
     a[r++] = e.height;
-  var h = t();
+  var A = t();
   a[r++] = 1 / 0;
-  for (var x = 0, m = ~~((e.sbs.length + 1) / 2); x < m; x++)
+  for (var w = 0, m = ~~((e.sbs.length + 1) / 2); w < m; w++)
     a[r++] = 0;
   var B = t();
-  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = g, a[r++] = "bhs", a[r++] = h, a[r++] = "bbs", a[r++] = B, a[r++] = "txt", a[r++] = e.txt, a[r++] = "textxalign", a[r++] = "center", a[r++] = "opt", a[r++] = e.options;
+  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = g, a[r++] = "bhs", a[r++] = A, a[r++] = "bbs", a[r++] = B, a[r++] = "txt", a[r++] = e.txt, a[r++] = "textxalign", a[r++] = "center", a[r++] = "opt", a[r++] = e.options;
   var I = C1();
   a[r++] = I, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
 }
@@ -7050,16 +7036,16 @@ function So() {
   e.encstr = o(e.encstr, e.i + 1, 15 - e.i), e.bhs = t(e.encstr.length), e.bbs = t(e.encstr.length);
   for (var y = 0, g = e.encstr.length - 1; y <= g; y += 1) {
     e.i = y;
-    var A = i(e.encstr, e.i);
-    s(e.bhs, e.i, e.bar * i(t([1, 1, 2]), A)), s(e.bbs, e.i, i(t([0, e.bar, 0]), A));
+    var h = i(e.encstr, e.i);
+    s(e.bhs, e.i, e.bar * i(t([1, 1, 2]), h)), s(e.bbs, e.i, i(t([0, e.bar, 0]), h));
   }
   a[r++] = 1 / 0;
-  var b = e.bhs, h = e.bbs;
+  var b = e.bhs, A = e.bbs;
   a[r++] = 1 / 0;
-  for (var x = 0, m = e.encstr.length * 2; x < m; x++)
+  for (var w = 0, m = e.encstr.length * 2; w < m; w++)
     a[r++] = e.spc;
   var B = t();
-  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "bhs", a[r++] = b, a[r++] = "bbs", a[r++] = h, a[r++] = "sbs", a[r++] = B, a[r++] = "txt", a[r++] = e.txt, a[r++] = "textxalign", a[r++] = "center", a[r++] = "textyoffset", a[r++] = 4, a[r++] = "opt", a[r++] = e.options;
+  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "bhs", a[r++] = b, a[r++] = "bbs", a[r++] = A, a[r++] = "sbs", a[r++] = B, a[r++] = "txt", a[r++] = e.txt, a[r++] = "textxalign", a[r++] = "center", a[r++] = "textyoffset", a[r++] = 4, a[r++] = "opt", a[r++] = e.options;
   var I = C1();
   a[r++] = I, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
 }
@@ -7078,8 +7064,8 @@ function xt() {
       var y = a[--r];
       a[r++] = y * 3;
     }
-    var g = a[--r], A = a[--r];
-    e[a[--r]] = n(A + g);
+    var g = a[--r], h = a[--r];
+    e[a[--r]] = n(h + g);
   }
   if (e.checksum = (10 - e.checksum % 10) % 10, e.validatecheck && (i(e.barcode, e.barlen) != e.checksum + 48 && (a[r++] = "bwipp.code2of5badCheckDigit#10542", a[r++] = "Incorrect Code 25 check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen), e.includecheck = !0), !xt.__10574__) {
     e = Object.create(e);
@@ -7091,11 +7077,11 @@ function xt() {
       ["datalogic", t(["113311", "311131", "131131", "331111", "113131", "313111", "133111", "111331", "311311", "131311", "1111", "311"])]
     ]);
     e.versions = b;
-    for (var h in e) e.hasOwnProperty(h) && (xt.$ctx[h] = e[h]);
+    for (var A in e) e.hasOwnProperty(A) && (xt.$ctx[A] = e[A]);
     xt.__10574__ = 1, e = Object.getPrototypeOf(e);
   }
-  var x = i(e.versions, e.version) !== void 0;
-  x || (a[r++] = "bwipp.code2of5badVersion#10577", a[r++] = "Unrecognised Code 25 version", u()), e.encs = i(e.versions, e.version), e.cs = i(e.encs, 0).length, a[r++] = "cw", a[r++] = 0, L(i(e.encs, 0), function() {
+  var w = i(e.versions, e.version) !== void 0;
+  w || (a[r++] = "bwipp.code2of5badVersion#10577", a[r++] = "Unrecognised Code 25 version", u()), e.encs = i(e.versions, e.version), e.cs = i(e.encs, 0).length, a[r++] = "cw", a[r++] = 0, L(i(e.encs, 0), function() {
     var V = a[--r], J = a[--r];
     a[r++] = n(J + n(V - 48));
   });
@@ -7109,7 +7095,7 @@ function xt() {
   var I = i(e.encs, 11);
   if (e.es = I.length, !xt.__10590__) {
     e = Object.create(e), e.barchars = "0123456789";
-    for (var h in e) e.hasOwnProperty(h) && (xt.$ctx[h] = e[h]);
+    for (var A in e) e.hasOwnProperty(A) && (xt.$ctx[A] = e[A]);
     xt.__10590__ = 1, e = Object.getPrototypeOf(e);
   }
   if (a[r++] = "sbs", a[r++] = e.barlen, e.includecheck) {
@@ -7185,14 +7171,14 @@ function sn() {
     e.barlen = e.barlen - g;
   }
   if (a[r++] = "numchecks", e.includecheck || e.validatecheck) {
-    var A = e.barlen >= 10 ? 2 : 1;
-    a[r++] = A;
+    var h = e.barlen >= 10 ? 2 : 1;
+    a[r++] = h;
   } else
     a[r++] = 0;
   var b = a[--r];
   e[a[--r]] = b, e.checksum1 = 0, e.checksum2 = 0;
-  for (var h = 0, x = e.barlen - 1; h <= x; h += 1)
-    e.i = h, e.indx = i(e.charvals, o(e.barcode, e.i, 1)), e.checksum1 = n(e.checksum1 + ((e.barlen - e.i - 1) % 10 + 1) * e.indx), e.checksum2 = n(e.checksum2 + ((e.barlen - e.i) % 9 + 1) * e.indx);
+  for (var A = 0, w = e.barlen - 1; A <= w; A += 1)
+    e.i = A, e.indx = i(e.charvals, o(e.barcode, e.i, 1)), e.checksum1 = n(e.checksum1 + ((e.barlen - e.i - 1) % 10 + 1) * e.indx), e.checksum2 = n(e.checksum2 + ((e.barlen - e.i) % 9 + 1) * e.indx);
   if (e.checksum1 = e.checksum1 % 11, e.checksum2 = n(e.checksum2 + e.checksum1) % 11, e.validatecheck) {
     if (e.numchecks == 1) {
       var m = e.checksum1;
@@ -7251,7 +7237,7 @@ function gi() {
   }
   if (e.semi) {
     e.validatecheck ? (e.barcode.length < 8 || e.barcode.length > 19) && (a[r++] = "bwipp.bc412semivalidateBadLength#11125", a[r++] = "BC412 semi with check digit must be 8 to 19 characters long", u()) : (e.barcode.length < 7 || e.barcode.length > 18) && (a[r++] = "bwipp.bc412semiBadLength#11129", a[r++] = "BC412 semi must be 7 to 18 characters long", u()), e.barlen = e.barcode.length, e.validatecheck || (e.barlen = e.barlen + 1, e.sbarcode = C(e.barlen), s(e.sbarcode, 0, i(e.barcode, 0)), s(e.sbarcode, 1, 48), l(e.sbarcode, 2, o(e.barcode, 1, e.barlen - 2)), e.barcode = e.sbarcode), e.sumodd = 0, e.sumeven = 0;
-    for (var g = 0, A = e.barlen - 1; g <= A; g += 1)
+    for (var g = 0, h = e.barlen - 1; g <= h; g += 1)
       e.i = g, a[r++] = i(e.charvals, o(e.barcode, e.i, 1)), e.i % 2 == 0 ? e.sumodd = n(a[--r] + e.sumodd) : e.sumeven = n(a[--r] + e.sumeven);
     e.checksum = n(e.sumodd % 35 + e.sumeven % 35 * 2) % 35, e.validatecheck ? e.checksum != 0 && (a[r++] = "bwipp.bc412semiBadCheckDigit#11155", a[r++] = "Incorrect BC412 semi check digit provided", u()) : (e.checksum = e.checksum * 17 % 35, s(e.barcode, 1, i(e.barchars, e.checksum)));
   } else {
@@ -7259,10 +7245,10 @@ function gi() {
       var b = a[--r];
       a[r++] = n(b - 1);
     }
-    var h = a[--r];
-    e[a[--r]] = h, e.checksum = 0;
-    for (var x = 0, m = e.barlen - 1; x <= m; x += 1)
-      e.checksum = n(i(e.charvals, o(e.barcode, x, 1)) + e.checksum);
+    var A = a[--r];
+    e[a[--r]] = A, e.checksum = 0;
+    for (var w = 0, m = e.barlen - 1; w <= m; w += 1)
+      e.checksum = n(i(e.charvals, o(e.barcode, w, 1)) + e.checksum);
     e.checksum = e.checksum % 35, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.bc412badCheckDigit#11172", a[r++] = "Incorrect BC412 check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen), e.includecheck = !0);
   }
   if (!gi.__11191__) {
@@ -7305,11 +7291,11 @@ function on() {
   e.ssvals = /* @__PURE__ */ new Map();
   for (var y = 16; y <= 19; y += 1)
     s(e.ssvals, o(e.barchars, y, 1), y);
-  var g = i(e.ssvals, o(e.barcode, 0, 1)) !== void 0, A = i(e.ssvals, o(e.barcode, e.barcode.length - 1, 1)) !== void 0;
-  (!g || !A) && (e.altstartstop ? (a[r++] = "bwipp.rationalizedCodabarBadAltStartStop#11332", a[r++] = "Codabar start and stop characters must be one of E N T or *", u()) : (a[r++] = "bwipp.rationalizedCodabarBadStartStop#11334", a[r++] = "Codabar start and stop characters must be one of A B C or D", u()));
-  for (var b = 1, h = e.barcode.length - 2; b <= h; b += 1) {
-    var x = i(e.bodyvals, o(e.barcode, b, 1)) !== void 0;
-    x || (a[r++] = "bwipp.rationalizedCodabarBadCharacter#11339", a[r++] = "Codabar body must contain only digits and symbols - $ : / . +", u());
+  var g = i(e.ssvals, o(e.barcode, 0, 1)) !== void 0, h = i(e.ssvals, o(e.barcode, e.barcode.length - 1, 1)) !== void 0;
+  (!g || !h) && (e.altstartstop ? (a[r++] = "bwipp.rationalizedCodabarBadAltStartStop#11332", a[r++] = "Codabar start and stop characters must be one of E N T or *", u()) : (a[r++] = "bwipp.rationalizedCodabarBadStartStop#11334", a[r++] = "Codabar start and stop characters must be one of A B C or D", u()));
+  for (var b = 1, A = e.barcode.length - 2; b <= A; b += 1) {
+    var w = i(e.bodyvals, o(e.barcode, b, 1)) !== void 0;
+    w || (a[r++] = "bwipp.rationalizedCodabarBadCharacter#11339", a[r++] = "Codabar body must contain only digits and symbols - $ : / . +", u());
   }
   if (a[r++] = "barlen", a[r++] = e.barcode.length, e.validatecheck) {
     var m = a[--r];
@@ -7385,7 +7371,7 @@ function Nt() {
       s(ie, pe - 1, n(i(ie, pe - 1) + ~~(i(e.num, e.i) / e.base))), s(e.num, e.i, i(e.num, e.i) % e.base);
     }
     for (; !za(i(e.num, 0), e.base); )
-      a[r++] = 1 / 0, a[r++] = 0, w(e.num), e.num = t(), s(e.num, 0, n(i(e.num, 0) + ~~(i(e.num, 1) / e.base))), s(e.num, 1, i(e.num, 1) % e.base);
+      a[r++] = 1 / 0, a[r++] = 0, x(e.num), e.num = t(), s(e.num, 0, n(i(e.num, 0) + ~~(i(e.num, 1) / e.base))), s(e.num, 1, i(e.num, 1) % e.base);
     a[r++] = 1 / 0, e.i = !0;
     for (var be = e.num, fe = 0, Te = be.length; fe < Te; fe++) {
       var V1 = i(be, fe);
@@ -7417,18 +7403,18 @@ function Nt() {
     Nt.__11533__ = 1, e = Object.getPrototypeOf(e);
   }
   a[r++] = "binval", a[r++] = i(e.startvals, e.barlen), a[r++] = 1 / 0;
-  for (var A = o(e.barcode, 20, e.barlen - 20), b = 0, h = A.length; b < h; b++)
-    a[r++] = n(i(A, b) - 48);
-  var x = t();
-  a[r++] = x, e.bigadd();
+  for (var h = o(e.barcode, 20, e.barlen - 20), b = 0, A = h.length; b < A; b++)
+    a[r++] = n(i(h, b) - 48);
+  var w = t();
+  a[r++] = w, e.bigadd();
   var m = a[--r];
-  e[a[--r]] = m, a[r++] = 1 / 0, w(e.binval), a[r++] = n(i(e.barcode, 0) - 48), e.binval = t(), a[r++] = 1 / 0;
+  e[a[--r]] = m, a[r++] = 1 / 0, x(e.binval), a[r++] = n(i(e.barcode, 0) - 48), e.binval = t(), a[r++] = 1 / 0;
   for (var B = e.binval, I = 0, M = B.length; I < M; I++)
     a[r++] = i(B, I) * 5;
   var R = t();
   a[r++] = "binval", a[r++] = R, a[r++] = t([n(i(e.barcode, 1) - 48)]), e.bigadd(), a[r++] = 10, e.normalize();
   var Q = a[--r];
-  e[a[--r]] = Q, a[r++] = 1 / 0, w(e.binval);
+  e[a[--r]] = Q, a[r++] = 1 / 0, x(e.binval);
   for (var S = o(e.barcode, 2, 18), T = 0, Y = S.length; T < Y; T++)
     a[r++] = n(i(S, T) - 48);
   e.binval = t(), e.bytes = t(13);
@@ -7458,8 +7444,8 @@ function Nt() {
     e.i = l1;
     var _ = e.i == 9 ? 636 : 1365;
     e.b = _;
-    for (var h1 = 0, g1 = e.binval.length - 2; h1 <= g1; h1 += 1) {
-      e.j = h1;
+    for (var A1 = 0, g1 = e.binval.length - 2; A1 <= g1; A1 += 1) {
+      e.j = A1;
       var u1 = e.binval, x1 = e.j;
       s(u1, x1 + 1, n(i(u1, x1 + 1) + i(e.binval, e.j) % e.b * 10)), s(e.binval, e.j, ~~(i(e.binval, e.j) / e.b));
     }
@@ -7524,13 +7510,13 @@ function cn() {
   for (var d = 0, y = n(e.barlen - 1); d <= y; d += 1)
     e.i = d, e.checksum = n(e.checksum + n(i(e.barcode, e.i) - 48));
   e.checksum = n(10 - e.checksum % 10) % 10, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.postnetBadCheckDigit#11858", a[r++] = "Incorrect USPS POSTNET check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen)), e.bhs = t(n(e.barlen * 5 + 7)), e.txt = t(n(e.barlen + 1)), e.enc = i(e.encs, 10), e.heights = t(e.enc.length);
-  for (var g = 0, A = e.enc.length - 1; g <= A; g += 1)
+  for (var g = 0, h = e.enc.length - 1; g <= h; g += 1)
     e.j = g, s(e.heights, e.j, b1(o(e.enc, e.j, 1)) * e.height / 5);
   l(e.bhs, 0, e.heights);
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1) {
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1) {
     e.i = b, e.enc = i(e.encs, n(i(e.barcode, e.i) - 48)), e.heights = t(e.enc.length);
-    for (var x = 0, m = e.enc.length - 1; x <= m; x += 1)
-      e.j = x, s(e.heights, e.j, b1(o(e.enc, e.j, 1)) * e.height / 5);
+    for (var w = 0, m = e.enc.length - 1; w <= m; w += 1)
+      e.j = w, s(e.heights, e.j, b1(o(e.enc, e.j, 1)) * e.height / 5);
     l(e.bhs, e.i * 5 + 1, e.heights), s(e.txt, e.i, t([o(e.barcode, e.i, 1), (e.i * 5 + 1) * 3.312, e.textyoffset, e.textfont, e.textsize]));
   }
   e.enc = i(e.encs, e.checksum), e.heights = t(e.enc.length);
@@ -7572,13 +7558,13 @@ function fn() {
   for (var d = 0, y = n(e.barlen - 1); d <= y; d += 1)
     e.i = d, e.checksum = n(e.checksum + n(i(e.barcode, e.i) - 48));
   e.checksum = n(10 - e.checksum % 10) % 10, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.planetBadCheckDigit#12007", a[r++] = "Incorrect USPS PLANET check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen)), e.bhs = t(n(e.barlen * 5 + 7)), e.txt = t(n(e.barlen + 1)), e.enc = i(e.encs, 10), e.heights = t(e.enc.length);
-  for (var g = 0, A = e.enc.length - 1; g <= A; g += 1)
+  for (var g = 0, h = e.enc.length - 1; g <= h; g += 1)
     e.j = g, s(e.heights, e.j, b1(o(e.enc, e.j, 1)) * e.height / 5);
   l(e.bhs, 0, e.heights);
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1) {
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1) {
     e.i = b, e.enc = i(e.encs, n(i(e.barcode, e.i) - 48)), e.heights = t(e.enc.length);
-    for (var x = 0, m = e.enc.length - 1; x <= m; x += 1)
-      e.j = x, s(e.heights, e.j, b1(o(e.enc, e.j, 1)) * e.height / 5);
+    for (var w = 0, m = e.enc.length - 1; w <= m; w += 1)
+      e.j = w, s(e.heights, e.j, b1(o(e.enc, e.j, 1)) * e.height / 5);
     l(e.bhs, e.i * 5 + 1, e.heights), s(e.txt, e.i, t([o(e.barcode, e.i, 1), (e.i * 5 + 1) * 3.312, e.textyoffset, e.textfont, e.textsize]));
   }
   e.enc = i(e.encs, e.checksum), e.heights = t(e.enc.length);
@@ -7619,13 +7605,13 @@ function ln() {
     var g = a[--r];
     a[r++] = n(g - 1);
   }
-  var A = a[--r];
-  e[a[--r]] = A, e.checksumrow = 0, e.checksumcol = 0;
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1)
+  var h = a[--r];
+  e[a[--r]] = h, e.checksumrow = 0, e.checksumcol = 0;
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1)
     e.i = b, e.indx = i(e.charvals, o(e.barcode, e.i, 1)), e.checksumrow = e.checksumrow + ~~(e.indx / 6), e.checksumcol = n(e.checksumcol + e.indx % 6);
   e.checksum = n(e.checksumrow % 6 * 6 + e.checksumcol % 6), e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.royalmailBadCheckDigit#12165", a[r++] = "Incorrect RM4SCC check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen)), e.encstr = C(n(e.barlen * 4 + 6)), e.txt = t(n(e.barlen + 1)), l(e.encstr, 0, i(e.encs, 36));
-  for (var x = 0, m = n(e.barlen - 1); x <= m; x += 1)
-    e.i = x, e.indx = i(e.charvals, o(e.barcode, e.i, 1)), l(e.encstr, e.i * 4 + 1, i(e.encs, e.indx)), s(e.txt, e.i, t([o(e.barcode, e.i, 1), (e.i * 4 + 1) * 3.312, e.textyoffset, e.textfont, e.textsize]));
+  for (var w = 0, m = n(e.barlen - 1); w <= m; w += 1)
+    e.i = w, e.indx = i(e.charvals, o(e.barcode, e.i, 1)), l(e.encstr, e.i * 4 + 1, i(e.encs, e.indx)), s(e.txt, e.i, t([o(e.barcode, e.i, 1), (e.i * 4 + 1) * 3.312, e.textyoffset, e.textfont, e.textsize]));
   l(e.encstr, n(e.barlen * 4 + 1), i(e.encs, e.checksum)), e.includecheckintext ? s(e.txt, e.barlen, t([o(e.barchars, e.checksum, 1), n(e.barlen * 4 + 1) * 3.312, e.textyoffset, e.textfont, e.textsize])) : s(e.txt, e.barlen, t([" ", n(e.barlen * 4 + 1) * 3.312, e.textyoffset, e.textfont, e.textsize])), l(e.encstr, n(e.barlen * 4 + 5), i(e.encs, 37)), e.bbs = t(e.encstr.length), e.bhs = t(e.encstr.length);
   for (var B = 0, I = e.encstr.length - 1; B <= I; B += 1)
     e.i = B, e.enc = o(e.encstr, e.i, 1), k(e.enc, "0") && (s(e.bbs, e.i, 3 * e.height / 8), s(e.bhs, e.i, 2 * e.height / 8)), k(e.enc, "1") && (s(e.bbs, e.i, 0 * e.height / 8), s(e.bhs, e.i, 5 * e.height / 8)), k(e.enc, "2") && (s(e.bbs, e.i, 3 * e.height / 8), s(e.bhs, e.i, 5 * e.height / 8)), k(e.enc, "3") && (s(e.bbs, e.i, 0 * e.height / 8), s(e.bhs, e.i, 8 * e.height / 8));
@@ -7658,13 +7644,13 @@ function ui() {
   a[r++] = d, a[r++] = v, y || (r -= 2, a[r++] = "bwipp.auspostBadFCC#12315", a[r++] = "Must begin with an FCC, either 11, 45, 59 or 62", u());
   var g = a[--r];
   e.encstr = C(i(a[--r], g)), a[r++] = !0;
-  for (var A = 0, b = 1; A < b; A++) {
+  for (var h = 0, b = 1; h < b; h++) {
     if (e.barlen < 10) {
       r--, a[r++] = !1;
       break;
     }
-    for (var h = o(e.barcode, 2, 8), x = 0, m = h.length; x < m; x++) {
-      var B = i(h, x);
+    for (var A = o(e.barcode, 2, 8), w = 0, m = A.length; w < m; w++) {
+      var B = i(A, w);
       if (B < 48 || B > 57) {
         r--, a[r++] = !1;
         break;
@@ -7712,8 +7698,8 @@ function ui() {
         }, e.nextcell();
         var _ = a[--r];
         s(a[--r], _, i(e.rstable, 64 * e.prev + e.j) << 1), e.nextcell();
-        var h1 = a[--r];
-        if (i(a[--r], h1) & 64) {
+        var A1 = a[--r];
+        if (i(a[--r], A1) & 64) {
           e.nextcell(), e.nextcell();
           var g1 = a[--r], u1 = i(a[--r], g1), x1 = a[--r];
           s(a[--r], x1, u1 ^ 67);
@@ -7734,7 +7720,7 @@ function ui() {
   for (var D1 = e.rscodes.length - 5; D1 >= 0; D1 -= 1) {
     e.i = D1;
     for (var G1 = 0; G1 <= 4; G1 += 1)
-      e.j = G1, s(e.rscodes, e.i + e.j, Ar(i(e.rscodes, e.i + e.j), i(e.rstable, n(64 * i(t([48, 17, 29, 30, 1]), e.j) + i(e.rscodes, e.i + 4)))));
+      e.j = G1, s(e.rscodes, e.i + e.j, hr(i(e.rscodes, e.i + e.j), i(e.rstable, n(64 * i(t([48, 17, 29, 30, 1]), e.j) + i(e.rscodes, e.i + 4)))));
   }
   e.checkcode = H2(C(12), "000000000000");
   for (var S1 = 0; S1 <= 3; S1 += 1)
@@ -7766,19 +7752,19 @@ function vn() {
     y || (a[r++] = "bwipp.kixBadCharacter#12549", a[r++] = "KIX must contain only capital letters and digits", u());
   }
   e.barlen = e.barcode.length, e.encstr = C(e.barlen * 4), e.txt = t(e.barlen);
-  for (var g = 0, A = e.barlen - 1; g <= A; g += 1)
+  for (var g = 0, h = e.barlen - 1; g <= h; g += 1)
     e.i = g, e.indx = i(e.charvals, o(e.barcode, e.i, 1)), l(e.encstr, e.i * 4, i(e.encs, e.indx)), s(e.txt, e.i, t([o(e.barcode, e.i, 1), e.i * 4 * 3.312, e.textyoffset, e.textfont, e.textsize]));
   e.bbs = t(e.encstr.length), e.bhs = t(e.encstr.length);
-  for (var b = 0, h = e.encstr.length - 1; b <= h; b += 1)
+  for (var b = 0, A = e.encstr.length - 1; b <= A; b += 1)
     e.i = b, e.enc = o(e.encstr, e.i, 1), k(e.enc, "0") && (s(e.bbs, e.i, 3 * e.height / 8), s(e.bhs, e.i, 2 * e.height / 8)), k(e.enc, "1") && (s(e.bbs, e.i, 0 * e.height / 8), s(e.bhs, e.i, 5 * e.height / 8)), k(e.enc, "2") && (s(e.bbs, e.i, 3 * e.height / 8), s(e.bhs, e.i, 5 * e.height / 8)), k(e.enc, "3") && (s(e.bbs, e.i, 0 * e.height / 8), s(e.bhs, e.i, 8 * e.height / 8));
   a[r++] = 1 / 0;
-  var x = e.bbs, m = e.bhs;
+  var w = e.bbs, m = e.bhs;
   a[r++] = 1 / 0;
   for (var B = 0, I = e.bhs.length - 1; B < I; B++)
     a[r++] = 1.44, a[r++] = 1.872;
   a[r++] = 1.44;
   var M = t();
-  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "bbs", a[r++] = x, a[r++] = "bhs", a[r++] = m, a[r++] = "sbs", a[r++] = M, e.includetext && (a[r++] = "txt", a[r++] = e.txt), a[r++] = "opt", a[r++] = e.options;
+  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "bbs", a[r++] = w, a[r++] = "bhs", a[r++] = m, a[r++] = "sbs", a[r++] = M, e.includetext && (a[r++] = "txt", a[r++] = e.txt), a[r++] = "opt", a[r++] = e.options;
   var R = C1();
   a[r++] = R, e.dontdraw || ve(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
 }
@@ -7810,16 +7796,16 @@ function pn() {
   for (var d = e.j, y = 19; d <= y; d += 1)
     e.k = d, l(e.encstr, e.k * 3 + 2, i(e.encs, 14)), e.checksum = e.checksum + 14, s(e.digits, e.k, 14);
   e.checksum = 19 - e.checksum % 19, l(e.encstr, 2 + 20 * 3, i(e.encs, e.checksum)), l(e.encstr, 2 + 21 * 3, i(e.encs, 20)), e.checkdigit = " ", e.includecheckintext && (e.checkdigit = o(e.barchars, e.checksum, 1)), s(e.txt, e.i + 1, t([e.checkdigit, (20 * 3 + 2) * 3.312, e.textyoffset, e.textfont, e.textsize])), l(e.encstr, 21 * 3 + 2, i(e.encs, 20)), e.bbs = t(21 * 3 + 4), e.bhs = t(e.bbs.length);
-  for (var g = 0, A = e.bbs.length - 1; g <= A; g += 1)
+  for (var g = 0, h = e.bbs.length - 1; g <= h; g += 1)
     e.i = g, e.enc = o(e.encstr, e.i, 1), e.bunit = 0, e.hunit = 0, k(e.enc, "0") && (e.bunit = 3, e.hunit = 2), k(e.enc, "1") && (e.bunit = 0, e.hunit = 5), k(e.enc, "2") && (e.bunit = 3, e.hunit = 5), k(e.enc, "3") && (e.bunit = 0, e.hunit = 8), s(e.bbs, e.i, e.bunit * e.height / 8), s(e.bhs, e.i, e.hunit * e.height / 8);
   a[r++] = 1 / 0;
-  var b = e.bbs, h = e.bhs;
+  var b = e.bbs, A = e.bhs;
   a[r++] = 1 / 0;
-  for (var x = 0, m = e.bhs.length - 1; x < m; x++)
+  for (var w = 0, m = e.bhs.length - 1; w < m; w++)
     a[r++] = 1.44, a[r++] = 1.872;
   a[r++] = 1.44;
   var B = t();
-  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "bbs", a[r++] = b, a[r++] = "bhs", a[r++] = h, a[r++] = "sbs", a[r++] = B, e.includetext && (a[r++] = "txt", a[r++] = e.txt), a[r++] = "opt", a[r++] = e.options;
+  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "bbs", a[r++] = b, a[r++] = "bhs", a[r++] = A, a[r++] = "sbs", a[r++] = B, e.includetext && (a[r++] = "txt", a[r++] = e.txt), a[r++] = "opt", a[r++] = e.options;
   var I = C1();
   a[r++] = I, e.dontdraw || ve(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
 }
@@ -7926,17 +7912,17 @@ function wi() {
   if (e.includecheck) {
     var v = e.checkfunc, d = e.checktype, y = i(v, d) !== void 0;
     a[r++] = v, a[r++] = d, y || (r -= 2, a[r++] = "bwipp.msiBadCharacter#12927", a[r++] = "MSI checktype must be mod10, mod1010, mod11, ncrmod11, mod1110 or ncrmod1110", u());
-    var g = a[--r], A = i(a[--r], g);
-    if (a[r++] = e.barcode, A() === !0)
+    var g = a[--r], h = i(a[--r], g);
+    if (a[r++] = e.barcode, h() === !0)
       return !0;
     e.barcode = a[--r], e.barlen = e.barcode.length, e.includecheckintext && (e.txtlen = e.barlen);
   }
   e.sbs = C(e.barlen * 8 + 5), e.txt = t(e.barlen), l(e.sbs, 0, i(e.encs, 10));
-  for (var b = 0, h = e.barlen - 1; b <= h; b += 1)
+  for (var b = 0, A = e.barlen - 1; b <= A; b += 1)
     e.i = b, Ie(e.barchars, o(e.barcode, e.i, 1)), r--, e.indx = a[--r].length, r -= 2, e.enc = i(e.encs, e.indx), l(e.sbs, e.i * 8 + 2, e.enc), s(e.txt, e.i, t([o(e.barcode, e.i, 1), e.i * 12 + 3, e.textyoffset, e.textfont, e.textsize]));
   l(e.sbs, e.barlen * 8 + 2, i(e.encs, 11)), a[r++] = 1 / 0, a[r++] = 1 / 0;
-  for (var x = e.sbs, m = 0, B = x.length; m < B; m++)
-    a[r++] = i(x, m) - 48;
+  for (var w = e.sbs, m = 0, B = w.length; m < B; m++)
+    a[r++] = i(w, m) - 48;
   var I = t();
   a[r++] = 1 / 0;
   for (var M = 0, R = ~~((e.sbs.length + 1) / 2); M < R; M++)
@@ -7967,15 +7953,15 @@ function dn() {
     var g = a[--r];
     a[r++] = n(g - 2);
   }
-  var A = a[--r];
-  e[a[--r]] = A, e.checkbits = t(n(e.barlen * 4 + 8)), l(e.checkbits, e.barlen * 4, t([0, 0, 0, 0, 0, 0, 0, 0]));
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1)
+  var h = a[--r];
+  e[a[--r]] = h, e.checkbits = t(n(e.barlen * 4 + 8)), l(e.checkbits, e.barlen * 4, t([0, 0, 0, 0, 0, 0, 0, 0]));
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1)
     e.i = b, e.indx = i(e.charvals, o(e.barcode, e.i, 1)), l(e.checkbits, e.i * 4, t([e.indx & 1, e.indx >>> 1 & 1, e.indx >>> 2 & 1, e.indx >>> 3]));
   e.checksalt = t([1, 1, 1, 1, 0, 1, 0, 0, 1]);
-  for (var x = 0, m = n(e.barlen * 4 - 1); x <= m; x += 1)
-    if (e.i = x, i(e.checkbits, e.i) == 1)
+  for (var w = 0, m = n(e.barlen * 4 - 1); w <= m; w += 1)
+    if (e.i = w, i(e.checkbits, e.i) == 1)
       for (var B = 0; B <= 8; B += 1)
-        e.j = B, s(e.checkbits, e.i + e.j, Ar(i(e.checkbits, e.i + e.j), i(e.checksalt, e.j)));
+        e.j = B, s(e.checkbits, e.i + e.j, hr(i(e.checkbits, e.i + e.j), i(e.checksalt, e.j)));
   e.checkval = 0;
   for (var I = 0; I <= 7; I += 1)
     e.i = I, e.checkval = n(e.checkval + ~~Math.pow(2, e.i) * i(e.checkbits, n(e.barlen * 4 + e.i)));
@@ -8026,15 +8012,15 @@ function Gi() {
         else {
           var g = n(i(e.np, 1) - 48);
           if (a[r++] = n(i(e.np, 0) - 48), a[r++] = g, g != 40) {
-            var A = a[--r], b = a[--r];
-            a[r++] = n(n(A + b * 10) + 10);
+            var h = a[--r], b = a[--r];
+            a[r++] = n(n(h + b * 10) + 10);
           } else
             r--;
-          var h = a[--r];
-          a[r++] = n(h + 17);
+          var A = a[--r];
+          a[r++] = n(A + 17);
         }
-        var x = a[--r];
-        a[r++] = x, x == -1 && (a[r++] = "bwipp.telepenInvalidNumericCharacter#13254", a[r++] = "Telepen Numeric may contain only digits, or X in even positions", u()), e.indx = a[--r], s(e.txt, e.j, t([e.np, e.j * 16 + 16, e.textyoffset, e.textfont, e.textsize])), e.i = e.i + 2;
+        var w = a[--r];
+        a[r++] = w, w == -1 && (a[r++] = "bwipp.telepenInvalidNumericCharacter#13254", a[r++] = "Telepen Numeric may contain only digits, or X in even positions", u()), e.indx = a[--r], s(e.txt, e.j, t([e.np, e.j * 16 + 16, e.textyoffset, e.textfont, e.textsize])), e.i = e.i + 2;
       } else
         e.indx = i(e.barcode, e.i), s(e.txt, e.j, t([" ", e.j * 16 + 16, e.textyoffset, e.textfont, e.textsize])), e.i = e.i + 1;
     else
@@ -8077,19 +8063,19 @@ function Dt() {
   e[a[--r]] = d, e.charmaps, e.charmaps, e.charmaps, e.charvals = t([/* @__PURE__ */ new Map(), /* @__PURE__ */ new Map(), /* @__PURE__ */ new Map()]);
   for (var y = 0, g = e.charmaps.length - 1; y <= g; y += 1) {
     e.i = y, e.encs = i(e.charmaps, e.i);
-    for (var A = 0; A <= 2; A += 1) {
-      e.j = A;
+    for (var h = 0; h <= 2; h += 1) {
+      e.j = h;
       var b = i(e.encs, e.j);
       if (a[r++] = b, k(ba(b), "stringtype")) {
-        var h = i(a[--r], 0);
-        a[r++] = h;
+        var A = i(a[--r], 0);
+        a[r++] = A;
       }
       s(i(e.charvals, e.j), a[--r], e.i);
     }
   }
   if (e.set0 = i(e.charvals, 0), e.set1 = i(e.charvals, 1), e.set2 = i(e.charvals, 2), k(e.version, "limiteda") || k(e.version, "limitedb"))
-    for (var x = 0, m = e.barcode.length - 1; x <= m; x += 1) {
-      var B = i(e.set0, i(o(e.barcode, x, 1), 0)) !== void 0;
+    for (var w = 0, m = e.barcode.length - 1; w <= m; w += 1) {
+      var B = i(e.set0, i(o(e.barcode, w, 1), 0)) !== void 0;
       B || (a[r++] = "bwipp.posicodeBadCharacter#13485", a[r++] = "Posicode limited must contain only digits, capital letters, and the symbols - and .", u());
     }
   if (e.raw && (e.encoding = "raw"), k(e.encoding, "raw")) {
@@ -8126,12 +8112,12 @@ function Dt() {
       e.i = U, i(e.msg, e.i) >= 0 && (i(e.msg, e.i) >= 128 ? s(e.numEA, e.i, n(i(e.numEA, e.i + 1) + 1)) : s(e.numSA, e.i, n(i(e.numSA, e.i + 1) + 1)));
     e.ea = !1, e.msgtmp = t([]);
     for (var $ = 0, n1 = e.msglen - 1; $ <= n1; $ += 1) {
-      if (e.i = $, e.c = i(e.msg, e.i), !Ar(e.ea, e.c < 128) && e.c >= 0) {
+      if (e.i = $, e.c = i(e.msg, e.i), !hr(e.ea, e.c < 128) && e.c >= 0) {
         e.ea ? a[r++] = e.numSA : a[r++] = e.numEA;
         var P = i(a[--r], e.i), V = n(P + e.i) == e.msglen ? 3 : 5;
-        P < V ? (a[r++] = 1 / 0, w(e.msgtmp), a[r++] = e.fn4, e.msgtmp = t()) : (a[r++] = 1 / 0, w(e.msgtmp), a[r++] = e.fn4, a[r++] = e.fn4, e.msgtmp = t(), e.ea = !e.ea);
+        P < V ? (a[r++] = 1 / 0, x(e.msgtmp), a[r++] = e.fn4, e.msgtmp = t()) : (a[r++] = 1 / 0, x(e.msgtmp), a[r++] = e.fn4, a[r++] = e.fn4, e.msgtmp = t(), e.ea = !e.ea);
       }
-      a[r++] = 1 / 0, w(e.msgtmp), e.c >= 0 ? a[r++] = e.c & 127 : a[r++] = e.c, e.msgtmp = t();
+      a[r++] = 1 / 0, x(e.msgtmp), e.c >= 0 ? a[r++] = e.c & 127 : a[r++] = e.c, e.msgtmp = t();
     }
     for (e.msg = e.msgtmp, e.msglen = e.msg.length, e.enc = function() {
       var De = a[--r];
@@ -8180,8 +8166,8 @@ function Dt() {
     Dt.__13680__ = 1, e = Object.getPrototypeOf(e);
   }
   e.v = 0;
-  for (var _ = e.cws, h1 = 0, g1 = _.length; h1 < g1; h1++) {
-    e.cw = i(_, h1);
+  for (var _ = e.cws, A1 = 0, g1 = _.length; A1 < g1; A1++) {
+    e.cw = i(_, A1);
     for (var u1 = 0, x1 = 6; u1 < x1; u1++)
       (e.cw ^ e.v) & 1 && (e.v = e.v ^ 7682), e.v = e.v >>> 1, e.cw = e.cw >>> 1;
   }
@@ -8249,14 +8235,14 @@ function jt() {
   e.fncvals = v, a[r++] = "msg", a[r++] = e.barcode, a[r++] = e.fncvals, sr();
   var d = a[--r];
   e[a[--r]] = d, e.msglen = e.msg.length, e.msgtmp = t([]);
-  for (var y = e.msg, g = 0, A = y.length; g < A; g++)
-    e.char = i(y, g), a[r++] = 1 / 0, w(e.msgtmp), e.char < 128 ? a[r++] = e.char : (a[r++] = e.fn4, a[r++] = e.char & 127), e.msgtmp = t();
+  for (var y = e.msg, g = 0, h = y.length; g < h; g++)
+    e.char = i(y, g), a[r++] = 1 / 0, x(e.msgtmp), e.char < 128 ? a[r++] = e.char : (a[r++] = e.fn4, a[r++] = e.char & 127), e.msgtmp = t();
   if (e.kmsg = e.msg, e.msg = e.msgtmp, e.msglen = e.msg.length, !jt.__13917__) {
     e = Object.create(e), e.charmaps = t([t([32, 32, "00"]), t(["!", "!", "01"]), t(['"', '"', "02"]), t(["#", "#", "03"]), t(["$", "$", "04"]), t(["%", "%", "05"]), t(["&", "&", "06"]), t(["'", "'", "07"]), t([40, 40, "08"]), t([41, 41, "09"]), t(["*", "*", "10"]), t(["+", "+", "11"]), t([",", ",", "12"]), t(["-", "-", "13"]), t([".", ".", "14"]), t(["/", "/", "15"]), t(["0", "0", "16"]), t(["1", "1", "17"]), t(["2", "2", "18"]), t(["3", "3", "19"]), t(["4", "4", "20"]), t(["5", "5", "21"]), t(["6", "6", "22"]), t(["7", "7", "23"]), t(["8", "8", "24"]), t(["9", "9", "25"]), t([":", ":", "26"]), t([";", ";", "27"]), t(["<", "<", "28"]), t(["=", "=", "29"]), t([">", ">", "30"]), t(["?", "?", "31"]), t(["@", "@", "32"]), t(["A", "A", "33"]), t(["B", "B", "34"]), t(["C", "C", "35"]), t(["D", "D", "36"]), t(["E", "E", "37"]), t(["F", "F", "38"]), t(["G", "G", "39"]), t(["H", "H", "40"]), t(["I", "I", "41"]), t(["J", "J", "42"]), t(["K", "K", "43"]), t(["L", "L", "44"]), t(["M", "M", "45"]), t(["N", "N", "46"]), t(["O", "O", "47"]), t(["P", "P", "48"]), t(["Q", "Q", "49"]), t(["R", "R", "50"]), t(["S", "S", "51"]), t(["T", "T", "52"]), t(["U", "U", "53"]), t(["V", "V", "54"]), t(["W", "W", "55"]), t(["X", "X", "56"]), t(["Y", "Y", "57"]), t(["Z", "Z", "58"]), t(["[", "[", "59"]), t([92, 92, "60"]), t(["]", "]", "61"]), t(["^", "^", "62"]), t(["_", "_", "63"]), t([0, "`", "64"]), t([1, "a", "65"]), t([2, "b", "66"]), t([3, "c", "67"]), t([4, "d", "68"]), t([5, "e", "69"]), t([6, "f", "70"]), t([7, "g", "71"]), t([8, "h", "72"]), t([9, "i", "73"]), t([10, "j", "74"]), t([11, "k", "75"]), t([12, "l", "76"]), t([13, "m", "77"]), t([14, "n", "78"]), t([15, "o", "79"]), t([16, "p", "80"]), t([17, "q", "81"]), t([18, "r", "82"]), t([19, "s", "83"]), t([20, "t", "84"]), t([21, "u", "85"]), t([22, "v", "86"]), t([23, "w", "87"]), t([24, "x", "88"]), t([25, "y", "89"]), t([26, "z", "90"]), t([27, "{", "91"]), t([28, "|", "92"]), t([29, "}", "93"]), t([30, "~", "94"]), t([31, 127, "95"]), t([e.fn3, e.fn3, "96"]), t([e.fn2, e.fn2, "97"]), t([e.sft, e.sft, "98"]), t([e.swc, e.swc, "99"]), t([e.swb, e.fn4, e.swb]), t([e.fn4, e.swa, e.swa]), t([e.fn1, e.fn1, e.fn1]), t([e.sta, e.sta, e.sta]), t([e.stp, e.stp, e.stp])]), e.charvals = t([/* @__PURE__ */ new Map(), /* @__PURE__ */ new Map(), /* @__PURE__ */ new Map()]);
-    for (var b = 0, h = e.charmaps.length - 1; b <= h; b += 1) {
+    for (var b = 0, A = e.charmaps.length - 1; b <= A; b += 1) {
       e.i = b, e.encs = i(e.charmaps, e.i);
-      for (var x = 0; x <= 2; x += 1) {
-        e.j = x;
+      for (var w = 0; w <= 2; w += 1) {
+        e.j = w;
         var m = i(e.encs, e.j);
         if (a[r++] = m, k(ba(m), "stringtype")) {
           var B = i(a[--r], 0);
@@ -8294,7 +8280,7 @@ function jt() {
       var f1 = i(e.setc, a[--r]);
       a[r++] = f1;
     } else {
-      w(a[--r]);
+      x(a[--r]);
       var d1 = a[--r], s1 = a[--r];
       a[r++] = n(n(d1 - 48) + n(s1 - 48) * 10);
     }
@@ -8442,7 +8428,7 @@ function jt() {
     jt.__14206__ = 1, e = Object.getPrototypeOf(e);
   }
   e.chkmsg = t(e.kmsg.length), e.j = 0;
-  for (var _ = 0, h1 = e.kmsg.length - 1; _ <= h1; _ += 1)
+  for (var _ = 0, A1 = e.kmsg.length - 1; _ <= A1; _ += 1)
     e.i = _, e.char = i(e.kmsg, e.i), e.char >= 0 && (s(e.chkmsg, e.j, e.char), e.j = e.j + 1), e.char == e.fn1 && e.i != 0 && (s(e.chkmsg, e.j, 29), e.j = e.j + 1);
   e.t1 = 0, e.t2 = 0, e.k1 = 0, e.k2 = 0;
   for (var g1 = 0, u1 = e.j - 1; g1 <= u1; g1 += 1)
@@ -8486,10 +8472,10 @@ function jt() {
     e.sbs = t(), a[r++] = 1 / 0;
     var De = e.sbs;
     a[r++] = 0;
-    for (var Ae = 0, Fe = De.length; Ae < Fe; Ae++) {
+    for (var he = 0, Fe = De.length; he < Fe; he++) {
       var ce = a[--r], Ye = ce == 1 ? 0 : 1;
       a[r++] = ce;
-      for (var le = 0, Be = i(De, Ae); le < Be; le++)
+      for (var le = 0, Be = i(De, he); le < Be; le++)
         a[r++] = Ye;
     }
     Re(t(rr() - 1));
@@ -8504,7 +8490,7 @@ function jt() {
   for (var E = 0, N = e.r - 2; E <= N; E += 1) {
     e.i = E;
     for (var q = 0, o1 = e.rowheight; q < o1; q++)
-      w(i(e.rowbits, e.i));
+      x(i(e.rowbits, e.i));
     for (var O = 0, t1 = e.sepheight; O < t1; O++) {
       a[r++] = 1, a[r++] = 1, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 0;
       for (var F = 0, Z = n(e.symwid - 24); F < Z; F++)
@@ -8513,8 +8499,8 @@ function jt() {
     }
   }
   for (var c1 = 0, r1 = e.rowheight; c1 < r1; c1++)
-    w(i(e.rowbits, e.r - 1));
-  for (var D = 0, A1 = e.symwid * e.sepheight; D < A1; D++)
+    x(i(e.rowbits, e.r - 1));
+  for (var D = 0, h1 = e.symwid * e.sepheight; D < h1; D++)
     a[r++] = 1;
   e.pixs = t();
   var p1 = /* @__PURE__ */ new Map([
@@ -8554,8 +8540,8 @@ function St() {
       e.i = d, e.encs = i(e.charmaps, e.i);
       for (var g = 0; g <= 2; g += 1) {
         e.j = g;
-        var A = i(e.encs, e.j);
-        if (a[r++] = A, k(ba(A), "stringtype")) {
+        var h = i(e.encs, e.j);
+        if (a[r++] = h, k(ba(h), "stringtype")) {
           var b = i(a[--r], 0);
           a[r++] = b;
         }
@@ -8563,15 +8549,15 @@ function St() {
       }
     }
     e.seta = i(e.charvals, 0), e.setb = i(e.charvals, 1), e.setc = i(e.charvals, 2);
-    for (var h in e) e.hasOwnProperty(h) && (St.$ctx[h] = e[h]);
+    for (var A in e) e.hasOwnProperty(A) && (St.$ctx[A] = e[A]);
     St.__14453__ = 1, e = Object.getPrototypeOf(e);
   }
   if (e.raw) {
     for (e.cws = t(e.barcode.length), e.i = 0, e.j = 0; !(e.i >= e.barcode.length - 3 || i(e.barcode, e.i) != 94); ) {
-      var x = o(e.barcode, e.i + 1, 3);
-      a[r++] = x, a[r++] = !1;
-      for (var m = 0, B = x.length; m < B; m++) {
-        var I = i(x, m);
+      var w = o(e.barcode, e.i + 1, 3);
+      a[r++] = w, a[r++] = !1;
+      for (var m = 0, B = w.length; m < B; m++) {
+        var I = i(w, m);
         (I < 48 || I > 57) && (r--, a[r++] = !0);
       }
       if (a[--r]) {
@@ -8603,12 +8589,12 @@ function St() {
       e.i = W, i(e.msg, e.i) >= 0 && (i(e.msg, e.i) >= 128 ? s(e.numEA, e.i, n(i(e.numEA, e.i + 1) + 1)) : s(e.numSA, e.i, n(i(e.numSA, e.i + 1) + 1)));
     e.ea = !1, e.msgtmp = t([]);
     for (var e1 = 0, G = e.msglen - 1; e1 <= G; e1 += 1) {
-      if (e.i = e1, e.c = i(e.msg, e.i), !Ar(e.ea, e.c < 128) && e.c >= 0) {
+      if (e.i = e1, e.c = i(e.msg, e.i), !hr(e.ea, e.c < 128) && e.c >= 0) {
         e.ea ? a[r++] = e.numSA : a[r++] = e.numEA;
         var H = i(a[--r], e.i), U = n(H + e.i) == e.msglen ? 3 : 5;
-        H < U ? (a[r++] = 1 / 0, w(e.msgtmp), a[r++] = e.fn4, e.msgtmp = t()) : (a[r++] = 1 / 0, w(e.msgtmp), a[r++] = e.fn4, a[r++] = e.fn4, e.msgtmp = t(), e.ea = !e.ea);
+        H < U ? (a[r++] = 1 / 0, x(e.msgtmp), a[r++] = e.fn4, e.msgtmp = t()) : (a[r++] = 1 / 0, x(e.msgtmp), a[r++] = e.fn4, a[r++] = e.fn4, e.msgtmp = t(), e.ea = !e.ea);
       }
-      a[r++] = 1 / 0, w(e.msgtmp), e.c >= 0 ? a[r++] = e.c & 127 : a[r++] = e.c, e.msgtmp = t();
+      a[r++] = 1 / 0, x(e.msgtmp), e.c >= 0 ? a[r++] = e.c & 127 : a[r++] = e.c, e.msgtmp = t();
     }
     e.msg = e.msgtmp, e.msglen = e.msg.length, e.numsscr = function() {
       for (e.n = 0, e.s = 0, e.p = a[--r]; !(e.p >= e.msglen); ) {
@@ -8635,7 +8621,7 @@ function St() {
         var or = i(e.setc, a[--r]);
         a[r++] = or;
       } else {
-        w(a[--r]);
+        x(a[--r]);
         var jr = a[--r], Hr = a[--r];
         a[r++] = n(n(jr - 48) + n(Hr - 48) * 10);
       }
@@ -8686,8 +8672,8 @@ function St() {
       }
       if (e.msglen >= 2) {
         a[r++] = 0, e.numsscr();
-        var _ = a[--r], h1 = a[--r];
-        a[r++] = _, a[r++] = h1, r--;
+        var _ = a[--r], A1 = a[--r];
+        a[r++] = _, a[r++] = A1, r--;
         var g1 = a[--r];
         if (g1 >= 2 && g1 % 2 == 0) {
           e.cset = "setc", e.mode = 2;
@@ -8765,7 +8751,7 @@ function St() {
             var De = i(e.seta, i(e.msg, e.i + 4)) !== void 0;
             if (e.nums == 4 && De) {
               a[r++] = e.sc2, e.enca();
-              for (var Ae = 0, Fe = 2; Ae < Fe; Ae++)
+              for (var he = 0, Fe = 2; he < Fe; he++)
                 i(e.msg, e.i) == e.fn1 ? (a[r++] = e.fn1, e.encc(), e.i = e.i + 1) : (a[r++] = o(e.msg, e.i, 2), e.encc(), e.i = e.i + 2);
               break;
             }
@@ -8853,8 +8839,8 @@ function St() {
           if (e.i < e.msglen - 1) {
             var D = i(e.setb, i(e.msg, e.i)) !== void 0;
             a[r++] = D, a[r++] = e.i + 1, e.numsscr();
-            var A1 = a[--r], p1 = a[--r];
-            a[r++] = A1, a[r++] = p1, r--;
+            var h1 = a[--r], p1 = a[--r];
+            a[r++] = h1, a[r++] = p1, r--;
             var K = a[--r], f1 = a[--r];
             if (f1 && K >= 3 && K % 2 == 1) {
               a[r++] = e.sb2, e.encc(), a[r++] = i(e.msg, e.i), e.encb(), a[r++] = i(e.msg, e.i + 1), e.encb(), e.i = e.i + 2;
@@ -8884,8 +8870,8 @@ function St() {
             }
           }
           if (e.i < e.msglen - 3) {
-            var he = i(e.setb, i(e.msg, e.i)) !== void 0, re = i(e.setb, i(e.msg, e.i + 1)) !== void 0, Me = i(e.setb, i(e.msg, e.i + 2)) !== void 0;
-            a[r++] = he && re && Me, a[r++] = e.i + 3, e.numsscr();
+            var Ae = i(e.setb, i(e.msg, e.i)) !== void 0, re = i(e.setb, i(e.msg, e.i + 1)) !== void 0, Me = i(e.setb, i(e.msg, e.i + 2)) !== void 0;
+            a[r++] = Ae && re && Me, a[r++] = e.i + 3, e.numsscr();
             var z1 = a[--r], Ee = a[--r];
             a[r++] = z1, a[r++] = Ee, r--;
             var R1 = a[--r], je = a[--r];
@@ -8907,16 +8893,16 @@ function St() {
   }
   if (!St.__14946__) {
     e = Object.create(e), e.metrics = t([t([2, 7]), t([3, 12]), t([4, 17]), t([5, 22]), t([6, 27]), t([7, 32]), t([8, 37]), t([9, 42]), t([10, 47]), t([11, 52]), t([12, 57]), t([13, 62]), t([14, 67]), t([15, 72]), t([16, 77])]);
-    for (var h in e) e.hasOwnProperty(h) && (St.$ctx[h] = e[h]);
+    for (var A in e) e.hasOwnProperty(A) && (St.$ctx[A] = e[A]);
     St.__14946__ = 1, e = Object.getPrototypeOf(e);
   }
   e.urows = e.rows;
   for (var xe = e.metrics, ye = 0, We = xe.length; ye < We && (e.m = i(xe, ye), e.r = i(e.m, 0), e.dcws = i(e.m, 1), e.okay = !0, e.urows != 0 && e.urows != e.r && (e.okay = !1), e.cws.length > e.dcws && (e.okay = !1), !e.okay); ye++)
     ;
-  e.okay || (a[r++] = "bwipp.code16kNoValidSymbol#14961", a[r++] = "Maximum length exceeded or data too large for given options", u()), a[r++] = 1 / 0, w(e.cws);
+  e.okay || (a[r++] = "bwipp.code16kNoValidSymbol#14961", a[r++] = "Maximum length exceeded or data too large for given options", u()), a[r++] = 1 / 0, x(e.cws);
   for (var o2 = 0, Ke = n(e.dcws - e.cws.length); o2 < Ke; o2++)
     a[r++] = 103;
-  e.cws = t(), a[r++] = 1 / 0, a[r++] = n(n(e.r - 2) * 7 + e.mode), w(e.cws), e.cws = t(), a[r++] = 0;
+  e.cws = t(), a[r++] = 1 / 0, a[r++] = n(n(e.r - 2) * 7 + e.mode), x(e.cws), e.cws = t(), a[r++] = 0;
   for (var c2 = 0, f2 = e.dcws; c2 <= f2; c2 += 1) {
     var u2 = a[--r];
     a[r++] = n(u2 + (c2 + 2) * i(e.cws, c2));
@@ -8926,11 +8912,11 @@ function St() {
     var w2 = a[--r];
     a[r++] = n(w2 + (Ve + 1) * i(e.cws, Ve));
   }
-  e.c2 = n(a[--r] + e.c1 * n(e.dcws + 2)) % 107, a[r++] = 1 / 0, w(e.cws), a[r++] = e.c1, a[r++] = e.c2, e.cws = t();
+  e.c2 = n(a[--r] + e.c1 * n(e.dcws + 2)) % 107, a[r++] = 1 / 0, x(e.cws), a[r++] = e.c1, a[r++] = e.c2, e.cws = t();
   var D2 = i(e.options, "debugcws") !== void 0;
   if (D2 && (a[r++] = "bwipp.debugcws#14977", a[r++] = e.cws, u()), !St.__15013__) {
     e = Object.create(e), e.encs = t(["212222", "222122", "222221", "121223", "121322", "131222", "122213", "122312", "132212", "221213", "221312", "231212", "112232", "122132", "122231", "113222", "123122", "123221", "223211", "221132", "221231", "213212", "223112", "312131", "311222", "321122", "321221", "312212", "322112", "322211", "212123", "212321", "232121", "111323", "131123", "131321", "112313", "132113", "132311", "211313", "231113", "231311", "112133", "112331", "132131", "113123", "113321", "133121", "313121", "211331", "231131", "213113", "213311", "213131", "311123", "311321", "331121", "312113", "312311", "332111", "314111", "221411", "431111", "111224", "111422", "121124", "121421", "141122", "141221", "112214", "112412", "122114", "122411", "142112", "142211", "241211", "221114", "413111", "241112", "134111", "111242", "121142", "121241", "114212", "124112", "124211", "411212", "421112", "421211", "212141", "214121", "412121", "111143", "111341", "131141", "114113", "114311", "411113", "411311", "113141", "114131", "311141", "411131", "211412", "211214", "211232", "211133"]), e.startencs = t(["3211", "2221", "2122", "1411", "1132", "1231", "1114", "3112", "3211", "2221", "2122", "1411", "1132", "1231", "1114", "3112"]), e.stopencsodd = t(["3211", "2221", "2122", "1411", "1132", "1231", "1114", "3112", "1132", "1231", "1114", "3112", "3211", "2221", "2122", "1411"]), e.stopencseven = t(["2122", "1411", "1132", "1231", "1114", "3112", "1132", "1231", "1114", "3112", "3211", "2221", "2122", "1411", "3211", "2221"]);
-    for (var h in e) e.hasOwnProperty(h) && (St.$ctx[h] = e[h]);
+    for (var A in e) e.hasOwnProperty(A) && (St.$ctx[A] = e[A]);
     St.__15013__ = 1, e = Object.getPrototypeOf(e);
   }
   e.sam == -1 || ~~(e.sam / 10) % 2 == 1 ? e.stopencs = e.stopencsodd : e.stopencs = e.stopencseven, e.rowbits = t(e.r);
@@ -8953,10 +8939,10 @@ function St() {
     var Se = e.sbs;
     a[r++] = 1;
     for (var He = 0, p2 = Se.length; He < p2; He++) {
-      var oe = a[--r], A2 = oe == 0 ? 1 : 0;
+      var oe = a[--r], h2 = oe == 0 ? 1 : 0;
       a[r++] = oe;
       for (var Ze = 0, E2 = i(Se, He); Ze < E2; Ze++)
-        a[r++] = A2;
+        a[r++] = h2;
     }
     Re(t(rr() - 1));
     var Ue = a[--r], z2 = a[--r];
@@ -8970,8 +8956,8 @@ function St() {
   for (var e2 = 0, K2 = n(e.r - 2); e2 <= K2; e2 += 1) {
     e.i = e2;
     for (var t2 = 0, vr = e.rowheight; t2 < vr; t2++)
-      w(i(e.rowbits, e.i));
-    for (var x2 = 0, hr = e.sepheight; x2 < hr; x2++) {
+      x(i(e.rowbits, e.i));
+    for (var x2 = 0, Ar = e.sepheight; x2 < Ar; x2++) {
       for (var U2 = 0, Mr = 10; U2 < Mr; U2++)
         a[r++] = 0;
       for (var ar = 0, Er = 70; ar < Er; ar++)
@@ -8980,7 +8966,7 @@ function St() {
     }
   }
   for (var $2 = 0, Yr = e.rowheight; $2 < Yr; $2++)
-    w(i(e.rowbits, n(e.r - 1)));
+    x(i(e.rowbits, n(e.r - 1)));
   for (var nr = 0, Dr = 81 * e.sepheight; nr < Dr; nr++)
     a[r++] = 1;
   e.pixs = t();
@@ -9033,18 +9019,18 @@ function ia() {
     a[--r] > 127 && (a[r++] = "bwipp.code49badCharacter#15161", a[r++] = "Code 49 can only support ASCII characters with values 0 to 127", u());
   }), !ia.__15205__) {
     e = Object.create(e), e.charmap = t(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "-", ".", " ", "$", "/", "+", "%", e.s1, e.s2, e.fn1, e.fn2, e.fn3, e.ns]), e.charvals = /* @__PURE__ */ new Map();
-    for (var A = 0; A <= 48; A += 1) {
-      e.i = A;
+    for (var h = 0; h <= 48; h += 1) {
+      e.i = h;
       var b = i(e.charmap, e.i);
       if (a[r++] = b, k(ba(b), "stringtype")) {
-        var h = i(a[--r], 0);
-        a[r++] = h;
+        var A = i(a[--r], 0);
+        a[r++] = A;
       }
       s(e.charvals, a[--r], e.i);
     }
     e.combos = t(["1 ", "1A", "1B", "1C", "1D", "1E", "1F", "1G", "1H", "1I", "1J", "1K", "1L", "1M", "1N", "1O", "1P", "1Q", "1R", "1S", "1T", "1U", "1V", "1W", "1X", "1Y", "1Z", "11", "12", "13", "14", "15", "  ", "16", "17", "18", " $", " %", "19", "10", "1-", "1.", "1$", " +", "1/", " -", " .", " /", " 0", " 1", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", "1+", "21", "22", "23", "24", "25", "26", " A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P", " Q", " R", " S", " T", " U", " V", " W", " X", " Y", " Z", "27", "28", "29", "20", "2-", "2.", "2A", "2B", "2C", "2D", "2E", "2F", "2G", "2H", "2I", "2J", "2K", "2L", "2M", "2N", "2O", "2P", "2Q", "2R", "2S", "2T", "2U", "2V", "2W", "2X", "2Y", "2Z", "2$", "2/", "2+", "2%", "2 "]);
-    for (var x = 0; x <= 127; x += 1) {
-      e.i = x;
+    for (var w = 0; w <= 127; w += 1) {
+      e.i = w;
       var m = i(e.combos, e.i);
       e.c1 = i(m, 0), e.c2 = i(m, 1), e.c1 == 49 && s(e.charvals, e.i, t([i(e.charvals, e.s1), i(e.charvals, e.c2)])), e.c1 == 50 && s(e.charvals, e.i, t([i(e.charvals, e.s2), i(e.charvals, e.c2)]));
     }
@@ -9059,8 +9045,8 @@ function ia() {
   }, e.base48 = function() {
     var K = a[--r];
     a[r++] = 0, L(K, function() {
-      var ne = a[--r], he = a[--r];
-      a[r++] = n(n(ne - 48) + he * 10);
+      var ne = a[--r], Ae = a[--r];
+      a[r++] = n(n(ne - 48) + Ae * 10);
     }), a[r++] = 1 / 0;
     var f1 = a[--r], d1 = a[--r], s1 = a[--r];
     a[r++] = f1, a[r++] = d1;
@@ -9100,12 +9086,12 @@ function ia() {
     a[r++] = L1, L1 == 3 && (a[r++] = 2, a[r++] = e.nums, e.base48());
     var T1 = a[--r];
     if (a[r++] = T1, T1 == 4) {
-      a[r++] = 3, a[r++] = 1 / 0, a[r++] = 49, a[r++] = 48, w(e.nums);
+      a[r++] = 3, a[r++] = 1 / 0, a[r++] = 49, a[r++] = 48, x(e.nums);
       var Y1 = t();
       a[r++] = Y1, e.base48();
     }
     if (a[--r] == 7) {
-      a[r++] = 3, a[r++] = 1 / 0, a[r++] = 49, a[r++] = 48, w(o(e.nums, 0, 4));
+      a[r++] = 3, a[r++] = 1 / 0, a[r++] = 49, a[r++] = 48, x(o(e.nums, 0, 4));
       var ne = t();
       a[r++] = ne, e.base48(), a[r++] = 2, a[r++] = o(e.nums, 4, 3), e.base48();
     }
@@ -9176,7 +9162,7 @@ function ia() {
   e.urows = e.rows;
   for (var e1 = e.metrics, G = 0, H = e1.length; G < H && (e.m = i(e1, G), e.r = i(e.m, 0), e.dcws = i(e.m, 1), e.okay = !0, e.urows != 0 && e.urows != e.r && (e.okay = !1), e.cws.length > e.dcws && (e.okay = !1), !e.okay); G++)
     ;
-  e.okay || (a[r++] = "bwipp.code49noValidSymbol#15355", a[r++] = "Maximum length exceeded", u()), a[r++] = 1 / 0, w(e.cws);
+  e.okay || (a[r++] = "bwipp.code49noValidSymbol#15355", a[r++] = "Maximum length exceeded", u()), a[r++] = 1 / 0, x(e.cws);
   for (var U = 0, $ = n(e.dcws - e.cws.length); U < $; U++)
     a[r++] = 48;
   e.cws = t(), e.ccs = t(e.r * 8), e.j = 0;
@@ -9195,14 +9181,14 @@ function ia() {
     e = Object.create(e);
     var _ = t([1, 9, 31, 26, 2, 12, 17, 23, 37, 18, 22, 6, 27, 44, 15, 43, 39, 11, 13, 5, 41, 33, 36, 8, 4, 32, 3, 19, 40, 25, 29, 10, 24, 30]);
     a[r++] = _, a[r++] = _, a[r++] = 1 / 0;
-    var h1 = a[--r], g1 = o(a[--r], 0, 32);
-    a[r++] = h1, a[r++] = 20, w(g1), e.weightx = t();
+    var A1 = a[--r], g1 = o(a[--r], 0, 32);
+    a[r++] = A1, a[r++] = 20, x(g1), e.weightx = t();
     var u1 = a[--r];
     a[r++] = u1, a[r++] = u1, a[r++] = 1 / 0;
     var x1 = a[--r], Q1 = o(a[--r], 1, 32);
-    a[r++] = x1, a[r++] = 16, w(Q1), e.weighty = t(), a[r++] = 1 / 0;
+    a[r++] = x1, a[r++] = 16, x(Q1), e.weighty = t(), a[r++] = 1 / 0;
     var I1 = a[--r], F1 = o(a[--r], 2, 32);
-    a[r++] = I1, a[r++] = 38, w(F1), e.weightz = t();
+    a[r++] = I1, a[r++] = 38, x(F1), e.weightz = t();
     for (var d in e) e.hasOwnProperty(d) && (ia.$ctx[d] = e[d]);
     ia.__15386__ = 1, e = Object.getPrototypeOf(e);
   }
@@ -9240,7 +9226,7 @@ function ia() {
     var pe = a[--r];
     e[a[--r]] = pe, e.ccrow = o(e.ccs, e.i * 8, 8), a[r++] = 1 / 0;
     for (var be = 0; be <= 7; be += 2) {
-      w(o(e.ccrow, be, 2));
+      x(o(e.ccrow, be, 2));
       var fe = a[--r], Te = a[--r];
       a[r++] = n(fe + Te * 49);
     }
@@ -9254,8 +9240,8 @@ function ia() {
     var Ce = e.sbs;
     a[r++] = 1;
     for (var ue = 0, De = Ce.length; ue < De; ue++) {
-      var Ae = a[--r], Fe = Ae == 0 ? 1 : 0;
-      a[r++] = Ae;
+      var he = a[--r], Fe = he == 0 ? 1 : 0;
+      a[r++] = he;
       for (var ce = 0, Ye = i(Ce, ue); ce < Ye; ce++)
         a[r++] = Fe;
     }
@@ -9271,7 +9257,7 @@ function ia() {
   for (var p = 0, j = n(e.r - 2); p <= j; p += 1) {
     e.i = p;
     for (var E = 0, N = e.rowheight; E < N; E++)
-      w(i(e.rowbits, e.i));
+      x(i(e.rowbits, e.i));
     for (var q = 0, o1 = e.sepheight; q < o1; q++) {
       for (var O = 0, t1 = 10; O < t1; O++)
         a[r++] = 0;
@@ -9281,8 +9267,8 @@ function ia() {
     }
   }
   for (var c1 = 0, r1 = e.rowheight; c1 < r1; c1++)
-    w(i(e.rowbits, n(e.r - 1)));
-  for (var D = 0, A1 = 81 * e.sepheight; D < A1; D++)
+    x(i(e.rowbits, n(e.r - 1)));
+  for (var D = 0, h1 = 81 * e.sepheight; D < h1; D++)
     a[r++] = 1;
   e.pixs = t();
   var p1 = /* @__PURE__ */ new Map([
@@ -9311,26 +9297,26 @@ function bn() {
   a[r++] = 1 / 0, a[r++] = 1 / 0;
   for (var d = e.sbs, y = 0, g = d.length; y < g; y++)
     a[r++] = i(d, y) - 48;
-  var A = t();
+  var h = t();
   a[r++] = 1 / 0;
-  for (var b = 0, h = ~~((e.sbs.length + 1) / 2); b < h; b++)
+  for (var b = 0, A = ~~((e.sbs.length + 1) / 2); b < A; b++)
     a[r++] = e.height;
-  var x = t();
+  var w = t();
   a[r++] = 1 / 0;
   for (var m = 0, B = ~~((e.sbs.length + 1) / 2); m < B; m++)
     a[r++] = 0;
   var I = t();
-  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = A, a[r++] = "bhs", a[r++] = x, a[r++] = "bbs", a[r++] = I, a[r++] = "txt", a[r++] = e.txt, a[r++] = "opt", a[r++] = e.options;
+  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = h, a[r++] = "bhs", a[r++] = w, a[r++] = "bbs", a[r++] = I, a[r++] = "txt", a[r++] = e.txt, a[r++] = "opt", a[r++] = e.options;
   var M = C1();
   a[r++] = M, e.dontdraw || ve(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
 }
 function il() {
   e = Object.create(e), e.dontdraw = !1, e.height = 1, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], L(e.barcode, function() {
-    var h = a[--r];
-    (h < 49 || h > 57) && (a[r++] = "bwipp.rawBadCharacter#16574", a[r++] = "Raw must contain only digits 1 to 9", u());
+    var A = a[--r];
+    (A < 49 || A > 57) && (a[r++] = "bwipp.rawBadCharacter#16574", a[r++] = "Raw must contain only digits 1 to 9", u());
   }), a[r++] = 1 / 0, a[r++] = 1 / 0, L(e.barcode, function() {
-    var h = a[--r];
-    a[r++] = n(h - 48);
+    var A = a[--r];
+    a[r++] = n(A - 48);
   });
   var c = t();
   a[r++] = 1 / 0;
@@ -9340,15 +9326,15 @@ function il() {
   a[r++] = 1 / 0;
   for (var y = 0, g = ~~((e.barcode.length + 1) / 2); y < g; y++)
     a[r++] = 0;
-  var A = t();
-  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = c, a[r++] = "bhs", a[r++] = d, a[r++] = "bbs", a[r++] = A, a[r++] = "opt", a[r++] = e.options;
+  var h = t();
+  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "sbs", a[r++] = c, a[r++] = "bhs", a[r++] = d, a[r++] = "bbs", a[r++] = h, a[r++] = "opt", a[r++] = e.options;
   var b = C1();
   a[r++] = b, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
 }
 function nl() {
   e = Object.create(e), e.dontdraw = !1, e.height = 0.175, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], k(e.barcode, "") && (a[r++] = "bwipp.daftEmptyData#16627", a[r++] = "The data must not be empty", u()), L(e.barcode, function() {
-    var h = a[--r];
-    h != 68 && h != 65 && h != 70 && h != 84 && (a[r++] = "bwipp.daftBadCharacter#16632", a[r++] = "DAFT must contain only characters D, A, F and T", u());
+    var A = a[--r];
+    A != 68 && A != 65 && A != 70 && A != 84 && (a[r++] = "bwipp.daftBadCharacter#16632", a[r++] = "DAFT must contain only characters D, A, F and T", u());
   }), e.barlen = e.barcode.length, e.bbs = t(e.barlen), e.bhs = t(e.barlen);
   for (var c = 0, f = e.barlen - 1; c <= f; c += 1)
     e.i = c, e.enc = o(e.barcode, e.i, 1), k(e.enc, "D") && (s(e.bbs, e.i, 0 * e.height / 8), s(e.bhs, e.i, 5 * e.height / 8)), k(e.enc, "A") && (s(e.bbs, e.i, 3 * e.height / 8), s(e.bhs, e.i, 5 * e.height / 8)), k(e.enc, "F") && (s(e.bbs, e.i, 0 * e.height / 8), s(e.bhs, e.i, 8 * e.height / 8)), k(e.enc, "T") && (s(e.bbs, e.i, 3 * e.height / 8), s(e.bhs, e.i, 2 * e.height / 8));
@@ -9358,15 +9344,15 @@ function nl() {
   for (var y = 0, g = e.bhs.length - 1; y < g; y++)
     a[r++] = 1.44, a[r++] = 1.872;
   a[r++] = 1.44;
-  var A = t();
-  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "bbs", a[r++] = v, a[r++] = "bhs", a[r++] = d, a[r++] = "sbs", a[r++] = A, a[r++] = "opt", a[r++] = e.options;
+  var h = t();
+  a[r++] = "ren", a[r++] = "renlinear", a[r++] = "bbs", a[r++] = v, a[r++] = "bhs", a[r++] = d, a[r++] = "sbs", a[r++] = h, a[r++] = "opt", a[r++] = e.options;
   var b = C1();
   a[r++] = b, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
 }
-function An() {
+function hn() {
   e = Object.create(e), e.dontdraw = !1, a[r++] = e, E1(), e.options = a[--r];
   var c = a[--r];
-  if (e.barcode = c, Ne(An), !An.__16747__) {
+  if (e.barcode = c, Ne(hn), !hn.__16747__) {
     e = Object.create(e), e.fimasbs = t([2.25, 2.25, 2.25, 11.25, 2.25, 11.25, 2.25, 2.25, 2.25]), a[r++] = 1 / 0;
     for (var f = 0, v = ~~(e.fimasbs.length / 2) + 1; f < v; f++)
       a[r++] = 0.625;
@@ -9374,13 +9360,13 @@ function An() {
     for (var d = 0, y = ~~(e.fimasbs.length / 2) + 1; d < y; d++)
       a[r++] = 0;
     e.fimabbs = t(), e.fimbsbs = t([2.25, 6.75, 2.25, 2.25, 2.25, 6.25, 2.25, 2.25, 2.25, 6.75, 2.25]), a[r++] = 1 / 0;
-    for (var g = 0, A = ~~(e.fimbsbs.length / 2) + 1; g < A; g++)
+    for (var g = 0, h = ~~(e.fimbsbs.length / 2) + 1; g < h; g++)
       a[r++] = 0.625;
     e.fimbbhs = t(), a[r++] = 1 / 0;
-    for (var b = 0, h = ~~(e.fimbsbs.length / 2) + 1; b < h; b++)
+    for (var b = 0, A = ~~(e.fimbsbs.length / 2) + 1; b < A; b++)
       a[r++] = 0;
     e.fimbbbs = t(), e.fimcsbs = t([2.25, 2.25, 2.25, 6.75, 2.25, 6.75, 2.25, 6.75, 2.25, 2.25, 2.25]), a[r++] = 1 / 0;
-    for (var x = 0, m = ~~(e.fimcsbs.length / 2) + 1; x < m; x++)
+    for (var w = 0, m = ~~(e.fimcsbs.length / 2) + 1; w < m; w++)
       a[r++] = 0.625;
     e.fimcbhs = t(), a[r++] = 1 / 0;
     for (var B = 0, I = ~~(e.fimcsbs.length / 2) + 1; B < I; B++)
@@ -9415,8 +9401,8 @@ function An() {
       ["renmatrix", K1]
     ]);
     e.renmap = a1;
-    for (var i1 in e) e.hasOwnProperty(i1) && (An.$ctx[i1] = e[i1]);
-    An.__16747__ = 1, e = Object.getPrototypeOf(e);
+    for (var i1 in e) e.hasOwnProperty(i1) && (hn.$ctx[i1] = e[i1]);
+    hn.__16747__ = 1, e = Object.getPrototypeOf(e);
   }
   var l1 = /* @__PURE__ */ new Map([
     ["fima", function() {
@@ -9489,8 +9475,8 @@ function An() {
   var _ = i(e.symbols, e.barcode) !== void 0;
   if (_ || (a[r++] = "bwipp.symbolUnknownSymbol#16761", a[r++] = "Unknown symbol name provided", u()), i(e.symbols, e.barcode)() === !0)
     return !0;
-  var h1 = a[--r];
-  if (s(h1, "opt", e.options), a[r++] = h1, !e.dontdraw) {
+  var A1 = a[--r];
+  if (s(A1, "opt", e.options), a[r++] = A1, !e.dontdraw) {
     var g1 = a[--r];
     if (a[r++] = g1, i(e.renmap, i(g1, "ren"))() === !0)
       return !0;
@@ -9514,15 +9500,15 @@ function vt() {
       }
     }
     e.e = 1e4, e.latlen = t([t([0, 1, 1, 2]), t([2, 0, 1, 2]), t([1, 1, 0, 1]), t([1, 2, 2, 0])]), e.latseq = t([t([t([]), t([e.ll]), t([e.ml]), t([e.ml, e.pl])]), t([t([e.ml, e.al]), t([]), t([e.ml]), t([e.ml, e.pl])]), t([t([e.al]), t([e.ll]), t([]), t([e.pl])]), t([t([e.al]), t([e.al, e.ll]), t([e.al, e.ml]), t([])])]), e.shftlen = t([t([e.e, e.e, e.e, 1]), t([1, e.e, e.e, 1]), t([e.e, e.e, e.e, 1]), t([e.e, e.e, e.e, e.e])]), a[r++] = 1 / 0, a[r++] = e.tl, a[r++] = 900, a[r++] = e.bl, a[r++] = 901, a[r++] = e.bl6, a[r++] = 924, a[r++] = e.nl, a[r++] = 902, a[r++] = e.bs, a[r++] = 913, e.latchcws = C1();
-    for (var A in e) e.hasOwnProperty(A) && (vt.$ctx[A] = e[A]);
+    for (var h in e) e.hasOwnProperty(h) && (vt.$ctx[h] = e[h]);
     vt.__16938__ = 1, e = Object.getPrototypeOf(e);
   }
   if (e.raw) {
     for (e.datcws = t(e.barcode.length), e.i = 0, e.j = 0; !(e.i >= e.barcode.length - 3 || i(e.barcode, e.i) != 94); ) {
       var b = o(e.barcode, e.i + 1, 3);
       a[r++] = b, a[r++] = !1;
-      for (var h = 0, x = b.length; h < x; h++) {
-        var m = i(b, h);
+      for (var A = 0, w = b.length; A < w; A++) {
+        var m = i(b, A);
         (m < 48 || m > 57) && (r--, a[r++] = !0);
       }
       if (a[--r]) {
@@ -9536,14 +9522,14 @@ function vt() {
   if (e.encb = function() {
     e.in = a[--r], e.inlen = e.in.length, e.out = t(~~(e.inlen / 6) * 5 + e.inlen % 6);
     for (var r1 = 0, D = ~~(e.inlen / 6) - 1; r1 <= D; r1 += 1) {
-      e.k = r1, a[r++] = 1 / 0, w(o(e.in, e.k * 6, 3)), e.msbs = t(), a[r++] = 1 / 0, w(e.msbs);
-      var A1 = a[--r], p1 = a[--r], K = a[--r];
-      a[r++] = n(n(A1 + p1 * 256) + K * 65536);
+      e.k = r1, a[r++] = 1 / 0, x(o(e.in, e.k * 6, 3)), e.msbs = t(), a[r++] = 1 / 0, x(e.msbs);
+      var h1 = a[--r], p1 = a[--r], K = a[--r];
+      a[r++] = n(n(h1 + p1 * 256) + K * 65536);
       for (var f1 = 0, d1 = 3; f1 < d1; f1++) {
         var s1 = a[--r];
         a[r++] = s1 % 900, a[r++] = ~~(s1 / 900);
       }
-      e.mscs = t(), a[r++] = 1 / 0, w(o(e.in, e.k * 6 + 3, 3)), e.lsbs = t(), a[r++] = 1 / 0, w(e.lsbs);
+      e.mscs = t(), a[r++] = 1 / 0, x(o(e.in, e.k * 6 + 3, 3)), e.lsbs = t(), a[r++] = 1 / 0, x(e.lsbs);
       var w1 = a[--r], k1 = a[--r], B1 = a[--r];
       a[r++] = n(n(w1 + k1 * 256) + B1 * 65536);
       for (var O1 = 0, U1 = 3; O1 < U1; O1++) {
@@ -9553,15 +9539,15 @@ function vt() {
       e.lscs = t();
       var L1 = i(e.lscs, 0), T1 = i(e.mscs, 0);
       s(e.out, e.k * 5 + 4, n(L1 + T1 * 316) % 900);
-      var Y1 = i(e.lscs, 1), ne = i(e.mscs, 0), he = i(e.mscs, 1);
-      s(e.out, e.k * 5 + 3, n(n(n(~~(n(L1 + T1 * 316) / 900) + Y1) + ne * 641) + he * 316) % 900);
+      var Y1 = i(e.lscs, 1), ne = i(e.mscs, 0), Ae = i(e.mscs, 1);
+      s(e.out, e.k * 5 + 3, n(n(n(~~(n(L1 + T1 * 316) / 900) + Y1) + ne * 641) + Ae * 316) % 900);
       var re = i(e.lscs, 2), Me = i(e.mscs, 0), z1 = i(e.mscs, 1), Ee = i(e.mscs, 2);
-      s(e.out, e.k * 5 + 2, n(n(n(n(~~(n(n(n(~~(n(L1 + T1 * 316) / 900) + Y1) + ne * 641) + he * 316) / 900) + re) + Me * 20) + z1 * 641) + Ee * 316) % 900);
+      s(e.out, e.k * 5 + 2, n(n(n(n(~~(n(n(n(~~(n(L1 + T1 * 316) / 900) + Y1) + ne * 641) + Ae * 316) / 900) + re) + Me * 20) + z1 * 641) + Ee * 316) % 900);
       var R1 = i(e.lscs, 3), je = i(e.mscs, 1), xe = i(e.mscs, 2);
-      s(e.out, e.k * 5 + 1, n(n(n(~~(n(n(n(n(~~(n(n(n(~~(n(L1 + T1 * 316) / 900) + Y1) + ne * 641) + he * 316) / 900) + re) + Me * 20) + z1 * 641) + Ee * 316) / 900) + R1) + je * 20) + xe * 641) % 900), s(e.out, e.k * 5, n(~~(n(n(n(~~(n(n(n(n(~~(n(n(n(~~(n(L1 + T1 * 316) / 900) + Y1) + ne * 641) + he * 316) / 900) + re) + Me * 20) + z1 * 641) + Ee * 316) / 900) + R1) + je * 20) + xe * 641) / 900) + i(e.mscs, 2) * 20) % 900);
+      s(e.out, e.k * 5 + 1, n(n(n(~~(n(n(n(n(~~(n(n(n(~~(n(L1 + T1 * 316) / 900) + Y1) + ne * 641) + Ae * 316) / 900) + re) + Me * 20) + z1 * 641) + Ee * 316) / 900) + R1) + je * 20) + xe * 641) % 900), s(e.out, e.k * 5, n(~~(n(n(n(~~(n(n(n(n(~~(n(n(n(~~(n(L1 + T1 * 316) / 900) + Y1) + ne * 641) + Ae * 316) / 900) + re) + Me * 20) + z1 * 641) + Ee * 316) / 900) + R1) + je * 20) + xe * 641) / 900) + i(e.mscs, 2) * 20) % 900);
     }
     if (e.rem = e.inlen % 6, e.rem != 0) {
-      a[r++] = e.out, a[r++] = e.out.length - e.rem, a[r++] = 1 / 0, w(o(e.in, e.inlen - e.rem, e.rem));
+      a[r++] = e.out, a[r++] = e.out.length - e.rem, a[r++] = 1 / 0, x(o(e.in, e.inlen - e.rem, e.rem));
       var ye = t(), We = a[--r];
       l(a[--r], We, ye);
     }
@@ -9605,7 +9591,7 @@ function vt() {
     }
     for (e.numdigits = o(e.numdigits, 0, e.msglen), e.numtext = o(e.numtext, 0, e.msglen), e.numbytes = o(e.numbytes, 0, e.msglen), e.seq = t([]), e.seqlen = 0, e.state = e.T, e.p = 0; e.p != e.msglen; )
       if (i(e.iseci, e.p)) {
-        if (e.eci = i(e.msg, e.p), a[r++] = 1 / 0, w(e.seq), a[r++] = t([e.eci]), e.seq = t(), e.p = e.p + 1, a[r++] = "seqlen", a[r++] = e.seqlen, e.eci <= -1810900)
+        if (e.eci = i(e.msg, e.p), a[r++] = 1 / 0, x(e.seq), a[r++] = t([e.eci]), e.seq = t(), e.p = e.p + 1, a[r++] = "seqlen", a[r++] = e.seqlen, e.eci <= -1810900)
           a[r++] = 2;
         else {
           var J = e.eci <= -1000900 ? 3 : 2;
@@ -9614,21 +9600,21 @@ function vt() {
         var X = a[--r], a1 = a[--r];
         e[a[--r]] = n(a1 + X);
       } else if (e.n = i(e.numdigits, e.p), e.n >= 13 || e.n == e.msglen && e.n >= 8) {
-        a[r++] = 1 / 0, w(e.seq), a[r++] = e.nl, a[r++] = 1 / 0, w(o(e.msg, e.p, e.n));
+        a[r++] = 1 / 0, x(e.seq), a[r++] = e.nl, a[r++] = 1 / 0, x(o(e.msg, e.p, e.n));
         var i1 = t();
         a[r++] = i1, e.seq = t(), e.state = e.N, e.p = n(e.p + e.n), e.seqlen = n(e.seqlen + 1 + e.n);
       } else if (e.t = i(e.numtext, e.p), e.t >= 5) {
-        a[r++] = 1 / 0, w(e.seq), e.state != e.T && (a[r++] = e.tl), a[r++] = 1 / 0, w(o(e.msg, e.p, e.t));
+        a[r++] = 1 / 0, x(e.seq), e.state != e.T && (a[r++] = e.tl), a[r++] = 1 / 0, x(o(e.msg, e.p, e.t));
         var l1 = t();
         a[r++] = l1, e.seq = t(), e.state = e.T, e.p = n(e.p + e.t), e.seqlen = n(n(e.seqlen + 1) + e.t);
       } else if (e.b = i(e.numbytes, e.p), e.b == 1 && e.state == e.T)
-        a[r++] = 1 / 0, w(e.seq), a[r++] = e.bs, a[r++] = t([i(e.msg, e.p)]), e.seq = t(), e.p = n(e.p + e.b), e.seqlen = n(e.seqlen + 2);
+        a[r++] = 1 / 0, x(e.seq), a[r++] = e.bs, a[r++] = t([i(e.msg, e.p)]), e.seq = t(), e.p = n(e.p + e.b), e.seqlen = n(e.seqlen + 2);
       else {
-        a[r++] = 1 / 0, w(e.seq);
+        a[r++] = 1 / 0, x(e.seq);
         var _ = e.b % 6 != 0 ? e.bl : e.bl6;
-        a[r++] = _, a[r++] = 1 / 0, w(o(e.msg, e.p, e.b));
-        var h1 = t();
-        a[r++] = h1, e.seq = t(), e.state = e.B, e.p = n(e.p + e.b), e.seqlen = n(n(e.seqlen + 1) + e.b);
+        a[r++] = _, a[r++] = 1 / 0, x(o(e.msg, e.p, e.b));
+        var A1 = t();
+        a[r++] = A1, e.seq = t(), e.state = e.B, e.p = n(e.p + e.b), e.seqlen = n(n(e.seqlen + 1) + e.b);
       }
     for (e.enca = function() {
       var r1 = i(i(e.charvals, e.A), a[--r]);
@@ -9648,11 +9634,11 @@ function vt() {
       e.in = a[--r], e.curlen = t([e.e, e.e, e.e, e.e]), s(e.curlen, e.submode, 0), e.curseq = t([t([]), t([]), t([]), t([])]), L(e.in, function() {
         for (e.char = a[--r]; ; ) {
           e.imp = !1;
-          for (var he = t([e.A, e.L, e.M, e.P]), re = 0, Me = he.length; re < Me; re++) {
-            e.x = i(he, re);
+          for (var Ae = t([e.A, e.L, e.M, e.P]), re = 0, Me = Ae.length; re < Me; re++) {
+            e.x = i(Ae, re);
             for (var z1 = t([e.A, e.L, e.M, e.P]), Ee = 0, R1 = z1.length; Ee < R1; Ee++)
               if (e.y = i(z1, Ee), e.cost = n(i(e.curlen, e.x) + i(i(e.latlen, e.x), e.y)), e.cost < i(e.curlen, e.y)) {
-                s(e.curlen, e.y, e.cost), a[r++] = e.curseq, a[r++] = e.y, a[r++] = 1 / 0, w(i(e.curseq, e.x)), w(i(i(e.latseq, e.x), e.y));
+                s(e.curlen, e.y, e.cost), a[r++] = e.curseq, a[r++] = e.y, a[r++] = 1 / 0, x(i(e.curseq, e.x)), x(i(i(e.latseq, e.x), e.y));
                 var je = t(), xe = a[--r];
                 s(a[--r], xe, je), e.imp = !0;
               }
@@ -9667,13 +9653,13 @@ function vt() {
             if (!Ke)
               break;
             if (e.cost = n(i(e.curlen, e.x) + 1), e.cost < i(e.nxtlen, e.x)) {
-              s(e.nxtlen, e.x, e.cost), a[r++] = e.nxtseq, a[r++] = e.x, a[r++] = 1 / 0, w(i(e.curseq, e.x)), a[r++] = e.char;
+              s(e.nxtlen, e.x, e.cost), a[r++] = e.nxtseq, a[r++] = e.x, a[r++] = 1 / 0, x(i(e.curseq, e.x)), a[r++] = e.char;
               var c2 = t(), f2 = a[--r];
               s(a[--r], f2, c2);
             }
             for (var u2 = t([e.A, e.L, e.M, e.P]), Ve = 0, l2 = u2.length; Ve < l2; Ve++)
               if (e.y = i(u2, Ve), v1(e.x, e.y) && (e.cost = n(n(i(e.curlen, e.y) + i(i(e.shftlen, e.y), e.x)) + 1), e.cost < i(e.nxtlen, e.y))) {
-                s(e.nxtlen, e.y, e.cost), a[r++] = e.nxtseq, a[r++] = e.y, a[r++] = 1 / 0, w(i(e.curseq, e.y));
+                s(e.nxtlen, e.y, e.cost), a[r++] = e.nxtseq, a[r++] = e.y, a[r++] = 1 / 0, x(i(e.curseq, e.y));
                 var w2 = e.x == e.A ? e.as : e.ps;
                 a[r++] = w2, a[r++] = e.char;
                 var D2 = t(), $e = a[--r];
@@ -9683,7 +9669,7 @@ function vt() {
           }
         e.curlen = e.nxtlen, e.curseq = e.nxtseq;
       }), e.minseq = e.e;
-      for (var r1 = t([e.A, e.L, e.M, e.P]), D = 0, A1 = r1.length; D < A1; D++)
+      for (var r1 = t([e.A, e.L, e.M, e.P]), D = 0, h1 = r1.length; D < h1; D++)
         e.k = i(r1, D), i(e.curlen, e.k) < e.minseq && (e.minseq = i(e.curlen, e.k), e.txtseq = i(e.curseq, e.k));
       for (e.text = t(e.minseq), e.k = 0, e.l = 0; !(e.k >= e.txtseq.length || (e.char = i(e.txtseq, e.k), a[r++] = e.char, e[i(e.textencfuncs, e.submode)]() === !0)); )
         e.addtotext(), e.k = e.k + 1, (e.char == e.as || e.char == e.ps) && (a[r++] = i(e.txtseq, e.k), e.char == e.as ? e.enca() : e.encp(), e.addtotext(), e.k = e.k + 1), e.char == e.al && (e.submode = e.A), e.char == e.ll && (e.submode = e.L), e.char == e.ml && (e.submode = e.M), e.char == e.pl && (e.submode = e.P);
@@ -9745,7 +9731,7 @@ function vt() {
             e[a[--r]] = T1;
           }
         }
-        a[r++] = 1 / 0, w(e.text), a[r++] = e.pad, e.text = t();
+        a[r++] = 1 / 0, x(e.text), a[r++] = e.pad, e.text = t();
       }
       e.out = t(~~(e.text.length / 2));
       for (var Y1 = 0, ne = e.out.length - 1; Y1 <= ne; Y1 += 1)
@@ -9755,17 +9741,17 @@ function vt() {
       e.in = a[--r], e.out = t([]);
       for (var r1 = 0, D = e.in.length - 1; r1 <= D; r1 += 44) {
         e.k = r1, a[r++] = 1 / 0;
-        var A1 = e.in.length - e.k;
-        a[r++] = 1, a[r++] = e.in, a[r++] = e.k, a[r++] = A1, A1 > 44 && (r--, a[r++] = 44);
+        var h1 = e.in.length - e.k;
+        a[r++] = 1, a[r++] = e.in, a[r++] = e.k, a[r++] = h1, h1 > 44 && (r--, a[r++] = 44);
         for (var p1 = a[--r], K = a[--r], f1 = o(a[--r], K, p1), d1 = 0, s1 = f1.length; d1 < s1; d1++)
           a[r++] = n(i(f1, d1) - 48);
         for (e.gmod = t(), e.cwn = t([]); ; ) {
           for (e.dv = 900, e.gmul = t([]), e.val = 0; e.gmod.length != 0; )
-            e.val = n(e.val * 10 + i(e.gmod, 0)), e.gmod = o(e.gmod, 1, e.gmod.length - 1), e.val < e.dv ? e.gmul.length != 0 && (a[r++] = 1 / 0, w(e.gmul), a[r++] = 0, e.gmul = t()) : (a[r++] = 1 / 0, w(e.gmul), a[r++] = ~~(e.val / e.dv), e.gmul = t()), e.val = e.val % e.dv;
-          if (e.dv = e.val, a[r++] = 1 / 0, a[r++] = e.dv, w(e.cwn), e.cwn = t(), e.gmod = e.gmul, e.gmul.length == 0)
+            e.val = n(e.val * 10 + i(e.gmod, 0)), e.gmod = o(e.gmod, 1, e.gmod.length - 1), e.val < e.dv ? e.gmul.length != 0 && (a[r++] = 1 / 0, x(e.gmul), a[r++] = 0, e.gmul = t()) : (a[r++] = 1 / 0, x(e.gmul), a[r++] = ~~(e.val / e.dv), e.gmul = t()), e.val = e.val % e.dv;
+          if (e.dv = e.val, a[r++] = 1 / 0, a[r++] = e.dv, x(e.cwn), e.cwn = t(), e.gmod = e.gmul, e.gmul.length == 0)
             break;
         }
-        a[r++] = 1 / 0, w(e.out), w(e.cwn), e.out = t();
+        a[r++] = 1 / 0, x(e.out), x(e.cwn), e.out = t();
       }
       a[r++] = e.out;
     }, e.ence = function() {
@@ -9774,8 +9760,8 @@ function vt() {
         var D = a[--r];
         a[r++] = 927, a[r++] = D, Re(t(2));
       } else {
-        var A1 = a[--r];
-        if (a[r++] = A1, A1 <= 810899) {
+        var h1 = a[--r];
+        if (a[r++] = h1, h1 <= 810899) {
           var p1 = a[--r];
           a[r++] = 926, a[r++] = ~~(p1 / 900) - 1, a[r++] = p1 % 900, Re(t(3));
         } else {
@@ -9831,13 +9817,13 @@ function vt() {
     e.rsalog = t(), e.rslog = t(929);
     for (var ie = 1; ie <= 928; ie += 1)
       s(e.rslog, i(e.rsalog, ie), ie);
-    for (var A in e) e.hasOwnProperty(A) && (vt.$ctx[A] = e[A]);
+    for (var h in e) e.hasOwnProperty(h) && (vt.$ctx[h] = e[h]);
     vt.__17404__ = 1, e = Object.getPrototypeOf(e);
   }
   e.rsprod = function() {
     var r1 = a[--r], D = a[--r];
     if (a[r++] = D, a[r++] = r1, r1 != 0 && D != 0) {
-      var A1 = i(e.rslog, a[--r]), p1 = i(e.rsalog, n(A1 + i(e.rslog, a[--r])) % 928);
+      var h1 = i(e.rslog, a[--r]), p1 = i(e.rsalog, n(h1 + i(e.rslog, a[--r])) % 928);
       a[r++] = p1;
     } else
       r -= 2, a[r++] = 0;
@@ -9853,8 +9839,8 @@ function vt() {
       s(a[--r], De, n(ue + Ce) % 929);
     }
     a[r++] = e.coeffs, a[r++] = 0, a[r++] = i(e.coeffs, 0), a[r++] = i(e.rsalog, e.i), e.rsprod();
-    var Ae = a[--r], Fe = a[--r];
-    s(a[--r], Fe, Ae);
+    var he = a[--r], Fe = a[--r];
+    s(a[--r], Fe, he);
   }
   e.coeffs = o(e.coeffs, 0, e.coeffs.length - 1);
   for (var ce = e.coeffs.length - 1; ce >= 0; ce -= 2) {
@@ -9872,13 +9858,13 @@ function vt() {
   var p = i(e.options, "debugcws") !== void 0;
   if (p && (a[r++] = "bwipp.debugcws#17442", a[r++] = e.cws, u()), !vt.__17686__) {
     e = Object.create(e), e.clusters = t([t([120256, 125680, 128380, 120032, 125560, 128318, 108736, 119920, 108640, 86080, 108592, 86048, 110016, 120560, 125820, 109792, 120440, 125758, 88256, 109680, 88160, 89536, 110320, 120700, 89312, 110200, 120638, 89200, 110140, 89840, 110460, 89720, 110398, 89980, 128506, 119520, 125304, 128190, 107712, 119408, 125244, 107616, 119352, 84032, 107568, 119324, 84e3, 107544, 83984, 108256, 119672, 125374, 85184, 108144, 119612, 85088, 108088, 119582, 85040, 108060, 85728, 108408, 119742, 85616, 108348, 85560, 108318, 85880, 108478, 85820, 85790, 107200, 119152, 125116, 107104, 119096, 125086, 83008, 107056, 119068, 82976, 107032, 82960, 82952, 83648, 107376, 119228, 83552, 107320, 119198, 83504, 107292, 83480, 83468, 83824, 107452, 83768, 107422, 83740, 83900, 106848, 118968, 125022, 82496, 106800, 118940, 82464, 106776, 118926, 82448, 106764, 82440, 106758, 82784, 106936, 119006, 82736, 106908, 82712, 106894, 82700, 82694, 106974, 82830, 82240, 106672, 118876, 82208, 106648, 118862, 82192, 106636, 82184, 106630, 82180, 82352, 82328, 82316, 82080, 118830, 106572, 106566, 82050, 117472, 124280, 127678, 103616, 117360, 124220, 103520, 117304, 124190, 75840, 103472, 75808, 104160, 117624, 124350, 76992, 104048, 117564, 76896, 103992, 76848, 76824, 77536, 104312, 117694, 77424, 104252, 77368, 77340, 77688, 104382, 77628, 77758, 121536, 126320, 128700, 121440, 126264, 128670, 111680, 121392, 126236, 111648, 121368, 126222, 111632, 121356, 103104, 117104, 124092, 112320, 103008, 117048, 124062, 112224, 121656, 126366, 93248, 74784, 102936, 117006, 93216, 112152, 93200, 75456, 103280, 117180, 93888, 75360, 103224, 117150, 93792, 112440, 121758, 93744, 75288, 93720, 75632, 103356, 94064, 75576, 103326, 94008, 112542, 93980, 75708, 94140, 75678, 94110, 121184, 126136, 128606, 111168, 121136, 126108, 111136, 121112, 126094, 111120, 121100, 111112, 111108, 102752, 116920, 123998, 111456, 102704, 116892, 91712, 74272, 121244, 116878, 91680, 74256, 102668, 91664, 111372, 102662, 74244, 74592, 102840, 116958, 92e3, 74544, 102812, 91952, 111516, 102798, 91928, 74508, 74502, 74680, 102878, 92088, 74652, 92060, 74638, 92046, 92126, 110912, 121008, 126044, 110880, 120984, 126030, 110864, 120972, 110856, 120966, 110852, 110850, 74048, 102576, 116828, 90944, 74016, 102552, 116814, 90912, 111e3, 121038, 90896, 73992, 102534, 90888, 110982, 90884, 74160, 102620, 91056, 74136, 102606, 91032, 111054, 91020, 74118, 91014, 91100, 91086, 110752, 120920, 125998, 110736, 120908, 110728, 120902, 110724, 110722, 73888, 102488, 116782, 90528, 73872, 102476, 90512, 110796, 102470, 90504, 73860, 90500, 73858, 73944, 90584, 90572, 90566, 120876, 120870, 110658, 102444, 73800, 90312, 90308, 90306, 101056, 116080, 123580, 100960, 116024, 70720, 100912, 115996, 70688, 100888, 70672, 70664, 71360, 101232, 116156, 71264, 101176, 116126, 71216, 101148, 71192, 71180, 71536, 101308, 71480, 101278, 71452, 71612, 71582, 118112, 124600, 127838, 105024, 118064, 124572, 104992, 118040, 124558, 104976, 118028, 104968, 118022, 100704, 115896, 123486, 105312, 100656, 115868, 79424, 70176, 118172, 115854, 79392, 105240, 100620, 79376, 70152, 79368, 70496, 100792, 115934, 79712, 70448, 118238, 79664, 105372, 100750, 79640, 70412, 79628, 70584, 100830, 79800, 70556, 79772, 70542, 70622, 79838, 122176, 126640, 128860, 122144, 126616, 128846, 122128, 126604, 122120, 126598, 122116, 104768, 117936, 124508, 113472, 104736, 126684, 124494, 113440, 122264, 126670, 113424, 104712, 117894, 113416, 122246, 104706, 69952, 100528, 115804, 78656, 69920, 100504, 115790, 96064, 78624, 104856, 117966, 96032, 113560, 122318, 100486, 96016, 78600, 104838, 96008, 69890, 70064, 100572, 78768, 70040, 100558, 96176, 78744, 104910, 96152, 113614, 70022, 78726, 70108, 78812, 70094, 96220, 78798, 122016, 126552, 128814, 122e3, 126540, 121992, 126534, 121988, 121986, 104608, 117848, 124462, 113056, 104592, 126574, 113040, 122060, 117830, 113032, 104580, 113028, 104578, 113026, 69792, 100440, 115758, 78240, 69776, 100428, 95136, 78224, 104652, 100422, 95120, 113100, 69764, 95112, 78212, 69762, 78210, 69848, 100462, 78296, 69836, 95192, 78284, 69830, 95180, 78278, 69870, 95214, 121936, 126508, 121928, 126502, 121924, 121922, 104528, 117804, 112848, 104520, 117798, 112840, 121958, 112836, 104514, 112834, 69712, 100396, 78032, 69704, 100390, 94672, 78024, 104550, 94664, 112870, 69698, 94660, 78018, 94658, 78060, 94700, 94694, 126486, 121890, 117782, 104484, 104482, 69672, 77928, 94440, 69666, 77922, 99680, 68160, 99632, 68128, 99608, 115342, 68112, 99596, 68104, 99590, 68448, 99768, 115422, 68400, 99740, 68376, 99726, 68364, 68358, 68536, 99806, 68508, 68494, 68574, 101696, 116400, 123740, 101664, 116376, 101648, 116364, 101640, 116358, 101636, 67904, 99504, 115292, 72512, 67872, 116444, 115278, 72480, 101784, 116430, 72464, 67848, 99462, 72456, 101766, 67842, 68016, 99548, 72624, 67992, 99534, 72600, 101838, 72588, 67974, 68060, 72668, 68046, 72654, 118432, 124760, 127918, 118416, 124748, 118408, 124742, 118404, 118402, 101536, 116312, 105888, 101520, 116300, 105872, 118476, 116294, 105864, 101508, 105860, 101506, 105858, 67744, 99416, 72096, 67728, 116334, 80800, 72080, 101580, 99398, 80784, 105932, 67716, 80776, 72068, 67714, 72066, 67800, 99438, 72152, 67788, 80856, 72140, 67782, 80844, 72134, 67822, 72174, 80878, 126800, 128940, 126792, 128934, 126788, 126786, 118352, 124716, 122576, 126828, 124710, 122568, 126822, 122564, 118338, 122562, 101456, 116268, 105680, 101448, 116262, 114128, 105672, 118374, 114120, 122598, 101442, 114116, 105666, 114114, 67664, 99372, 71888, 67656, 99366, 80336, 71880, 101478, 97232, 80328, 105702, 67650, 97224, 114150, 71874, 97220, 67692, 71916, 67686, 80364, 71910, 97260, 80358, 97254, 126760, 128918, 126756, 126754, 118312, 124694, 122472, 126774, 122468, 118306, 122466, 101416, 116246, 105576, 101412, 113896, 105572, 101410, 113892, 105570, 113890, 67624, 99350, 71784, 101430, 80104, 71780, 67618, 96744, 80100, 71778, 96740, 80098, 96738, 71798, 96758, 126738, 122420, 122418, 105524, 113780, 113778, 71732, 79988, 96500, 96498, 66880, 66848, 98968, 66832, 66824, 66820, 66992, 66968, 66956, 66950, 67036, 67022, 1e5, 99984, 115532, 99976, 115526, 99972, 99970, 66720, 98904, 69024, 100056, 98892, 69008, 100044, 69e3, 100038, 68996, 66690, 68994, 66776, 98926, 69080, 100078, 69068, 66758, 69062, 66798, 69102, 116560, 116552, 116548, 116546, 99920, 102096, 116588, 115494, 102088, 116582, 102084, 99906, 102082, 66640, 68816, 66632, 98854, 73168, 68808, 66628, 73160, 68804, 66626, 73156, 68802, 66668, 68844, 66662, 73196, 68838, 73190, 124840, 124836, 124834, 116520, 118632, 124854, 118628, 116514, 118626, 99880, 115478, 101992, 116534, 106216, 101988, 99874, 106212, 101986, 106210, 66600, 98838, 68712, 99894, 72936, 68708, 66594, 81384, 72932, 68706, 81380, 72930, 66614, 68726, 72950, 81398, 128980, 128978, 124820, 126900, 124818, 126898, 116500, 118580, 116498, 122740, 118578, 122738, 99860, 101940, 99858, 106100, 101938, 114420]), t([128352, 129720, 125504, 128304, 129692, 125472, 128280, 129678, 125456, 128268, 125448, 128262, 125444, 125792, 128440, 129758, 120384, 125744, 128412, 120352, 125720, 128398, 120336, 125708, 120328, 125702, 120324, 120672, 125880, 128478, 110144, 120624, 125852, 110112, 120600, 125838, 110096, 120588, 110088, 120582, 110084, 110432, 120760, 125918, 89664, 110384, 120732, 89632, 110360, 120718, 89616, 110348, 89608, 110342, 89952, 110520, 120798, 89904, 110492, 89880, 110478, 89868, 90040, 110558, 90012, 89998, 125248, 128176, 129628, 125216, 128152, 129614, 125200, 128140, 125192, 128134, 125188, 125186, 119616, 125360, 128220, 119584, 125336, 128206, 119568, 125324, 119560, 125318, 119556, 119554, 108352, 119728, 125404, 108320, 119704, 125390, 108304, 119692, 108296, 119686, 108292, 108290, 85824, 108464, 119772, 85792, 108440, 119758, 85776, 108428, 85768, 108422, 85764, 85936, 108508, 85912, 108494, 85900, 85894, 85980, 85966, 125088, 128088, 129582, 125072, 128076, 125064, 128070, 125060, 125058, 119200, 125144, 128110, 119184, 125132, 119176, 125126, 119172, 119170, 107424, 119256, 125166, 107408, 119244, 107400, 119238, 107396, 107394, 83872, 107480, 119278, 83856, 107468, 83848, 107462, 83844, 83842, 83928, 107502, 83916, 83910, 83950, 125008, 128044, 125e3, 128038, 124996, 124994, 118992, 125036, 118984, 125030, 118980, 118978, 106960, 119020, 106952, 119014, 106948, 106946, 82896, 106988, 82888, 106982, 82884, 82882, 82924, 82918, 124968, 128022, 124964, 124962, 118888, 124982, 118884, 118882, 106728, 118902, 106724, 106722, 82408, 106742, 82404, 82402, 124948, 124946, 118836, 118834, 106612, 106610, 124224, 127664, 129372, 124192, 127640, 129358, 124176, 127628, 124168, 127622, 124164, 124162, 117568, 124336, 127708, 117536, 124312, 127694, 117520, 124300, 117512, 124294, 117508, 117506, 104256, 117680, 124380, 104224, 117656, 124366, 104208, 117644, 104200, 117638, 104196, 104194, 77632, 104368, 117724, 77600, 104344, 117710, 77584, 104332, 77576, 104326, 77572, 77744, 104412, 77720, 104398, 77708, 77702, 77788, 77774, 128672, 129880, 93168, 128656, 129868, 92664, 128648, 129862, 92412, 128644, 128642, 124064, 127576, 129326, 126368, 124048, 129902, 126352, 128716, 127558, 126344, 124036, 126340, 124034, 126338, 117152, 124120, 127598, 121760, 117136, 124108, 121744, 126412, 124102, 121736, 117124, 121732, 117122, 121730, 103328, 117208, 124142, 112544, 103312, 117196, 112528, 121804, 117190, 112520, 103300, 112516, 103298, 112514, 75680, 103384, 117230, 94112, 75664, 103372, 94096, 112588, 103366, 94088, 75652, 94084, 75650, 75736, 103406, 94168, 75724, 94156, 75718, 94150, 75758, 128592, 129836, 91640, 128584, 129830, 91388, 128580, 91262, 128578, 123984, 127532, 126160, 123976, 127526, 126152, 128614, 126148, 123970, 126146, 116944, 124012, 121296, 116936, 124006, 121288, 126182, 121284, 116930, 121282, 102864, 116972, 111568, 102856, 116966, 111560, 121318, 111556, 102850, 111554, 74704, 102892, 92112, 74696, 102886, 92104, 111590, 92100, 74690, 92098, 74732, 92140, 74726, 92134, 128552, 129814, 90876, 128548, 90750, 128546, 123944, 127510, 126056, 128566, 126052, 123938, 126050, 116840, 123958, 121064, 116836, 121060, 116834, 121058, 102632, 116854, 111080, 121078, 111076, 102626, 111074, 74216, 102646, 91112, 74212, 91108, 74210, 91106, 74230, 91126, 128532, 90494, 128530, 123924, 126004, 123922, 126002, 116788, 120948, 116786, 120946, 102516, 110836, 102514, 110834, 73972, 90612, 73970, 90610, 128522, 123914, 125978, 116762, 120890, 102458, 110714, 123552, 127320, 129198, 123536, 127308, 123528, 127302, 123524, 123522, 116128, 123608, 127342, 116112, 123596, 116104, 123590, 116100, 116098, 101280, 116184, 123630, 101264, 116172, 101256, 116166, 101252, 101250, 71584, 101336, 116206, 71568, 101324, 71560, 101318, 71556, 71554, 71640, 101358, 71628, 71622, 71662, 127824, 129452, 79352, 127816, 129446, 79100, 127812, 78974, 127810, 123472, 127276, 124624, 123464, 127270, 124616, 127846, 124612, 123458, 124610, 115920, 123500, 118224, 115912, 123494, 118216, 124646, 118212, 115906, 118210, 100816, 115948, 105424, 100808, 115942, 105416, 118246, 105412, 100802, 105410, 70608, 100844, 79824, 70600, 100838, 79816, 105446, 79812, 70594, 79810, 70636, 79852, 70630, 79846, 129960, 95728, 113404, 129956, 95480, 113278, 129954, 95356, 95294, 127784, 129430, 78588, 128872, 129974, 95996, 78462, 128868, 127778, 95870, 128866, 123432, 127254, 124520, 123428, 126696, 128886, 123426, 126692, 124514, 126690, 115816, 123446, 117992, 115812, 122344, 117988, 115810, 122340, 117986, 122338, 100584, 115830, 104936, 100580, 113640, 104932, 100578, 113636, 104930, 113634, 70120, 100598, 78824, 70116, 96232, 78820, 70114, 96228, 78818, 96226, 70134, 78838, 129940, 94968, 113022, 129938, 94844, 94782, 127764, 78206, 128820, 127762, 95102, 128818, 123412, 124468, 123410, 126580, 124466, 126578, 115764, 117876, 115762, 122100, 117874, 122098, 100468, 104692, 100466, 113140, 104690, 113138, 69876, 78324, 69874, 95220, 78322, 95218, 129930, 94588, 94526, 127754, 128794, 123402, 124442, 126522, 115738, 117818, 121978, 100410, 104570, 112890, 69754, 78074, 94714, 94398, 123216, 127148, 123208, 127142, 123204, 123202, 115408, 123244, 115400, 123238, 115396, 115394, 99792, 115436, 99784, 115430, 99780, 99778, 68560, 99820, 68552, 99814, 68548, 68546, 68588, 68582, 127400, 129238, 72444, 127396, 72318, 127394, 123176, 127126, 123752, 123172, 123748, 123170, 123746, 115304, 123190, 116456, 115300, 116452, 115298, 116450, 99560, 115318, 101864, 99556, 101860, 99554, 101858, 68072, 99574, 72680, 68068, 72676, 68066, 72674, 68086, 72694, 129492, 80632, 105854, 129490, 80508, 80446, 127380, 72062, 127924, 127378, 80766, 127922, 123156, 123700, 123154, 124788, 123698, 124786, 115252, 116340, 115250, 118516, 116338, 118514, 99444, 101620, 99442, 105972, 101618, 105970, 67828, 72180, 67826, 80884, 72178, 80882, 97008, 114044, 96888, 113982, 96828, 96798, 129482, 80252, 130010, 97148, 80190, 97086, 127370, 127898, 128954, 123146, 123674, 124730, 126842, 115226, 116282, 118394, 122618, 99386, 101498, 105722, 114170, 67706, 71930, 80378, 96632, 113854, 96572, 96542, 80062, 96702, 96444, 96414, 96350, 123048, 123044, 123042, 115048, 123062, 115044, 115042, 99048, 115062, 99044, 99042, 67048, 99062, 67044, 67042, 67062, 127188, 68990, 127186, 123028, 123316, 123026, 123314, 114996, 115572, 114994, 115570, 98932, 100084, 98930, 100082, 66804, 69108, 66802, 69106, 129258, 73084, 73022, 127178, 127450, 123018, 123290, 123834, 114970, 115514, 116602, 98874, 99962, 102138, 66682, 68858, 73210, 81272, 106174, 81212, 81182, 72894, 81342, 97648, 114364, 97592, 114334, 97564, 97550, 81084, 97724, 81054, 97694, 97464, 114270, 97436, 97422, 80990, 97502, 97372, 97358, 97326, 114868, 114866, 98676, 98674, 66292, 66290, 123098, 114842, 115130, 98618, 99194, 66170, 67322, 69310, 73404, 73374, 81592, 106334, 81564, 81550, 73310, 81630, 97968, 114524, 97944, 114510, 97932, 97926, 81500, 98012, 81486, 97998, 97880, 114478, 97868, 97862, 81454, 97902, 97836, 97830, 69470, 73564, 73550, 81752, 106414, 81740, 81734, 73518, 81774, 81708, 81702]), t([109536, 120312, 86976, 109040, 120060, 86496, 108792, 119934, 86256, 108668, 86136, 129744, 89056, 110072, 129736, 88560, 109820, 129732, 88312, 109694, 129730, 88188, 128464, 129772, 89592, 128456, 129766, 89340, 128452, 89214, 128450, 125904, 128492, 125896, 128486, 125892, 125890, 120784, 125932, 120776, 125926, 120772, 120770, 110544, 120812, 110536, 120806, 110532, 84928, 108016, 119548, 84448, 107768, 119422, 84208, 107644, 84088, 107582, 84028, 129640, 85488, 108284, 129636, 85240, 108158, 129634, 85116, 85054, 128232, 129654, 85756, 128228, 85630, 128226, 125416, 128246, 125412, 125410, 119784, 125430, 119780, 119778, 108520, 119798, 108516, 108514, 83424, 107256, 119166, 83184, 107132, 83064, 107070, 83004, 82974, 129588, 83704, 107390, 129586, 83580, 83518, 128116, 83838, 128114, 125172, 125170, 119284, 119282, 107508, 107506, 82672, 106876, 82552, 106814, 82492, 82462, 129562, 82812, 82750, 128058, 125050, 119034, 82296, 106686, 82236, 82206, 82366, 82108, 82078, 76736, 103920, 117500, 76256, 103672, 117374, 76016, 103548, 75896, 103486, 75836, 129384, 77296, 104188, 129380, 77048, 104062, 129378, 76924, 76862, 127720, 129398, 77564, 127716, 77438, 127714, 124392, 127734, 124388, 124386, 117736, 124406, 117732, 117730, 104424, 117750, 104420, 104418, 112096, 121592, 126334, 92608, 111856, 121468, 92384, 111736, 121406, 92272, 111676, 92216, 111646, 92188, 75232, 103160, 117118, 93664, 74992, 103036, 93424, 112252, 102974, 93304, 74812, 93244, 74782, 93214, 129332, 75512, 103294, 129908, 129330, 93944, 75388, 129906, 93820, 75326, 93758, 127604, 75646, 128756, 127602, 94078, 128754, 124148, 126452, 124146, 126450, 117236, 121844, 117234, 121842, 103412, 103410, 91584, 111344, 121212, 91360, 111224, 121150, 91248, 111164, 91192, 111134, 91164, 91150, 74480, 102780, 91888, 74360, 102718, 91768, 111422, 91708, 74270, 91678, 129306, 74620, 129850, 92028, 74558, 91966, 127546, 128634, 124026, 126202, 116986, 121338, 102906, 90848, 110968, 121022, 90736, 110908, 90680, 110878, 90652, 90638, 74104, 102590, 91e3, 74044, 90940, 74014, 90910, 74174, 91070, 90480, 110780, 90424, 110750, 90396, 90382, 73916, 90556, 73886, 90526, 90296, 110686, 90268, 90254, 73822, 90334, 90204, 90190, 71136, 101112, 116094, 70896, 100988, 70776, 100926, 70716, 70686, 129204, 71416, 101246, 129202, 71292, 71230, 127348, 71550, 127346, 123636, 123634, 116212, 116210, 101364, 101362, 79296, 105200, 118140, 79072, 105080, 118078, 78960, 105020, 78904, 104990, 78876, 78862, 70384, 100732, 79600, 70264, 100670, 79480, 105278, 79420, 70174, 79390, 129178, 70524, 129466, 79740, 70462, 79678, 127290, 127866, 123514, 124666, 115962, 118266, 100858, 113376, 122232, 126654, 95424, 113264, 122172, 95328, 113208, 122142, 95280, 113180, 95256, 113166, 95244, 78560, 104824, 117950, 95968, 78448, 104764, 95856, 113468, 104734, 95800, 78364, 95772, 78350, 95758, 70008, 100542, 78712, 69948, 96120, 78652, 69918, 96060, 78622, 96030, 70078, 78782, 96190, 94912, 113008, 122044, 94816, 112952, 122014, 94768, 112924, 94744, 112910, 94732, 94726, 78192, 104636, 95088, 78136, 104606, 95032, 113054, 95004, 78094, 94990, 69820, 78268, 69790, 95164, 78238, 95134, 94560, 112824, 121950, 94512, 112796, 94488, 112782, 94476, 94470, 78008, 104542, 94648, 77980, 94620, 77966, 94606, 69726, 78046, 94686, 94384, 112732, 94360, 112718, 94348, 94342, 77916, 94428, 77902, 94414, 94296, 112686, 94284, 94278, 77870, 94318, 94252, 94246, 68336, 99708, 68216, 99646, 68156, 68126, 68476, 68414, 127162, 123258, 115450, 99834, 72416, 101752, 116414, 72304, 101692, 72248, 101662, 72220, 72206, 67960, 99518, 72568, 67900, 72508, 67870, 72478, 68030, 72638, 80576, 105840, 118460, 80480, 105784, 118430, 80432, 105756, 80408, 105742, 80396, 80390, 72048, 101564, 80752, 71992, 101534, 80696, 71964, 80668, 71950, 80654, 67772, 72124, 67742, 80828, 72094, 80798, 114016, 122552, 126814, 96832, 113968, 122524, 96800, 113944, 122510, 96784, 113932, 96776, 113926, 96772, 80224, 105656, 118366, 97120, 80176, 105628, 97072, 114076, 105614, 97048, 80140, 97036, 80134, 97030, 71864, 101470, 80312, 71836, 97208, 80284, 71822, 97180, 80270, 97166, 67678, 71902, 80350, 97246, 96576, 113840, 122460, 96544, 113816, 122446, 96528, 113804, 96520, 113798, 96516, 96514, 80048, 105564, 96688, 80024, 105550, 96664, 113870, 96652, 80006, 96646, 71772, 80092, 71758, 96732, 80078, 96718, 96416, 113752, 122414, 96400, 113740, 96392, 113734, 96388, 96386, 79960, 105518, 96472, 79948, 96460, 79942, 96454, 71726, 79982, 96494, 96336, 113708, 96328, 113702, 96324, 96322, 79916, 96364, 79910, 96358, 96296, 113686, 96292, 96290, 79894, 96310, 66936, 99006, 66876, 66846, 67006, 68976, 100028, 68920, 99998, 68892, 68878, 66748, 69052, 66718, 69022, 73056, 102072, 116574, 73008, 102044, 72984, 102030, 72972, 72966, 68792, 99934, 73144, 68764, 73116, 68750, 73102, 66654, 68830, 73182, 81216, 106160, 118620, 81184, 106136, 118606, 81168, 106124, 81160, 106118, 81156, 81154, 72880, 101980, 81328, 72856, 101966, 81304, 106190, 81292, 72838, 81286, 68700, 72924, 68686, 81372, 72910, 81358, 114336, 122712, 126894, 114320, 122700, 114312, 122694, 114308, 114306, 81056, 106072, 118574, 97696, 81040, 106060, 97680, 114380, 106054, 97672, 81028, 97668, 81026, 97666, 72792, 101934, 81112, 72780, 97752, 81100, 72774, 97740, 81094, 97734, 68654, 72814, 81134, 97774, 114256, 122668, 114248, 122662, 114244, 114242, 80976, 106028, 97488, 80968, 106022, 97480, 114278, 97476, 80962, 97474, 72748, 81004, 72742, 97516, 80998, 97510, 114216, 122646, 114212, 114210, 80936, 106006, 97384, 80932, 97380, 80930, 97378, 72726, 80950, 97398, 114196, 114194, 80916, 97332, 80914, 97330, 66236, 66206, 67256, 99166, 67228, 67214, 66142, 67294, 69296, 100188, 69272, 100174, 69260, 69254, 67164, 69340, 67150, 69326, 73376, 102232, 116654, 73360, 102220, 73352, 102214, 73348, 73346, 69208, 100142, 73432, 102254, 73420, 69190, 73414, 67118, 69230, 73454, 106320, 118700, 106312, 118694, 106308, 106306, 73296, 102188, 81616, 106348, 102182, 81608, 73284, 81604, 73282, 81602, 69164, 73324, 69158, 81644, 73318, 81638, 122792, 126934, 122788, 122786, 106280, 118678, 114536, 106276, 114532, 106274, 114530, 73256, 102166, 81512, 73252, 98024, 81508, 73250, 98020, 81506, 98018, 69142, 73270, 81526, 98038, 122772, 122770, 106260, 114484, 106258, 114482, 73236, 81460, 73234, 97908, 81458, 97906, 122762, 106250, 114458, 73226, 81434, 97850, 66396, 66382, 67416, 99246, 67404, 67398, 66350, 67438, 69456, 100268, 69448, 100262, 69444, 69442, 67372, 69484, 67366, 69478, 102312, 116694, 102308, 102306, 69416, 100246, 73576, 102326, 73572, 69410, 73570, 67350, 69430, 73590, 118740, 118738, 102292, 106420, 102290, 106418, 69396, 73524, 69394, 81780, 73522, 81778, 118730, 102282, 106394, 69386, 73498, 81722, 66476, 66470, 67496, 99286, 67492, 67490, 66454, 67510, 100308, 100306, 67476, 69556, 67474, 69554, 116714])]);
-    for (var A in e) e.hasOwnProperty(A) && (vt.$ctx[A] = e[A]);
+    for (var h in e) e.hasOwnProperty(h) && (vt.$ctx[h] = e[h]);
     vt.__17686__ = 1, e = Object.getPrototypeOf(e);
   }
   e.cwtobits = function() {
     var r1 = i(e.clusters, a[--r]);
     e.v = i(r1, a[--r]), a[r++] = 1 / 0;
-    for (var D = 0, A1 = 17; D < A1; D++)
+    for (var D = 0, h1 = 17; D < h1; D++)
       a[r++] = 0;
     for (var p1 = Oe(C(17), e.v, 2), K = 0, f1 = p1.length; K < f1; K++)
       a[r++] = i(p1, K) - 48;
@@ -9886,10 +9872,10 @@ function vt() {
     a[r++] = o(d1, d1.length - 17, 17);
   }, e.compact ? e.rwid = n(n(n(17 * e.c + 17) + 17) + 1) : e.rwid = n(n(n(n(17 * e.c + 17) + 17) + 17) + 18), e.pixs = t(e.rwid * e.r * e.rowmult);
   for (var j = 0, E = e.r - 1; j <= E; j += 1) {
-    e.i = j, e.i % 3 == 0 && (e.lcw = ~~(e.i / 3) * 30 + ~~((e.r - 1) / 3), e.rcw = n(n(~~(e.i / 3) * 30 + e.c) - 1)), e.i % 3 == 1 && (e.lcw = ~~(e.i / 3) * 30 + e.eclevel * 3 + (e.r - 1) % 3, e.rcw = ~~(e.i / 3) * 30 + ~~((e.r - 1) / 3)), e.i % 3 == 2 && (e.lcw = n(n(~~(e.i / 3) * 30 + e.c) - 1), e.rcw = ~~(e.i / 3) * 30 + e.eclevel * 3 + (e.r - 1) % 3), a[r++] = 1 / 0, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = e.lcw, a[r++] = e.i % 3, e.cwtobits(), w(a[--r]);
+    e.i = j, e.i % 3 == 0 && (e.lcw = ~~(e.i / 3) * 30 + ~~((e.r - 1) / 3), e.rcw = n(n(~~(e.i / 3) * 30 + e.c) - 1)), e.i % 3 == 1 && (e.lcw = ~~(e.i / 3) * 30 + e.eclevel * 3 + (e.r - 1) % 3, e.rcw = ~~(e.i / 3) * 30 + ~~((e.r - 1) / 3)), e.i % 3 == 2 && (e.lcw = n(n(~~(e.i / 3) * 30 + e.c) - 1), e.rcw = ~~(e.i / 3) * 30 + e.eclevel * 3 + (e.r - 1) % 3), a[r++] = 1 / 0, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = e.lcw, a[r++] = e.i % 3, e.cwtobits(), x(a[--r]);
     for (var N = o(e.cws, e.c * e.i, e.c), q = 0, o1 = N.length; q < o1; q++)
-      a[r++] = i(N, q), a[r++] = e.i % 3, e.cwtobits(), w(a[--r]);
-    e.compact || (a[r++] = e.rcw, a[r++] = e.i % 3, e.cwtobits(), w(a[--r]), a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 0), a[r++] = 1;
+      a[r++] = i(N, q), a[r++] = e.i % 3, e.cwtobits(), x(a[--r]);
+    e.compact || (a[r++] = e.rcw, a[r++] = e.i % 3, e.cwtobits(), x(a[--r]), a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 0), a[r++] = 1;
     var O = t();
     a[r++] = O;
     for (var t1 = 0, F = e.rowmult - 1; t1 <= F; t1 += 1) {
@@ -9939,15 +9925,15 @@ function Ea() {
     e = Object.create(e), e.T = 0, e.N = 1, e.B = 2, e.A = 0, e.L = 1, e.M = 2, e.P = 3, e.tl = -1, e.nl = -2, e.bl = -3, e.bl6 = -4, e.bs = -5, e.al = -6, e.ll = -7, e.ml = -8, e.pl = -9, e.as = -10, e.ps = -11, e.m05 = -12, e.m06 = -13, e.charmaps = t([t(["A", "a", "0", ";"]), t(["B", "b", "1", "<"]), t(["C", "c", "2", ">"]), t(["D", "d", "3", "@"]), t(["E", "e", "4", "["]), t(["F", "f", "5", 92]), t(["G", "g", "6", "]"]), t(["H", "h", "7", "_"]), t(["I", "i", "8", "`"]), t(["J", "j", "9", "~"]), t(["K", "k", "&", "!"]), t(["L", "l", 13, 13]), t(["M", "m", 9, 9]), t(["N", "n", ",", ","]), t(["O", "o", ":", ":"]), t(["P", "p", "#", 10]), t(["Q", "q", "-", "-"]), t(["R", "r", ".", "."]), t(["S", "s", "$", "$"]), t(["T", "t", "/", "/"]), t(["U", "u", "+", '"']), t(["V", "v", "%", "|"]), t(["W", "w", "*", "*"]), t(["X", "x", "=", 40]), t(["Y", "y", "^", 41]), t(["Z", "z", e.pl, "?"]), t([" ", " ", " ", "{"]), t([e.ll, e.as, e.ll, "}"]), t([e.ml, e.ml, e.al, "'"]), t([e.ps, e.ps, e.ps, e.al])]), e.charvals = t([/* @__PURE__ */ new Map(), /* @__PURE__ */ new Map(), /* @__PURE__ */ new Map(), /* @__PURE__ */ new Map()]), e.alltext = /* @__PURE__ */ new Map();
     for (var y = 0, g = e.charmaps.length - 1; y <= g; y += 1) {
       e.i = y, e.encs = i(e.charmaps, e.i);
-      for (var A = 0; A <= 3; A += 1) {
-        e.j = A;
+      for (var h = 0; h <= 3; h += 1) {
+        e.j = h;
         var b = i(e.encs, e.j);
         if (a[r++] = b, k(ba(b), "stringtype")) {
-          var h = i(a[--r], 0);
-          a[r++] = h;
+          var A = i(a[--r], 0);
+          a[r++] = A;
         }
-        var x = a[--r];
-        s(i(e.charvals, e.j), x, e.i), s(e.alltext, x, -1);
+        var w = a[--r];
+        s(i(e.charvals, e.j), w, e.i), s(e.alltext, w, -1);
       }
     }
     e.e = 1e4, e.latlen = t([t([0, 1, 1, 2]), t([2, 0, 1, 2]), t([1, 1, 0, 1]), t([1, 2, 2, 0])]), e.latseq = t([t([t([]), t([e.ll]), t([e.ml]), t([e.ml, e.pl])]), t([t([e.ml, e.al]), t([]), t([e.ml]), t([e.ml, e.pl])]), t([t([e.al]), t([e.ll]), t([]), t([e.pl])]), t([t([e.al]), t([e.al, e.ll]), t([e.al, e.ml]), t([])])]), e.shftlen = t([t([e.e, e.e, e.e, 1]), t([1, e.e, e.e, 1]), t([e.e, e.e, e.e, 1]), t([e.e, e.e, e.e, e.e])]);
@@ -9973,17 +9959,17 @@ function Ea() {
   if (e.encb = function() {
     e.in = a[--r], e.inlen = e.in.length, e.out = t(~~(e.inlen / 6) * 5 + e.inlen % 6);
     for (var s1 = 0, w1 = ~~(e.inlen / 6) - 1; s1 <= w1; s1 += 1) {
-      e.k = s1, a[r++] = 1 / 0, w(o(e.in, e.k * 6, 3)), e.msbs = t(), a[r++] = 1 / 0, w(e.msbs);
+      e.k = s1, a[r++] = 1 / 0, x(o(e.in, e.k * 6, 3)), e.msbs = t(), a[r++] = 1 / 0, x(e.msbs);
       var k1 = a[--r], B1 = a[--r], O1 = a[--r];
       a[r++] = n(n(k1 + B1 * 256) + O1 * 65536);
       for (var U1 = 0, j1 = 3; U1 < j1; U1++) {
         var L1 = a[--r];
         a[r++] = L1 % 900, a[r++] = ~~(L1 / 900);
       }
-      e.mscs = t(), a[r++] = 1 / 0, w(o(e.in, e.k * 6 + 3, 3)), e.lsbs = t(), a[r++] = 1 / 0, w(e.lsbs);
+      e.mscs = t(), a[r++] = 1 / 0, x(o(e.in, e.k * 6 + 3, 3)), e.lsbs = t(), a[r++] = 1 / 0, x(e.lsbs);
       var T1 = a[--r], Y1 = a[--r], ne = a[--r];
       a[r++] = n(n(T1 + Y1 * 256) + ne * 65536);
-      for (var he = 0, re = 3; he < re; he++) {
+      for (var Ae = 0, re = 3; Ae < re; Ae++) {
         var Me = a[--r];
         a[r++] = Me % 900, a[r++] = ~~(Me / 900);
       }
@@ -9998,7 +9984,7 @@ function Ea() {
       s(e.out, e.k * 5 + 1, n(n(n(~~(n(n(n(n(~~(n(n(n(~~(n(z1 + Ee * 316) / 900) + R1) + je * 641) + xe * 316) / 900) + ye) + We * 20) + o2 * 641) + Ke * 316) / 900) + c2) + f2 * 20) + u2 * 641) % 900), s(e.out, e.k * 5, n(~~(n(n(n(~~(n(n(n(n(~~(n(n(n(~~(n(z1 + Ee * 316) / 900) + R1) + je * 641) + xe * 316) / 900) + ye) + We * 20) + o2 * 641) + Ke * 316) / 900) + c2) + f2 * 20) + u2 * 641) / 900) + i(e.mscs, 2) * 20) % 900);
     }
     if (e.rem = e.inlen % 6, e.rem != 0) {
-      a[r++] = e.out, a[r++] = e.out.length - e.rem, a[r++] = 1 / 0, w(o(e.in, e.inlen - e.rem, e.rem));
+      a[r++] = e.out, a[r++] = e.out.length - e.rem, a[r++] = 1 / 0, x(o(e.in, e.inlen - e.rem, e.rem));
       var Ve = t(), l2 = a[--r];
       l(a[--r], l2, Ve);
     }
@@ -10021,21 +10007,21 @@ function Ea() {
     e.fncvals = W, a[r++] = "msg", a[r++] = e.barcode, a[r++] = e.fncvals, sr();
     var e1 = a[--r];
     if (e[a[--r]] = e1, e.msglen = e.msg.length, e.msglen >= 9) {
-      w(o(e.msg, 0, 7));
+      x(o(e.msg, 0, 7));
       var G = a[--r], H = a[--r];
       a[r++] = G == 29, a[r++] = H, r--;
       var U = a[--r], $ = a[--r], n1 = a[--r], P = a[--r], V = a[--r], J = a[--r];
       if (U && $ == 48 && n1 == 30 && P == 62 && V == 41 && J == 91) {
-        w(o(e.msg, e.msglen - 2, 2));
+        x(o(e.msg, e.msglen - 2, 2));
         var X = a[--r], a1 = a[--r];
-        X == 4 && a1 == 30 && (i(e.msg, 5) == 53 ? (a[r++] = 1 / 0, a[r++] = e.m05, w(o(e.msg, 7, e.msg.length - 9)), e.msg = t()) : i(e.msg, 5) == 54 && (a[r++] = 1 / 0, a[r++] = e.m06, w(o(e.msg, 7, e.msg.length - 9)), e.msg = t()));
+        X == 4 && a1 == 30 && (i(e.msg, 5) == 53 ? (a[r++] = 1 / 0, a[r++] = e.m05, x(o(e.msg, 7, e.msg.length - 9)), e.msg = t()) : i(e.msg, 5) == 54 && (a[r++] = 1 / 0, a[r++] = e.m06, x(o(e.msg, 7, e.msg.length - 9)), e.msg = t()));
       }
     }
     e.msglen = e.msg.length, a[r++] = 1 / 0;
     for (var i1 = 0, l1 = e.msglen; i1 < l1; i1++)
       a[r++] = 0;
     a[r++] = 0, e.numdigits = t(), a[r++] = 1 / 0;
-    for (var _ = 0, h1 = e.msglen; _ < h1; _++)
+    for (var _ = 0, A1 = e.msglen; _ < A1; _++)
       a[r++] = 0;
     a[r++] = 0, e.numtext = t(), a[r++] = 1 / 0;
     for (var g1 = 0, u1 = e.msglen; g1 < u1; g1++)
@@ -10054,11 +10040,11 @@ function Ea() {
     for (e.numdigits = o(e.numdigits, 0, e.msglen), e.numtext = o(e.numtext, 0, e.msglen), e.numbytes = o(e.numbytes, 0, e.msglen), e.seq = t([]), e.seqlen = 0, e.state = e.B, e.p = 0; e.p != e.msglen; ) {
       var N1 = i(e.msg, e.p);
       if (e.p == 0 && (N1 == e.m05 || N1 == e.m06)) {
-        a[r++] = 1 / 0, w(e.seq);
+        a[r++] = 1 / 0, x(e.seq);
         var H1 = i(e.msg, e.p) == e.m05 ? e.m05 : e.m06;
         a[r++] = H1, e.seq = t(), e.p = e.p + 1, e.seqlen = e.seqlen + 1;
       } else if (i(e.iseci, e.p)) {
-        if (e.eci = i(e.msg, e.p), a[r++] = 1 / 0, w(e.seq), a[r++] = t([e.eci]), e.seq = t(), e.p = e.p + 1, a[r++] = "seqlen", a[r++] = e.seqlen, e.eci <= -1810900)
+        if (e.eci = i(e.msg, e.p), a[r++] = 1 / 0, x(e.seq), a[r++] = t([e.eci]), e.seq = t(), e.p = e.p + 1, a[r++] = "seqlen", a[r++] = e.seqlen, e.eci <= -1810900)
           a[r++] = 2;
         else {
           var D1 = e.eci <= -1000900 ? 3 : 2;
@@ -10067,19 +10053,19 @@ function Ea() {
         var G1 = a[--r], S1 = a[--r];
         e[a[--r]] = n(S1 + G1);
       } else if (e.n = i(e.numdigits, e.p), e.n >= 13 || e.n == e.msglen && e.n >= 8) {
-        a[r++] = 1 / 0, w(e.seq), a[r++] = e.nl, a[r++] = 1 / 0, w(o(e.msg, e.p, e.n));
+        a[r++] = 1 / 0, x(e.seq), a[r++] = e.nl, a[r++] = 1 / 0, x(o(e.msg, e.p, e.n));
         var _1 = t();
         a[r++] = _1, e.seq = t(), e.state = e.N, e.p = n(e.p + e.n), e.seqlen = n(e.seqlen + 1 + e.n);
       } else if (e.t = i(e.numtext, e.p), e.t >= 5) {
-        a[r++] = 1 / 0, w(e.seq), e.state != e.T && (a[r++] = e.tl), a[r++] = 1 / 0, w(o(e.msg, e.p, e.t));
+        a[r++] = 1 / 0, x(e.seq), e.state != e.T && (a[r++] = e.tl), a[r++] = 1 / 0, x(o(e.msg, e.p, e.t));
         var Z1 = t();
         a[r++] = Z1, e.seq = t(), e.state = e.T, e.p = n(e.p + e.t), e.seqlen = n(n(e.seqlen + 1) + e.t);
       } else if (e.b = i(e.numbytes, e.p), e.b == 1 && e.state == e.T)
-        a[r++] = 1 / 0, w(e.seq), a[r++] = e.bs, a[r++] = t([i(e.msg, e.p)]), e.seq = t(), e.p = n(e.p + e.b), e.seqlen = n(e.seqlen + 2);
+        a[r++] = 1 / 0, x(e.seq), a[r++] = e.bs, a[r++] = t([i(e.msg, e.p)]), e.seq = t(), e.p = n(e.p + e.b), e.seqlen = n(e.seqlen + 2);
       else {
-        a[r++] = 1 / 0, w(e.seq);
+        a[r++] = 1 / 0, x(e.seq);
         var J1 = e.b % 6 != 0 ? e.bl : e.bl6;
-        a[r++] = J1, a[r++] = 1 / 0, w(o(e.msg, e.p, e.b));
+        a[r++] = J1, a[r++] = 1 / 0, x(o(e.msg, e.p, e.b));
         var te = t();
         a[r++] = te, e.seq = t(), e.state = e.B, e.p = n(e.p + e.b), e.seqlen = n(n(e.seqlen + 1) + e.b);
       }
@@ -10106,7 +10092,7 @@ function Ea() {
             e.x = i(xe, ye);
             for (var o2 = t([e.A, e.L, e.M, e.P]), Ke = 0, c2 = o2.length; Ke < c2; Ke++)
               if (e.y = i(o2, Ke), e.cost = n(i(e.curlen, e.x) + i(i(e.latlen, e.x), e.y)), e.cost < i(e.curlen, e.y)) {
-                s(e.curlen, e.y, e.cost), a[r++] = e.curseq, a[r++] = e.y, a[r++] = 1 / 0, w(i(e.curseq, e.x)), w(i(i(e.latseq, e.x), e.y));
+                s(e.curlen, e.y, e.cost), a[r++] = e.curseq, a[r++] = e.y, a[r++] = 1 / 0, x(i(e.curseq, e.x)), x(i(i(e.latseq, e.x), e.y));
                 var f2 = t(), u2 = a[--r];
                 s(a[--r], u2, f2), e.imp = !0;
               }
@@ -10121,13 +10107,13 @@ function Ea() {
             if (!D2)
               break;
             if (e.cost = n(i(e.curlen, e.x) + 1), e.cost < i(e.nxtlen, e.x)) {
-              s(e.nxtlen, e.x, e.cost), a[r++] = e.nxtseq, a[r++] = e.x, a[r++] = 1 / 0, w(i(e.curseq, e.x)), a[r++] = e.char;
+              s(e.nxtlen, e.x, e.cost), a[r++] = e.nxtseq, a[r++] = e.x, a[r++] = 1 / 0, x(i(e.curseq, e.x)), a[r++] = e.char;
               var $e = t(), B2 = a[--r];
               s(a[--r], B2, $e);
             }
             for (var M2 = t([e.A, e.L, e.M, e.P]), me = 0, we = M2.length; me < we; me++)
               if (e.y = i(M2, me), v1(e.x, e.y) && (e.cost = n(n(i(e.curlen, e.y) + i(i(e.shftlen, e.y), e.x)) + 1), e.cost < i(e.nxtlen, e.y))) {
-                s(e.nxtlen, e.y, e.cost), a[r++] = e.nxtseq, a[r++] = e.y, a[r++] = 1 / 0, w(i(e.curseq, e.y));
+                s(e.nxtlen, e.y, e.cost), a[r++] = e.nxtseq, a[r++] = e.y, a[r++] = 1 / 0, x(i(e.curseq, e.y));
                 var Se = e.x == e.A ? e.as : e.ps;
                 a[r++] = Se, a[r++] = e.char;
                 var He = t(), p2 = a[--r];
@@ -10176,8 +10162,8 @@ function Ea() {
                 var ne = a[--r];
                 e[a[--r]] = ne, e.submode = e.L;
               } else {
-                var he = i(i(e.charvals, e.P), i(i(e.seq, e.ti), 0)) !== void 0;
-                if (he) {
+                var Ae = i(i(e.charvals, e.P), i(i(e.seq, e.ti), 0)) !== void 0;
+                if (Ae) {
                   a[r++] = "pad", a[r++] = e.pl, e.encm();
                   var re = a[--r];
                   e[a[--r]] = re, e.submode = e.P;
@@ -10199,7 +10185,7 @@ function Ea() {
             e[a[--r]] = Ee;
           }
         }
-        a[r++] = 1 / 0, w(e.text), a[r++] = e.pad, e.text = t();
+        a[r++] = 1 / 0, x(e.text), a[r++] = e.pad, e.text = t();
       }
       e.out = t(~~(e.text.length / 2));
       for (var R1 = 0, je = e.out.length - 1; R1 <= je; R1 += 1)
@@ -10215,11 +10201,11 @@ function Ea() {
           a[r++] = n(i(U1, j1) - 48);
         for (e.gmod = t(), e.cwn = t([]); ; ) {
           for (e.dv = 900, e.gmul = t([]), e.val = 0; e.gmod.length != 0; )
-            e.val = n(e.val * 10 + i(e.gmod, 0)), e.gmod = o(e.gmod, 1, e.gmod.length - 1), e.val < e.dv ? e.gmul.length != 0 && (a[r++] = 1 / 0, w(e.gmul), a[r++] = 0, e.gmul = t()) : (a[r++] = 1 / 0, w(e.gmul), a[r++] = ~~(e.val / e.dv), e.gmul = t()), e.val = e.val % e.dv;
-          if (e.dv = e.val, a[r++] = 1 / 0, a[r++] = e.dv, w(e.cwn), e.cwn = t(), e.gmod = e.gmul, e.gmul.length == 0)
+            e.val = n(e.val * 10 + i(e.gmod, 0)), e.gmod = o(e.gmod, 1, e.gmod.length - 1), e.val < e.dv ? e.gmul.length != 0 && (a[r++] = 1 / 0, x(e.gmul), a[r++] = 0, e.gmul = t()) : (a[r++] = 1 / 0, x(e.gmul), a[r++] = ~~(e.val / e.dv), e.gmul = t()), e.val = e.val % e.dv;
+          if (e.dv = e.val, a[r++] = 1 / 0, a[r++] = e.dv, x(e.cwn), e.cwn = t(), e.gmod = e.gmul, e.gmul.length == 0)
             break;
         }
-        a[r++] = 1 / 0, w(e.out), w(e.cwn), e.out = t();
+        a[r++] = 1 / 0, x(e.out), x(e.cwn), e.out = t();
       }
       a[r++] = e.out;
     }, e.ence = function() {
@@ -10281,8 +10267,8 @@ function Ea() {
   if (l(a[--r], Ce, V1), !Ea.__18543__) {
     e = Object.create(e), a[r++] = 1 / 0, a[r++] = 1;
     for (var ue = 0, De = 928; ue < De; ue++) {
-      var Ae = a[--r];
-      a[r++] = Ae, a[r++] = Ae * 3 % 929;
+      var he = a[--r];
+      a[r++] = he, a[r++] = he * 3 % 929;
     }
     e.rsalog = t(), e.rslog = t(929);
     for (var Fe = 1; Fe <= 928; Fe += 1)
@@ -10351,9 +10337,9 @@ function Ea() {
     a[r++] = o(j1, j1.length - 10, 10);
   }, e.rwid = i(t([38, 55, 82, 99]), n(e.c - 1)), e.c == 3 && e.cca && (e.rwid = 72), e.pixs = t(e.rwid * e.r * e.rowmult);
   for (var r1 = 0, D = n(e.r - 1); r1 <= D; r1 += 1) {
-    e.i = r1, e.clst = n(n(e.i + e.rapl) - 1) % 3, a[r++] = 1 / 0, e.c == 1 && (a[r++] = n(n(e.i + e.rapl) - 1) % 52, a[r++] = 0, e.raptobits(), w(a[--r]), a[r++] = i(e.cws, e.i), a[r++] = e.clst, e.cwtobits(), w(a[--r]), a[r++] = n(n(e.i + e.rapr) - 1) % 52, a[r++] = 0, e.raptobits(), w(a[--r])), e.c == 2 && (a[r++] = n(n(e.i + e.rapl) - 1) % 52, a[r++] = 0, e.raptobits(), w(a[--r]), a[r++] = i(e.cws, e.i * 2), a[r++] = e.clst, e.cwtobits(), w(a[--r]), a[r++] = i(e.cws, e.i * 2 + 1), a[r++] = e.clst, e.cwtobits(), w(a[--r]), a[r++] = n(n(e.i + e.rapr) - 1) % 52, a[r++] = 0, e.raptobits(), w(a[--r])), e.c == 3 && (e.cca || (a[r++] = n(n(e.i + e.rapl) - 1) % 52, a[r++] = 0, e.raptobits(), w(a[--r])), a[r++] = i(e.cws, e.i * 3), a[r++] = e.clst, e.cwtobits(), w(a[--r]), a[r++] = n(n(e.i + e.rapc) - 1) % 52, a[r++] = 1, e.raptobits(), w(a[--r]), a[r++] = i(e.cws, e.i * 3 + 1), a[r++] = e.clst, e.cwtobits(), w(a[--r]), a[r++] = i(e.cws, e.i * 3 + 2), a[r++] = e.clst, e.cwtobits(), w(a[--r]), a[r++] = n(n(e.i + e.rapr) - 1) % 52, a[r++] = 0, e.raptobits(), w(a[--r])), e.c == 4 && (a[r++] = n(n(e.i + e.rapl) - 1) % 52, a[r++] = 0, e.raptobits(), w(a[--r]), a[r++] = i(e.cws, e.i * 4), a[r++] = e.clst, e.cwtobits(), w(a[--r]), a[r++] = i(e.cws, e.i * 4 + 1), a[r++] = e.clst, e.cwtobits(), w(a[--r]), a[r++] = n(n(e.i + e.rapc) - 1) % 52, a[r++] = 1, e.raptobits(), w(a[--r]), a[r++] = i(e.cws, e.i * 4 + 2), a[r++] = e.clst, e.cwtobits(), w(a[--r]), a[r++] = i(e.cws, e.i * 4 + 3), a[r++] = e.clst, e.cwtobits(), w(a[--r]), a[r++] = n(n(e.i + e.rapr) - 1) % 52, a[r++] = 0, e.raptobits(), w(a[--r])), a[r++] = 1;
-    var A1 = t();
-    a[r++] = A1;
+    e.i = r1, e.clst = n(n(e.i + e.rapl) - 1) % 3, a[r++] = 1 / 0, e.c == 1 && (a[r++] = n(n(e.i + e.rapl) - 1) % 52, a[r++] = 0, e.raptobits(), x(a[--r]), a[r++] = i(e.cws, e.i), a[r++] = e.clst, e.cwtobits(), x(a[--r]), a[r++] = n(n(e.i + e.rapr) - 1) % 52, a[r++] = 0, e.raptobits(), x(a[--r])), e.c == 2 && (a[r++] = n(n(e.i + e.rapl) - 1) % 52, a[r++] = 0, e.raptobits(), x(a[--r]), a[r++] = i(e.cws, e.i * 2), a[r++] = e.clst, e.cwtobits(), x(a[--r]), a[r++] = i(e.cws, e.i * 2 + 1), a[r++] = e.clst, e.cwtobits(), x(a[--r]), a[r++] = n(n(e.i + e.rapr) - 1) % 52, a[r++] = 0, e.raptobits(), x(a[--r])), e.c == 3 && (e.cca || (a[r++] = n(n(e.i + e.rapl) - 1) % 52, a[r++] = 0, e.raptobits(), x(a[--r])), a[r++] = i(e.cws, e.i * 3), a[r++] = e.clst, e.cwtobits(), x(a[--r]), a[r++] = n(n(e.i + e.rapc) - 1) % 52, a[r++] = 1, e.raptobits(), x(a[--r]), a[r++] = i(e.cws, e.i * 3 + 1), a[r++] = e.clst, e.cwtobits(), x(a[--r]), a[r++] = i(e.cws, e.i * 3 + 2), a[r++] = e.clst, e.cwtobits(), x(a[--r]), a[r++] = n(n(e.i + e.rapr) - 1) % 52, a[r++] = 0, e.raptobits(), x(a[--r])), e.c == 4 && (a[r++] = n(n(e.i + e.rapl) - 1) % 52, a[r++] = 0, e.raptobits(), x(a[--r]), a[r++] = i(e.cws, e.i * 4), a[r++] = e.clst, e.cwtobits(), x(a[--r]), a[r++] = i(e.cws, e.i * 4 + 1), a[r++] = e.clst, e.cwtobits(), x(a[--r]), a[r++] = n(n(e.i + e.rapc) - 1) % 52, a[r++] = 1, e.raptobits(), x(a[--r]), a[r++] = i(e.cws, e.i * 4 + 2), a[r++] = e.clst, e.cwtobits(), x(a[--r]), a[r++] = i(e.cws, e.i * 4 + 3), a[r++] = e.clst, e.cwtobits(), x(a[--r]), a[r++] = n(n(e.i + e.rapr) - 1) % 52, a[r++] = 0, e.raptobits(), x(a[--r])), a[r++] = 1;
+    var h1 = t();
+    a[r++] = h1;
     for (var p1 = 0, K = e.rowmult - 1; p1 <= K; p1 += 1) {
       var f1 = a[--r];
       l(e.pixs, (p1 + e.i * e.rowmult) * e.rwid, f1), a[r++] = f1;
@@ -10401,14 +10387,14 @@ function da() {
   }
   if (v1(e.format, "square") && v1(e.format, "rectangle") && (a[r++] = "bwipp.datamatrixInvalidFormat#19005", a[r++] = "The format must be either square or rectangle", u()), Ne(da), !da.__19065__) {
     e = Object.create(e);
-    var A = t([20, 36, 1, 2, 28, 1, 1]);
-    e.metrics = t([t([10, 10, 1, 1, 5, 1, 0]), t([12, 12, 1, 1, 7, 1, 0]), t([14, 14, 1, 1, 10, 1, 0]), t([16, 16, 1, 1, 12, 1, 0]), t([18, 18, 1, 1, 14, 1, 0]), t([20, 20, 1, 1, 18, 1, 0]), t([22, 22, 1, 1, 20, 1, 0]), t([24, 24, 1, 1, 24, 1, 0]), t([26, 26, 1, 1, 28, 1, 0]), t([32, 32, 2, 2, 36, 1, 0]), t([36, 36, 2, 2, 42, 1, 0]), t([40, 40, 2, 2, 48, 1, 0]), t([44, 44, 2, 2, 56, 1, 0]), t([48, 48, 2, 2, 68, 1, 0]), t([52, 52, 2, 2, 84, 2, 0]), t([64, 64, 4, 4, 112, 2, 0]), t([72, 72, 4, 4, 144, 4, 0]), t([80, 80, 4, 4, 192, 4, 0]), t([88, 88, 4, 4, 224, 4, 0]), t([96, 96, 4, 4, 272, 4, 0]), t([104, 104, 4, 4, 336, 6, 0]), t([120, 120, 6, 6, 408, 6, 0]), t([132, 132, 6, 6, 496, 8, 0]), t([144, 144, 6, 6, 620, 10, 0]), t([8, 18, 1, 1, 7, 1, 0]), t([8, 32, 1, 2, 11, 1, 0]), t([8, 48, 1, 2, 15, 1, 1]), t([8, 64, 1, 4, 18, 1, 1]), t([8, 80, 1, 4, 22, 1, 1]), t([8, 96, 1, 4, 28, 1, 1]), t([8, 120, 1, 6, 32, 1, 1]), t([8, 144, 1, 6, 36, 1, 1]), t([12, 26, 1, 1, 14, 1, 0]), t([12, 36, 1, 2, 18, 1, 0]), t([12, 64, 1, 4, 27, 1, 1]), t([12, 88, 1, 4, 36, 1, 1]), t([16, 36, 1, 2, 24, 1, 0]), t([16, 48, 1, 2, 28, 1, 0]), t([16, 64, 1, 4, 36, 1, 1]), A, t([20, 44, 1, 2, 34, 1, 1]), t([20, 64, 1, 4, 42, 1, 1]), t([22, 48, 1, 2, 38, 1, 1]), t([24, 48, 1, 2, 41, 1, 1]), t([24, 64, 1, 4, 46, 1, 1]), t([26, 40, 1, 2, 38, 1, 1]), t([26, 48, 1, 2, 42, 1, 1]), t([26, 64, 1, 4, 50, 1, 1])]);
+    var h = t([20, 36, 1, 2, 28, 1, 1]);
+    e.metrics = t([t([10, 10, 1, 1, 5, 1, 0]), t([12, 12, 1, 1, 7, 1, 0]), t([14, 14, 1, 1, 10, 1, 0]), t([16, 16, 1, 1, 12, 1, 0]), t([18, 18, 1, 1, 14, 1, 0]), t([20, 20, 1, 1, 18, 1, 0]), t([22, 22, 1, 1, 20, 1, 0]), t([24, 24, 1, 1, 24, 1, 0]), t([26, 26, 1, 1, 28, 1, 0]), t([32, 32, 2, 2, 36, 1, 0]), t([36, 36, 2, 2, 42, 1, 0]), t([40, 40, 2, 2, 48, 1, 0]), t([44, 44, 2, 2, 56, 1, 0]), t([48, 48, 2, 2, 68, 1, 0]), t([52, 52, 2, 2, 84, 2, 0]), t([64, 64, 4, 4, 112, 2, 0]), t([72, 72, 4, 4, 144, 4, 0]), t([80, 80, 4, 4, 192, 4, 0]), t([88, 88, 4, 4, 224, 4, 0]), t([96, 96, 4, 4, 272, 4, 0]), t([104, 104, 4, 4, 336, 6, 0]), t([120, 120, 6, 6, 408, 6, 0]), t([132, 132, 6, 6, 496, 8, 0]), t([144, 144, 6, 6, 620, 10, 0]), t([8, 18, 1, 1, 7, 1, 0]), t([8, 32, 1, 2, 11, 1, 0]), t([8, 48, 1, 2, 15, 1, 1]), t([8, 64, 1, 4, 18, 1, 1]), t([8, 80, 1, 4, 22, 1, 1]), t([8, 96, 1, 4, 28, 1, 1]), t([8, 120, 1, 6, 32, 1, 1]), t([8, 144, 1, 6, 36, 1, 1]), t([12, 26, 1, 1, 14, 1, 0]), t([12, 36, 1, 2, 18, 1, 0]), t([12, 64, 1, 4, 27, 1, 1]), t([12, 88, 1, 4, 36, 1, 1]), t([16, 36, 1, 2, 24, 1, 0]), t([16, 48, 1, 2, 28, 1, 0]), t([16, 64, 1, 4, 36, 1, 1]), h, t([20, 44, 1, 2, 34, 1, 1]), t([20, 64, 1, 4, 42, 1, 1]), t([22, 48, 1, 2, 38, 1, 1]), t([24, 48, 1, 2, 41, 1, 1]), t([24, 64, 1, 4, 46, 1, 1]), t([26, 40, 1, 2, 38, 1, 1]), t([26, 48, 1, 2, 42, 1, 1]), t([26, 64, 1, 4, 50, 1, 1])]);
     for (var b in e) e.hasOwnProperty(b) && (da.$ctx[b] = e[b]);
     da.__19065__ = 1, e = Object.getPrototypeOf(e);
   }
   e.urows = e.rows, e.ucols = e.columns, e.fullcws = t([]);
-  for (var h = e.metrics, x = 0, m = h.length; x < m; x++)
-    e.m = i(h, x), e.rows = i(e.m, 0), e.cols = i(e.m, 1), e.regh = i(e.m, 2), e.regv = i(e.m, 3), e.rscw = i(e.m, 4), e.rsbl = i(e.m, 5), e.doly = i(e.m, 6), e.mrows = n(e.rows - 2 * e.regh), e.mcols = n(e.cols - 2 * e.regv), e.ncws = n(~~(e.mrows * e.mcols / 8) - e.rscw), e.okay = !0, e.urows != 0 && e.urows != e.rows && (e.okay = !1), e.ucols != 0 && e.ucols != e.cols && (e.okay = !1), k(e.format, "square") && v1(e.rows, e.cols) && (e.okay = !1), k(e.format, "rectangle") && k(e.rows, e.cols) && (e.okay = !1), !e.dmre && e.doly == 1 && (e.okay = !1), e.okay && (a[r++] = 1 / 0, w(e.fullcws), a[r++] = e.ncws, e.fullcws = t());
+  for (var A = e.metrics, w = 0, m = A.length; w < m; w++)
+    e.m = i(A, w), e.rows = i(e.m, 0), e.cols = i(e.m, 1), e.regh = i(e.m, 2), e.regv = i(e.m, 3), e.rscw = i(e.m, 4), e.rsbl = i(e.m, 5), e.doly = i(e.m, 6), e.mrows = n(e.rows - 2 * e.regh), e.mcols = n(e.cols - 2 * e.regv), e.ncws = n(~~(e.mrows * e.mcols / 8) - e.rscw), e.okay = !0, e.urows != 0 && e.urows != e.rows && (e.okay = !1), e.ucols != 0 && e.ucols != e.cols && (e.okay = !1), k(e.format, "square") && v1(e.rows, e.cols) && (e.okay = !1), k(e.format, "rectangle") && k(e.rows, e.cols) && (e.okay = !1), !e.dmre && e.doly == 1 && (e.okay = !1), e.okay && (a[r++] = 1 / 0, x(e.fullcws), a[r++] = e.ncws, e.fullcws = t());
   a[r++] = 1 / 0;
   for (var B = 0, I = 1558; B < I; B++)
     a[r++] = 1e4;
@@ -10444,8 +10430,8 @@ function da() {
     e.Avals = C1(), a[r++] = 1 / 0, a[r++] = e.sft1, a[r++] = 0, a[r++] = e.sft2, a[r++] = 1, a[r++] = e.sft3, a[r++] = 2, a[r++] = 32, a[r++] = 3;
     for (var _ = 48; _ <= 57; _ += 1)
       a[r++] = _, a[r++] = _ - 44;
-    for (var h1 = 65; h1 <= 90; h1 += 1)
-      a[r++] = h1, a[r++] = h1 - 51;
+    for (var A1 = 65; A1 <= 90; A1 += 1)
+      a[r++] = A1, a[r++] = A1 - 51;
     e.CNvals = C1(), a[r++] = 1 / 0;
     for (var g1 = 0; g1 <= 31; g1 += 1)
       a[r++] = g1, a[r++] = g1;
@@ -10479,8 +10465,8 @@ function da() {
     for (var fe = e.C2vals, Te = fe.size, V1 = fe.keys(), Ce = 0; Ce < Te; Ce++) {
       var ue = V1.next().value;
       a[r++] = ue, a[r++] = fe.get(ue), a[r++] = 1 / 0;
-      var De = a[--r], Ae = a[--r];
-      a[r++] = De, a[r++] = i(e.CNvals, e.sft2), a[r++] = Ae;
+      var De = a[--r], he = a[--r];
+      a[r++] = De, a[r++] = i(e.CNvals, e.sft2), a[r++] = he;
       var Fe = t();
       a[r++] = Fe;
     }
@@ -10516,8 +10502,8 @@ function da() {
     for (var F = e.TNvals, Z = F.size, c1 = F.keys(), r1 = 0; r1 < Z; r1++) {
       var D = c1.next().value;
       a[r++] = D, a[r++] = F.get(D), a[r++] = 1 / 0;
-      var A1 = a[--r], p1 = a[--r];
-      a[r++] = A1, a[r++] = p1;
+      var h1 = a[--r], p1 = a[--r];
+      a[r++] = h1, a[r++] = p1;
       var K = t();
       a[r++] = K;
     }
@@ -10532,8 +10518,8 @@ function da() {
     for (var j1 = e.T2vals, L1 = j1.size, T1 = j1.keys(), Y1 = 0; Y1 < L1; Y1++) {
       var ne = T1.next().value;
       a[r++] = ne, a[r++] = j1.get(ne), a[r++] = 1 / 0;
-      var he = a[--r], re = a[--r];
-      a[r++] = he, a[r++] = i(e.TNvals, e.sft2), a[r++] = re;
+      var Ae = a[--r], re = a[--r];
+      a[r++] = Ae, a[r++] = i(e.TNvals, e.sft2), a[r++] = re;
       var Me = t();
       a[r++] = Me;
     }
@@ -10547,11 +10533,11 @@ function da() {
     }
     e.Tvals = C1();
     for (var Ke = 128; Ke <= 255; Ke += 1) {
-      e.i = Ke, a[r++] = e.Avals, a[r++] = e.i, a[r++] = 1 / 0, w(i(e.Avals, e.usft)), w(i(e.Avals, e.i - 128));
+      e.i = Ke, a[r++] = e.Avals, a[r++] = e.i, a[r++] = 1 / 0, x(i(e.Avals, e.usft)), x(i(e.Avals, e.i - 128));
       var c2 = t(), f2 = a[--r];
-      s(a[--r], f2, c2), a[r++] = e.Cvals, a[r++] = e.i, a[r++] = 1 / 0, w(i(e.Cvals, e.usft)), w(i(e.Cvals, e.i - 128));
+      s(a[--r], f2, c2), a[r++] = e.Cvals, a[r++] = e.i, a[r++] = 1 / 0, x(i(e.Cvals, e.usft)), x(i(e.Cvals, e.i - 128));
       var u2 = t(), Ve = a[--r];
-      s(a[--r], Ve, u2), a[r++] = e.Tvals, a[r++] = e.i, a[r++] = 1 / 0, w(i(e.Tvals, e.usft)), w(i(e.Tvals, e.i - 128));
+      s(a[--r], Ve, u2), a[r++] = e.Tvals, a[r++] = e.i, a[r++] = 1 / 0, x(i(e.Tvals, e.usft)), x(i(e.Tvals, e.i - 128));
       var l2 = t(), w2 = a[--r];
       s(a[--r], w2, l2);
     }
@@ -10570,8 +10556,8 @@ function da() {
       a[r++] = oe;
     }
     e.Xvals = C1(), a[r++] = 1 / 0;
-    for (var A2 = 64; A2 <= 94; A2 += 1)
-      a[r++] = A2, a[r++] = A2 - 64;
+    for (var h2 = 64; h2 <= 94; h2 += 1)
+      a[r++] = h2, a[r++] = h2 - 64;
     a[r++] = e.unl, a[r++] = 31;
     for (var Ze = 32; Ze <= 63; Ze += 1)
       a[r++] = Ze, a[r++] = Ze;
@@ -10588,7 +10574,7 @@ function da() {
     for (var K2 = 0; K2 <= 255; K2 += 1)
       a[r++] = K2, a[r++] = K2;
     e.Bvals = C1(), a[r++] = 1 / 0;
-    for (var t2 = e.Bvals, vr = t2.size, x2 = t2.keys(), hr = 0; hr < vr; hr++) {
+    for (var t2 = e.Bvals, vr = t2.size, x2 = t2.keys(), Ar = 0; Ar < vr; Ar++) {
       var U2 = x2.next().value;
       a[r++] = U2, a[r++] = t2.get(U2), a[r++] = 1 / 0;
       var Mr = a[--r], ar = a[--r];
@@ -10615,14 +10601,14 @@ function da() {
     e.fncvals = $2, a[r++] = "msg", a[r++] = e.barcode, a[r++] = e.fncvals, sr();
     var Yr = a[--r];
     if (e[a[--r]] = Yr, e.msglen = e.msg.length, e.msglen >= 9) {
-      w(o(e.msg, 0, 7));
+      x(o(e.msg, 0, 7));
       var nr = a[--r], Dr = a[--r];
       a[r++] = nr == 29, a[r++] = Dr, r--;
       var mr = a[--r], i2 = a[--r], or = a[--r], jr = a[--r], Hr = a[--r], Wr = a[--r];
       if (mr && i2 == 48 && or == 30 && jr == 62 && Hr == 41 && Wr == 91) {
-        w(o(e.msg, e.msglen - 2, 2));
+        x(o(e.msg, e.msglen - 2, 2));
         var Lr = a[--r], qa = a[--r];
-        Lr == 4 && qa == 30 && (i(e.msg, 5) == 53 ? (a[r++] = 1 / 0, a[r++] = e.m05, w(o(e.msg, 7, e.msg.length - 9)), e.msg = t()) : i(e.msg, 5) == 54 && (a[r++] = 1 / 0, a[r++] = e.m06, w(o(e.msg, 7, e.msg.length - 9)), e.msg = t()));
+        Lr == 4 && qa == 30 && (i(e.msg, 5) == 53 ? (a[r++] = 1 / 0, a[r++] = e.m05, x(o(e.msg, 7, e.msg.length - 9)), e.msg = t()) : i(e.msg, 5) == 54 && (a[r++] = 1 / 0, a[r++] = e.m06, x(o(e.msg, 7, e.msg.length - 9)), e.msg = t()));
       }
     }
     e.msglen = e.msg.length, a[r++] = 1 / 0;
@@ -10640,12 +10626,12 @@ function da() {
     a[r++] = !1, e.isECI = t();
     for (var aa = e.msglen - 1; aa >= 0; aa -= 1) {
       e.i = aa, e.barchar = i(e.msg, e.i), e.barchar >= 48 && e.barchar <= 57 && s(e.numD, e.i, n(i(e.numD, e.i + 1) + 1)), e.barchar == 13 || e.barchar == 42 || e.barchar == 62 ? s(e.nextXterm, e.i, 0) : s(e.nextXterm, e.i, n(i(e.nextXterm, e.i + 1) + 1));
-      var Aa = i(e.Xvals, e.barchar) !== void 0;
-      Aa ? s(e.nextNonX, e.i, n(i(e.nextNonX, e.i + 1) + 1)) : s(e.nextNonX, e.i, 0), s(e.isECI, e.i, e.barchar <= -1e6);
+      var ha = i(e.Xvals, e.barchar) !== void 0;
+      ha ? s(e.nextNonX, e.i, n(i(e.nextNonX, e.i + 1) + 1)) : s(e.nextNonX, e.i, 0), s(e.isECI, e.i, e.barchar <= -1e6);
     }
     a[r++] = 1 / 0;
-    for (var ha = e.nextXterm, ma = 0, pr = ha.length; ma < pr; ma++) {
-      var oa = i(ha, ma);
+    for (var Aa = e.nextXterm, ma = 0, pr = Aa.length; ma < pr; ma++) {
+      var oa = i(Aa, ma);
       a[r++] = oa, oa > 1e4 && (r--, a[r++] = 1e4);
     }
     e.nextXterm = t(), a[r++] = 1 / 0;
@@ -10734,8 +10720,8 @@ function da() {
             var Ot = t([e.ac, e.cc, e.tc, e.ec, e.bc]);
             a[r++] = !0;
             for (var ti = 0, Ii = Ot.length; ti < Ii; ti++) {
-              var Ai = a[--r];
-              a[r++] = Ai && e.xc < i(Ot, ti);
+              var hi = a[--r];
+              a[r++] = hi && e.xc < i(Ot, ti);
             }
             if (a[--r]) {
               a[r++] = e.X;
@@ -10754,8 +10740,8 @@ function da() {
             var Ua = a[--r];
             a[r++] = Math.ceil(Ua) + 1;
           }
-          var hi = a[--r];
-          if (e[a[--r]] = hi, a[r++] = "cc", a[r++] = e.cc, e.isC(), a[--r]) {
+          var Ai = a[--r];
+          if (e[a[--r]] = Ai, a[r++] = "cc", a[r++] = e.cc, e.isC(), a[--r]) {
             var ii = a[--r];
             a[r++] = n(ii + 0.6666667);
           } else if (e.isEA(), a[--r]) {
@@ -10957,16 +10943,16 @@ function da() {
             e.remcws = i(e.numremcws, e.j + ~~(e.p / 3) * 2), a[r++] = 1 / 0;
             for (var G2 = o(e.msg, e.i, e.msglen - e.i), O2 = 0, Tr = G2.length; O2 < Tr; O2++) {
               var Gr = i(G2, O2), wr = i(i(e.encvals, e.mode), Gr) !== void 0;
-              a[r++] = Gr, wr ? w(i(i(e.encvals, e.mode), a[--r])) : (r--, a[r++] = -1, a[r++] = -1, a[r++] = -1, a[r++] = -1);
+              a[r++] = Gr, wr ? x(i(i(e.encvals, e.mode), a[--r])) : (r--, a[r++] = -1, a[r++] = -1, a[r++] = -1, a[r++] = -1);
             }
             if (e.remvals = t(), e.remcws == 2 && e.remvals.length == 3) {
-              a[r++] = 1 / 0, w(o(e.ctxvals, 0, e.p)), w(e.remvals);
+              a[r++] = 1 / 0, x(o(e.ctxvals, 0, e.p)), x(e.remvals);
               var Ba = t();
               a[r++] = Ba, e.CTXvalstocws(), e.addtocws(), e.mode = e.A, e.i = e.msglen, e.done = !0;
               break;
             }
             if (e.remcws == 2 && e.remvals.length == 2 && e.mode != e.X) {
-              a[r++] = 1 / 0, w(o(e.ctxvals, 0, e.p)), w(e.remvals), w(i(i(e.encvals, e.mode), e.sft1));
+              a[r++] = 1 / 0, x(o(e.ctxvals, 0, e.p)), x(e.remvals), x(i(i(e.encvals, e.mode), e.sft1));
               var Sa = t();
               a[r++] = Sa, e.CTXvalstocws(), e.addtocws(), e.mode = e.A, e.i = e.msglen, e.done = !0;
               break;
@@ -10987,7 +10973,7 @@ function da() {
       if (!e.done) {
         for (; e.p % 3 != 0; )
           e.i = e.i - 1, e.p = e.p - i(i(e.encvals, e.mode), i(e.msg, e.i)).length;
-        a[r++] = 1 / 0, w(o(e.ctxvals, 0, e.p));
+        a[r++] = 1 / 0, x(o(e.ctxvals, 0, e.p));
         var ut = t();
         if (a[r++] = ut, e.CTXvalstocws(), e.addtocws(), a[r++] = t([e.unlcw]), e.addtocws(), e.mode = e.A, e.i != e.msglen && ke(i(e.isECI, e.i)))
           if (i(e.numD, e.i) >= 2) {
@@ -10997,7 +10983,7 @@ function da() {
             a[r++] = i(e.Avals, i(e.msg, e.i)), e.addtocws(), e.i = e.i + 1;
       }
     }, e.Evalstocws = function() {
-      e.in = a[--r], e.inlen = e.in.length, e.outlen = ~~Math.ceil(e.in.length / 4 * 3), a[r++] = 1 / 0, w(e.in), a[r++] = 0, a[r++] = 0, a[r++] = 0, e.in = t(), a[r++] = 1 / 0;
+      e.in = a[--r], e.inlen = e.in.length, e.outlen = ~~Math.ceil(e.in.length / 4 * 3), a[r++] = 1 / 0, x(e.in), a[r++] = 0, a[r++] = 0, a[r++] = 0, e.in = t(), a[r++] = 1 / 0;
       for (var ae = 0, qe = e.inlen - 1; ae <= qe; ae += 4) {
         var G2 = o(e.in, ae, 4);
         a[r++] = 0;
@@ -11022,7 +11008,7 @@ function da() {
           if (e.msglen - e.i <= 2) {
             e.remcws = i(e.numremcws, e.j + ~~(e.p / 4) * 3), a[r++] = 1 / 0;
             for (var qe = o(e.msg, e.i, e.msglen - e.i), G2 = 0, O2 = qe.length; G2 < O2; G2++)
-              w(i(e.Avals, i(qe, G2)));
+              x(i(e.Avals, i(qe, G2)));
             if (e.remvals = t(), (e.remcws == 1 || e.remcws == 2) && e.remvals.length <= e.remcws) {
               a[r++] = o(e.edifactvals, 0, e.p), e.Evalstocws(), e.addtocws(), a[r++] = e.remvals, e.addtocws(), e.mode = e.A, e.i = e.msglen;
               break;
@@ -11049,7 +11035,7 @@ function da() {
     }, e.encB = function() {
       for (e.p = 0, e.bvals = t(1558); !(e.i == e.msglen || (e.lookup(), a[--r] != e.mode)); )
         s(e.bvals, e.p, i(e.msg, e.i)), e.p = e.p + 1, e.i = e.i + 1;
-      e.remcws = n(i(e.numremcws, e.j + e.p) - 1), a[r++] = 1 / 0, e.remcws == 0 && e.i == e.msglen ? a[r++] = 0 : e.p < 250 ? a[r++] = e.p : (a[r++] = ~~(e.p / 250) + 249, a[r++] = e.p % 250), w(o(e.bvals, 0, e.p)), e.bvals = t();
+      e.remcws = n(i(e.numremcws, e.j + e.p) - 1), a[r++] = 1 / 0, e.remcws == 0 && e.i == e.msglen ? a[r++] = 0 : e.p < 250 ? a[r++] = e.p : (a[r++] = ~~(e.p / 250) + 249, a[r++] = e.p % 250), x(o(e.bvals, 0, e.p)), e.bvals = t();
       for (var ae = 0, qe = e.bvals.length - 1; ae <= qe; ae += 1) {
         e.p = ae;
         var G2 = n((e.j + e.p + 1) * 149 % 255 + 1 + i(e.bvals, e.p));
@@ -11065,7 +11051,7 @@ function da() {
     e.cws = o(e.cws, 0, e.j);
   }
   if (e.datlen = e.cws.length, e.remcws = n(i(e.numremcws, e.j - 1) - 1), e.remcws > 0) {
-    a[r++] = 1 / 0, w(e.cws);
+    a[r++] = 1 / 0, x(e.cws);
     for (var Je = 0, Cr = e.remcws; Je < Cr; Je++)
       a[r++] = 129;
     e.cws = t();
@@ -11125,21 +11111,21 @@ function da() {
     for (var k2 = e.i - 1; k2 >= 1; k2 -= 1) {
       e.j = k2, a[r++] = e.coeffs, a[r++] = e.j, a[r++] = i(e.coeffs, e.j - 1), a[r++] = i(e.coeffs, e.j), a[r++] = i(e.rsalog, e.i), e.rsprod();
       var j2 = a[--r], X2 = a[--r], W2 = a[--r];
-      s(a[--r], W2, Ar(X2, j2));
+      s(a[--r], W2, hr(X2, j2));
     }
     a[r++] = e.coeffs, a[r++] = 0, a[r++] = i(e.coeffs, 0), a[r++] = i(e.rsalog, e.i), e.rsprod();
-    var h2 = a[--r], q2 = a[--r];
-    s(a[--r], q2, h2);
+    var A2 = a[--r], q2 = a[--r];
+    s(a[--r], q2, A2);
   }
   e.coeffs = o(e.coeffs, 0, e.coeffs.length - 1);
   for (var g2 = 0, C2 = e.cwbs.length - 1; g2 <= C2; g2 += 1) {
     e.i = g2, e.cwb = i(e.cwbs, e.i), e.ecb = i(e.ecbs, e.i);
     for (var er = 0, dr = e.cwb.length - 1; er <= dr; er += 1) {
-      e.t = Ar(i(e.cwb, er), i(e.ecb, 0));
+      e.t = hr(i(e.cwb, er), i(e.ecb, 0));
       for (var fr = e.ecb.length - 1; fr >= 0; fr -= 1) {
         e.j = fr, e.p = e.ecb.length - e.j - 1, a[r++] = e.ecb, a[r++] = e.p, a[r++] = e.t, a[r++] = i(e.coeffs, e.j), e.rsprod();
         var qr = a[--r], Fr = a[--r];
-        s(a[--r], Fr, qr), e.j > 0 && s(e.ecb, e.p, Ar(i(e.ecb, e.p + 1), i(e.ecb, e.p)));
+        s(a[--r], Fr, qr), e.j > 0 && s(e.ecb, e.p, hr(i(e.ecb, e.p + 1), i(e.ecb, e.p)));
       }
     }
   }
@@ -11181,13 +11167,13 @@ function da() {
         var ti = a[--r], Ii = a[--r];
         a[r++] = n(Ii + n(4 - n(e.mcols + 4) % 8)), a[r++] = n(ti + e.mcols);
       }
-      var Ai = a[--r], qt = a[--r];
-      if (a[r++] = qt, a[r++] = Ai, qt >= e.mrows) {
+      var hi = a[--r], qt = a[--r];
+      if (a[r++] = qt, a[r++] = hi, qt >= e.mrows) {
         var Bi = a[--r], Ua = a[--r];
         a[r++] = n(Ua - e.mrows), a[r++] = Bi;
       }
-      var hi = a[--r], ii = a[--r], Mi = a[--r], Ei = a[--r];
-      s(e.mmat, n(hi + ii * e.mcols), a[--r]), a[r++] = Ei, a[r++] = Mi;
+      var Ai = a[--r], ii = a[--r], Mi = a[--r], Ei = a[--r];
+      s(e.mmat, n(Ai + ii * e.mcols), a[--r]), a[r++] = Ei, a[r++] = Mi;
     });
   };
   var Z2 = t([function() {
@@ -11288,7 +11274,7 @@ function da() {
     a[r++] = 1, a[r++] = n(e.mcols - 1);
   }]);
   e.dmc4 = Nr, a[r++] = 1 / 0;
-  for (var At = 0, La = e.mrows * e.mcols; At < La; At++)
+  for (var ht = 0, La = e.mrows * e.mcols; ht < La; ht++)
     a[r++] = -1;
   e.mmat = t();
   for (var Ka = e.cws.length - 1; Ka >= 0; Ka -= 1)
@@ -11298,8 +11284,8 @@ function da() {
     a[r++] = Oa, a[r++] = Qa, Qa == 0 && Oa == e.mrows && (a[r++] = e.dmc1, e.module());
     var Za = a[--r], it = a[--r];
     a[r++] = it, a[r++] = Za, Za == 0 && it == n(e.mrows - 2) && e.mcols % 4 != 0 && (a[r++] = e.dmc2, e.module());
-    var ht = a[--r], nt = a[--r];
-    a[r++] = nt, a[r++] = ht, ht == 0 && nt == n(e.mrows - 2) && e.mcols % 8 == 4 && (a[r++] = e.dmc3, e.module());
+    var At = a[--r], nt = a[--r];
+    a[r++] = nt, a[r++] = At, At == 0 && nt == n(e.mrows - 2) && e.mcols % 8 == 4 && (a[r++] = e.dmc3, e.module());
     var Ra = a[--r], mt = a[--r];
     for (a[r++] = mt, a[r++] = Ra, Ra == 2 && mt == n(e.mrows + 4) && e.mcols % 8 == 0 && (a[r++] = e.dmc4, e.module()); ; ) {
       var Na = a[--r], yt = a[--r];
@@ -11421,22 +11407,22 @@ function N2() {
   var d = a[--r];
   if (e[a[--r]] = d, e.msglen = e.msg.length, e.fnc1first = !1, e.msglen > 0 && i(e.msg, 0) == e.fn1) {
     e.fnc1first = !0, a[r++] = 1 / 0;
-    for (var y = o(e.msg, 1, e.msglen - 1), g = 0, A = y.length; g < A; g++) {
+    for (var y = o(e.msg, 1, e.msglen - 1), g = 0, h = y.length; g < h; g++) {
       var b = i(y, g);
       if (a[r++] = b, b == 37) {
-        var h = a[--r];
-        a[r++] = h, a[r++] = h;
+        var A = a[--r];
+        a[r++] = A, a[r++] = A;
       }
     }
     e.msg = t(), e.msglen = e.msg.length;
   }
   if (!N2.__20301__) {
     e = Object.create(e);
-    var x = t(["v1to9", "v10to26", "v27to40", "vM1", "vM2", "vM3", "vM4", "vR7x43", "vR7x59", "vR7x77", "vR7x99", "vR7x139", "vR9x43", "vR9x59", "vR9x77", "vR9x99", "vR9x139", "vR11x27", "vR11x43", "vR11x59", "vR11x77", "vR11x99", "vR11x139", "vR13x27", "vR13x43", "vR13x59", "vR13x77", "vR13x99", "vR13x139", "vR15x43", "vR15x59", "vR15x77", "vR15x99", "vR15x139", "vR17x43", "vR17x59", "vR17x77", "vR17x99", "vR17x139"]);
+    var w = t(["v1to9", "v10to26", "v27to40", "vM1", "vM2", "vM3", "vM4", "vR7x43", "vR7x59", "vR7x77", "vR7x99", "vR7x139", "vR9x43", "vR9x59", "vR9x77", "vR9x99", "vR9x139", "vR11x27", "vR11x43", "vR11x59", "vR11x77", "vR11x99", "vR11x139", "vR13x27", "vR13x43", "vR13x59", "vR13x77", "vR13x99", "vR13x139", "vR15x43", "vR15x59", "vR15x77", "vR15x99", "vR15x139", "vR17x43", "vR17x59", "vR17x77", "vR17x99", "vR17x139"]);
     a[r++] = 0;
-    for (var m = 0, B = x.length; m < B; m++) {
+    for (var m = 0, B = w.length; m < B; m++) {
       var I = a[--r];
-      e[i(x, m)] = I, a[r++] = n(I + 1);
+      e[i(w, m)] = I, a[r++] = n(I + 1);
     }
     r--, e.N = 0, e.A = 1, e.B = 2, e.K = 3, e.E = 4, a[r++] = 1 / 0, a[r++] = 1 / 0;
     for (var M = 48; M <= 57; M += 1)
@@ -11557,7 +11543,7 @@ function N2() {
     var M1 = a[--r];
     l(e.bits, e.j, M1), e.j = M1.length + e.j;
   }, a[r++] = 1 / 0;
-  for (var h1 = 0, g1 = e.msglen; h1 < g1; h1++)
+  for (var A1 = 0, g1 = e.msglen; A1 < g1; A1++)
     a[r++] = 0;
   a[r++] = 0, e.numNs = t(), a[r++] = 1 / 0;
   for (var u1 = 0, x1 = e.msglen; u1 < x1; u1++)
@@ -11655,8 +11641,8 @@ function N2() {
     e = Object.create(e), a[r++] = 1 / 0, a[r++] = "full", a[r++] = 1 / 0;
     for (var De = 0; De <= 9; De += 1)
       a[r++] = Oe(C(2), De, 10), a[r++] = e.v1to9;
-    for (var Ae = 10; Ae <= 26; Ae += 1)
-      a[r++] = Oe(C(2), Ae, 10), a[r++] = e.v10to26;
+    for (var he = 10; he <= 26; he += 1)
+      a[r++] = Oe(C(2), he, 10), a[r++] = e.v10to26;
     for (var Fe = 27; Fe <= 40; Fe += 1)
       a[r++] = Oe(C(2), Fe, 10), a[r++] = e.v27to40;
     var ce = C1(), Ye = /* @__PURE__ */ new Map([
@@ -11947,13 +11933,13 @@ function N2() {
       if (a[r++] = Z, Z == e.mode) {
         r--;
         var c1 = e.mode == e.K ? 2 : 1;
-        e.dat = o(e.msg, e.i, c1), a[r++] = 1 / 0, w(e.seq), a[r++] = 1 / 0;
+        e.dat = o(e.msg, e.i, c1), a[r++] = 1 / 0, x(e.seq), a[r++] = 1 / 0;
         var r1 = a[--r], D = a[--r];
-        a[r++] = r1, w(D), w(e.dat);
-        var A1 = t();
-        a[r++] = A1, e.seq = t();
+        a[r++] = r1, x(D), x(e.dat);
+        var h1 = t();
+        a[r++] = h1, e.seq = t();
       } else
-        e.mode = a[--r], e.mode == e.K && (a[r++] = e.K, a[r++] = o(e.msg, e.i, e.numK * 2)), e.mode == e.B && (a[r++] = e.B, a[r++] = o(e.msg, e.i, e.numB)), e.mode == e.A && (a[r++] = e.A, a[r++] = o(e.msg, e.i, e.numA)), e.mode == e.N && (a[r++] = e.N, a[r++] = o(e.msg, e.i, e.numN)), e.mode == e.E && (e.mode = -1, a[r++] = e.E, a[r++] = o(e.msg, e.i, 1)), e.dat = a[--r], e.sw = a[--r], a[r++] = 1 / 0, w(e.seq), a[r++] = e.sw, a[r++] = e.dat, e.seq = t();
+        e.mode = a[--r], e.mode == e.K && (a[r++] = e.K, a[r++] = o(e.msg, e.i, e.numK * 2)), e.mode == e.B && (a[r++] = e.B, a[r++] = o(e.msg, e.i, e.numB)), e.mode == e.A && (a[r++] = e.A, a[r++] = o(e.msg, e.i, e.numA)), e.mode == e.N && (a[r++] = e.N, a[r++] = o(e.msg, e.i, e.numN)), e.mode == e.E && (e.mode = -1, a[r++] = e.E, a[r++] = o(e.msg, e.i, 1)), e.dat = a[--r], e.sw = a[--r], a[r++] = 1 / 0, x(e.seq), a[r++] = e.sw, a[r++] = e.dat, e.seq = t();
       e.i = e.i + e.dat.length;
     }
     for (; e.seq != -1; ) {
@@ -12000,8 +11986,8 @@ function N2() {
       break;
   }
   e.okay || (a[r++] = "bwipp.qrcodeNoValidSymbol#20823", a[r++] = "Maximum length exceeded or invalid content", u()), e.format = e.frmt, e.version = e.vers, e.msgbits = e.verbits, e.dcpb = ~~(e.dcws / n(e.ecb1 + e.ecb2)), e.ecpb = ~~(e.ncws / n(e.ecb1 + e.ecb2)) - e.dcpb;
-  var T1 = e.term, Y1 = e.dmod, ne = e.msgbits, he = e.term, re = he.length, Me = n(Y1 - ne.length);
-  if (n(Y1 - ne.length) > he.length) {
+  var T1 = e.term, Y1 = e.dmod, ne = e.msgbits, Ae = e.term, re = Ae.length, Me = n(Y1 - ne.length);
+  if (n(Y1 - ne.length) > Ae.length) {
     var z1 = re;
     re = Me, Me = z1;
   }
@@ -12055,8 +12041,8 @@ function N2() {
     e.i = He, s(e.coeffs, e.i + 1, i(e.coeffs, e.i));
     for (var oe = e.i; oe >= 1; oe -= 1) {
       e.j = oe, a[r++] = e.coeffs, a[r++] = e.j, a[r++] = i(e.coeffs, e.j - 1), a[r++] = i(e.coeffs, e.j), a[r++] = i(e.rsalog, e.i), e.rsprod();
-      var A2 = a[--r], Ze = a[--r], E2 = a[--r];
-      s(a[--r], E2, Ar(Ze, A2));
+      var h2 = a[--r], Ze = a[--r], E2 = a[--r];
+      s(a[--r], E2, hr(Ze, h2));
     }
     a[r++] = e.coeffs, a[r++] = 0, a[r++] = i(e.coeffs, 0), a[r++] = i(e.rsalog, e.i), e.rsprod();
     var Ue = a[--r], z2 = a[--r];
@@ -12072,7 +12058,7 @@ function N2() {
       for (var ze = 0, Ge = e.ecpb - 1; ze <= Ge; ze += 1) {
         e.j = ze, a[r++] = e.rscws, a[r++] = e.m + e.j + 1, a[r++] = i(e.coeffs, e.ecpb - e.j - 1), a[r++] = e.k, e.rsprod();
         var T2 = a[--r], V2 = a[--r];
-        s(a[--r], V2, Ar(T2, i(e.rscws, e.m + e.j + 1)));
+        s(a[--r], V2, hr(T2, i(e.rscws, e.m + e.j + 1)));
       }
     }
     a[r++] = o(e.rscws, e.rsnd, e.ecpb);
@@ -12088,7 +12074,7 @@ function N2() {
     s(a[--r], vr, t2);
   }
   e.cws = t(e.ncws), e.cw = 0;
-  for (var x2 = 0, hr = e.dcpb; x2 <= hr; x2 += 1) {
+  for (var x2 = 0, Ar = e.dcpb; x2 <= Ar; x2 += 1) {
     e.i = x2;
     for (var U2 = 0, Mr = n(n(e.ecb1 + e.ecb2) - 1); U2 <= Mr; U2 += 1)
       e.j = U2, e.i < i(e.dcwsb, e.j).length && (s(e.cws, e.cw, i(i(e.dcwsb, e.j), e.i)), e.cw = e.cw + 1);
@@ -12136,8 +12122,8 @@ function N2() {
       var aa = a[--r];
       s(a[--r], aa, (e.i + 1) % 2);
     }
-    for (var Aa = 3, ha = n(e.rows - 4); Aa <= ha; Aa += 1) {
-      e.i = Aa, a[r++] = e.pixs, a[r++] = 0, a[r++] = e.i, e.qmv();
+    for (var ha = 3, Aa = n(e.rows - 4); ha <= Aa; ha += 1) {
+      e.i = ha, a[r++] = e.pixs, a[r++] = 0, a[r++] = e.i, e.qmv();
       var ma = a[--r];
       s(a[--r], ma, (e.i + 1) % 2), a[r++] = e.pixs, a[r++] = n(e.cols - 1), a[r++] = e.i, e.qmv();
       var pr = a[--r];
@@ -12296,7 +12282,7 @@ function N2() {
   e.maskfuncs = i(k2, e.format), e.mask != -1 && (e.maskfuncs = t([i(e.maskfuncs, e.mask - 1)]), e.bestmaskval = e.mask - 1), e.masks = t(e.maskfuncs.length);
   for (var j2 = 0, X2 = e.masks.length - 1; j2 <= X2; j2 += 1) {
     e.m = j2, e.mask = t(e.rows * e.cols);
-    for (var W2 = 0, h2 = n(e.rows - 1); W2 <= h2; W2 += 1) {
+    for (var W2 = 0, A2 = n(e.rows - 1); W2 <= A2; W2 += 1) {
       e.j = W2;
       for (var q2 = 0, g2 = n(e.cols - 1); q2 <= g2 && (e.i = q2, a[r++] = e.i, a[r++] = e.j, i(e.maskfuncs, e.m)() !== !0); q2 += 1) {
         var C2 = a[--r];
@@ -12386,7 +12372,7 @@ function N2() {
         a[r++] = n(ct + Sa), a[r++] = Sa;
       }
       if (r--, Re(e.thispairs), r--, e.i > 0) {
-        a[r++] = 1 / 0, w(e.lastpairs), w(e.thispairs), a[r++] = e.n2;
+        a[r++] = 1 / 0, x(e.lastpairs), x(e.thispairs), a[r++] = e.n2;
         for (var ut = 0, $a = e.cols; ut < $a; ut++) {
           var ei = a[--r], ri = a[--r];
           a[r++] = ei, a[r++] = ri;
@@ -12421,7 +12407,7 @@ function N2() {
   for (var Ir = 0, la = e.masks.length - 1; Ir <= la; Ir += 1) {
     e.m = Ir, e.masksym = t(e.rows * e.cols);
     for (var Pe = 0, F2 = n(e.rows * e.cols - 1); Pe <= F2; Pe += 1)
-      e.i = Pe, s(e.masksym, e.i, Ar(i(e.pixs, e.i), i(i(e.masks, e.m), e.i)));
+      e.i = Pe, s(e.masksym, e.i, hr(i(e.pixs, e.i), i(i(e.masks, e.m), e.i)));
     e.masks.length != 1 ? (k(e.format, "full") ? (a[r++] = e.masksym, e.evalfull(), e.score = a[--r]) : (a[r++] = e.masksym, e.evalmicro(), e.score = a[--r]), e.score < e.bestscore && (e.bestsym = e.masksym, e.bestmaskval = e.m, e.bestscore = e.score)) : e.bestsym = e.masksym;
   }
   if (e.pixs = e.bestsym, k(e.format, "full")) {
@@ -12442,10 +12428,10 @@ function N2() {
     a[r++] = ur, a[r++] = Xr, r--;
     var wa = a[--r];
     e[a[--r]] = wa, e.fmtval = i(e.fmtvalsfull, (e.ecid << 3) + e.bestmaskval);
-    for (var Nr = 0, At = e.formatmap.length - 1; Nr <= At; Nr += 1)
+    for (var Nr = 0, ht = e.formatmap.length - 1; Nr <= ht; Nr += 1)
       e.i = Nr, L(i(e.formatmap, e.i), function() {
         var M1 = a[--r];
-        a[r++] = e.pixs, w(M1), e.qmv();
+        a[r++] = e.pixs, x(M1), e.qmv();
         var $1 = e.fmtval, m1 = -(14 - e.i), X1 = a[--r];
         s(a[--r], X1, (m1 < 0 ? $1 >>> -m1 : $1 << m1) & 1);
       });
@@ -12453,23 +12439,23 @@ function N2() {
   if (k(e.format, "micro")) {
     e.symid = i(i(t([t([0]), t([1, 2]), t([3, 4]), t([5, 6, 7])]), ~~(n(e.cols - 11) / 2)), e.eclval), e.fmtval = i(e.fmtvalsmicro, (e.symid << 2) + e.bestmaskval);
     for (var La = 0, Ka = e.formatmap.length - 1; La <= Ka; La += 1) {
-      e.i = La, a[r++] = e.pixs, w(i(i(e.formatmap, e.i), 0)), e.qmv();
+      e.i = La, a[r++] = e.pixs, x(i(i(e.formatmap, e.i), 0)), e.qmv();
       var Qa = e.fmtval, Oa = -(14 - e.i), Za = a[--r];
       s(a[--r], Za, (Oa < 0 ? Qa >>> -Oa : Qa << Oa) & 1);
     }
   }
   if (k(e.format, "rmqr")) {
     a[r++] = "fmtvalu", Ie("MH", e.eclevel), r--;
-    var it = a[--r], ht = a[--r];
-    a[r++] = it.length, a[r++] = ht, r--;
+    var it = a[--r], At = a[--r];
+    a[r++] = it.length, a[r++] = At, r--;
     var nt = a[--r], Ra = a[--r];
     a[r++] = nt, a[r++] = Ra, r--;
     var mt = a[--r];
     e[a[--r]] = (mt << 5) + e.verind, e.fmtval1 = i(e.fmtvalsrmqr1, e.fmtvalu), e.fmtval2 = i(e.fmtvalsrmqr2, e.fmtvalu);
     for (var Na = 0, yt = e.formatmap.length - 1; Na <= yt; Na += 1) {
-      e.i = Na, a[r++] = e.pixs, w(i(i(e.formatmap, e.i), 0)), e.qmv();
+      e.i = Na, a[r++] = e.pixs, x(i(i(e.formatmap, e.i), 0)), e.qmv();
       var gt = e.fmtval1, st = -(17 - e.i), Ft = a[--r];
-      s(a[--r], Ft, (st < 0 ? gt >>> -st : gt << st) & 1), a[r++] = e.pixs, w(i(i(e.formatmap, e.i), 1)), e.qmv();
+      s(a[--r], Ft, (st < 0 ? gt >>> -st : gt << st) & 1), a[r++] = e.pixs, x(i(i(e.formatmap, e.i), 1)), e.qmv();
       var Zt = e.fmtval2, $t = -(17 - e.i), vi = a[--r];
       s(a[--r], vi, ($t < 0 ? Zt >>> -$t : Zt << $t) & 1);
     }
@@ -12512,8 +12498,8 @@ function ll() {
     z.scale(y, y), z.save(), z.newpath(), z.moveto(0, 0), z.lineto(46, 0), z.lineto(46, 46), z.lineto(0, 46), z.closepath(), z.moveto(19.5, 19.5), z.lineto(19.5, 26.5), z.lineto(26.5, 26.5), z.lineto(26.5, 19.5), z.closepath(), z.clip(), z.save(), z.moveto(0, 0);
     var g = 46 / i(e.args, "pixx") / 2;
     z.scale(g, g), K1(), z.restore(), z.restore(), z.translate(19.5, 19.5);
-    var A = 7 / 83;
-    z.scale(A, A), z.newpath(), z.moveto(6, 6), z.lineto(6, 77), z.lineto(77, 77), z.lineto(77, 6), z.closepath(), z.moveto(49, 18), z.lineto(49, 34), z.lineto(65, 34), z.lineto(65, 49), z.lineto(49, 49), z.lineto(49, 65), z.lineto(34, 65), z.lineto(34, 49), z.lineto(18, 49), z.lineto(18, 34), z.lineto(34, 34), z.lineto(34, 18), z.closepath(), z.setrgbcolor(0, 0, 0), z.fill(), z.restore();
+    var h = 7 / 83;
+    z.scale(h, h), z.newpath(), z.moveto(6, 6), z.lineto(6, 77), z.lineto(77, 77), z.lineto(77, 6), z.closepath(), z.moveto(49, 18), z.lineto(49, 34), z.lineto(65, 34), z.lineto(65, 49), z.lineto(49, 49), z.lineto(49, 65), z.lineto(34, 65), z.lineto(34, 49), z.lineto(18, 49), z.lineto(18, 34), z.lineto(34, 34), z.lineto(34, 18), z.closepath(), z.setrgbcolor(0, 0, 0), z.fill(), z.restore();
   }
   e = Object.getPrototypeOf(e);
 }
@@ -12558,12 +12544,12 @@ function Ut() {
   var g = a[--r];
   if (e[a[--r]] = g, e.msglen = e.msg.length, e.mode == 2 || e.mode == 3) {
     e.barcode = C(e.msglen);
-    for (var A = 0, b = e.msglen - 1; A <= b; A += 1)
-      e.i = A, i(e.msg, e.i) > 0 && s(e.barcode, e.i, i(e.msg, e.i));
+    for (var h = 0, b = e.msglen - 1; h <= b; h += 1)
+      e.i = h, i(e.msg, e.i) > 0 && s(e.barcode, e.i, i(e.msg, e.i));
     if (e.barlen = e.barcode.length, e.fid = "", e.barlen >= 7 && k(o(e.barcode, 0, 7), "[)>01") && (e.fid = o(e.barcode, 0, 9), e.barcode = o(e.barcode, 9, e.barlen - 9)), Ie(e.barcode, ""), a[--r])
       if (e.pcode = a[--r], r--, e.mode == 2) {
         a[r++] = !0;
-        for (var h = 0, x = 1; h < x; h++) {
+        for (var A = 0, w = 1; A < w; A++) {
           if (e.pcode.length > 9) {
             r--, a[r++] = !1;
             break;
@@ -12650,8 +12636,8 @@ function Ut() {
   }
   for (e.nseq = o(e.nseq, 0, e.msglen), e.prefixinset = function() {
     for (a[r++] = 0; ; ) {
-      var oe = a[--r], A2 = a[--r];
-      if (a[r++] = A2, a[r++] = oe, oe >= A2.length)
+      var oe = a[--r], h2 = a[--r];
+      if (a[r++] = h2, a[r++] = oe, oe >= h2.length)
         break;
       var Ze = a[--r], E2 = a[--r], Ue = a[--r], z2 = i(Ue, i(E2, Ze)) !== void 0;
       if (a[r++] = Ue, a[r++] = E2, a[r++] = Ze, z2) {
@@ -12690,8 +12676,8 @@ function Ut() {
               var _ = a[--r];
               a[r++] = _ >>> 12 & 47 | 48, a[r++] = _ >>> 6 & 63, a[r++] = _ & 63, Re(t(3));
             } else {
-              var h1 = a[--r];
-              a[r++] = h1 >>> 18 & 55 | 56, a[r++] = h1 >>> 12 & 63, a[r++] = h1 >>> 6 & 63, a[r++] = h1 & 63, Re(t(4));
+              var A1 = a[--r];
+              a[r++] = A1 >>> 18 & 55 | 56, a[r++] = A1 >>> 12 & 63, a[r++] = A1 >>> 6 & 63, a[r++] = A1 & 63, Re(t(4));
             }
           }
         }
@@ -12743,12 +12729,12 @@ function Ut() {
       }
       var ue = i(e.seta, e.char1) !== void 0;
       if (k(e.cset, "setb") && ue) {
-        var De = e.seta, Ae = e.msg, Fe = e.i, ce = e.msglen, Ye = e.i, le = ce - Ye, Be = 4;
+        var De = e.seta, he = e.msg, Fe = e.i, ce = e.msglen, Ye = e.i, le = ce - Ye, Be = 4;
         if (4 > ce - Ye) {
           var Qe = le;
           le = Be, Be = Qe;
         }
-        a[r++] = "p", a[r++] = De, a[r++] = o(Ae, Fe, Be), e.prefixinset();
+        a[r++] = "p", a[r++] = De, a[r++] = o(he, Fe, Be), e.prefixinset();
         var a2 = a[--r];
         e[a[--r]] = a2, e.p == 1 && (a[r++] = e.sa, a[r++] = e.setb, e.enc(), a[r++] = e.char1, a[r++] = e.seta, e.enc(), e.i = e.i + 1), e.p == 2 && (a[r++] = e.sa2, a[r++] = e.setb, e.enc(), a[r++] = e.char1, a[r++] = e.seta, e.enc(), a[r++] = e.char2, a[r++] = e.seta, e.enc(), e.i = e.i + 2), e.p == 3 && (a[r++] = e.sa3, a[r++] = e.setb, e.enc(), a[r++] = e.char1, a[r++] = e.seta, e.enc(), a[r++] = e.char2, a[r++] = e.seta, e.enc(), a[r++] = e.char3, a[r++] = e.seta, e.enc(), e.i = e.i + 3), e.p >= 4 && (a[r++] = e.la, a[r++] = e.setb, e.enc(), e.cset = "seta");
         break;
@@ -12782,10 +12768,10 @@ function Ut() {
   }
   e.encmsg = o(e.out, 0, e.j), e.padval = i(e[e.cset], e.pad), a[r++] = "sami", e.sam != -1 ? a[r++] = t([i(e.seta, e.pad), (~~(e.sam / 10) - 1) * 8 + (e.sam % 10 - 1)]) : a[r++] = t([]);
   var r1 = a[--r];
-  if (e[a[--r]] = r1, a[r++] = 1 / 0, w(e.sami), w(e.encmsg), e.encmsg = t(), e.mode == 2 || e.mode == 3) {
+  if (e[a[--r]] = r1, a[r++] = 1 / 0, x(e.sami), x(e.encmsg), e.encmsg = t(), e.mode == 2 || e.mode == 3) {
     e.encmsg.length > 84 && (a[r++] = "bwipp.maxicodeMode23TooLong#22164", a[r++] = "The secondary message is too long", u());
-    var D = H2(C(4), "0000"), A1 = Oe(C(4), ~~e.mode, 2);
-    l(D, 4 - A1.length, A1), e.mdb = D;
+    var D = H2(C(4), "0000"), h1 = Oe(C(4), ~~e.mode, 2);
+    l(D, 4 - h1.length, h1), e.mdb = D;
     var p1 = H2(C(10), "0000000000"), K = Oe(C(10), b1(e.ccode), 2);
     l(p1, 10 - K.length, K), e.ccb = p1;
     var f1 = H2(C(10), "0000000000"), d1 = Oe(C(10), b1(e.scode), 2);
@@ -12823,7 +12809,7 @@ function Ut() {
       e.mode = ne;
     }
     a[r++] = 1 / 0;
-    for (var he = e.mode == 5 ? 78 : 94, re = 0, Me = he; re < Me; re++)
+    for (var Ae = e.mode == 5 ? 78 : 94, re = 0, Me = Ae; re < Me; re++)
       a[r++] = e.padval;
     e.cws = t(), e.encmsg.length > e.cws.length - 1 && (a[r++] = "bwipp.maxicodeMode56TooLong#22229", a[r++] = "The message is too long", u()), s(e.cws, 0, e.mode), l(e.cws, 1, e.encmsg), e.pri = o(e.cws, 0, 10), e.sec = o(e.cws, 10, e.cws.length - 10);
   }
@@ -12843,15 +12829,15 @@ function Ut() {
     Ut.__22245__ = 1, e = Object.getPrototypeOf(e);
   }
   e.rsprod = function() {
-    var oe = a[--r], A2 = a[--r];
-    if (a[r++] = A2, a[r++] = oe, oe != 0 && A2 != 0) {
+    var oe = a[--r], h2 = a[--r];
+    if (a[r++] = h2, a[r++] = oe, oe != 0 && h2 != 0) {
       var Ze = i(e.rslog, a[--r]), E2 = i(e.rsalog, n(Ze + i(e.rslog, a[--r])) % 63);
       a[r++] = E2;
     } else
       r -= 2, a[r++] = 0;
   }, e.rscodes = function() {
     e.rsnum = a[--r], e.cwb = a[--r], a[r++] = 1 / 0, a[r++] = 1;
-    for (var oe = 0, A2 = e.rsnum; oe < A2; oe++)
+    for (var oe = 0, h2 = e.rsnum; oe < h2; oe++)
       a[r++] = 0;
     e.coeffs = t();
     for (var Ze = 1, E2 = e.rsnum; Ze <= E2; Ze += 1) {
@@ -12859,7 +12845,7 @@ function Ut() {
       for (var Ue = e.i - 1; Ue >= 1; Ue -= 1) {
         e.j = Ue, a[r++] = e.coeffs, a[r++] = e.j, a[r++] = i(e.coeffs, e.j - 1), a[r++] = i(e.coeffs, e.j), a[r++] = i(e.rsalog, e.i), e.rsprod();
         var z2 = a[--r], _e = a[--r], S2 = a[--r];
-        s(a[--r], S2, Ar(_e, z2));
+        s(a[--r], S2, hr(_e, z2));
       }
       a[r++] = e.coeffs, a[r++] = 0, a[r++] = i(e.coeffs, 0), a[r++] = i(e.rsalog, e.i), e.rsprod();
       var v2 = a[--r], ir = a[--r];
@@ -12870,11 +12856,11 @@ function Ut() {
       a[r++] = 0;
     e.ecb = t();
     for (var t2 = 0, vr = e.cwb.length - 1; t2 <= vr; t2 += 1) {
-      e.t = Ar(i(e.cwb, t2), i(e.ecb, 0));
+      e.t = hr(i(e.cwb, t2), i(e.ecb, 0));
       for (var x2 = e.ecb.length - 1; x2 >= 0; x2 -= 1) {
         e.i = x2, e.p = e.ecb.length - e.i - 1, a[r++] = e.ecb, a[r++] = e.p, a[r++] = e.t, a[r++] = i(e.coeffs, e.i), e.rsprod();
-        var hr = a[--r], U2 = a[--r];
-        s(a[--r], U2, hr), e.i > 0 && s(e.ecb, e.p, Ar(i(e.ecb, e.p + 1), i(e.ecb, e.p)));
+        var Ar = a[--r], U2 = a[--r];
+        s(a[--r], U2, Ar), e.i > 0 && s(e.ecb, e.p, hr(i(e.ecb, e.p + 1), i(e.ecb, e.p)));
       }
     }
     a[r++] = e.ecb;
@@ -12893,7 +12879,7 @@ function Ut() {
   e[a[--r]] = Ve, a[r++] = 1 / 0;
   for (var l2 = 0, w2 = e.scodes - 1; l2 <= w2; l2 += 1)
     a[r++] = i(e.secochk, l2), a[r++] = i(e.secechk, l2);
-  e.secchk = t(), a[r++] = 1 / 0, w(e.pri), a[r++] = e.pri, a[r++] = 10, e.rscodes(), w(a[--r]), w(e.sec), w(e.secchk), e.codewords = t(), a[r++] = 1 / 0;
+  e.secchk = t(), a[r++] = 1 / 0, x(e.pri), a[r++] = e.pri, a[r++] = 10, e.rscodes(), x(a[--r]), x(e.sec), x(e.secchk), e.codewords = t(), a[r++] = 1 / 0;
   for (var D2 = 0, $e = 864; D2 < $e; D2++)
     a[r++] = 0;
   e.mods = t();
@@ -12911,7 +12897,7 @@ function Ut() {
   e.pixs = t(864), e.j = 0;
   for (var Se = 0, He = e.mods.length - 1; Se <= He; Se += 1)
     e.i = Se, i(e.mods, e.i) == 1 && (s(e.pixs, e.j, i(e.modmap, e.i)), e.j = e.j + 1);
-  a[r++] = 1 / 0, w(o(e.pixs, 0, e.j)), a[r++] = 28, a[r++] = 29, a[r++] = 280, a[r++] = 281, a[r++] = 311, a[r++] = 457, a[r++] = 488, a[r++] = 500, a[r++] = 530, a[r++] = 670, a[r++] = 700, a[r++] = 677, a[r++] = 707, e.pixs = t();
+  a[r++] = 1 / 0, x(o(e.pixs, 0, e.j)), a[r++] = 28, a[r++] = 29, a[r++] = 280, a[r++] = 281, a[r++] = 311, a[r++] = 457, a[r++] = 488, a[r++] = 500, a[r++] = 530, a[r++] = 670, a[r++] = 700, a[r++] = 677, a[r++] = 707, e.pixs = t();
   var p2 = /* @__PURE__ */ new Map([
     ["ren", "renmaximatrix"],
     ["pixs", e.pixs],
@@ -12947,24 +12933,24 @@ function ja() {
       e.i = d, e.encs = i(e.charmaps, e.i);
       for (var g = 0; g <= 4; g += 1) {
         e.j = g;
-        var A = i(e.encs, e.j);
-        if (a[r++] = A, k(ba(A), "stringtype")) {
+        var h = i(e.encs, e.j);
+        if (a[r++] = h, k(ba(h), "stringtype")) {
           var b = i(a[--r], 0);
           a[r++] = b;
         }
         s(i(e.charvals, e.j), a[--r], e.i);
       }
     }
-    var h = /* @__PURE__ */ new Map([
+    var A = /* @__PURE__ */ new Map([
       [`\r
 `, e.p2],
       [". ", e.p3],
       [", ", e.p4],
       [": ", e.p5]
     ]);
-    e.pcomp = h, e.e = 1e6;
-    var x = t([0, 0, 0, 0, 0, 0]);
-    e.latlen = t([t([0, 5, 5, 10, 5, 10]), t([9, 0, 5, 10, 5, 10]), t([5, 5, 0, 5, 10, 10]), t([5, 10, 10, 0, 10, 15]), t([4, 9, 9, 14, 0, 14]), x]), e.latseq = t([t([t([]), t([e.ll]), t([e.lm]), t([e.lm, e.lp]), t([e.ld]), t([e.sb])]), t([t([e.ld, e.lu]), t([]), t([e.lm]), t([e.lm, e.lp]), t([e.ld]), t([e.sb])]), t([t([e.lu]), t([e.ll]), t([]), t([e.lp]), t([e.lu, e.ld]), t([e.sb])]), t([t([e.lu]), t([e.lu, e.ll]), t([e.lu, e.lm]), t([]), t([e.lu, e.ld]), t([e.lu, e.sb])]), t([t([e.lu]), t([e.lu, e.ll]), t([e.lu, e.lm]), t([e.lu, e.lm, e.lp]), t([]), t([e.lu, e.sb])]), t([t([e.lu]), t([e.ll]), t([e.lm]), t([]), t([]), t([])])]), e.shftlen = t([t([e.e, e.e, e.e, 5, e.e]), t([5, e.e, e.e, 5, e.e]), t([e.e, e.e, e.e, 5, e.e]), t([e.e, e.e, e.e, e.e, e.e]), t([4, e.e, e.e, 4, e.e])]);
+    e.pcomp = A, e.e = 1e6;
+    var w = t([0, 0, 0, 0, 0, 0]);
+    e.latlen = t([t([0, 5, 5, 10, 5, 10]), t([9, 0, 5, 10, 5, 10]), t([5, 5, 0, 5, 10, 10]), t([5, 10, 10, 0, 10, 15]), t([4, 9, 9, 14, 0, 14]), w]), e.latseq = t([t([t([]), t([e.ll]), t([e.lm]), t([e.lm, e.lp]), t([e.ld]), t([e.sb])]), t([t([e.ld, e.lu]), t([]), t([e.lm]), t([e.lm, e.lp]), t([e.ld]), t([e.sb])]), t([t([e.lu]), t([e.ll]), t([]), t([e.lp]), t([e.lu, e.ld]), t([e.sb])]), t([t([e.lu]), t([e.lu, e.ll]), t([e.lu, e.lm]), t([]), t([e.lu, e.ld]), t([e.lu, e.sb])]), t([t([e.lu]), t([e.lu, e.ll]), t([e.lu, e.lm]), t([e.lu, e.lm, e.lp]), t([]), t([e.lu, e.sb])]), t([t([e.lu]), t([e.ll]), t([e.lm]), t([]), t([]), t([])])]), e.shftlen = t([t([e.e, e.e, e.e, 5, e.e]), t([5, e.e, e.e, 5, e.e]), t([e.e, e.e, e.e, 5, e.e]), t([e.e, e.e, e.e, e.e, e.e]), t([4, e.e, e.e, 4, e.e])]);
     for (var m in e) e.hasOwnProperty(m) && (ja.$ctx[m] = e[m]);
     ja.__22611__ = 1, e = Object.getPrototypeOf(e);
   }
@@ -12984,8 +12970,8 @@ function ja() {
         else {
           var D = n(-a[--r] - 1e6);
           a[r++] = D, D == 0 && (r--, a[r++] = 1);
-          var A1 = a[--r];
-          a[r++] = (~~(Math.log(A1) / Math.log(10)) + 1) * 4 + 8;
+          var h1 = a[--r];
+          a[r++] = (~~(Math.log(h1) / Math.log(10)) + 1) * 4 + 8;
         }
       }
     }, e.curlen = t([0, e.e, e.e, e.e, e.e, e.e]), e.curseq = t([t([]), t([]), t([]), t([]), t([]), t([])]), e.backto = e.U, e.lastchar = "", L(e.msg, function() {
@@ -12995,9 +12981,9 @@ function ja() {
           e.x = i(t1, F);
           for (var c1 = t([e.U, e.L, e.M, e.P, e.D, e.B]), r1 = 0, D = c1.length; r1 < D; r1++)
             if (e.y = i(c1, r1), (e.x != e.B || e.y == e.backto) && (e.cost = n(i(e.curlen, e.x) + i(i(e.latlen, e.x), e.y)), e.cost < i(e.curlen, e.y))) {
-              s(e.curlen, e.y, e.cost), a[r++] = e.curseq, a[r++] = e.y, a[r++] = 1 / 0, w(i(e.curseq, e.x)), w(i(i(e.latseq, e.x), e.y));
-              var A1 = t(), p1 = a[--r];
-              if (s(a[--r], p1, A1), e.y == e.B) {
+              s(e.curlen, e.y, e.cost), a[r++] = e.curseq, a[r++] = e.y, a[r++] = 1 / 0, x(i(e.curseq, e.x)), x(i(i(e.latseq, e.x), e.y));
+              var h1 = t(), p1 = a[--r];
+              if (s(a[--r], p1, h1), e.y == e.B) {
                 a[r++] = "backto", e.x == e.P || e.x == e.D ? a[r++] = e.U : a[r++] = e.x;
                 var K = a[--r];
                 e[a[--r]] = K;
@@ -13022,7 +13008,7 @@ function ja() {
           a[r++] = "cost", a[r++] = i(e.curlen, e.x), a[r++] = e.x, a[r++] = e.char, e.charsize();
           var k1 = a[--r], B1 = a[--r];
           if (e[a[--r]] = n(B1 + k1), e.cost < i(e.nxtlen, e.x)) {
-            s(e.nxtlen, e.x, e.cost), a[r++] = e.nxtseq, a[r++] = e.x, a[r++] = 1 / 0, w(i(e.curseq, e.x)), a[r++] = e.char;
+            s(e.nxtlen, e.x, e.cost), a[r++] = e.nxtseq, a[r++] = e.x, a[r++] = 1 / 0, x(i(e.curseq, e.x)), a[r++] = e.char;
             var O1 = t(), U1 = a[--r];
             s(a[--r], U1, O1);
           }
@@ -13033,9 +13019,9 @@ function ja() {
               a[r++] = "cost", a[r++] = n(i(e.curlen, e.y) + i(i(e.shftlen, e.y), e.x)), a[r++] = e.x, a[r++] = e.char, e.charsize();
               var Y1 = a[--r], ne = a[--r];
               if (e[a[--r]] = n(ne + Y1), e.cost < i(e.nxtlen, e.y)) {
-                s(e.nxtlen, e.y, e.cost), a[r++] = e.nxtseq, a[r++] = e.y, a[r++] = 1 / 0, w(i(e.curseq, e.y));
-                var he = e.x == e.U ? e.su : e.sp;
-                a[r++] = he, a[r++] = e.char;
+                s(e.nxtlen, e.y, e.cost), a[r++] = e.nxtseq, a[r++] = e.y, a[r++] = 1 / 0, x(i(e.curseq, e.y));
+                var Ae = e.x == e.U ? e.su : e.sp;
+                a[r++] = Ae, a[r++] = e.char;
                 var re = t(), Me = a[--r];
                 s(a[--r], Me, re);
               }
@@ -13060,16 +13046,16 @@ function ja() {
               if (e.inP && e.lastidx >= 0)
                 if (s(e.nxtlen, e.i, i(e.curlen, e.i)), e.lastidx < e.curseqi.length - 1)
                   if (e.i == e.P) {
-                    e.lastld && s(e.nxtlen, e.i, n(i(e.nxtlen, e.i) + 1)), a[r++] = e.nxtseq, a[r++] = e.i, a[r++] = 1 / 0, w(e.curseqi), an(e.curseqi.length - e.lastidx, -1), r--, a[r++] = i(e.pcomp, e.pchars);
+                    e.lastld && s(e.nxtlen, e.i, n(i(e.nxtlen, e.i) + 1)), a[r++] = e.nxtseq, a[r++] = e.i, a[r++] = 1 / 0, x(e.curseqi), an(e.curseqi.length - e.lastidx, -1), r--, a[r++] = i(e.pcomp, e.pchars);
                     var We = t(), o2 = a[--r];
                     s(a[--r], o2, We);
                   } else {
-                    a[r++] = e.nxtseq, a[r++] = e.i, a[r++] = 1 / 0, w(e.curseqi);
+                    a[r++] = e.nxtseq, a[r++] = e.i, a[r++] = 1 / 0, x(e.curseqi);
                     var Ke = t(), c2 = a[--r];
                     s(a[--r], c2, Ke), s(i(e.nxtseq, e.i), e.lastidx, i(e.pcomp, e.pchars));
                   }
                 else {
-                  a[r++] = e.nxtseq, a[r++] = e.i, a[r++] = 1 / 0, w(e.curseqi), r--, a[r++] = i(e.pcomp, e.pchars);
+                  a[r++] = e.nxtseq, a[r++] = e.i, a[r++] = 1 / 0, x(e.curseqi), r--, a[r++] = i(e.pcomp, e.pchars);
                   var f2 = t(), u2 = a[--r];
                   s(a[--r], u2, f2);
                 }
@@ -13118,8 +13104,8 @@ function ja() {
           l(r1, 0, "00000"), a[r++] = c1, a[r++] = r1, a[r++] = r1, a[r++] = c1 + 1, a[r++] = 3, e.tobin();
           var D = a[--r];
           l(a[--r], 5, D);
-          var A1 = a[--r], p1 = a[--r], K = a[--r];
-          a[r++] = A1, a[r++] = K;
+          var h1 = a[--r], p1 = a[--r], K = a[--r];
+          a[r++] = h1, a[r++] = K;
           for (var f1 = p1; f1 >= 0; f1 -= 1) {
             var d1 = a[--r], s1 = a[--r];
             a[r++] = s1, a[r++] = ~~(d1 / 10), a[r++] = s1, a[r++] = f1 * 4 + 8, a[r++] = n(d1 % 10 + 2), a[r++] = 4, e.tobin();
@@ -13184,11 +13170,11 @@ function ja() {
       var Z = a[--r], c1 = Z * 2;
       if (a[r++] = Z, a[r++] = c1, c1 >= e.rsgf) {
         var r1 = a[--r];
-        a[r++] = Ar(r1, e.rspm);
+        a[r++] = hr(r1, e.rspm);
       }
     }
     e.rsalog = t(), e.rslog = t(e.rsgf);
-    for (var D = 1, A1 = n(e.rsgf - 1); D <= A1; D += 1)
+    for (var D = 1, h1 = n(e.rsgf - 1); D <= h1; D += 1)
       s(e.rslog, i(e.rsalog, D), D);
     e.rsprod = function() {
       var Ee = a[--r], R1 = a[--r];
@@ -13206,7 +13192,7 @@ function ja() {
       for (var s1 = e.i - 1; s1 >= 1; s1 -= 1) {
         e.j = s1, a[r++] = e.coeffs, a[r++] = e.j, a[r++] = i(e.coeffs, e.j - 1), a[r++] = i(e.coeffs, e.j), a[r++] = i(e.rsalog, e.i), e.rsprod();
         var w1 = a[--r], k1 = a[--r], B1 = a[--r];
-        s(a[--r], B1, Ar(k1, w1));
+        s(a[--r], B1, hr(k1, w1));
       }
       a[r++] = e.coeffs, a[r++] = 0, a[r++] = i(e.coeffs, 0), a[r++] = i(e.rsalog, e.i), e.rsprod();
       var O1 = a[--r], U1 = a[--r];
@@ -13217,11 +13203,11 @@ function ja() {
       a[r++] = 0;
     a[r++] = 0, e.rscws = t();
     for (var T1 = 0, Y1 = e.nd - 1; T1 <= Y1; T1 += 1) {
-      e.k = Ar(i(e.rscws, T1), i(e.rscws, e.nd));
-      for (var ne = 0, he = n(e.rsnc - 1); ne <= he; ne += 1) {
+      e.k = hr(i(e.rscws, T1), i(e.rscws, e.nd));
+      for (var ne = 0, Ae = n(e.rsnc - 1); ne <= Ae; ne += 1) {
         e.j = ne, a[r++] = e.rscws, a[r++] = e.nd + e.j, a[r++] = i(e.rscws, e.nd + e.j + 1), a[r++] = e.k, a[r++] = i(e.coeffs, n(n(e.rsnc - e.j) - 1)), e.rsprod();
         var re = a[--r], Me = a[--r], z1 = a[--r];
-        s(a[--r], z1, Ar(Me, re));
+        s(a[--r], z1, hr(Me, re));
       }
     }
     a[r++] = o(e.rscws, 0, e.rscws.length - 1);
@@ -13248,8 +13234,8 @@ function ja() {
     l(e.modebits, a1, "0");
   for (var l1 = 0, _ = e.mode.length - 1; l1 <= _; l1 += 1) {
     e.i = l1;
-    var h1 = Oe(C(4), i(e.mode, e.i), 2);
-    l(e.modebits, 4 - h1.length + 4 * e.i, h1);
+    var A1 = Oe(C(4), i(e.mode, e.i), 2);
+    l(e.modebits, 4 - A1.length + 4 * e.i, A1);
   }
   if (!ja.__23086__) {
     e = Object.create(e), e.rsparams = t([t([]), t([]), t([]), t([]), t([]), t([]), t([64, 67]), t([]), t([256, 301]), t([]), t([1024, 1033]), t([]), t([4096, 4201])]);
@@ -13310,8 +13296,8 @@ function ja() {
   e.fw = ~~(e.fw / 2);
   for (var ue = -e.fw, De = e.fw; ue <= De; ue += 1) {
     e.i = ue;
-    for (var Ae = -e.fw, Fe = e.fw; Ae <= Fe; Ae += 1) {
-      e.j = Ae, a[r++] = e.pixs, a[r++] = e.i, a[r++] = e.j, e.cmv(), Math.abs(e.i) > Math.abs(e.j) ? a[r++] = Math.abs(e.i) : a[r++] = Math.abs(e.j);
+    for (var he = -e.fw, Fe = e.fw; he <= Fe; he += 1) {
+      e.j = he, a[r++] = e.pixs, a[r++] = e.i, a[r++] = e.j, e.cmv(), Math.abs(e.i) > Math.abs(e.j) ? a[r++] = Math.abs(e.i) : a[r++] = Math.abs(e.j);
       var ce = a[--r], Ye = a[--r];
       s(a[--r], Ye, n(ce + 1) % 2);
     }
@@ -13371,14 +13357,14 @@ function Pt() {
       a[r++] = y, a[r++] = y + 1;
     a[r++] = e.pad, a[r++] = 129;
     for (var g = 0; g <= 99; g += 1) {
-      var A = Oe(C(2), g, 10), b = H2(C(2), "00");
-      l(b, 2 - A.length, A), a[r++] = b, a[r++] = g + 130;
+      var h = Oe(C(2), g, 10), b = H2(C(2), "00");
+      l(b, 2 - h.length, h), a[r++] = b, a[r++] = g + 130;
     }
-    var h = t([e.lC, e.lB, e.fnc1, e.fnc2, e.fnc3, e.fnc4, e.fnc1lD]);
+    var A = t([e.lC, e.lB, e.fnc1, e.fnc2, e.fnc3, e.fnc4, e.fnc1lD]);
     a[r++] = 229;
-    for (var x = 0, m = h.length; x < m; x++) {
+    for (var w = 0, m = A.length; w < m; w++) {
       var B = n(a[--r] + 1);
-      a[r++] = i(h, x), a[r++] = B, a[r++] = B;
+      a[r++] = i(A, w), a[r++] = B, a[r++] = B;
     }
     r--, a[r++] = e.lX, a[r++] = 238, a[r++] = e.lT, a[r++] = 239, e.Avals = C1(), a[r++] = 1 / 0;
     for (var I = e.Avals, M = I.size, R = I.keys(), Q = 0; Q < M; Q++) {
@@ -13413,8 +13399,8 @@ function Pt() {
       a[r++] = i1, a[r++] = V.get(i1), a[r++] = 1 / 0;
       var l1 = a[--r], _ = a[--r];
       a[r++] = l1, a[r++] = _;
-      var h1 = t();
-      a[r++] = h1;
+      var A1 = t();
+      a[r++] = A1;
     }
     for (var g1 = e.C1vals, u1 = g1.size, x1 = g1.keys(), Q1 = 0; Q1 < u1; Q1++) {
       var I1 = x1.next().value;
@@ -13449,8 +13435,8 @@ function Pt() {
     for (var De = 0; De <= 31; De += 1)
       a[r++] = De, a[r++] = De;
     e.T1vals = C1(), a[r++] = 1 / 0;
-    for (var Ae = 33; Ae <= 47; Ae += 1)
-      a[r++] = Ae, a[r++] = Ae - 33;
+    for (var he = 33; he <= 47; he += 1)
+      a[r++] = he, a[r++] = he - 33;
     for (var Fe = 58; Fe <= 64; Fe += 1)
       a[r++] = Fe, a[r++] = Fe - 43;
     for (var ce = 91; ce <= 95; ce += 1)
@@ -13477,8 +13463,8 @@ function Pt() {
       var c1 = t();
       a[r++] = c1;
     }
-    for (var r1 = e.T2vals, D = r1.size, A1 = r1.keys(), p1 = 0; p1 < D; p1++) {
-      var K = A1.next().value;
+    for (var r1 = e.T2vals, D = r1.size, h1 = r1.keys(), p1 = 0; p1 < D; p1++) {
+      var K = h1.next().value;
       a[r++] = K, a[r++] = r1.get(K), a[r++] = 1 / 0;
       var f1 = a[--r], d1 = a[--r];
       a[r++] = f1, a[r++] = i(e.TNvals, e.sft2), a[r++] = d1;
@@ -13495,11 +13481,11 @@ function Pt() {
     }
     e.Tvals = C1();
     for (var Y1 = 128; Y1 <= 255; Y1 += 1) {
-      e.i = Y1, a[r++] = e.Avals, a[r++] = e.i, a[r++] = 1 / 0, w(i(e.Avals, e.fnc4)), w(i(e.Avals, e.i - 128));
-      var ne = t(), he = a[--r];
-      s(a[--r], he, ne), a[r++] = e.Cvals, a[r++] = e.i, a[r++] = 1 / 0, w(i(e.Cvals, e.fnc4)), w(i(e.Cvals, e.i - 128));
+      e.i = Y1, a[r++] = e.Avals, a[r++] = e.i, a[r++] = 1 / 0, x(i(e.Avals, e.fnc4)), x(i(e.Avals, e.i - 128));
+      var ne = t(), Ae = a[--r];
+      s(a[--r], Ae, ne), a[r++] = e.Cvals, a[r++] = e.i, a[r++] = 1 / 0, x(i(e.Cvals, e.fnc4)), x(i(e.Cvals, e.i - 128));
       var re = t(), Me = a[--r];
-      s(a[--r], Me, re), a[r++] = e.Tvals, a[r++] = e.i, a[r++] = 1 / 0, w(i(e.Tvals, e.fnc4)), w(i(e.Tvals, e.i - 128));
+      s(a[--r], Me, re), a[r++] = e.Tvals, a[r++] = e.i, a[r++] = 1 / 0, x(i(e.Tvals, e.fnc4)), x(i(e.Tvals, e.i - 128));
       var z1 = t(), Ee = a[--r];
       s(a[--r], Ee, z1);
     }
@@ -13574,11 +13560,11 @@ function Pt() {
       a[r++] = oe, a[r++] = e.v, e.bigadd(), e.v = a[--r];
     }
     a[r++] = "v", a[r++] = e.v, a[r++] = 2, e.normalize();
-    var A2 = a[--r];
-    e[a[--r]] = A2, a[r++] = 1 / 0;
+    var h2 = a[--r];
+    e[a[--r]] = h2, a[r++] = 1 / 0;
     for (var Ze = 0, E2 = (5 - e.v.length % 5) % 5; Ze < E2; Ze++)
       a[r++] = 0;
-    w(e.v), e.v = t(), e.cws = t(~~(e.v.length / 5));
+    x(e.v), e.v = t(), e.cws = t(~~(e.v.length / 5));
     for (var Ue = 0, z2 = e.cws.length - 1; Ue <= z2; Ue += 1) {
       e.i = Ue;
       var _e = o(e.v, e.i * 5, 5);
@@ -13605,8 +13591,8 @@ function Pt() {
     a[r++] = "numecis", a[r++] = 0;
     for (var vr = 0, x2 = t2.length; vr < x2; vr++)
       if (i(t2, vr) <= -1e6) {
-        var hr = a[--r];
-        a[r++] = n(hr + 1);
+        var Ar = a[--r];
+        a[r++] = n(Ar + 1);
       }
     var U2 = a[--r];
     if (e[a[--r]] = U2, e.numecis > 0) {
@@ -13626,7 +13612,7 @@ function Pt() {
     }
     e.metrics = e.nonstypemetrics, e.fullcws = t([]);
     for (var mr = e.metrics, i2 = 0, or = mr.length; i2 < or; i2++)
-      e.m = i(mr, i2), e.vers = i(e.m, 0), e.dcws = i(e.m, 4), e.okay = !0, k(e.version, "unset") ? e.vers.length != 1 && (e.okay = !1) : v1(e.version, e.vers) && (e.okay = !1), e.okay && (a[r++] = 1 / 0, w(e.fullcws), a[r++] = e.dcws, e.fullcws = t());
+      e.m = i(mr, i2), e.vers = i(e.m, 0), e.dcws = i(e.m, 4), e.okay = !0, k(e.version, "unset") ? e.vers.length != 1 && (e.okay = !1) : v1(e.version, e.vers) && (e.okay = !1), e.okay && (a[r++] = 1 / 0, x(e.fullcws), a[r++] = e.dcws, e.fullcws = t());
     a[r++] = 1 / 0;
     for (var jr = 0, Hr = 1480; jr < Hr; jr++)
       a[r++] = 1e4;
@@ -13651,8 +13637,8 @@ function Pt() {
       aa ? s(e.nextNonX, e.i, n(i(e.nextNonX, e.i + 1) + 1)) : s(e.nextNonX, e.i, 0);
     }
     a[r++] = 1 / 0;
-    for (var Aa = e.nextXterm, ha = 0, ma = Aa.length; ha < ma; ha++) {
-      var pr = i(Aa, ha);
+    for (var ha = e.nextXterm, Aa = 0, ma = ha.length; Aa < ma; Aa++) {
+      var pr = i(ha, Aa);
       a[r++] = pr, pr > 1e4 && (r--, a[r++] = 1e4);
     }
     e.nextXterm = t(), a[r++] = 1 / 0;
@@ -13789,21 +13775,21 @@ function Pt() {
               a[r++] = e.B;
               break;
             }
-            var Ai = t([e.cc, e.tc, e.xc, e.bc]);
+            var hi = t([e.cc, e.tc, e.xc, e.bc]);
             a[r++] = !0;
-            for (var qt = 0, Bi = Ai.length; qt < Bi; qt++) {
+            for (var qt = 0, Bi = hi.length; qt < Bi; qt++) {
               var Ua = a[--r];
-              a[r++] = Ua && e.ac + 1 <= Math.ceil(i(Ai, qt));
+              a[r++] = Ua && e.ac + 1 <= Math.ceil(i(hi, qt));
             }
             if (a[--r]) {
               a[r++] = e.A;
               break;
             }
-            var hi = t([e.ac, e.cc, e.xc, e.bc]);
+            var Ai = t([e.ac, e.cc, e.xc, e.bc]);
             a[r++] = !0;
-            for (var ii = 0, Mi = hi.length; ii < Mi; ii++) {
+            for (var ii = 0, Mi = Ai.length; ii < Mi; ii++) {
               var Ei = a[--r];
-              a[r++] = Ei && Math.ceil(e.tc) + 1 <= Math.ceil(i(hi, ii));
+              a[r++] = Ei && Math.ceil(e.tc) + 1 <= Math.ceil(i(Ai, ii));
             }
             if (a[--r]) {
               a[r++] = e.T;
@@ -13950,16 +13936,16 @@ function Pt() {
             e.remcws = i(e.numremcws, e.j + ~~(e.p / 3) * 2), a[r++] = 1 / 0;
             for (var T2 = o(e.msg, e.i, e.msglen - e.i), V2 = 0, lr = T2.length; V2 < lr; V2++) {
               var Br = i(T2, V2), ra = i(i(e.encvals, e.mode), Br) !== void 0;
-              a[r++] = Br, ra ? w(i(i(e.encvals, e.mode), a[--r])) : (r--, a[r++] = -1, a[r++] = -1, a[r++] = -1, a[r++] = -1);
+              a[r++] = Br, ra ? x(i(i(e.encvals, e.mode), a[--r])) : (r--, a[r++] = -1, a[r++] = -1, a[r++] = -1, a[r++] = -1);
             }
             if (e.remvals = t(), e.remcws == 2 && e.remvals.length == 3) {
-              a[r++] = 1 / 0, w(o(e.ctxvals, 0, e.p)), w(e.remvals);
+              a[r++] = 1 / 0, x(o(e.ctxvals, 0, e.p)), x(e.remvals);
               var xa = t();
               a[r++] = xa, e.CTXvalstocws(), e.addtocws(), e.mode = e.A, e.i = e.msglen;
               break;
             }
             if (e.remcws == 2 && e.remvals.length == 2 && e.mode != e.X) {
-              a[r++] = 1 / 0, w(o(e.ctxvals, 0, e.p)), w(e.remvals), w(i(i(e.encvals, e.mode), e.sft1));
+              a[r++] = 1 / 0, x(o(e.ctxvals, 0, e.p)), x(e.remvals), x(i(i(e.encvals, e.mode), e.sft1));
               var va = t();
               a[r++] = va, e.CTXvalstocws(), e.addtocws(), e.mode = e.A, e.i = e.msglen;
               break;
@@ -13980,7 +13966,7 @@ function Pt() {
       if (e.mode != e.A) {
         for (; e.p % 3 != 0; )
           e.i = e.i - 1, e.p = e.p - i(i(e.encvals, e.mode), i(e.msg, e.i)).length;
-        a[r++] = 1 / 0, w(o(e.ctxvals, 0, e.p));
+        a[r++] = 1 / 0, x(o(e.ctxvals, 0, e.p));
         var ot = t();
         if (a[r++] = ot, e.CTXvalstocws(), e.addtocws(), a[r++] = t([e.unlcw]), e.addtocws(), e.mode = e.A, e.i != e.msglen)
           if (i(e.numD, e.i) >= 2) {
@@ -13993,15 +13979,15 @@ function Pt() {
       for (; ; ) {
         if (i(e.numD, e.i) < 3) {
           if (e.Drem = (8 - e.Dbits.length % 8) % 8, e.remcws = i(e.numremcws, e.j + ~~(e.Dbits.length / 8)), (n(i(e.numremcws, e.j + ~~(e.Dbits.length / 8) - 1) - 1) == 0 && e.Drem == 0 || e.remcws == 1 && e.Drem != 0) && e.i == e.msglen) {
-            (e.Drem == 4 || e.Drem == 6) && (a[r++] = 1 / 0, w(e.Dbits), a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, e.Dbits = t()), (e.Drem == 2 || e.Drem == 6) && (a[r++] = 1 / 0, w(e.Dbits), a[r++] = 0, a[r++] = 1, e.Dbits = t());
+            (e.Drem == 4 || e.Drem == 6) && (a[r++] = 1 / 0, x(e.Dbits), a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, e.Dbits = t()), (e.Drem == 2 || e.Drem == 6) && (a[r++] = 1 / 0, x(e.Dbits), a[r++] = 0, a[r++] = 1, e.Dbits = t());
             break;
           }
           if ((e.i == e.msglen - 1 && i(e.numD, e.i) == 1 || e.i == e.msglen - 2 && i(e.numD, e.i) == 2) && e.remcws == 1 && e.Drem == 0)
             break;
-          e.i == e.msglen - 1 && i(e.numD, e.i) == 1 && e.remcws == 1 && (e.Drem == 4 || e.Drem == 6) || (a[r++] = 1 / 0, w(e.Dbits), a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, e.Dbits = t(), e.Drem = (8 - e.Dbits.length % 8) % 8), (e.Drem == 4 || e.Drem == 6) && (i(e.numD, e.i) >= 1 ? (a[r++] = 1 / 0, w(e.Dbits), a[r++] = n(n(i(e.msg, e.i) - 48) + 1), a[r++] = 4, e.tobin(), w(a[--r]), e.Dbits = t(), e.i = e.i + 1) : (a[r++] = 1 / 0, w(e.Dbits), a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, e.Dbits = t()), e.Drem = e.Drem - 4), e.Drem == 2 && (a[r++] = 1 / 0, w(e.Dbits), a[r++] = 0, a[r++] = 1, e.Dbits = t(), e.Drem = 0);
+          e.i == e.msglen - 1 && i(e.numD, e.i) == 1 && e.remcws == 1 && (e.Drem == 4 || e.Drem == 6) || (a[r++] = 1 / 0, x(e.Dbits), a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, e.Dbits = t(), e.Drem = (8 - e.Dbits.length % 8) % 8), (e.Drem == 4 || e.Drem == 6) && (i(e.numD, e.i) >= 1 ? (a[r++] = 1 / 0, x(e.Dbits), a[r++] = n(n(i(e.msg, e.i) - 48) + 1), a[r++] = 4, e.tobin(), x(a[--r]), e.Dbits = t(), e.i = e.i + 1) : (a[r++] = 1 / 0, x(e.Dbits), a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, e.Dbits = t()), e.Drem = e.Drem - 4), e.Drem == 2 && (a[r++] = 1 / 0, x(e.Dbits), a[r++] = 0, a[r++] = 1, e.Dbits = t(), e.Drem = 0);
           break;
         }
-        a[r++] = 1 / 0, w(e.Dbits);
+        a[r++] = 1 / 0, x(e.Dbits);
         var m1 = o(e.msg, e.i, 3);
         a[r++] = 0;
         for (var X1 = 0, ze = m1.length; X1 < ze; X1++) {
@@ -14009,7 +13995,7 @@ function Pt() {
           a[r++] = n(Ge + n(i(m1, X1) - 48)) * 10;
         }
         var T2 = a[--r];
-        a[r++] = ~~(T2 / 10) + 1, a[r++] = 10, e.tobin(), w(a[--r]), e.Dbits = t(), e.i = e.i + 3;
+        a[r++] = ~~(T2 / 10) + 1, a[r++] = 10, e.tobin(), x(a[--r]), e.Dbits = t(), e.i = e.i + 3;
       }
       a[r++] = 1 / 0;
       for (var V2 = 0, lr = e.Dbits.length - 1; V2 <= lr; V2 += 8) {
@@ -14028,7 +14014,7 @@ function Pt() {
     }, e.encB = function() {
       for (e.p = 0, e.bvals = t(1480); !(e.i == e.msglen || i(e.msg, e.i) < 0 || (e.lookup(), a[--r] != e.mode)); )
         s(e.bvals, e.p, i(e.msg, e.i)), e.p = e.p + 1, e.i = e.i + 1;
-      e.remcws = n(i(e.numremcws, e.j + e.p) - 1), a[r++] = 1 / 0, e.remcws == 0 && e.i == e.msglen ? a[r++] = 0 : e.p < 250 ? a[r++] = e.p : (a[r++] = ~~(e.p / 250) + 249, a[r++] = e.p % 250), w(o(e.bvals, 0, e.p)), e.bvals = t(), a[r++] = e.bvals, e.addtocws(), e.mode = e.A;
+      e.remcws = n(i(e.numremcws, e.j + e.p) - 1), a[r++] = 1 / 0, e.remcws == 0 && e.i == e.msglen ? a[r++] = 0 : e.p < 250 ? a[r++] = e.p : (a[r++] = ~~(e.p / 250) + 249, a[r++] = e.p % 250), x(o(e.bvals, 0, e.p)), e.bvals = t(), a[r++] = e.bvals, e.addtocws(), e.mode = e.A;
     }, e.cws = t(1480), e.mode = e.A, e.i = 0, e.j = 0; !(e.i >= e.msglen || e[i(t(["encA", "encCTX", "encCTX", "encCTX", "encD", "encB"]), e.mode)]() === !0); )
       ;
     e.cws = o(e.cws, 0, e.j);
@@ -14039,9 +14025,9 @@ function Pt() {
     a[r++] = 1 / 0;
     for (var gr = 0, _r = n(e.dcws - e.cws.length); gr < _r; gr++)
       a[r++] = 0;
-    w(e.cws), e.cws = t();
+    x(e.cws), e.cws = t();
   } else {
-    a[r++] = 1 / 0, w(e.cws);
+    a[r++] = 1 / 0, x(e.cws);
     for (var J2 = 0, $r = n(e.dcws - e.cws.length); J2 < $r; J2++)
       a[r++] = 129;
     e.cws = t();
@@ -14084,7 +14070,7 @@ function Pt() {
     for (var n2 = e.i; n2 >= 1; n2 -= 1) {
       e.j = n2, a[r++] = e.coeffs, a[r++] = e.j, a[r++] = i(e.coeffs, e.j - 1), a[r++] = i(e.coeffs, e.j), a[r++] = i(e.rsalog, e.i), e.rsprod();
       var _2 = a[--r], P2 = a[--r], L2 = a[--r];
-      s(a[--r], L2, Ar(P2, _2));
+      s(a[--r], L2, hr(P2, _2));
     }
     a[r++] = e.coeffs, a[r++] = 0, a[r++] = i(e.coeffs, 0), a[r++] = i(e.rsalog, e.i), e.rsprod();
     var k2 = a[--r], j2 = a[--r];
@@ -14092,8 +14078,8 @@ function Pt() {
   }
   e.coeffs = o(e.coeffs, 0, e.coeffs.length - 1);
   for (var X2 = 0, W2 = e.cwbs.length - 1; X2 <= W2; X2 += 1) {
-    e.i = X2, a[r++] = 1 / 0, w(i(e.cwbs, e.i));
-    for (var h2 = 0, q2 = e.ecpb; h2 < q2; h2++)
+    e.i = X2, a[r++] = 1 / 0, x(i(e.cwbs, e.i));
+    for (var A2 = 0, q2 = e.ecpb; A2 < q2; A2++)
       a[r++] = 0;
     e.rscws = t();
     for (var g2 = 0, C2 = e.dcpb - 1; g2 <= C2; g2 += 1) {
@@ -14101,12 +14087,12 @@ function Pt() {
       for (var er = 0, dr = e.ecpb - 1; er <= dr; er += 1) {
         e.j = er, a[r++] = e.rscws, a[r++] = e.m + e.j + 1, a[r++] = i(e.coeffs, e.ecpb - e.j - 1), a[r++] = e.k, e.rsprod();
         var fr = a[--r], qr = a[--r];
-        s(a[--r], qr, Ar(fr, i(e.rscws, e.m + e.j + 1)));
+        s(a[--r], qr, hr(fr, i(e.rscws, e.m + e.j + 1)));
       }
     }
     s(e.ecbs, e.i, o(e.rscws, e.dcpb, e.ecpb));
   }
-  a[r++] = 1 / 0, w(e.cws);
+  a[r++] = 1 / 0, x(e.cws);
   for (var Fr = 0, Vr = e.rscw; Fr < Vr; Fr++)
     a[r++] = 0;
   e.cws = t();
@@ -14123,13 +14109,13 @@ function Pt() {
         var m1 = a[--r];
         a[r++] = n(m1 - 48);
       }), e.c1 = t();
-      var Nr = H2(C(5), "00000"), At = Oe(C(5), i(e.cws, e.i + 1), 2);
-      l(Nr, 5 - At.length, At), a[r++] = Nr, a[r++] = 1 / 0;
+      var Nr = H2(C(5), "00000"), ht = Oe(C(5), i(e.cws, e.i + 1), 2);
+      l(Nr, 5 - ht.length, ht), a[r++] = Nr, a[r++] = 1 / 0;
       var La = a[--r], Ka = a[--r];
       a[r++] = La, L(Ka, function() {
         var m1 = a[--r];
         a[r++] = n(m1 - 48);
-      }), e.c2 = t(), a[r++] = 1 / 0, w(o(e.c1, 0, 3)), w(o(e.c2, 0, 2)), e.top = t(), a[r++] = 1 / 0, w(o(e.c1, 3, 2)), w(o(e.c2, 2, 3)), e.bot = t();
+      }), e.c2 = t(), a[r++] = 1 / 0, x(o(e.c1, 0, 3)), x(o(e.c2, 0, 2)), e.top = t(), a[r++] = 1 / 0, x(o(e.c1, 3, 2)), x(o(e.c2, 2, 3)), e.bot = t();
     } else {
       var la = H2(C(8), "00000000"), Pe = Oe(C(8), i(e.cws, e.i), 2);
       l(la, 8 - Pe.length, Pe), a[r++] = la, a[r++] = 1 / 0;
@@ -14211,8 +14197,8 @@ function Pt() {
     if (i(e.artifact, n(a[--r] - 49))() === !0)
       return !0;
   });
-  var ht = t(), nt = a[--r];
-  l(a[--r], nt, ht);
+  var At = t(), nt = a[--r];
+  l(a[--r], nt, At);
   for (var Ra = 0, mt = n(e.risl - 1); Ra <= mt; Ra += 1) {
     e.i = Ra;
     for (var Na = e.riso, yt = e.risi, gt = n(e.cols - 1); yt < 0 ? Na >= gt : Na <= gt; Na += yt) {
@@ -14252,7 +14238,7 @@ function Pt() {
   }
   L(i(e.blackdotmap, e.vers), function() {
     var m1 = a[--r];
-    a[r++] = e.pixs, w(m1), e.mmv();
+    a[r++] = e.pixs, x(m1), e.mmv();
     var X1 = a[--r];
     s(a[--r], X1, 1);
   }), e.j = 0;
@@ -14273,8 +14259,8 @@ function xi() {
         var g = i(v, d);
         (g < 48 || g > 57) && (r--, a[r++] = !1);
       }
-      var A = a[--r];
-      if (a[r++] = A, A) {
+      var h = a[--r];
+      if (a[r++] = h, h) {
         r--;
         var b = b1(e.version);
         a[r++] = b >= 1 && b <= 84;
@@ -14282,11 +14268,11 @@ function xi() {
     }
     ke(a[--r]) && (a[r++] = "bwipp.hanxinInvalidVersion#24318", a[r++] = "Valid versions are 1 to 84", u());
   }
-  var h = e.eclevel.length == 2;
-  if (a[r++] = h, h && (r--, a[r++] = o(e.eclevel, 0, 1), k("L", "L"))) {
+  var A = e.eclevel.length == 2;
+  if (a[r++] = A, A && (r--, a[r++] = o(e.eclevel, 0, 1), k("L", "L"))) {
     r--;
-    var x = i(e.eclevel, 1) - 48;
-    a[r++] = x >= 1 && x <= 4;
+    var w = i(e.eclevel, 1) - 48;
+    a[r++] = w >= 1 && w <= 4;
   }
   ke(a[--r]) && (a[r++] = "bwipp.hanxinInvalidErrorCorrectionLevel#24328", a[r++] = "Valid error correction levels are L1 to L4", u()), e.mask != -1 && (e.mask < 1 || e.mask > 4) && (a[r++] = "bwipp.hanxinInvalidErrorCorrectionLevel#24333", a[r++] = "The valid masks are 1 to 4", u()), Ne(xi);
   var m = /* @__PURE__ */ new Map([
@@ -14348,11 +14334,11 @@ function xi() {
       var Se = a[--r], He = Se * 2;
       if (a[r++] = Se, a[r++] = He, He >= e.rsgf) {
         var p2 = a[--r];
-        a[r++] = Ar(p2, e.rspm);
+        a[r++] = hr(p2, e.rspm);
       }
     }
     e.rsalog = t(), e.rslog = t(e.rsgf);
-    for (var oe = 1, A2 = n(e.rsgf - 1); oe <= A2; oe += 1)
+    for (var oe = 1, h2 = n(e.rsgf - 1); oe <= h2; oe += 1)
       s(e.rslog, i(e.rsalog, oe), oe);
     e.rsprod = function() {
       var Yr = a[--r], nr = a[--r];
@@ -14370,7 +14356,7 @@ function xi() {
       for (var _e = e.i - 1; _e >= 1; _e -= 1) {
         e.j = _e, a[r++] = e.coeffs, a[r++] = e.j, a[r++] = i(e.coeffs, e.j - 1), a[r++] = i(e.coeffs, e.j), a[r++] = i(e.rsalog, e.i), e.rsprod();
         var S2 = a[--r], v2 = a[--r], ir = a[--r];
-        s(a[--r], ir, Ar(v2, S2));
+        s(a[--r], ir, hr(v2, S2));
       }
       a[r++] = e.coeffs, a[r++] = 0, a[r++] = i(e.coeffs, 0), a[r++] = i(e.rsalog, e.i), e.rsprod();
       var e2 = a[--r], K2 = a[--r];
@@ -14380,17 +14366,17 @@ function xi() {
     for (var t2 = 0, vr = e.rsnc; t2 < vr; t2++)
       a[r++] = 0;
     a[r++] = 0, e.rscws = t();
-    for (var x2 = 0, hr = e.nd - 1; x2 <= hr; x2 += 1) {
-      e.k = Ar(i(e.rscws, x2), i(e.rscws, e.nd));
+    for (var x2 = 0, Ar = e.nd - 1; x2 <= Ar; x2 += 1) {
+      e.k = hr(i(e.rscws, x2), i(e.rscws, e.nd));
       for (var U2 = 0, Mr = n(e.rsnc - 1); U2 <= Mr; U2 += 1) {
         e.j = U2, a[r++] = e.rscws, a[r++] = e.nd + e.j, a[r++] = i(e.rscws, e.nd + e.j + 1), a[r++] = e.k, a[r++] = i(e.coeffs, n(n(e.rsnc - e.j) - 1)), e.rsprod();
         var ar = a[--r], Er = a[--r], $2 = a[--r];
-        s(a[--r], $2, Ar(Er, ar));
+        s(a[--r], $2, hr(Er, ar));
       }
     }
     a[r++] = o(e.rscws, 0, e.rscws.length - 1);
   }, e.dcwsb = t(n(n(e.e1nb + e.e2nb) + e.e3nb)), e.ecwsb = t(e.dcwsb.length), e.in = 0, e.out = 0;
-  for (var h1 = 0, g1 = e.e1nb; h1 < g1; h1++) {
+  for (var A1 = 0, g1 = e.e1nb; A1 < g1; A1++) {
     a[r++] = o(e.cws, e.in, e.e1dcws), a[r++] = e.e1ecws, a[r++] = 256, a[r++] = 355, e.rscodes();
     var u1 = a[--r];
     s(e.dcwsb, e.out, o(u1, 0, e.e1dcws)), s(e.ecwsb, e.out, o(u1, e.e1dcws, e.e1ecws)), e.in = n(e.in + e.e1dcws), e.out = e.out + 1;
@@ -14452,8 +14438,8 @@ function xi() {
         }
       n(e.i + e.alnr) == e.size ? e.i = n(n(e.i + e.alnr) - 1) : e.i = n(e.i + e.alnk), e.stag = 1 - e.stag;
     }
-    for (var Ae = e.alnk, Fe = e.alnk, ce = n(e.size - 2); Fe < 0 ? Ae >= ce : Ae <= ce; Ae += Fe) {
-      if (e.i = Ae, ~~(e.i / e.alnk) % 2 != 0) {
+    for (var he = e.alnk, Fe = e.alnk, ce = n(e.size - 2); Fe < 0 ? he >= ce : he <= ce; he += Fe) {
+      if (e.i = he, ~~(e.i / e.alnk) % 2 != 0) {
         a[r++] = e.pixs, a[r++] = 0, a[r++] = e.i - 1, e.trmv();
         var Ye = a[--r];
         s(a[--r], Ye, 0), a[r++] = e.pixs, a[r++] = 0, a[r++] = e.i + 1, e.trmv();
@@ -14498,8 +14484,8 @@ function xi() {
         s(a[--r], r1, 0), a[r++] = e.pixs, a[r++] = e.i + 1, a[r++] = n(e.size - 2), e.trmv();
         var D = a[--r];
         s(a[--r], D, 0), a[r++] = e.pixs, a[r++] = e.i + 1, a[r++] = n(e.size - 1), e.trmv();
-        var A1 = a[--r];
-        s(a[--r], A1, 0);
+        var h1 = a[--r];
+        s(a[--r], h1, 0);
       }
     }
   }
@@ -14542,7 +14528,7 @@ function xi() {
   e.maskfuncs = L1, e.mask != -1 && (e.maskfuncs = t([i(e.maskfuncs, e.mask - 1)]), e.bestmaskval = e.mask - 1), e.masks = t(e.maskfuncs.length);
   for (var T1 = 0, Y1 = e.masks.length - 1; T1 <= Y1; T1 += 1) {
     e.m = T1, e.mask = t(e.size * e.size);
-    for (var ne = 0, he = n(e.size - 1); ne <= he; ne += 1) {
+    for (var ne = 0, Ae = n(e.size - 1); ne <= Ae; ne += 1) {
       e.j = ne;
       for (var re = 0, Me = n(e.size - 1); re <= Me && (e.i = re, a[r++] = e.i + 1, a[r++] = e.j + 1, i(e.maskfuncs, e.m)() !== !0); re += 1) {
         var z1 = a[--r];
@@ -14570,7 +14556,7 @@ function xi() {
     e.scrle = a[--r], a[r++] = "scr1", a[r++] = 0, L(e.scrle, function() {
       var x2 = a[--r];
       if (a[r++] = x2, x2 >= 3) {
-        var hr = a[--r], U2 = n(a[--r] + hr * 4);
+        var Ar = a[--r], U2 = n(a[--r] + Ar * 4);
         a[r++] = U2, a[r++] = U2;
       }
       r--;
@@ -14582,8 +14568,8 @@ function xi() {
         e.fact = ~~(i(e.scrle, e.j) / 3);
         for (var He = o(e.scrle, e.j - 4, 4), p2 = 0, oe = He.length; p2 < oe; p2++)
           a[r++] = i(He, p2) == e.fact;
-        var A2 = a[--r], Ze = a[--r], E2 = a[--r], Ue = a[--r];
-        Ue && E2 && Ze && A2 && (e.j == 5 || e.j + 2 >= e.scrle.length || i(e.scrle, e.j - 5) >= 3 || i(e.scrle, e.j + 1) >= 3) && (e.scr3 = e.scr3 + 50);
+        var h2 = a[--r], Ze = a[--r], E2 = a[--r], Ue = a[--r];
+        Ue && E2 && Ze && h2 && (e.j == 5 || e.j + 2 >= e.scrle.length || i(e.scrle, e.j - 5) >= 3 || i(e.scrle, e.j + 1) >= 3) && (e.scr3 = e.scr3 + 50);
       }
     for (var z2 = 1, _e = e.scrle.length - 5; z2 <= _e; z2 += 2)
       if (e.j = z2, i(e.scrle, e.j) % 3 == 0) {
@@ -14601,8 +14587,8 @@ function xi() {
       var Se = e.size;
       a[r++] = 0, a[r++] = 0;
       for (var He = e.i, p2 = Se, oe = n(Se * Se - 1); p2 < 0 ? He >= oe : He <= oe; He += p2) {
-        var A2 = i(e.sym, He), Ze = a[--r];
-        if (a[r++] = A2, k(Ze, A2)) {
+        var h2 = i(e.sym, He), Ze = a[--r];
+        if (a[r++] = h2, k(Ze, h2)) {
           var E2 = a[--r], Ue = a[--r];
           a[r++] = n(Ue + 1), a[r++] = E2;
         } else {
@@ -14626,15 +14612,15 @@ function xi() {
         }
       }
       r--;
-      var hr = rr() + 2;
-      Re(o(e.rle, 0, hr - 2)), e.evalfulln1n3(), e.n3 = n(a[--r] + e.n3), e.n1 = n(a[--r] + e.n1), r--;
+      var Ar = rr() + 2;
+      Re(o(e.rle, 0, Ar - 2)), e.evalfulln1n3(), e.n3 = n(a[--r] + e.n3), e.n1 = n(a[--r] + e.n1), r--;
     }
     a[r++] = n(e.n1 + e.n3);
   }, e.bestscore = 999999999;
   for (var Ve = 0, l2 = e.masks.length - 1; Ve <= l2; Ve += 1) {
     e.m = Ve, e.masksym = t(e.size * e.size);
     for (var w2 = 0, D2 = n(e.size * e.size - 1); w2 <= D2; w2 += 1)
-      e.i = w2, s(e.masksym, e.i, Ar(i(e.pixs, e.i), i(i(e.masks, e.m), e.i)));
+      e.i = w2, s(e.masksym, e.i, hr(i(e.pixs, e.i), i(i(e.masks, e.m), e.i)));
     e.masks.length != 1 ? (a[r++] = e.masksym, e.evalfull(), e.score = a[--r], e.score < e.bestscore && (e.bestsym = e.masksym, e.bestmaskval = e.m, e.bestscore = e.score)) : e.bestsym = e.masksym;
   }
   e.pixs = e.bestsym, e.funval = ((~~(n(e.size - 21) / 2) + 20) * 4 + e.eclval) * 4 + e.bestmaskval, a[r++] = t([(e.funval & 3840) >>> 8, (e.funval & 240) >>> 4, e.funval & 15]), a[r++] = 4, a[r++] = 16, a[r++] = 19, e.rscodes(), e.funvals = a[--r], a[r++] = 1 / 0, L(e.funvals, function() {
@@ -14646,7 +14632,7 @@ function xi() {
   for (var $e = 0, B2 = e.functionmap.length - 1; $e <= B2; $e += 1)
     e.i = $e, L(i(e.functionmap, e.i), function() {
       var me = a[--r];
-      a[r++] = e.pixs, w(me), e.qmv();
+      a[r++] = e.pixs, x(me), e.qmv();
       var we = a[--r];
       s(a[--r], we, i(e.funbits, e.i));
     });
@@ -14685,13 +14671,13 @@ function et() {
   a[r++] = "numecis", a[r++] = 0;
   for (var y = 0, g = d.length; y < g; y++)
     if (i(d, y) <= -1e6) {
-      var A = a[--r];
-      a[r++] = n(A + 1);
+      var h = a[--r];
+      a[r++] = n(h + 1);
     }
   var b = a[--r];
   e[a[--r]] = b, e.msgtmp = t(n(e.msg.length + e.numecis * 6)), e.j = 0;
-  for (var h = 0, x = e.msg.length - 1; h <= x; h += 1) {
-    var m = i(e.msg, h);
+  for (var A = 0, w = e.msg.length - 1; A <= w; A += 1) {
+    var m = i(e.msg, A);
     if (a[r++] = m, m <= -1e6) {
       for (var B = o(Oe(C(7), -a[--r], 10), 1, 6), I = 0, M = B.length; I < M; I++)
         a[r++] = i(B, I);
@@ -14740,7 +14726,7 @@ function et() {
   for (var i1 = 0, l1 = e.msglen + 1; i1 < l1; i1++)
     a[r++] = !1;
   e.DatumB = t(), a[r++] = 1 / 0;
-  for (var _ = 0, h1 = e.msglen + 1; _ < h1; _++)
+  for (var _ = 0, A1 = e.msglen + 1; _ < A1; _++)
     a[r++] = !1;
   e.DatumC = t(), a[r++] = 1 / 0;
   for (var g1 = 0, u1 = e.msglen + 8; g1 < u1; g1++)
@@ -14767,7 +14753,7 @@ function et() {
     Z1 && s(e.DatumA, e.i, !0);
     var J1 = i(e.Bvals, e.barchar) !== void 0;
     if (J1 && s(e.DatumB, e.i, !0), e.CRLF = !1, e.barchar == 13 && e.i < e.msglen - 1 && i(e.msg, e.i + 1) == 10 && (e.CRLF = !0), e.CRLF && s(e.DatumB, e.i, !0), i(e.nDigits, e.i) >= 2 && s(e.DatumC, e.i, !0), e.barchar < 0 && s(e.DatumC, e.i, !0), e.barchar >= 128 && s(e.Binary, e.i, !0), i(e.nDigits, e.i) >= 10) {
-      a[r++] = 1 / 0, w(o(e.msg, e.i, 10));
+      a[r++] = 1 / 0, x(o(e.msg, e.i, 10));
       for (var te = 0, se = 1; te < se; te++) {
         if (a[--r] != 48) {
           a[r++] = !1;
@@ -14806,14 +14792,14 @@ function et() {
     e.in = a[--r], e.inlen = e.in.length, a[r++] = 1 / 0;
     for (var Z = 0, c1 = 5 - e.inlen; Z < c1; Z++)
       a[r++] = 0;
-    w(e.in), e.in = t(), e.out = t(6), a[r++] = 1 / 0, w(o(e.in, 0, 2)), e.msbs = t(), a[r++] = 1 / 0, w(e.msbs);
+    x(e.in), e.in = t(), e.out = t(6), a[r++] = 1 / 0, x(o(e.in, 0, 2)), e.msbs = t(), a[r++] = 1 / 0, x(e.msbs);
     var r1 = a[--r], D = a[--r];
     a[r++] = n(r1 + D * 259);
-    for (var A1 = 0, p1 = 2; A1 < p1; A1++) {
+    for (var h1 = 0, p1 = 2; h1 < p1; h1++) {
       var K = a[--r];
       a[r++] = K % 103, a[r++] = ~~(K / 103);
     }
-    e.mscs = t(), a[r++] = 1 / 0, w(o(e.in, 2, 3)), e.lsbs = t(), a[r++] = 1 / 0, w(e.lsbs);
+    e.mscs = t(), a[r++] = 1 / 0, x(o(e.in, 2, 3)), e.lsbs = t(), a[r++] = 1 / 0, x(e.lsbs);
     var f1 = a[--r], d1 = a[--r], s1 = a[--r];
     a[r++] = n(n(f1 + d1 * 259) + s1 * 67081);
     for (var w1 = 0, k1 = 3; w1 < k1; w1++) {
@@ -14825,14 +14811,14 @@ function et() {
     s(e.out, 5, n(O1 + U1 * 42) % 103);
     var j1 = i(e.lscs, 1), L1 = i(e.mscs, 0), T1 = i(e.mscs, 1);
     s(e.out, 4, n(n(n(~~(n(O1 + U1 * 42) / 103) + j1) + L1 * 68) + T1 * 42) % 103);
-    var Y1 = i(e.lscs, 2), ne = i(e.mscs, 0), he = i(e.mscs, 1), re = i(e.mscs, 2);
-    s(e.out, 3, n(n(n(n(~~(n(n(n(~~(n(O1 + U1 * 42) / 103) + j1) + L1 * 68) + T1 * 42) / 103) + Y1) + ne * 92) + he * 68) + re * 42) % 103);
+    var Y1 = i(e.lscs, 2), ne = i(e.mscs, 0), Ae = i(e.mscs, 1), re = i(e.mscs, 2);
+    s(e.out, 3, n(n(n(n(~~(n(n(n(~~(n(O1 + U1 * 42) / 103) + j1) + L1 * 68) + T1 * 42) / 103) + Y1) + ne * 92) + Ae * 68) + re * 42) % 103);
     var Me = i(e.lscs, 3), z1 = i(e.mscs, 0), Ee = i(e.mscs, 1), R1 = i(e.mscs, 2);
-    s(e.out, 2, n(n(n(n(~~(n(n(n(n(~~(n(n(n(~~(n(O1 + U1 * 42) / 103) + j1) + L1 * 68) + T1 * 42) / 103) + Y1) + ne * 92) + he * 68) + re * 42) / 103) + Me) + z1 * 15) + Ee * 92) + R1 * 68) % 103);
+    s(e.out, 2, n(n(n(n(~~(n(n(n(n(~~(n(n(n(~~(n(O1 + U1 * 42) / 103) + j1) + L1 * 68) + T1 * 42) / 103) + Y1) + ne * 92) + Ae * 68) + re * 42) / 103) + Me) + z1 * 15) + Ee * 92) + R1 * 68) % 103);
     var je = i(e.mscs, 1), xe = i(e.mscs, 2);
-    s(e.out, 1, n(n(~~(n(n(n(n(~~(n(n(n(n(~~(n(n(n(~~(n(O1 + U1 * 42) / 103) + j1) + L1 * 68) + T1 * 42) / 103) + Y1) + ne * 92) + he * 68) + re * 42) / 103) + Me) + z1 * 15) + Ee * 92) + R1 * 68) / 103) + je * 15) + xe * 92) % 103), s(e.out, 0, n(~~(n(n(~~(n(n(n(n(~~(n(n(n(n(~~(n(n(n(~~(n(O1 + U1 * 42) / 103) + j1) + L1 * 68) + T1 * 42) / 103) + Y1) + ne * 92) + he * 68) + re * 42) / 103) + Me) + z1 * 15) + Ee * 92) + R1 * 68) / 103) + je * 15) + xe * 92) / 103) + i(e.mscs, 2) * 15) % 103), a[r++] = o(e.out, 6 - e.inlen - 1, e.inlen + 1);
+    s(e.out, 1, n(n(~~(n(n(n(n(~~(n(n(n(n(~~(n(n(n(~~(n(O1 + U1 * 42) / 103) + j1) + L1 * 68) + T1 * 42) / 103) + Y1) + ne * 92) + Ae * 68) + re * 42) / 103) + Me) + z1 * 15) + Ee * 92) + R1 * 68) / 103) + je * 15) + xe * 92) % 103), s(e.out, 0, n(~~(n(n(~~(n(n(n(n(~~(n(n(n(n(~~(n(n(n(~~(n(O1 + U1 * 42) / 103) + j1) + L1 * 68) + T1 * 42) / 103) + Y1) + ne * 92) + Ae * 68) + re * 42) / 103) + Me) + z1 * 15) + Ee * 92) + R1 * 68) / 103) + je * 15) + xe * 92) / 103) + i(e.mscs, 2) * 15) % 103), a[r++] = o(e.out, 6 - e.inlen - 1, e.inlen + 1);
   }, e.finaliseBIN = function() {
-    e.bpos != 0 && (a[r++] = o(e.bvals, 0, e.bpos), e.base259to103(), w(a[--r]), e.bpos = 0);
+    e.bpos != 0 && (a[r++] = o(e.bvals, 0, e.bpos), e.base259to103(), x(a[--r]), e.bpos = 0);
   }, e.addtobin = function() {
     s(e.bvals, e.bpos, a[--r]), e.bpos = e.bpos + 1, e.bpos == 5 && e.finaliseBIN();
   }, e.ECIabc = function() {
@@ -14842,8 +14828,8 @@ function et() {
       var D = a[--r];
       a[r++] = n(D + n(i(Z, c1) - 48)) * 10;
     }
-    var A1 = ~~(a[--r] / 10);
-    if (a[r++] = A1, A1 >= 40) {
+    var h1 = ~~(a[--r] / 10);
+    if (a[r++] = h1, h1 >= 40) {
       var p1 = n(a[--r] - 40), K = p1 % 12769;
       a[r++] = ~~(p1 / 12769) + 40, a[r++] = ~~(K / 113), a[r++] = K % 113;
     }
@@ -14855,8 +14841,8 @@ function et() {
       var D = a[--r];
       a[r++] = n(D + n(i(Z, c1) - 48)) * 10;
     }
-    var A1 = ~~(a[--r] / 10);
-    if (a[r++] = A1, A1 >= 65536) {
+    var h1 = ~~(a[--r] / 10);
+    if (a[r++] = h1, h1 >= 65536) {
       var p1 = a[--r], K = p1 % 65536;
       a[r++] = 258, a[r++] = ~~(p1 / 65536), a[r++] = ~~(K / 256), a[r++] = K % 256;
     } else {
@@ -14895,8 +14881,8 @@ function et() {
             a[r++] = 0;
             break;
           }
-          var A1 = i(e.msg, e.segstart + 4);
-          if (A1 < 48 || A1 > 57) {
+          var h1 = i(e.msg, e.segstart + 4);
+          if (h1 < 48 || h1 > 57) {
             a[r++] = 0;
             break;
           }
@@ -15003,8 +14989,8 @@ function et() {
         break;
       }
       if (i(e.DatumB, e.i)) {
-        var A1 = i(e.msg, e.i);
-        if (A1 == e.fn1 || A1 == e.fn2 || A1 == e.fn3) {
+        var h1 = i(e.msg, e.i);
+        if (h1 == e.fn1 || h1 == e.fn2 || h1 == e.fn3) {
           if (a[r++] = t([i(e.Bvals, i(e.msg, e.i))]), e.addtocws(), i(e.ECI, e.i)) {
             a[r++] = 1 / 0, e.ECIabc();
             var p1 = t();
@@ -15053,8 +15039,8 @@ function et() {
         break;
       }
       if (i(e.DatumA, e.i)) {
-        var A1 = i(e.msg, e.i);
-        if (A1 == e.fn1 || A1 == e.fn2 || A1 == e.fn3) {
+        var h1 = i(e.msg, e.i);
+        if (h1 == e.fn1 || h1 == e.fn2 || h1 == e.fn3) {
           if (a[r++] = t([i(e.Avals, i(e.msg, e.i))]), e.addtocws(), i(e.ECI, e.i)) {
             a[r++] = 1 / 0, e.ECIabc();
             var p1 = t();
@@ -15098,7 +15084,7 @@ function et() {
           break;
         }
         a[r++] = t([i(e.BINvals, i(t([e.sc2, e.sc3, e.sc4, e.sc5, e.sc6, e.sc7]), n(e.n - 2)))]), e.addtocws();
-        for (var D = 0, A1 = e.n; D < A1; D++)
+        for (var D = 0, h1 = e.n; D < h1; D++)
           i(e.msg, e.i) < 0 ? (a[r++] = t([i(e.Cvals, i(e.msg, e.i))]), e.addtocws(), e.i = e.i + 1) : (a[r++] = t([n(n(i(e.msg, e.i) - 48) * 10 + n(i(e.msg, e.i + 1) - 48))]), e.addtocws(), e.i = e.i + 2);
         break;
       }
@@ -15159,13 +15145,13 @@ function et() {
     }
   }
   for (e.ndots = ~~(e.rows * e.columns / 2); ; ) {
-    var Ae = e.nd + 1;
-    if ((Ae + (~~(Ae / 2) + 3)) * 9 + 2 > e.ndots)
+    var he = e.nd + 1;
+    if ((he + (~~(he / 2) + 3)) * 9 + 2 > e.ndots)
       break;
     e.nd = e.nd + 1;
   }
   if (e.nc = ~~(e.nd / 2) + 3, e.nw = e.nd + e.nc, e.rembits = e.ndots - (e.nw * 9 + 2), e.nd > e.cws.length) {
-    a[r++] = 1 / 0, w(e.cws);
+    a[r++] = 1 / 0, x(e.cws);
     var Fe = e.mode == e.BIN ? 109 : 106;
     a[r++] = Fe;
     for (var ce = 0, Ye = e.nd - e.cws.length - 1; ce < Ye; ce++)
@@ -15191,7 +15177,7 @@ function et() {
     }
   }
   for (var p = e.sixedges, j = 0, E = p.length; j < E; j++) {
-    a[r++] = e.outline, w(i(p, j)), e.dmv();
+    a[r++] = e.outline, x(i(p, j)), e.dmv();
     var N = a[--r];
     s(a[--r], N, 1);
   }
@@ -15212,9 +15198,9 @@ function et() {
   }, e.evalsymbol = function() {
     e.sym = a[--r], e.worst = 9999999;
     for (var Z = t([t(["x", 0]), t(["x", 1]), t(["y", 0]), t(["y", 1])]), c1 = 0, r1 = Z.length; c1 < r1; c1++) {
-      w(i(Z, c1)), e.fl = a[--r], e.dir = a[--r], e.sum = 0, e.first = -1, e.last = -1;
-      for (var D = k(e.dir, "x") ? e.columns : e.rows, A1 = 0, p1 = D - 1; A1 <= p1; A1 += 1) {
-        e[e.dir] = A1;
+      x(i(Z, c1)), e.fl = a[--r], e.dir = a[--r], e.sum = 0, e.first = -1, e.last = -1;
+      for (var D = k(e.dir, "x") ? e.columns : e.rows, h1 = 0, p1 = D - 1; h1 <= p1; h1 += 1) {
+        e[e.dir] = h1;
         var K = e.sym, f1 = e[e.dir], d1 = k(e.dir, "x") ? e.rows : e.columns, s1 = (d1 - 1) * e.fl;
         if (k(e.dir, "y")) {
           var w1 = s1;
@@ -15250,10 +15236,10 @@ function et() {
       e.pen = e.pen + e.p;
     }
     a[r++] = 1 / 0;
-    for (var he = 0, re = (e.columns + 4) * 2; he < re; he++)
+    for (var Ae = 0, re = (e.columns + 4) * 2; Ae < re; Ae++)
       a[r++] = 0;
     for (var Me = 0, z1 = e.columns, Ee = e.sym.length - 1; z1 < 0 ? Me >= Ee : Me <= Ee; Me += z1)
-      a[r++] = 0, a[r++] = 0, w(o(e.sym, Me, e.columns)), a[r++] = 0, a[r++] = 0;
+      a[r++] = 0, a[r++] = 0, x(o(e.sym, Me, e.columns)), a[r++] = 0, a[r++] = 0;
     for (var R1 = 0, je = (e.columns + 4) * 2; R1 < je; R1++)
       a[r++] = 0;
     e.symp = t(), e.columns = e.columns + 4, e.rows = e.rows + 4, e.sum = 0;
@@ -15325,8 +15311,8 @@ function et() {
     var Z = e.cws;
     a[r++] = e.mask, a[r++] = i(t([0, 3, 7, 17]), e.mask), a[r++] = 0;
     for (var c1 = 0, r1 = Z.length; c1 < r1; c1++) {
-      var D = a[--r], A1 = a[--r];
-      a[r++] = n(i(Z, c1) + D) % 113, a[r++] = A1, a[r++] = n(D + A1);
+      var D = a[--r], h1 = a[--r];
+      a[r++] = n(i(Z, c1) + D) % 113, a[r++] = h1, a[r++] = n(D + h1);
     }
     r -= 2;
     for (var p1 = 0, K = e.nc; p1 < K; p1++)
@@ -15346,8 +15332,8 @@ function et() {
         a[r++] = "t", a[r++] = e.rscws, a[r++] = U1, e.offset();
         var L1 = a[--r], T1 = i(a[--r], L1);
         a[r++] = T1, a[r++] = e.rscws, a[r++] = e.ND, e.offset();
-        var Y1 = a[--r], ne = i(a[--r], Y1), he = a[--r];
-        e[a[--r]] = n(he + ne) % 113;
+        var Y1 = a[--r], ne = i(a[--r], Y1), Ae = a[--r];
+        e[a[--r]] = n(Ae + ne) % 113;
         for (var re = 0, Me = e.NC - 2; re <= Me; re += 1) {
           e.j = re, a[r++] = e.rscws, a[r++] = e.ND + e.j, e.offset(), a[r++] = e.rscws, a[r++] = e.ND + e.j + 1, e.offset();
           var z1 = a[--r], Ee = i(a[--r], z1), R1 = a[--r];
@@ -15386,18 +15372,18 @@ function et() {
       s(He, Se, n(a[--r] - 48));
     }
     for (var p2 = 0; p2 <= 5; p2 += 1) {
-      e.i = p2, a[r++] = e.pixs, w(i(e.sixedges, e.i)), e.dmv();
+      e.i = p2, a[r++] = e.pixs, x(i(e.sixedges, e.i)), e.dmv();
       var oe = a[--r];
       s(a[--r], oe, i(e.bits, e.bits.length - 6 + e.i) - 48);
     }
     a[r++] = "score", a[r++] = e.pixs, e.evalsymbol();
-    var A2 = a[--r];
-    if (e[a[--r]] = A2, e.score > e.bestscore && (e.bestsym = e.pixs, e.bestscore = e.score, e.fast && e.bestscore > ~~(e.rows * e.columns / 2)))
+    var h2 = a[--r];
+    if (e[a[--r]] = h2, e.score > e.bestscore && (e.bestsym = e.pixs, e.bestscore = e.score, e.fast && e.bestscore > ~~(e.rows * e.columns / 2)))
       return !0;
     var Ze = e.pixs;
     e.litmask = Yi(t(Ze.length), Ze);
     for (var E2 = 0; E2 <= 5; E2 += 1) {
-      e.i = E2, a[r++] = e.litmask, w(i(e.sixedges, e.i)), e.dmv();
+      e.i = E2, a[r++] = e.litmask, x(i(e.sixedges, e.i)), e.dmv();
       var Ue = a[--r];
       s(a[--r], Ue, 1);
     }
@@ -15452,21 +15438,21 @@ function lt() {
     ]);
     e.fncvals = y, a[r++] = "msg", a[r++] = e.barcode, a[r++] = e.fncvals, sr();
     var g = a[--r];
-    e[a[--r]] = g, e.msglen = e.msg.length, e.scr = t([]), e.scp = t([]), a[r++] = 1 / 0, w(e.scr), w(e.scp), L(e.msg, function() {
+    e[a[--r]] = g, e.msglen = e.msg.length, e.scr = t([]), e.scp = t([]), a[r++] = 1 / 0, x(e.scr), x(e.scp), L(e.msg, function() {
       var s1 = a[--r];
       a[r++] = s1, s1 == e.fn1 && (r--, a[r++] = 268);
       var w1 = a[--r];
       a[r++] = w1, w1 == e.fn3 && (r--, a[r++] = 269);
     }), e.dcws = t();
   }
-  var A = i(e.options, "debugcws") !== void 0;
-  if (A && (a[r++] = "bwipp.debugcws#26358", a[r++] = e.dcws, u()), e.mcc = e.dcws.length + 3, e.eclval = i(e.eclevel, 2) - 48, e.eclval != 0) {
+  var h = i(e.options, "debugcws") !== void 0;
+  if (h && (a[r++] = "bwipp.debugcws#26358", a[r++] = e.dcws, u()), e.mcc = e.dcws.length + 3, e.eclval = i(e.eclevel, 2) - 48, e.eclval != 0) {
     if (a[r++] = "qcc", a[r++] = i(t([0, 1, 2, 4, 6, 8]), e.eclval), a[r++] = ~~(e.mcc / 25), e.mcc % 25 != 0) {
       var b = a[--r];
       a[r++] = n(b + 1);
     }
-    var h = a[--r], x = a[--r];
-    e[a[--r]] = n(x * h + 5);
+    var A = a[--r], w = a[--r];
+    e[a[--r]] = n(w * A + 5);
   } else
     e.qcc = 3;
   if (e.acc = e.qcc - 3 + 78 * e.link1, e.tcc = e.mcc + e.qcc, !lt.__26380__) {
@@ -15497,7 +15483,7 @@ function lt() {
     }
     r--;
   }
-  e.dcc = n(e.columns - e.mcol), a[r++] = 1 / 0, a[r++] = e.start, a[r++] = e.mcc, a[r++] = e.acc, w(e.dcws);
+  e.dcc = n(e.columns - e.mcol), a[r++] = 1 / 0, a[r++] = e.start, a[r++] = e.mcc, a[r++] = e.acc, x(e.dcws);
   for (var W = 0, e1 = e.qcc; W < e1; W++)
     a[r++] = 0;
   if (a[r++] = 0, e.rsseq = t(), !lt.__26427__) {
@@ -15531,8 +15517,8 @@ function lt() {
       s(a[--r], l1, n(i1 + a1) % 283);
     }
     a[r++] = e.coeffs, a[r++] = 0, a[r++] = i(e.coeffs, 0), a[r++] = i(e.rsalog, e.i), e.rsprod();
-    var _ = a[--r], h1 = a[--r];
-    s(a[--r], h1, _);
+    var _ = a[--r], A1 = a[--r];
+    s(a[--r], A1, _);
   }
   e.coeffs = o(e.coeffs, 0, e.coeffs.length - 1);
   for (var g1 = e.coeffs.length - 1; g1 >= 0; g1 -= 2) {
@@ -15590,8 +15576,8 @@ function lt() {
     s(a[--r], ue, 9), a[r++] = e.pixs, a[r++] = 1, a[r++] = e.i, e.qmv();
     var De = a[--r];
     s(a[--r], De, (1 - e.i % 2) * 9), a[r++] = e.pixs, a[r++] = 2, a[r++] = e.i, e.qmv();
-    var Ae = a[--r];
-    s(a[--r], Ae, 0), a[r++] = e.pixs, a[r++] = 3, a[r++] = e.i, e.qmv();
+    var he = a[--r];
+    s(a[--r], he, 0), a[r++] = e.pixs, a[r++] = 3, a[r++] = e.i, e.qmv();
     var Fe = a[--r];
     s(a[--r], Fe, 9), a[r++] = e.pixs, a[r++] = 4, a[r++] = e.i, e.qmv();
     var ce = a[--r];
@@ -15611,15 +15597,15 @@ function lt() {
     var N = a[--r], q = a[--r];
     s(q, N, a[--r]), e.i = e.i + 1;
   }
-  a[r++] = 1 / 0, a[r++] = e.start, a[r++] = e.mcc, w(e.ecws), a[r++] = e.tcc, a[r++] = 283, a[r++] = e.acc, w(e.dcws);
+  a[r++] = 1 / 0, a[r++] = e.start, a[r++] = e.mcc, x(e.ecws), a[r++] = e.tcc, a[r++] = 283, a[r++] = e.acc, x(e.dcws);
   for (var o1 = 0, O = e.pads; o1 < O; o1++)
     a[r++] = 284;
   a[r++] = e.qcc, e.tileseq = t(), e.x = 5, e.y = 1;
   for (var t1 = e.tileseq, F = 0, Z = t1.length; F < Z; F++) {
     for (var c1 = Oe(C(5), i(e.tiles, i(t1, F)), 10), r1 = 0, D = c1.length; r1 < D; r1++) {
       a[r++] = i(c1, r1), a[r++] = e.pixs, a[r++] = e.x, a[r++] = e.y, e.qmv();
-      var A1 = a[--r], p1 = a[--r];
-      s(p1, A1, n(a[--r] - 48)), e.y = e.y + 1;
+      var h1 = a[--r], p1 = a[--r];
+      s(p1, h1, n(a[--r] - 48)), e.y = e.y + 1;
     }
     if (e.y != n(e.rows - 1))
       e.y = e.y + 1;
@@ -15659,7 +15645,7 @@ function lt() {
   ]);
   a[r++] = d1, e.dontdraw || K1(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
 }
-function Al() {
+function hl() {
   e = Object.create(e), e.dontdraw = !1, e.rows = -1, e.columns = -1, e.slave = !1, e.colors = 16, e.eclevel = 6, e.raw = !1, e.parse = !1, e.parsefnc = !1, e.mask = -1, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], e.databpm = ~~Math.round(Math.log(e.colors) / Math.log(2));
   var c = e.colors;
   a[r++] = "metabpm", a[r++] = c, c > 8 && (r--, a[r++] = 8);
@@ -15681,7 +15667,7 @@ function Al() {
   };
   var y = e.msglen <= 15 ? 4 : 17;
   e.bits = C(7 + y + e.msglen * 8 + 12), e.j = 0, a[r++] = 31, a[r++] = 5, e.tofixedbits(), e.addtobits(), a[r++] = "00", e.addtobits(), e.msglen <= 15 ? (a[r++] = e.msglen, a[r++] = 4, e.tofixedbits(), e.addtobits()) : (a[r++] = "0000", e.addtobits(), a[r++] = e.msglen - 16, a[r++] = 13, e.tofixedbits(), e.addtobits());
-  for (var g = 0, A = e.msglen - 1; g <= A; g += 1)
+  for (var g = 0, h = e.msglen - 1; g <= h; g += 1)
     a[r++] = i(e.msg, g), a[r++] = 8, e.tofixedbits(), e.addtobits();
   if (a[r++] = 28, a[r++] = 5, e.tofixedbits(), e.addtobits(), a[r++] = 31, a[r++] = 5, e.tofixedbits(), e.addtobits(), a[r++] = "11", e.addtobits(), e.diffside = 21, e.sameshape = !1, e.sameecc = !1, e.hasslaves = !1, e.metrics = function() {
     e.mc = a[--r], e.mr = a[--r];
@@ -15693,8 +15679,8 @@ function Al() {
     var _2 = e.slave ? 7 : 17;
     if (a[r++] = q1 * de, a[r++] = ((~~(n(r2 - 25) / 16) + 2) * (~~(n(m2 - 25) / 16) + 2) - 4) * 7, a[r++] = y2 * 2, a[r++] = _2 * 4, e.slave) {
       if (a[r++] = 3, !e.sameshape) {
-        var h2 = a[--r];
-        a[r++] = n(h2 + 5);
+        var A2 = a[--r];
+        a[r++] = n(A2 + 5);
       }
       if (e.hasslaves) {
         var q2 = a[--r];
@@ -15746,14 +15732,14 @@ function Al() {
   } else {
     if (e.columns == -1 && e.rows != -1) {
       a[r++] = "columns", a[r++] = e.grosslen / e.rows, e.snapsize();
-      var h = a[--r];
-      for (e[a[--r]] = h; a[r++] = e.rows, a[r++] = e.columns, e.metrics(), !(e.grosslen <= e.numdatabits); )
+      var A = a[--r];
+      for (e[a[--r]] = A; a[r++] = e.rows, a[r++] = e.columns, e.metrics(), !(e.grosslen <= e.numdatabits); )
         e.columns = n(e.columns + 4);
     }
     if (e.rows == -1 && e.columns != -1) {
       a[r++] = "rows", a[r++] = e.grosslen / e.columns, e.snapsize();
-      var x = a[--r];
-      for (e[a[--r]] = x; a[r++] = e.rows, a[r++] = e.columns, e.metrics(), !(e.grosslen <= e.numdatabits); )
+      var w = a[--r];
+      for (e[a[--r]] = w; a[r++] = e.rows, a[r++] = e.columns, e.metrics(), !(e.grosslen <= e.numdatabits); )
         e.rows = n(e.rows + 4);
     }
     e.rows != -1 && e.columns != -1 && (a[r++] = e.rows, a[r++] = e.columns, e.metrics());
@@ -15794,8 +15780,8 @@ function Al() {
       e.i = y2;
       for (var _2 = 0, P2 = n(e.wr - 1); _2 <= P2; _2 += 1) {
         e.j = _2;
-        var L2 = e.matrixA, k2 = e.i, j2 = e.effwidth, X2 = e.wr, W2 = e.j, h2 = n(31 - n(e.i * n(e.effwidth + e.wr) + e.j) % 32);
-        s(L2, ~~(n(k2 * n(j2 + X2) + W2) / 32), i(L2, ~~(n(k2 * n(j2 + X2) + W2) / 32)) | (h2 < 0 ? 1 >>> -h2 : 1 << h2));
+        var L2 = e.matrixA, k2 = e.i, j2 = e.effwidth, X2 = e.wr, W2 = e.j, A2 = n(31 - n(e.i * n(e.effwidth + e.wr) + e.j) % 32);
+        s(L2, ~~(n(k2 * n(j2 + X2) + W2) / 32), i(L2, ~~(n(k2 * n(j2 + X2) + W2) / 32)) | (A2 < 0 ? 1 >>> -A2 : 1 << A2));
       }
     }
     e.s0 = 0, e.s1 = 0, e.s2 = 11, e.s3 = 64569;
@@ -15836,8 +15822,8 @@ function Al() {
           a[r++] = n((L2 ^ 2147483648) + 2147483648);
         }
         e.pos = ~~(a[--r] / 4294967296 * (e.Pg_sub_block - e.j));
-        var k2 = e.matrixA, j2 = e.i, X2 = e.offset, W2 = i(e.permutation, e.pos), h2 = n(31 - i(e.permutation, e.pos) % 32);
-        s(k2, j2 * X2 + ~~(W2 / 32), i(k2, j2 * X2 + ~~(W2 / 32)) | (h2 < 0 ? 1 >>> -h2 : 1 << h2));
+        var k2 = e.matrixA, j2 = e.i, X2 = e.offset, W2 = i(e.permutation, e.pos), A2 = n(31 - i(e.permutation, e.pos) % 32);
+        s(k2, j2 * X2 + ~~(W2 / 32), i(k2, j2 * X2 + ~~(W2 / 32)) | (A2 < 0 ? 1 >>> -A2 : 1 << A2));
         var q2 = e.permutation, g2 = e.Pg_sub_block, C2 = e.j;
         s(q2, g2 - 1 - C2, i(e.permutation, e.pos)), s(e.permutation, e.pos, i(q2, g2 - 1 - C2));
       }
@@ -15864,8 +15850,8 @@ function Al() {
       e.i = k2, e.pivot_column = e.Pg_sub_block + 1;
       for (var X2 = 0, W2 = e.Pg_sub_block - 1; X2 <= W2; X2 += 1) {
         e.j = X2;
-        var h2 = i(e.matrixH, ~~((e.offset * 32 * e.i + e.j) / 32)), q2 = -(31 - (e.offset * 32 * e.i + e.j) % 32);
-        if (((q2 < 0 ? h2 >>> -q2 : h2 << q2) & 1) == 1) {
+        var A2 = i(e.matrixH, ~~((e.offset * 32 * e.i + e.j) / 32)), q2 = -(31 - (e.offset * 32 * e.i + e.j) % 32);
+        if (((q2 < 0 ? A2 >>> -q2 : A2 << q2) & 1) == 1) {
           e.pivot_column = e.j;
           break;
         }
@@ -15879,7 +15865,7 @@ function Al() {
               for (var fr = 0, qr = e.offset - 1; fr <= qr; fr += 1) {
                 e.k = fr;
                 var Fr = e.matrixH, Vr = e.offset, Qr = e.j, Jr = e.k;
-                s(Fr, Vr * Qr + Jr, Ar(i(Fr, Vr * Qr + Jr), i(e.matrixH, e.offset * e.i + e.k)));
+                s(Fr, Vr * Qr + Jr, hr(i(Fr, Vr * Qr + Jr), i(e.matrixH, e.offset * e.i + e.k)));
               }
           }
       } else
@@ -15908,12 +15894,12 @@ function Al() {
     e.tmp = 0;
     for (var Xr = 0, wa = e.loop0 - 1; Xr <= wa; Xr += 1) {
       e.i = Xr;
-      for (var Nr = 0, At = e.nb_pcb - 1; Nr <= At; Nr += 1) {
+      for (var Nr = 0, ht = e.nb_pcb - 1; Nr <= ht; Nr += 1) {
         e.j = Nr;
         var La = i(e.matrixA, ~~(i(e.swap_col, e.i * 2) / 32) + e.j * e.offset), Ka = -n(31 - i(e.swap_col, e.i * 2) % 32);
         e.tmp = (-((Ka < 0 ? La >>> -Ka : La << Ka) & 1) ^ e.tmp) & 1 ^ e.tmp;
-        var Qa = e.matrixA, Oa = i(e.swap_col, e.i * 2), Za = e.j, it = e.offset, ht = i(e.matrixA, ~~(i(e.swap_col, e.i * 2 + 1) / 32) + e.j * e.offset), nt = -n(31 - i(e.swap_col, e.i * 2 + 1) % 32), Ra = n(31 - i(e.swap_col, e.i * 2) % 32);
-        s(Qa, ~~(Oa / 32) + Za * it, i(Qa, ~~(Oa / 32) + Za * it) ^ (-((nt < 0 ? ht >>> -nt : ht << nt) & 1) ^ i(e.matrixA, ~~(i(e.swap_col, e.i * 2) / 32) + e.j * e.offset)) & (Ra < 0 ? 1 >>> -Ra : 1 << Ra));
+        var Qa = e.matrixA, Oa = i(e.swap_col, e.i * 2), Za = e.j, it = e.offset, At = i(e.matrixA, ~~(i(e.swap_col, e.i * 2 + 1) / 32) + e.j * e.offset), nt = -n(31 - i(e.swap_col, e.i * 2 + 1) % 32), Ra = n(31 - i(e.swap_col, e.i * 2) % 32);
+        s(Qa, ~~(Oa / 32) + Za * it, i(Qa, ~~(Oa / 32) + Za * it) ^ (-((nt < 0 ? At >>> -nt : At << nt) & 1) ^ i(e.matrixA, ~~(i(e.swap_col, e.i * 2) / 32) + e.j * e.offset)) & (Ra < 0 ? 1 >>> -Ra : 1 << Ra));
         var mt = e.matrixA, Na = i(e.swap_col, e.i * 2 + 1), yt = e.j, gt = e.offset, st = n(31 - i(e.swap_col, e.i * 2 + 1) % 32);
         s(mt, ~~(Na / 32) + yt * gt, i(mt, ~~(Na / 32) + yt * gt) ^ (-(e.tmp & 1) ^ i(e.matrixA, ~~(i(e.swap_col, e.i * 2 + 1) / 32) + e.j * e.offset)) & (st < 0 ? 1 >>> -st : 1 << st));
       }
@@ -15930,8 +15916,8 @@ function Al() {
     e.matrix_index = e.Pg_sub_block - e.pn, e.loop0 = 0;
     for (var j2 = 0, X2 = (e.Pg_sub_block - e.pn) * e.effwidth - 1; j2 <= X2; j2 += 1)
       if (e.i = j2, e.matrix_index >= e.Pg_sub_block && (e.loop0 = e.loop0 + 1, e.matrix_index = e.Pg_sub_block - e.pn), e.i % e.effwidth < e.pn) {
-        var W2 = e.G, h2 = e.i, q2 = i(e.matrixA, ~~(e.matrix_index / 32) + e.offset_cap * e.loop0), g2 = -(31 - e.matrix_index % 32), C2 = 31 - e.i % 32;
-        s(W2, ~~(h2 / 32), i(W2, ~~(h2 / 32)) ^ (-((g2 < 0 ? q2 >>> -g2 : q2 << g2) & 1) ^ i(e.G, ~~(e.i / 32))) & (C2 < 0 ? 1 >>> -C2 : 1 << C2)), e.matrix_index = e.matrix_index + 1;
+        var W2 = e.G, A2 = e.i, q2 = i(e.matrixA, ~~(e.matrix_index / 32) + e.offset_cap * e.loop0), g2 = -(31 - e.matrix_index % 32), C2 = 31 - e.i % 32;
+        s(W2, ~~(A2 / 32), i(W2, ~~(A2 / 32)) ^ (-((g2 < 0 ? q2 >>> -g2 : q2 << g2) & 1) ^ i(e.G, ~~(e.i / 32))) & (C2 < 0 ? 1 >>> -C2 : 1 << C2)), e.matrix_index = e.matrix_index + 1;
       }
   }, e.ldpc = function() {
     e.wr = a[--r], e.wc = a[--r], a[r++] = 1 / 0;
@@ -15964,9 +15950,9 @@ function Al() {
       e.start = e.encoding_iterations * e.Pn_sub_block, e.last_index = e.encoding_iterations * e.Pg_sub_block, e.Pg_sub_block = e.Pg - e.encoding_iterations * e.Pg_sub_block, e.Pn_sub_block = ~~(e.Pg_sub_block * n(e.wr - e.wc) / e.wr), e.createMatrixA(), e.GaussJordan(), e.createGeneratorMatrix(), e.offset = ~~Math.ceil((e.Pg_sub_block - e.matrix_rank) / 32);
       for (var X2 = 0, W2 = e.Pg_sub_block - 1; X2 <= W2; X2 += 1) {
         e.i = X2, e.temp = 0, e.loop0 = 0, e.offset_index = e.offset * e.i;
-        for (var h2 = e.start, q2 = e.Pn - 1; h2 <= q2; h2 += 1) {
+        for (var A2 = e.start, q2 = e.Pn - 1; A2 <= q2; A2 += 1) {
           var g2 = i(e.G, e.offset_index + ~~(e.loop0 / 32)), C2 = -(31 - e.loop0 % 32);
-          e.temp = i(e.data, h2) & ((C2 < 0 ? g2 >>> -C2 : g2 << C2) & 1) ^ e.temp, e.loop0 = e.loop0 + 1;
+          e.temp = i(e.data, A2) & ((C2 < 0 ? g2 >>> -C2 : g2 << C2) & 1) ^ e.temp, e.loop0 = e.loop0 + 1;
         }
         s(e.ecc_encoded_data, e.i + e.last_index, e.temp);
       }
@@ -16013,7 +15999,7 @@ function Al() {
     e[a[--r]] = a1, a[r++] = "gvals", a[r++] = i(e.rgbres, 1), a[r++] = 1 / 0;
     var i1 = a[--r], l1 = n(a[--r] - 1);
     a[r++] = i1, a[r++] = l1;
-    for (var _ = 0, h1 = l1; _ <= h1; _ += 1) {
+    for (var _ = 0, A1 = l1; _ <= A1; _ += 1) {
       var g1 = a[--r];
       a[r++] = ~~Math.round(_ * (255 / g1)), a[r++] = g1;
     }
@@ -16052,8 +16038,8 @@ function Al() {
           a[r++] = j2, a[r++] = k2, k(j2, "FF00FF") && (e.mi = e.i, r--, a[r++] = !0);
           var X2 = a[--r], W2 = a[--r];
           a[r++] = W2, a[r++] = X2, k(W2, "FFFF00") && (e.yi = e.i, r--, a[r++] = !0);
-          var h2 = a[--r], q2 = a[--r];
-          a[r++] = q2, a[r++] = h2, k(q2, "FFFFFF") && (e.wi = e.i, r--, a[r++] = !0), ke(a[--r]) && (e.colors <= 64 || e.colors == 128 && (e.r == 0 || e.r == 73 || e.r == 182 || e.r == 255) || e.colors == 256 && (e.r == 0 || e.r == 73 || e.r == 182 || e.r == 255) && (e.g == 0 || e.g == 73 || e.g == 182 || e.g == 255)) && (s(e.palettelayout, e.j, e.i), e.j = e.j + 1), s(e.palette, e.i, a[--r]), e.i = e.i + 1;
+          var A2 = a[--r], q2 = a[--r];
+          a[r++] = q2, a[r++] = A2, k(q2, "FFFFFF") && (e.wi = e.i, r--, a[r++] = !0), ke(a[--r]) && (e.colors <= 64 || e.colors == 128 && (e.r == 0 || e.r == 73 || e.r == 182 || e.r == 255) || e.colors == 256 && (e.r == 0 || e.r == 73 || e.r == 182 || e.r == 255) && (e.g == 0 || e.g == 73 || e.g == 182 || e.g == 255)) && (s(e.palettelayout, e.j, e.i), e.j = e.j + 1), s(e.palette, e.i, a[--r]), e.i = e.i + 1;
         });
       });
     }), l(e.palettelayout, 0, t([e.ki, e.bi, e.gi, e.ci, e.ri, e.mi, e.yi, e.wi])), e.metacolorindex = t([e.ki, e.bi, e.gi, e.ci, e.ri, e.mi, e.yi, e.wi]);
@@ -16106,8 +16092,8 @@ function Al() {
     e.j = V1, e.y = i(e.algncpos, e.j);
     for (var ue = 0, De = e.algnrpos.length - 1; ue <= De; ue += 1) {
       e.i = ue, e.x = i(e.algnrpos, e.i), a[r++] = e.pixs, a[r++] = e.x, a[r++] = e.y, e.jmv();
-      var Ae = a[--r];
-      i(a[--r], Ae) == -1 && (a[r++] = n(e.x - 1), a[r++] = n(e.y - 1), (e.i + e.j) % 2 == 0 ? a[r++] = e.algnpat0 : a[r++] = e.algnpat1, e.putalgnpat());
+      var he = a[--r];
+      i(a[--r], he) == -1 && (a[r++] = n(e.x - 1), a[r++] = n(e.y - 1), (e.i + e.j) % 2 == 0 ? a[r++] = e.algnpat0 : a[r++] = e.algnpat1, e.putalgnpat());
     }
   }
   if (e.slave) {
@@ -16146,10 +16132,10 @@ function Al() {
       a[r++] = r1;
     }
     e.palettemap1 = t(), a[r++] = 1 / 0;
-    for (var D = e.palettemap1, A1 = 0, p1 = D.length; A1 < p1; A1++) {
-      a[r++] = i(D, A1), a[r++] = 1 / 0;
+    for (var D = e.palettemap1, h1 = 0, p1 = D.length; h1 < p1; h1++) {
+      a[r++] = i(D, h1), a[r++] = 1 / 0;
       var K = a[--r], f1 = a[--r];
-      a[r++] = K, w(f1);
+      a[r++] = K, x(f1);
       var d1 = a[--r], s1 = a[--r];
       a[r++] = -s1, a[r++] = -d1;
       var w1 = t();
@@ -16158,7 +16144,7 @@ function Al() {
     e.palettemap2 = t();
   } else {
     for (var Fe = t([t([6, 1]), t([6, 2]), t([6, 3]), t([6, 4]), t([6, 5]), t([6, 6]), t([5, 6]), t([4, 6]), t([3, 6]), t([2, 6]), t([1, 6]), t([7, 1]), t([7, 2]), t([7, 3]), t([7, 4]), t([7, 5]), t([7, 6]), t([7, 7]), t([6, 7]), t([5, 7]), t([4, 7]), t([3, 7]), t([2, 7]), t([1, 7]), t([8, 1]), t([8, 2]), t([8, 3]), t([8, 4]), t([8, 5]), t([8, 6]), t([8, 7]), t([8, 8]), t([7, 8]), t([6, 8]), t([5, 8]), t([4, 8]), t([3, 8]), t([2, 8]), t([1, 8]), t([9, 1]), t([9, 2]), t([9, 3]), t([9, 4]), t([9, 5])]), ce = 0, Ye = Fe.length; ce < Ye; ce++)
-      w(i(Fe, ce)), e.y = a[--r], e.x = a[--r], a[r++] = t([e.x, e.y]), a[r++] = t([-e.x, e.y]), a[r++] = t([-e.x, -e.y]), a[r++] = t([e.x, -e.y]);
+      x(i(Fe, ce)), e.y = a[--r], e.x = a[--r], a[r++] = t([e.x, e.y]), a[r++] = t([-e.x, e.y]), a[r++] = t([-e.x, -e.y]), a[r++] = t([e.x, -e.y]);
     Re(t(176)), e.metadatamap = a[--r], e.palettemap1 = t([t([4, 1]), t([4, 2]), t([5, 1]), t([5, 2]), t([2, 4]), t([2, 5]), t([1, 4]), t([1, 5]), t([-2, 1]), t([-2, 2]), t([-1, 1]), t([-1, 2]), t([-4, 4]), t([-4, 5]), t([-5, 4]), t([-5, 5])]), e.palettemap2 = t([t([-4, -5]), t([-4, -4]), t([-5, -5]), t([-5, -4]), t([-2, -2]), t([-2, -1]), t([-1, -2]), t([-1, -1]), t([2, -5]), t([2, -4]), t([1, -5]), t([1, -4]), t([4, -2]), t([4, -1]), t([5, -2]), t([5, -1])]);
   }
   for (var k1 = e.metadatamap, B1 = 0, O1 = k1.length; B1 < O1; B1++) {
@@ -16170,8 +16156,8 @@ function Al() {
       r--;
     var Y1 = a[--r], ne = i(Y1, 1);
     if (a[r++] = Y1, a[r++] = ne, ne < 0) {
-      var he = a[--r], re = a[--r];
-      s(re, 1, n(n(he + e.rows) - 1)), a[r++] = re;
+      var Ae = a[--r], re = a[--r];
+      s(re, 1, n(n(Ae + e.rows) - 1)), a[r++] = re;
     } else
       r--;
     r--;
@@ -16207,26 +16193,26 @@ function Al() {
     r--;
   }
   for (var Se = 0, He = n(e.nummetamodules - 1); Se <= He; Se += 1) {
-    a[r++] = e.pixs, w(i(e.metadatamap, Se)), e.jmv();
+    a[r++] = e.pixs, x(i(e.metadatamap, Se)), e.jmv();
     var p2 = a[--r];
     s(a[--r], p2, 0);
   }
   if (e.slave)
     e.i = 0;
   else {
-    var oe = e.colors, A2 = 16;
+    var oe = e.colors, h2 = 16;
     if (16 > oe) {
       var G1 = oe;
-      oe = A2, A2 = G1;
+      oe = h2, h2 = G1;
     }
-    for (var Ze = 0, E2 = A2 - 1; Ze <= E2; Ze += 1) {
+    for (var Ze = 0, E2 = h2 - 1; Ze <= E2; Ze += 1) {
       e.i = Ze;
       var Ue = i(e.palettelayout, e.i);
-      a[r++] = Ue, a[r++] = e.pixs, a[r++] = Ue, w(i(e.palettemap1, e.i)), e.jmv();
+      a[r++] = Ue, a[r++] = e.pixs, a[r++] = Ue, x(i(e.palettemap1, e.i)), e.jmv();
       var z2 = a[--r], _e = a[--r];
       s(a[--r], z2, _e);
       var S2 = a[--r];
-      a[r++] = e.pixs, a[r++] = S2, w(i(e.palettemap2, e.i)), e.jmv();
+      a[r++] = e.pixs, a[r++] = S2, x(i(e.palettemap2, e.i)), e.jmv();
       var v2 = a[--r], ir = a[--r];
       s(a[--r], v2, ir);
     }
@@ -16236,19 +16222,19 @@ function Al() {
   for (var e2 = e.i, K2 = e.palettelayout.length - 1; e2 <= K2; e2 += 2) {
     e.i = e2;
     var t2 = i(e.palettelayout, e.i);
-    a[r++] = t2, a[r++] = e.pixs, a[r++] = t2, w(i(e.metadatamap, e.j)), e.jmv();
+    a[r++] = t2, a[r++] = e.pixs, a[r++] = t2, x(i(e.metadatamap, e.j)), e.jmv();
     var vr = a[--r], x2 = a[--r];
     s(a[--r], vr, x2);
-    var hr = a[--r];
-    a[r++] = e.pixs, a[r++] = hr, w(i(e.metadatamap, n(e.j + 2))), e.jmv();
+    var Ar = a[--r];
+    a[r++] = e.pixs, a[r++] = Ar, x(i(e.metadatamap, n(e.j + 2))), e.jmv();
     var U2 = a[--r], Mr = a[--r];
     s(a[--r], U2, Mr);
     var ar = i(e.palettelayout, e.i + 1);
-    a[r++] = ar, a[r++] = e.pixs, a[r++] = ar, w(i(e.metadatamap, n(e.j + 1))), e.jmv();
+    a[r++] = ar, a[r++] = e.pixs, a[r++] = ar, x(i(e.metadatamap, n(e.j + 1))), e.jmv();
     var Er = a[--r], $2 = a[--r];
     s(a[--r], Er, $2);
     var Yr = a[--r];
-    a[r++] = e.pixs, a[r++] = Yr, w(i(e.metadatamap, n(e.j + 3))), e.jmv();
+    a[r++] = e.pixs, a[r++] = Yr, x(i(e.metadatamap, n(e.j + 3))), e.jmv();
     var nr = a[--r], Dr = a[--r];
     s(a[--r], nr, Dr), e.j = n(e.j + 4);
   }
@@ -16312,8 +16298,8 @@ function Al() {
       }
       var sa = a[--r];
       a[r++] = ~~(sa / 2), a[r++] = e.pixs, a[r++] = e.posx, a[r++] = e.posy, e.jmv();
-      var aa = a[--r], Aa = a[--r];
-      s(Aa, aa, a[--r]), e.i = e.i + e.databpm;
+      var aa = a[--r], ha = a[--r];
+      s(ha, aa, a[--r]), e.i = e.i + e.databpm;
     }
     e.posy = e.posy + 1, e.posy == e.rows && (e.posy = 0, e.posx = e.posx + 1);
   }
@@ -16337,9 +16323,9 @@ function Al() {
           if (a[--r]) {
             a[r++] = 1 / 0;
             var X2 = a[--r], W2 = a[--r];
-            a[r++] = X2, w(W2);
-            var h2 = a[--r], q2 = a[--r], g2 = a[--r], C2 = a[--r], er = a[--r], dr = a[--r], fr = a[--r], qr = a[--r], Fr = a[--r];
-            if (a[r++] = Fr, a[r++] = qr, a[r++] = fr, a[r++] = dr, a[r++] = er, a[r++] = C2, a[r++] = g2, a[r++] = q2, a[r++] = h2, k(Fr, er) && k(Fr, h2) && k(fr, g2)) {
+            a[r++] = X2, x(W2);
+            var A2 = a[--r], q2 = a[--r], g2 = a[--r], C2 = a[--r], er = a[--r], dr = a[--r], fr = a[--r], qr = a[--r], Fr = a[--r];
+            if (a[r++] = Fr, a[r++] = qr, a[r++] = fr, a[r++] = dr, a[r++] = er, a[r++] = C2, a[r++] = g2, a[r++] = q2, a[r++] = A2, k(Fr, er) && k(Fr, A2) && k(fr, g2)) {
               var Vr = a[--r], Qr = a[--r], Jr = a[--r];
               e.c4 = Jr, e.c5 = Vr, a[r++] = Jr, a[r++] = Qr, (e.c4 == e.bi && e.c5 == e.yi || e.c4 == e.yi && e.c5 == e.bi || e.c4 == e.gi && e.c5 == e.mi || e.c4 == e.mi && e.c5 == e.gi) && (e.scr3 = e.scr3 + 100);
             }
@@ -16373,8 +16359,8 @@ function Al() {
       var W2 = rr() + 2;
       Re(o(e.rle, 0, W2 - 2)), e.evalrle(), e.n3 = n(a[--r] + e.n3), e.n1 = n(a[--r] + e.n1), r--;
     }
-    for (var h2 = 0, q2 = n(e.rows - 1); h2 <= q2; h2 += 1) {
-      e.i = h2, e.symrow = o(e.sym, e.i * e.cols, e.cols), a[r++] = 1 / 0;
+    for (var A2 = 0, q2 = n(e.rows - 1); A2 <= q2; A2 += 1) {
+      e.i = A2, e.symrow = o(e.sym, e.i * e.cols, e.cols), a[r++] = 1 / 0;
       var g2 = e.symrow;
       a[r++] = 0, a[r++] = -1;
       for (var C2 = 0, er = g2.length; C2 < er; C2++) {
@@ -16403,7 +16389,7 @@ function Al() {
         }
       }
       if (r--, Re(e.thispairs), r--, e.i > 0) {
-        a[r++] = 1 / 0, w(e.lastpairs), w(e.thispairs), a[r++] = e.n2;
+        a[r++] = 1 / 0, x(e.lastpairs), x(e.thispairs), a[r++] = e.n2;
         for (var Pe = 0, F2 = e.cols; Pe < F2; Pe++) {
           var Q2 = a[--r], tr = a[--r];
           if (a[r++] = Q2, a[r++] = tr, tr != -1) {
@@ -16420,10 +16406,10 @@ function Al() {
     }
     a[r++] = n(n(e.n1 + e.n2) + e.n3);
   }, e.bestscore = 999999999;
-  for (var ha = 0, ma = e.masks.length - 1; ha <= ma; ha += 1) {
-    e.m = ha, e.masksym = t(e.rows * e.cols);
+  for (var Aa = 0, ma = e.masks.length - 1; Aa <= ma; Aa += 1) {
+    e.m = Aa, e.masksym = t(e.rows * e.cols);
     for (var pr = 0, oa = n(e.rows * e.cols - 1); pr <= oa; pr += 1)
-      e.i = pr, s(e.masksym, e.i, Ar(i(e.pixs, e.i), i(i(e.masks, e.m), e.i)));
+      e.i = pr, s(e.masksym, e.i, hr(i(e.pixs, e.i), i(i(e.masks, e.m), e.i)));
     e.masks.length != 1 ? (a[r++] = e.masksym, e.evalmask(), e.score = a[--r], e.score < e.bestscore && (e.bestsym = e.masksym, e.bestmaskval = e.m, e.bestscore = e.score)) : e.bestsym = e.masksym;
   }
   if (e.pixs = e.bestsym, e.metamask = e.bestmaskval, e.addtometapart = function() {
@@ -16448,7 +16434,7 @@ function Al() {
     for (var Cr = o(e.metabits, e.i, 6), J2 = 0, $r = Cr.length; J2 < $r; J2++) {
       a[r++] = i(Cr, J2), e.colors == 4 ? a[r++] = t([e.bi, e.yi]) : a[r++] = t([e.ki, e.wi]);
       var gr = a[--r], _r = i(gr, n(a[--r] - 48));
-      a[r++] = _r, a[r++] = e.pixs, w(i(e.metadatamap, e.j)), e.jmv();
+      a[r++] = _r, a[r++] = e.pixs, x(i(e.metadatamap, e.j)), e.jmv();
       var Ur = a[--r], Ca = a[--r];
       s(Ca, Ur, a[--r]), e.j = e.j + 1;
     }
@@ -16462,7 +16448,7 @@ function Al() {
       a[r++] = n(dt + n(i(Ja, Fa) - 48)) * 2;
     }
     var Wa = i(e.metacolorindex, ~~(a[--r] / 2));
-    a[r++] = Wa, a[r++] = e.pixs, w(i(e.metadatamap, e.j)), e.jmv();
+    a[r++] = Wa, a[r++] = e.pixs, x(i(e.metadatamap, e.j)), e.jmv();
     var bt = a[--r], ua = a[--r];
     s(ua, bt, a[--r]), e.i = n(e.i + e.metabpm), e.j = e.j + 1;
   }
@@ -16536,18 +16522,18 @@ function Y2() {
       }
       if (e.v.length >= 3) {
         a[r++] = i(e.v, 0), e.isnum1(), a[r++] = i(e.v, 1), e.isnum0();
-        var g = a[--r], A = a[--r];
-        a[r++] = li(A, g), a[r++] = i(e.v, 2), e.isupper();
-        var b = a[--r], h = a[--r];
-        if (h && b) {
+        var g = a[--r], h = a[--r];
+        a[r++] = li(h, g), a[r++] = i(e.v, 2), e.isupper();
+        var b = a[--r], A = a[--r];
+        if (A && b) {
           a[r++] = 2, a[r++] = "11";
           break;
         }
       }
       if (e.v.length >= 4) {
         a[r++] = i(e.v, 0), e.isnum1(), a[r++] = i(e.v, 1), e.isnum0();
-        var x = a[--r], m = a[--r];
-        a[r++] = li(m, x), a[r++] = i(e.v, 2), e.isnum0();
+        var w = a[--r], m = a[--r];
+        a[r++] = li(m, w), a[r++] = i(e.v, 2), e.isnum0();
         var B = a[--r], I = a[--r];
         a[r++] = li(I, B), a[r++] = i(e.v, 3), e.isupper();
         var M = a[--r], R = a[--r];
@@ -16618,7 +16604,7 @@ function Y2() {
   }
   if (k(e.method, "10")) {
     if (k(i(e.ais, 0), "11") || k(i(e.ais, 0), "17")) {
-      var h1 = i(e.vals, 0), g1 = H2(C(16), "0000000000000000"), u1 = Oe(C(16), b1(o(h1, 0, 2)) * 384 + ((b1(o(h1, 2, 2)) - 1) * 32 + b1(o(h1, 4, 2))), 2);
+      var A1 = i(e.vals, 0), g1 = H2(C(16), "0000000000000000"), u1 = Oe(C(16), b1(o(A1, 0, 2)) * 384 + ((b1(o(A1, 2, 2)) - 1) * 32 + b1(o(A1, 4, 2))), 2);
       l(g1, 16 - u1.length, u1), a[r++] = g1, a[r++] = 1 / 0;
       var x1 = a[--r], Q1 = a[--r];
       a[r++] = x1, a[r++] = 1, a[r++] = 0, L(Q1, function() {
@@ -16629,7 +16615,7 @@ function Y2() {
       a[r++] = I1, e.cdf = t(), e.ais = o(e.ais, 1, e.ais.length - 1), e.vals = o(e.vals, 1, e.vals.length - 1), e.fncs = o(e.fncs, 1, e.fncs.length - 1);
     } else
       e.cdf = t([1, 0, 1, 1]);
-    e.ais.length != 0 ? k(i(e.ais, 0), "10") ? (a[r++] = 1 / 0, L(i(e.vals, 0)), e.gpf = t(), e.ais.length > 1 && (a[r++] = 1 / 0, w(e.gpf), a[r++] = e.fnc1, e.gpf = t()), e.ais = o(e.ais, 1, e.ais.length - 1), e.vals = o(e.vals, 1, e.vals.length - 1), e.fncs = o(e.fncs, 1, e.fncs.length - 1)) : e.gpf = t([e.fnc1]) : (a[r++] = 1 / 0, w(e.cdf), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, e.cdf = t(), e.gpf = t([])), e.mode = "numeric";
+    e.ais.length != 0 ? k(i(e.ais, 0), "10") ? (a[r++] = 1 / 0, L(i(e.vals, 0)), e.gpf = t(), e.ais.length > 1 && (a[r++] = 1 / 0, x(e.gpf), a[r++] = e.fnc1, e.gpf = t()), e.ais = o(e.ais, 1, e.ais.length - 1), e.vals = o(e.vals, 1, e.vals.length - 1), e.fncs = o(e.fncs, 1, e.fncs.length - 1)) : e.gpf = t([e.fnc1]) : (a[r++] = 1 / 0, x(e.cdf), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, e.cdf = t(), e.gpf = t([])), e.mode = "numeric";
   }
   if (k(e.method, "11")) {
     e.cdf = t([1, 1]), e.ai90 = i(e.vals, 0), n(e.npre + 1) != e.ai90.length ? a[r++] = o(e.ai90, n(e.npre + 1), n(n(e.ai90.length - e.npre) - 1)) : a[r++] = "", e.ai90rem = a[--r], a[r++] = "nalpha", a[r++] = 0, L(e.ai90rem, function() {
@@ -16650,11 +16636,11 @@ function Y2() {
     var P1 = a[--r];
     e[a[--r]] = P1, a[r++] = "mode", Kt(e.nalpha, e.nnums) ? a[r++] = "alpha" : e.nalpha == 0 ? a[r++] = "numeric" : a[r++] = "alphanumeric";
     var N1 = a[--r];
-    e[a[--r]] = N1, n(e.nalpha + e.nnums) != e.ai90rem.length && (e.mode = "alphanumeric"), a[r++] = 1 / 0, w(e.cdf), k(e.mode, "alphanumeric") && (a[r++] = 0), k(e.mode, "numeric") && (a[r++] = 1, a[r++] = 0), k(e.mode, "alpha") && (a[r++] = 1, a[r++] = 1), e.cdf = t(), a[r++] = "ais1", e.ais.length > 1 ? a[r++] = i(e.ais, 1) : a[r++] = -1;
+    e[a[--r]] = N1, n(e.nalpha + e.nnums) != e.ai90rem.length && (e.mode = "alphanumeric"), a[r++] = 1 / 0, x(e.cdf), k(e.mode, "alphanumeric") && (a[r++] = 0), k(e.mode, "numeric") && (a[r++] = 1, a[r++] = 0), k(e.mode, "alpha") && (a[r++] = 1, a[r++] = 1), e.cdf = t(), a[r++] = "ais1", e.ais.length > 1 ? a[r++] = i(e.ais, 1) : a[r++] = -1;
     var H1 = a[--r];
     e[a[--r]] = H1, a[r++] = "vals1", e.vals.length > 1 ? a[r++] = i(e.vals, 1) : a[r++] = -1;
     var D1 = a[--r];
-    e[a[--r]] = D1, k(e.ais1, "21") || k(e.ais1, "8004") ? (a[r++] = 1 / 0, w(e.cdf), k(e.ais1, "21") ? (a[r++] = 1, a[r++] = 0) : (a[r++] = 1, a[r++] = 1), e.cdf = t()) : (a[r++] = 1 / 0, w(e.cdf), a[r++] = 0, e.cdf = t()), a[r++] = "nval", e.npre != 0 ? a[r++] = b1(o(e.ai90, 0, e.npre)) : a[r++] = 0;
+    e[a[--r]] = D1, k(e.ais1, "21") || k(e.ais1, "8004") ? (a[r++] = 1 / 0, x(e.cdf), k(e.ais1, "21") ? (a[r++] = 1, a[r++] = 0) : (a[r++] = 1, a[r++] = 1), e.cdf = t()) : (a[r++] = 1 / 0, x(e.cdf), a[r++] = 0, e.cdf = t()), a[r++] = "nval", e.npre != 0 ? a[r++] = b1(o(e.ai90, 0, e.npre)) : a[r++] = 0;
     var G1 = a[--r];
     if (e[a[--r]] = G1, Ie("BDHIJKLNPQRSTVXZ", o(e.ai90, e.npre, 1)), a[--r]) {
       var S1 = a[--r], _1 = a[--r];
@@ -16677,7 +16663,7 @@ function Y2() {
       a[r++] = fe, L(Te, function() {
         var Je = a[--r];
         a[r++] = n(Je - 48);
-      }), e.abits = t(), a[r++] = 1 / 0, w(e.cdf), w(e.nbits), w(e.abits), e.cdf = t();
+      }), e.abits = t(), a[r++] = 1 / 0, x(e.cdf), x(e.nbits), x(e.abits), e.cdf = t();
     } else {
       var V1 = H2(C(10), "0000000000"), Ce = Oe(C(10), e.nval, 2);
       l(V1, 10 - Ce.length, Ce), a[r++] = V1, a[r++] = 1 / 0;
@@ -16686,13 +16672,13 @@ function Y2() {
         var Je = a[--r];
         a[r++] = n(Je - 48);
       }), e.nbits = t();
-      var Ae = H2(C(5), "00000"), Fe = Oe(C(5), n(i(e.ai90, e.npre) - 65), 2);
-      l(Ae, 5 - Fe.length, Fe), a[r++] = Ae, a[r++] = 1 / 0;
+      var he = H2(C(5), "00000"), Fe = Oe(C(5), n(i(e.ai90, e.npre) - 65), 2);
+      l(he, 5 - Fe.length, Fe), a[r++] = he, a[r++] = 1 / 0;
       var ce = a[--r], Ye = a[--r];
       a[r++] = ce, L(Ye, function() {
         var Je = a[--r];
         a[r++] = n(Je - 48);
-      }), e.abits = t(), a[r++] = 1 / 0, w(e.cdf), a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, w(e.nbits), w(e.abits), e.cdf = t();
+      }), e.abits = t(), a[r++] = 1 / 0, x(e.cdf), a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, x(e.nbits), x(e.abits), e.cdf = t();
     }
     if (v1(e.mode, "alpha"))
       a[r++] = 1 / 0, L(e.ai90rem), e.ais.length > 1 && (a[r++] = e.fnc1), e.gpf = t();
@@ -16707,9 +16693,9 @@ function Y2() {
           a[r++] = n(Je - 48);
         }), l(e.out, e.j, t()), e.j = a[--r].length + e.j;
       }
-      a[r++] = 1 / 0, w(e.cdf), w(o(e.out, 0, e.j)), e.cdf = t(), e.gpf = t([]), e.ais.length > 1 && (e.mode = "numeric");
+      a[r++] = 1 / 0, x(e.cdf), x(o(e.out, 0, e.j)), e.cdf = t(), e.gpf = t([]), e.ais.length > 1 && (e.mode = "numeric");
     }
-    e.ais = o(e.ais, 1, e.ais.length - 1), e.vals = o(e.vals, 1, e.vals.length - 1), e.fncs = o(e.fncs, 1, e.fncs.length - 1), e.ais.length != 0 && (k(e.ais1, "21") || k(e.ais1, "8004")) && (a[r++] = 1 / 0, w(e.gpf), L(e.vals1), e.gpf = t(), e.ais = o(e.ais, 1, e.ais.length - 1), e.vals = o(e.vals, 1, e.vals.length - 1), e.fncs = o(e.fncs, 1, e.fncs.length - 1), e.ais.length != 0 && (a[r++] = 1 / 0, w(e.gpf), a[r++] = e.fnc1, e.gpf = t()));
+    e.ais = o(e.ais, 1, e.ais.length - 1), e.vals = o(e.vals, 1, e.vals.length - 1), e.fncs = o(e.fncs, 1, e.fncs.length - 1), e.ais.length != 0 && (k(e.ais1, "21") || k(e.ais1, "8004")) && (a[r++] = 1 / 0, x(e.gpf), L(e.vals1), e.gpf = t(), e.ais = o(e.ais, 1, e.ais.length - 1), e.vals = o(e.vals, 1, e.vals.length - 1), e.fncs = o(e.fncs, 1, e.fncs.length - 1), e.ais.length != 0 && (a[r++] = 1 / 0, x(e.gpf), a[r++] = e.fnc1, e.gpf = t()));
   }
   k(e.method, "0") && (e.cdf = t([0]), e.gpf = t([]), e.mode = "numeric");
   for (var Le = 0, p = e.ais.length - 1; Le <= p; Le += 1) {
@@ -16785,7 +16771,7 @@ function Y2() {
     var _r = t();
     l(e.gpfenc, e.j, _r), e.j = _r.length + e.j;
   }, a[r++] = 1 / 0;
-  for (var A1 = 0, p1 = e.gpf.length; A1 < p1; A1++)
+  for (var h1 = 0, p1 = e.gpf.length; h1 < p1; h1++)
     a[r++] = 0;
   a[r++] = 0, a[r++] = -1, e.numericruns = t(), a[r++] = 1 / 0;
   for (var K = 0, f1 = e.gpf.length; K < f1; K++)
@@ -16807,8 +16793,8 @@ function Y2() {
     }
     var ne = i(e.numeric, a[--r]) !== void 0;
     ne ? s(e.numericruns, e.i, n(i(e.numericruns, e.i + 2) + 2)) : s(e.numericruns, e.i, 0);
-    var he = a[--r], re = i(e.alphanumeric, he) !== void 0;
-    a[r++] = he, re ? s(e.alphanumericruns, e.i, n(i(e.alphanumericruns, e.i + 1) + 1)) : s(e.alphanumericruns, e.i, 0);
+    var Ae = a[--r], re = i(e.alphanumeric, Ae) !== void 0;
+    a[r++] = Ae, re ? s(e.alphanumericruns, e.i, n(i(e.alphanumericruns, e.i + 1) + 1)) : s(e.alphanumericruns, e.i, 0);
     var Me = a[--r], z1 = i(e.iso646, Me) !== void 0, Ee = i(e.alphanumeric, Me) !== void 0;
     z1 && !Ee ? s(e.nextiso646only, e.i, 0) : s(e.nextiso646only, e.i, n(i(e.nextiso646only, e.i + 1) + 1));
   }
@@ -16893,16 +16879,16 @@ function Y2() {
   if (e[a[--r]] = Se, e.pad.length > 0) {
     for (var He = 0, p2 = e.pad.length - 1; He <= p2; He += 5) {
       e.i = He;
-      var oe = e.pad, A2 = e.i, Ze = t([0, 0, 1, 0, 0]), E2 = e.pad, Ue = e.i, z2 = 5, _e = E2.length - Ue;
+      var oe = e.pad, h2 = e.i, Ze = t([0, 0, 1, 0, 0]), E2 = e.pad, Ue = e.i, z2 = 5, _e = E2.length - Ue;
       if (E2.length - Ue > 5) {
         var S2 = z2;
         z2 = _e, _e = S2;
       }
-      l(oe, A2, o(Ze, 0, _e));
+      l(oe, h2, o(Ze, 0, _e));
     }
-    k(e.mode, "numeric") && (a[r++] = 1 / 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, w(e.pad), e.pad = o(t(), 0, e.pad.length)), k(e.mode, "alpha") && (a[r++] = 1 / 0, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, w(e.pad), e.pad = o(t(), 0, e.pad.length));
+    k(e.mode, "numeric") && (a[r++] = 1 / 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, x(e.pad), e.pad = o(t(), 0, e.pad.length)), k(e.mode, "alpha") && (a[r++] = 1 / 0, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 1, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, x(e.pad), e.pad = o(t(), 0, e.pad.length));
   }
-  if (a[r++] = 1 / 0, w(e.cdf), w(e.gpf), w(e.pad), e.bits = t(), !Y2.__28348__) {
+  if (a[r++] = 1 / 0, x(e.cdf), x(e.gpf), x(e.pad), e.bits = t(), !Y2.__28348__) {
     e = Object.create(e), a[r++] = 1 / 0, a[r++] = t([0, 0, 0, 0, 0, 0, 1]);
     for (var v2 = 0, ir = 68; v2 < ir; v2++)
       a[r++] = t(7);
@@ -16921,12 +16907,12 @@ function Y2() {
     for (var t2 = 0, vr = 28; t2 < vr; t2++)
       a[r++] = 0;
     for (e.cws = t(), e.b = 0, e.c = 0; e.b != e.bits.length; ) {
-      var x2 = e.bits, hr = e.b, U2 = e.bits, Mr = e.b, ar = U2.length - Mr, Er = 69;
+      var x2 = e.bits, Ar = e.b, U2 = e.bits, Mr = e.b, ar = U2.length - Mr, Er = 69;
       if (69 > U2.length - Mr) {
         var S2 = ar;
         ar = Er, Er = S2;
       }
-      e.bs = o(x2, hr, Er), e.bsl = e.bs.length, e.cs = o(e.cws, e.c, ~~(e.bsl / 10) + 1), e.csl = e.cs.length;
+      e.bs = o(x2, Ar, Er), e.bsl = e.bs.length, e.cs = o(e.cws, e.c, ~~(e.bsl / 10) + 1), e.csl = e.cs.length;
       for (var $2 = 0, Yr = e.bsl - 1; $2 <= Yr; $2 += 1) {
         e.i = $2;
         for (var nr = 0, Dr = e.csl - 1; nr <= Dr; nr += 1) {
@@ -16961,14 +16947,14 @@ function Y2() {
       var Zr = o(e.bits, e.i * 8, 8);
       a[r++] = 0;
       for (var sa = 0, aa = Zr.length; sa < aa; sa++) {
-        var Aa = a[--r];
-        a[r++] = n(Aa + i(Zr, sa)) * 2;
+        var ha = a[--r];
+        a[r++] = n(ha + i(Zr, sa)) * 2;
       }
       s(e.barcode, e.i, ~~(a[--r] / 2));
     }
     delete e.options.parse, s(e.options, "dontdraw", !0), s(e.options, "ccb", !0), s(e.options, "columns", e.cccolumns), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, Ea();
-    var ha = a[--r];
-    e[a[--r]] = ha;
+    var Aa = a[--r];
+    e[a[--r]] = Aa;
   }
   if (e.ccversion == "c") {
     e.barcode = C(~~(e.bits.length / 8));
@@ -16988,7 +16974,7 @@ function Y2() {
   }
   a[r++] = e.args, e.dontdraw || K1(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
 }
-function hl() {
+function Al() {
   e = Object.create(e), e.dontdraw = !1, e.usematrix = !1, e.parse = !1, e.dontlint = !1, e.lintreqs = !0, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], e.dontdraw && (e.usematrix = !0), Ie(e.barcode, "|"), a[--r] ? (e.linear = a[--r], r--, e.comp = a[--r]) : (r--, a[r++] = "bwipp.missingCompositeComponent#28478", a[r++] = "A Composite Component must be provided following a pipe character", u()), s(e.options, "lintype", "ean13"), s(e.options, "inkspreadv", 0), s(e.options, "dontdraw", !0), s(e.options, "dontlint", !0);
   var c = C(e.comp.length + 18);
   if (l(c, 0, "(01)00000000000000"), l(c, 18, e.comp), a[r++] = c, a[r++] = "ai", s2(), r -= 3, a[r++] = e.linear, a[r++] = e.options, ci(), e.usematrix) {
@@ -16996,8 +16982,8 @@ function hl() {
       var P1 = a[--r], N1 = a[--r];
       a[r++] = n(N1 + b1(P1));
     });
-    var x = a[--r];
-    e[a[--r]] = x, a[r++] = "compsym", a[r++] = e.comp, a[r++] = e.options, Y2();
+    var w = a[--r];
+    e[a[--r]] = w, a[r++] = "compsym", a[r++] = e.comp, a[r++] = e.options, Y2();
     var m = a[--r];
     e[a[--r]] = m, e.ccpixs = i(e.compsym, "pixs"), e.ccpixx = i(e.compsym, "pixx"), a[r++] = 1 / 0;
     for (var B = 0, I = n(e.ccpixx - 97); B < I; B++)
@@ -17011,32 +16997,32 @@ function hl() {
       e.ccrpad = t(0), e.pixx = e.ccpixx;
     a[r++] = 1 / 0;
     for (var Q = 0, S = e.ccpixx, T = e.ccpixs.length - 1; S < 0 ? Q >= T : Q <= T; Q += S)
-      e.i = Q, w(o(e.ccpixs, e.i, e.ccpixx)), w(e.ccrpad);
+      e.i = Q, x(o(e.ccpixs, e.i, e.ccpixx)), x(e.ccrpad);
     for (var Y = 0, W = 2; Y < W; Y++) {
-      w(e.linpad), a[r++] = 0, a[r++] = 1;
+      x(e.linpad), a[r++] = 0, a[r++] = 1;
       for (var e1 = 0, G = 93; e1 < G; e1++)
         a[r++] = 0;
-      a[r++] = 1, a[r++] = 0, w(e.ccrpad);
+      a[r++] = 1, a[r++] = 0, x(e.ccrpad);
     }
     for (var H = 0, U = 2; H < U; H++) {
-      w(e.linpad), a[r++] = 1, a[r++] = 0;
+      x(e.linpad), a[r++] = 1, a[r++] = 0;
       for (var $ = 0, n1 = 93; $ < n1; $++)
         a[r++] = 0;
-      a[r++] = 0, a[r++] = 1, w(e.ccrpad);
+      a[r++] = 0, a[r++] = 1, x(e.ccrpad);
     }
     for (var P = 0, V = 2; P < V; P++) {
-      w(e.linpad), a[r++] = 0, a[r++] = 1;
+      x(e.linpad), a[r++] = 0, a[r++] = 1;
       for (var J = 0, X = 93; J < X; J++)
         a[r++] = 0;
-      a[r++] = 1, a[r++] = 0, w(e.ccrpad);
+      a[r++] = 1, a[r++] = 0, x(e.ccrpad);
     }
     for (var a1 = 71; a1 >= 0; a1 -= 1) {
-      e.y = a1, w(e.linpad), a[r++] = 0;
+      e.y = a1, x(e.linpad), a[r++] = 0;
       for (var i1 = 0, l1 = e.sbs.length - 1; i1 <= l1; i1 += 1)
         if (e.i = i1, e.i % 2 == 0) {
           var _ = i(e.bbs, ~~(e.i / 2)) * 72;
           if (_ > e.y || n(_ + i(e.bhs, ~~(e.i / 2)) * 72) < e.y)
-            for (var h1 = 0, g1 = b1(i(e.sbs, e.i)); h1 < g1; h1++)
+            for (var A1 = 0, g1 = b1(i(e.sbs, e.i)); A1 < g1; A1++)
               a[r++] = 0;
           else
             for (var u1 = 0, x1 = b1(i(e.sbs, e.i)); u1 < x1; u1++)
@@ -17065,13 +17051,13 @@ function hl() {
     for (var d = 0, y = 93; d < y; d++)
       a[r++] = 0;
     a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 1;
-    for (var g = 0, A = 93; g < A; g++)
+    for (var g = 0, h = 93; g < h; g++)
       a[r++] = 0;
     a[r++] = 1, a[r++] = 0;
     var b = t();
     a[r++] = "ren", a[r++] = "renmatrix", a[r++] = "pixs", a[r++] = b, a[r++] = "pixx", a[r++] = 97, a[r++] = "pixy", a[r++] = 3, a[r++] = "height", a[r++] = 6 / 72, a[r++] = "width", a[r++] = 97 / 72, a[r++] = "opt", a[r++] = e.options;
-    var h = C1();
-    a[r++] = h, K1(), z.rmoveto(-2, 6), a[r++] = e.comp, a[r++] = e.options, Y2(), K1(), z.restore();
+    var A = C1();
+    a[r++] = A, K1(), z.rmoveto(-2, 6), a[r++] = e.comp, a[r++] = e.options, Y2(), K1(), z.restore();
   }
   e = Object.getPrototypeOf(e);
 }
@@ -17100,28 +17086,28 @@ function ml() {
       e.ccrpad = t(0), e.pixx = e.ccpixx;
     a[r++] = 1 / 0;
     for (var T = 0, Y = e.ccpixx, W = e.ccpixs.length - 1; Y < 0 ? T >= W : T <= W; T += Y)
-      e.i = T, w(o(e.ccpixs, e.i, e.ccpixx)), w(e.ccrpad);
+      e.i = T, x(o(e.ccpixs, e.i, e.ccpixx)), x(e.ccrpad);
     for (var e1 = 0, G = 2; e1 < G; e1++) {
-      w(e.linpad), a[r++] = 0, a[r++] = 1;
+      x(e.linpad), a[r++] = 0, a[r++] = 1;
       for (var H = 0, U = 65; H < U; H++)
         a[r++] = 0;
-      a[r++] = 1, a[r++] = 0, w(e.ccrpad);
+      a[r++] = 1, a[r++] = 0, x(e.ccrpad);
     }
     for (var $ = 0, n1 = 2; $ < n1; $++) {
-      w(e.linpad), a[r++] = 1, a[r++] = 0;
+      x(e.linpad), a[r++] = 1, a[r++] = 0;
       for (var P = 0, V = 65; P < V; P++)
         a[r++] = 0;
-      a[r++] = 0, a[r++] = 1, w(e.ccrpad);
+      a[r++] = 0, a[r++] = 1, x(e.ccrpad);
     }
     for (var J = 0, X = 2; J < X; J++) {
-      w(e.linpad), a[r++] = 0, a[r++] = 1;
+      x(e.linpad), a[r++] = 0, a[r++] = 1;
       for (var a1 = 0, i1 = 65; a1 < i1; a1++)
         a[r++] = 0;
-      a[r++] = 1, a[r++] = 0, w(e.ccrpad);
+      a[r++] = 1, a[r++] = 0, x(e.ccrpad);
     }
     for (var l1 = 71; l1 >= 0; l1 -= 1) {
-      e.y = l1, w(e.linpad), a[r++] = 0;
-      for (var _ = 0, h1 = e.sbs.length - 1; _ <= h1; _ += 1)
+      e.y = l1, x(e.linpad), a[r++] = 0;
+      for (var _ = 0, A1 = e.sbs.length - 1; _ <= A1; _ += 1)
         if (e.i = _, e.i % 2 == 0) {
           var g1 = i(e.bbs, ~~(e.i / 2)) * 72;
           if (g1 > e.y || n(g1 + i(e.bhs, ~~(e.i / 2)) * 72) < e.y)
@@ -17154,15 +17140,15 @@ function ml() {
     for (var d = 0, y = 65; d < y; d++)
       a[r++] = 0;
     a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 1;
-    for (var g = 0, A = 65; g < A; g++)
+    for (var g = 0, h = 65; g < h; g++)
       a[r++] = 0;
     a[r++] = 1, a[r++] = 0;
     var b = t();
     a[r++] = "ren", a[r++] = "renmatrix", a[r++] = "pixs", a[r++] = b, a[r++] = "pixx", a[r++] = 69, a[r++] = "pixy", a[r++] = 3, a[r++] = "height", a[r++] = 6 / 72, a[r++] = "width", a[r++] = 69 / 72, a[r++] = "opt", a[r++] = e.options;
-    var h = C1();
-    a[r++] = h, K1(), a[r++] = e.comp, a[r++] = e.options, Y2();
-    var x = a[--r];
-    z.rmoveto(n(69 - i(x, "pixx")), 6), a[r++] = x, K1(), z.restore();
+    var A = C1();
+    a[r++] = A, K1(), a[r++] = e.comp, a[r++] = e.options, Y2();
+    var w = a[--r];
+    z.rmoveto(n(69 - i(w, "pixx")), 6), a[r++] = w, K1(), z.restore();
   }
   e = Object.getPrototypeOf(e);
 }
@@ -17174,8 +17160,8 @@ function gl() {
       var P1 = a[--r], N1 = a[--r];
       a[r++] = n(N1 + b1(P1));
     });
-    var x = a[--r];
-    e[a[--r]] = x, a[r++] = "compsym", a[r++] = e.comp, a[r++] = e.options, Y2();
+    var w = a[--r];
+    e[a[--r]] = w, a[r++] = "compsym", a[r++] = e.comp, a[r++] = e.options, Y2();
     var m = a[--r];
     e[a[--r]] = m, e.ccpixs = i(e.compsym, "pixs"), e.ccpixx = i(e.compsym, "pixx"), a[r++] = 1 / 0;
     for (var B = 0, I = n(e.ccpixx - 97); B < I; B++)
@@ -17189,32 +17175,32 @@ function gl() {
       e.ccrpad = t(0), e.pixx = e.ccpixx;
     a[r++] = 1 / 0;
     for (var Q = 0, S = e.ccpixx, T = e.ccpixs.length - 1; S < 0 ? Q >= T : Q <= T; Q += S)
-      e.i = Q, w(o(e.ccpixs, e.i, e.ccpixx)), w(e.ccrpad);
+      e.i = Q, x(o(e.ccpixs, e.i, e.ccpixx)), x(e.ccrpad);
     for (var Y = 0, W = 2; Y < W; Y++) {
-      w(e.linpad), a[r++] = 0, a[r++] = 1;
+      x(e.linpad), a[r++] = 0, a[r++] = 1;
       for (var e1 = 0, G = 93; e1 < G; e1++)
         a[r++] = 0;
-      a[r++] = 1, a[r++] = 0, w(e.ccrpad);
+      a[r++] = 1, a[r++] = 0, x(e.ccrpad);
     }
     for (var H = 0, U = 2; H < U; H++) {
-      w(e.linpad), a[r++] = 1, a[r++] = 0;
+      x(e.linpad), a[r++] = 1, a[r++] = 0;
       for (var $ = 0, n1 = 93; $ < n1; $++)
         a[r++] = 0;
-      a[r++] = 0, a[r++] = 1, w(e.ccrpad);
+      a[r++] = 0, a[r++] = 1, x(e.ccrpad);
     }
     for (var P = 0, V = 2; P < V; P++) {
-      w(e.linpad), a[r++] = 0, a[r++] = 1;
+      x(e.linpad), a[r++] = 0, a[r++] = 1;
       for (var J = 0, X = 93; J < X; J++)
         a[r++] = 0;
-      a[r++] = 1, a[r++] = 0, w(e.ccrpad);
+      a[r++] = 1, a[r++] = 0, x(e.ccrpad);
     }
     for (var a1 = 71; a1 >= 0; a1 -= 1) {
-      e.y = a1, w(e.linpad), a[r++] = 0;
+      e.y = a1, x(e.linpad), a[r++] = 0;
       for (var i1 = 0, l1 = e.sbs.length - 1; i1 <= l1; i1 += 1)
         if (e.i = i1, e.i % 2 == 0) {
           var _ = i(e.bbs, ~~(e.i / 2)) * 72;
           if (_ > e.y || n(_ + i(e.bhs, ~~(e.i / 2)) * 72) < e.y)
-            for (var h1 = 0, g1 = b1(i(e.sbs, e.i)); h1 < g1; h1++)
+            for (var A1 = 0, g1 = b1(i(e.sbs, e.i)); A1 < g1; A1++)
               a[r++] = 0;
           else
             for (var u1 = 0, x1 = b1(i(e.sbs, e.i)); u1 < x1; u1++)
@@ -17243,13 +17229,13 @@ function gl() {
     for (var d = 0, y = 93; d < y; d++)
       a[r++] = 0;
     a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 1;
-    for (var g = 0, A = 93; g < A; g++)
+    for (var g = 0, h = 93; g < h; g++)
       a[r++] = 0;
     a[r++] = 1, a[r++] = 0;
     var b = t();
     a[r++] = "ren", a[r++] = "renmatrix", a[r++] = "pixs", a[r++] = b, a[r++] = "pixx", a[r++] = 97, a[r++] = "pixy", a[r++] = 3, a[r++] = "height", a[r++] = 6 / 72, a[r++] = "width", a[r++] = 97 / 72, a[r++] = "opt", a[r++] = e.options;
-    var h = C1();
-    a[r++] = h, K1(), z.rmoveto(-2, 6), a[r++] = e.comp, a[r++] = e.options, Y2(), K1(), z.restore();
+    var A = C1();
+    a[r++] = A, K1(), z.rmoveto(-2, 6), a[r++] = e.comp, a[r++] = e.options, Y2(), K1(), z.restore();
   }
   e = Object.getPrototypeOf(e);
 }
@@ -17261,8 +17247,8 @@ function ul() {
       var P1 = a[--r], N1 = a[--r];
       a[r++] = n(N1 + b1(P1));
     });
-    var x = a[--r];
-    e[a[--r]] = x, a[r++] = "compsym", a[r++] = e.comp, a[r++] = e.options, Y2();
+    var w = a[--r];
+    e[a[--r]] = w, a[r++] = "compsym", a[r++] = e.comp, a[r++] = e.options, Y2();
     var m = a[--r];
     e[a[--r]] = m, e.ccpixs = i(e.compsym, "pixs"), e.ccpixx = i(e.compsym, "pixx"), a[r++] = 1 / 0;
     for (var B = 0, I = n(e.ccpixx - 53); B < I; B++)
@@ -17276,32 +17262,32 @@ function ul() {
       e.ccrpad = t(0), e.pixx = e.ccpixx;
     a[r++] = 1 / 0;
     for (var Q = 0, S = e.ccpixx, T = e.ccpixs.length - 1; S < 0 ? Q >= T : Q <= T; Q += S)
-      e.i = Q, w(o(e.ccpixs, e.i, e.ccpixx)), w(e.ccrpad);
+      e.i = Q, x(o(e.ccpixs, e.i, e.ccpixx)), x(e.ccrpad);
     for (var Y = 0, W = 2; Y < W; Y++) {
-      w(e.linpad), a[r++] = 0, a[r++] = 1;
+      x(e.linpad), a[r++] = 0, a[r++] = 1;
       for (var e1 = 0, G = 49; e1 < G; e1++)
         a[r++] = 0;
-      a[r++] = 1, a[r++] = 0, w(e.ccrpad);
+      a[r++] = 1, a[r++] = 0, x(e.ccrpad);
     }
     for (var H = 0, U = 2; H < U; H++) {
-      w(e.linpad), a[r++] = 1, a[r++] = 0;
+      x(e.linpad), a[r++] = 1, a[r++] = 0;
       for (var $ = 0, n1 = 49; $ < n1; $++)
         a[r++] = 0;
-      a[r++] = 0, a[r++] = 1, w(e.ccrpad);
+      a[r++] = 0, a[r++] = 1, x(e.ccrpad);
     }
     for (var P = 0, V = 2; P < V; P++) {
-      w(e.linpad), a[r++] = 0, a[r++] = 1;
+      x(e.linpad), a[r++] = 0, a[r++] = 1;
       for (var J = 0, X = 49; J < X; J++)
         a[r++] = 0;
-      a[r++] = 1, a[r++] = 0, w(e.ccrpad);
+      a[r++] = 1, a[r++] = 0, x(e.ccrpad);
     }
     for (var a1 = 71; a1 >= 0; a1 -= 1) {
-      e.y = a1, w(e.linpad), a[r++] = 0;
+      e.y = a1, x(e.linpad), a[r++] = 0;
       for (var i1 = 0, l1 = e.sbs.length - 1; i1 <= l1; i1 += 1)
         if (e.i = i1, e.i % 2 == 0) {
           var _ = i(e.bbs, ~~(e.i / 2)) * 72;
           if (_ > e.y || n(_ + i(e.bhs, ~~(e.i / 2)) * 72) < e.y)
-            for (var h1 = 0, g1 = b1(i(e.sbs, e.i)); h1 < g1; h1++)
+            for (var A1 = 0, g1 = b1(i(e.sbs, e.i)); A1 < g1; A1++)
               a[r++] = 0;
           else
             for (var u1 = 0, x1 = b1(i(e.sbs, e.i)); u1 < x1; u1++)
@@ -17330,13 +17316,13 @@ function ul() {
     for (var d = 0, y = 49; d < y; d++)
       a[r++] = 0;
     a[r++] = 0, a[r++] = 1, a[r++] = 0, a[r++] = 1;
-    for (var g = 0, A = 49; g < A; g++)
+    for (var g = 0, h = 49; g < h; g++)
       a[r++] = 0;
     a[r++] = 1, a[r++] = 0;
     var b = t();
     a[r++] = "ren", a[r++] = "renmatrix", a[r++] = "pixs", a[r++] = b, a[r++] = "pixx", a[r++] = 53, a[r++] = "pixy", a[r++] = 3, a[r++] = "height", a[r++] = 6 / 72, a[r++] = "width", a[r++] = 53 / 72, a[r++] = "opt", a[r++] = e.options;
-    var h = C1();
-    a[r++] = h, K1(), z.rmoveto(-2, 6), a[r++] = e.comp, a[r++] = e.options, Y2(), K1(), z.restore();
+    var A = C1();
+    a[r++] = A, K1(), z.rmoveto(-2, 6), a[r++] = e.comp, a[r++] = e.options, Y2(), K1(), z.restore();
   }
   e = Object.getPrototypeOf(e);
 }
@@ -17381,14 +17367,14 @@ function wl() {
       a[r++] = B;
       for (var M = 0, R = b1(m); M < R; M++)
         a[r++] = I;
-    }), e.linpixs = t(), a[r++] = 1 / 0, a[r++] = 0, w(e.sep), e.sep = t(), e.linheight = ~~e.linheight, a[r++] = 1 / 0;
-    for (var y = 0, g = e.ccpixx, A = e.ccpixs.length - 1; g < 0 ? y >= A : y <= A; y += g)
-      e.i = y, w(o(e.ccpixs, e.i, e.ccpixx)), a[r++] = 0;
-    a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, w(e.sep);
-    for (var b = 0, h = e.linheight; b < h; b++)
-      a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, w(e.linpixs);
+    }), e.linpixs = t(), a[r++] = 1 / 0, a[r++] = 0, x(e.sep), e.sep = t(), e.linheight = ~~e.linheight, a[r++] = 1 / 0;
+    for (var y = 0, g = e.ccpixx, h = e.ccpixs.length - 1; g < 0 ? y >= h : y <= h; y += g)
+      e.i = y, x(o(e.ccpixs, e.i, e.ccpixx)), a[r++] = 0;
+    a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, x(e.sep);
+    for (var b = 0, A = e.linheight; b < A; b++)
+      a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, x(e.linpixs);
     e.pixs = t(), e.pixx = n(e.ccpixx + 1), e.pixy = ~~(e.pixs.length / e.pixx);
-    var x = /* @__PURE__ */ new Map([
+    var w = /* @__PURE__ */ new Map([
       ["ren", "renmatrix"],
       ["pixs", e.pixs],
       ["pixx", e.pixx],
@@ -17397,7 +17383,7 @@ function wl() {
       ["width", e.pixx / 72],
       ["opt", e.options]
     ]);
-    a[r++] = x, e.dontdraw || (z.save(), K1(), z.restore());
+    a[r++] = w, e.dontdraw || (z.save(), K1(), z.restore());
   } else {
     z.rmoveto(0, e.linheight);
     var v = /* @__PURE__ */ new Map([
@@ -17443,13 +17429,13 @@ function xl() {
     a[r++] = n(1 - i(v, d));
   if (e.sep = t(), l(e.sep, 0, t([0, 0, 0, 0])), l(e.sep, e.sep.length - 4, t([0, 0, 0, 0])), a[r++] = 18, e.sepfinder(), e.usematrix) {
     a[r++] = "compsym", a[r++] = e.comp, a[r++] = e.options, Y2();
-    var A = a[--r];
-    e[a[--r]] = A, e.ccpixs = i(e.compsym, "pixs"), e.ccpixx = i(e.compsym, "pixx"), e.linwidth = e.sep.length, a[r++] = 1 / 0;
-    for (var b = 0, h = e.ccpixx, x = e.ccpixs.length - 1; h < 0 ? b >= x : b <= x; b += h)
-      e.i = b, a[r++] = 0, w(o(e.ccpixs, e.i, e.ccpixx));
-    w(e.sep), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0;
+    var h = a[--r];
+    e[a[--r]] = h, e.ccpixs = i(e.compsym, "pixs"), e.ccpixx = i(e.compsym, "pixx"), e.linwidth = e.sep.length, a[r++] = 1 / 0;
+    for (var b = 0, A = e.ccpixx, w = e.ccpixs.length - 1; A < 0 ? b >= w : b <= w; b += A)
+      e.i = b, a[r++] = 0, x(o(e.ccpixs, e.i, e.ccpixx));
+    x(e.sep), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0;
     for (var m = 0, B = e.linwidth, I = e.linpixs.length - 1; B < 0 ? m >= I : m <= I; m += B)
-      e.i = m, w(o(e.linpixs, e.i, e.linwidth)), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0;
+      e.i = m, x(o(e.linpixs, e.i, e.linwidth)), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0;
     e.pixs = t(), e.pixx = n(e.ccpixx + 1), e.pixy = ~~(e.pixs.length / e.pixx);
     var M = /* @__PURE__ */ new Map([
       ["ren", "renmatrix"],
@@ -17506,13 +17492,13 @@ function yl() {
     a[r++] = n(1 - i(v, d));
   if (e.sep = t(), l(e.sep, 0, t([0, 0, 0, 0])), l(e.sep, e.sep.length - 4, t([0, 0, 0, 0])), a[r++] = 18, e.sepfinder(), e.usematrix) {
     a[r++] = "compsym", a[r++] = e.comp, a[r++] = e.options, Y2();
-    var A = a[--r];
-    e[a[--r]] = A, e.ccpixs = i(e.compsym, "pixs"), e.ccpixx = i(e.compsym, "pixx"), e.linwidth = e.sep.length, a[r++] = 1 / 0;
-    for (var b = 0, h = e.ccpixx, x = e.ccpixs.length - 1; h < 0 ? b >= x : b <= x; b += h)
-      e.i = b, a[r++] = 0, w(o(e.ccpixs, e.i, e.ccpixx));
-    w(e.sep), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0;
+    var h = a[--r];
+    e[a[--r]] = h, e.ccpixs = i(e.compsym, "pixs"), e.ccpixx = i(e.compsym, "pixx"), e.linwidth = e.sep.length, a[r++] = 1 / 0;
+    for (var b = 0, A = e.ccpixx, w = e.ccpixs.length - 1; A < 0 ? b >= w : b <= w; b += A)
+      e.i = b, a[r++] = 0, x(o(e.ccpixs, e.i, e.ccpixx));
+    x(e.sep), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0;
     for (var m = 0, B = e.linwidth, I = e.linpixs.length - 1; B < 0 ? m >= I : m <= I; m += B)
-      e.i = m, w(o(e.linpixs, e.i, e.linwidth)), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0;
+      e.i = m, x(o(e.linpixs, e.i, e.linwidth)), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0;
     e.pixs = t(), e.pixx = n(e.ccpixx + 1), e.pixy = ~~(e.pixs.length / e.pixx);
     var M = /* @__PURE__ */ new Map([
       ["ren", "renmatrix"],
@@ -17580,14 +17566,14 @@ function kl() {
       a[r++] = B;
       for (var M = 0, R = b1(m); M < R; M++)
         a[r++] = I;
-    }), e.linpixs = t(), a[r++] = 1 / 0, a[r++] = 0, w(e.sep), e.sep = t(), e.linheight = ~~e.linheight, a[r++] = 1 / 0;
-    for (var y = 0, g = e.ccpixx, A = e.ccpixs.length - 1; g < 0 ? y >= A : y <= A; y += g)
-      e.i = y, w(o(e.ccpixs, e.i, e.ccpixx)), a[r++] = 0;
-    a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, w(e.sep);
-    for (var b = 0, h = e.linheight; b < h; b++)
-      a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, w(e.linpixs);
+    }), e.linpixs = t(), a[r++] = 1 / 0, a[r++] = 0, x(e.sep), e.sep = t(), e.linheight = ~~e.linheight, a[r++] = 1 / 0;
+    for (var y = 0, g = e.ccpixx, h = e.ccpixs.length - 1; g < 0 ? y >= h : y <= h; y += g)
+      e.i = y, x(o(e.ccpixs, e.i, e.ccpixx)), a[r++] = 0;
+    a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, x(e.sep);
+    for (var b = 0, A = e.linheight; b < A; b++)
+      a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, x(e.linpixs);
     e.pixs = t(), e.pixx = n(e.ccpixx + 1), e.pixy = ~~(e.pixs.length / e.pixx);
-    var x = /* @__PURE__ */ new Map([
+    var w = /* @__PURE__ */ new Map([
       ["ren", "renmatrix"],
       ["pixs", e.pixs],
       ["pixx", e.pixx],
@@ -17596,7 +17582,7 @@ function kl() {
       ["width", e.pixx / 72],
       ["opt", e.options]
     ]);
-    a[r++] = x, e.dontdraw || (z.save(), K1(), z.restore());
+    a[r++] = w, e.dontdraw || (z.save(), K1(), z.restore());
   } else {
     z.rmoveto(0, e.linheight);
     var v = /* @__PURE__ */ new Map([
@@ -17626,27 +17612,27 @@ function Il() {
   var v = e.sep;
   if (l(e.sep, v.length - 9, t([0, 0, 0, 0, 0, 0, 0, 0, 0])), e.usematrix) {
     a[r++] = "compsym", a[r++] = e.comp, a[r++] = e.options, Y2();
-    var A = a[--r];
-    if (e[a[--r]] = A, e.ccpixs = i(e.compsym, "pixs"), e.ccpixx = i(e.compsym, "pixx"), a[r++] = 1 / 0, a[r++] = 0, L(e.linsbs, function() {
+    var h = a[--r];
+    if (e[a[--r]] = h, e.ccpixs = i(e.compsym, "pixs"), e.ccpixx = i(e.compsym, "pixx"), a[r++] = 1 / 0, a[r++] = 0, L(e.linsbs, function() {
       var Y = a[--r], W = a[--r], e1 = W == 0 ? 1 : 0;
       a[r++] = W;
       for (var G = 0, H = b1(Y); G < H; G++)
         a[r++] = e1;
-    }), e.linpixs = t(), a[r++] = 1 / 0, a[r++] = 0, w(e.sep), e.sep = t(), e.linheight = ~~e.linheight, e.ccpixx == 72) {
+    }), e.linpixs = t(), a[r++] = 1 / 0, a[r++] = 0, x(e.sep), e.sep = t(), e.linheight = ~~e.linheight, e.ccpixx == 72) {
       a[r++] = 1 / 0;
-      for (var b = 0, h = e.ccpixx, x = e.ccpixs.length - 1; h < 0 ? b >= x : b <= x; b += h)
-        e.i = b, a[r++] = 0, w(o(e.ccpixs, e.i, e.ccpixx)), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0;
-      w(e.sep);
+      for (var b = 0, A = e.ccpixx, w = e.ccpixs.length - 1; A < 0 ? b >= w : b <= w; b += A)
+        e.i = b, a[r++] = 0, x(o(e.ccpixs, e.i, e.ccpixx)), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0;
+      x(e.sep);
       for (var m = 0, B = e.linheight; m < B; m++)
-        w(e.linpixs);
+        x(e.linpixs);
       e.pixs = t(), e.pixx = e.linpixs.length;
     } else {
       a[r++] = 1 / 0;
       for (var I = 0, M = e.ccpixx, R = e.ccpixs.length - 1; M < 0 ? I >= R : I <= R; I += M)
-        e.i = I, w(o(e.ccpixs, e.i, e.ccpixx)), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0;
-      a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, w(e.sep);
+        e.i = I, x(o(e.ccpixs, e.i, e.ccpixx)), a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0;
+      a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, x(e.sep);
       for (var Q = 0, S = e.linheight; Q < S; Q++)
-        a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, w(e.linpixs);
+        a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, a[r++] = 0, x(e.linpixs);
       e.pixs = t(), e.pixx = n(e.ccpixx + 6);
     }
     e.pixy = ~~(e.pixs.length / e.pixx);
@@ -17709,8 +17695,8 @@ function Bl() {
     a[r++] = v;
   for (var y = 69, g = e.bot.length - 13; y <= g; y += 98)
     a[r++] = y;
-  for (var A = t(), b = 0, h = A.length; b < h; b++)
-    a[r++] = i(A, b), e.sepfinder();
+  for (var h = t(), b = 0, A = h.length; b < A; b++)
+    a[r++] = i(h, b), e.sepfinder();
   if (e.usematrix) {
     a[r++] = "compsym", a[r++] = e.comp, a[r++] = e.options, Y2();
     var m = a[--r];
@@ -17719,15 +17705,15 @@ function Bl() {
       a[r++] = e1;
       for (var H = 0, U = b1(W); H < U; H++)
         a[r++] = G;
-    }), e.linpixs = t(), a[r++] = 1 / 0, a[r++] = 0, w(e.sep), e.sep = t(), e.linheight = ~~e.linheight, e.diff = n(e.linpixs.length - e.ccpixx), a[r++] = 1 / 0;
+    }), e.linpixs = t(), a[r++] = 1 / 0, a[r++] = 0, x(e.sep), e.sep = t(), e.linheight = ~~e.linheight, e.diff = n(e.linpixs.length - e.ccpixx), a[r++] = 1 / 0;
     for (var B = 0, I = n(e.diff - 2); B < I; B++)
       a[r++] = 0;
     e.ccrpad = t(), a[r++] = 1 / 0;
     for (var M = 0, R = e.ccpixx, Q = e.ccpixs.length - 1; R < 0 ? M >= Q : M <= Q; M += R)
-      e.i = M, a[r++] = 0, a[r++] = 0, w(o(e.ccpixs, e.i, e.ccpixx)), w(e.ccrpad);
-    w(e.sep);
+      e.i = M, a[r++] = 0, a[r++] = 0, x(o(e.ccpixs, e.i, e.ccpixx)), x(e.ccrpad);
+    x(e.sep);
     for (var S = 0, T = e.linheight; S < T; S++)
-      w(e.linpixs);
+      x(e.linpixs);
     e.pixs = t(), e.pixx = e.linpixs.length, e.pixy = ~~(e.pixs.length / e.pixx);
     var Y = /* @__PURE__ */ new Map([
       ["ren", "renmatrix"],
@@ -17741,7 +17727,7 @@ function Bl() {
     a[r++] = Y, e.dontdraw || (z.save(), K1(), z.restore());
   } else {
     z.rmoveto(0, e.linheight);
-    var x = /* @__PURE__ */ new Map([
+    var w = /* @__PURE__ */ new Map([
       ["ren", "renmatrix"],
       ["pixs", e.sep],
       ["pixx", e.sep.length],
@@ -17750,7 +17736,7 @@ function Bl() {
       ["width", e.sep.length / 72],
       ["opt", e.options]
     ]);
-    a[r++] = x, K1(), z.rmoveto(1, 1), a[r++] = e.comp, a[r++] = e.options, Y2(), K1(), z.restore();
+    a[r++] = w, K1(), z.rmoveto(1, 1), a[r++] = e.comp, a[r++] = e.options, Y2(), K1(), z.restore();
   }
   e = Object.getPrototypeOf(e);
 }
@@ -17777,12 +17763,12 @@ function Ml() {
   for (var v = e.bot, d = 0, y = v.length; d < y; d++)
     a[r++] = n(1 - i(v, d));
   e.sep = t(), l(e.sep, 0, t([0, 0, 0, 0])), l(e.sep, e.sep.length - 4, t([0, 0, 0, 0])), a[r++] = 1 / 0;
-  for (var g = 19, A = e.bot.length - 13; g <= A; g += 98)
+  for (var g = 19, h = e.bot.length - 13; g <= h; g += 98)
     a[r++] = g;
-  for (var b = 70, h = e.bot.length - 13; b <= h; b += 98)
+  for (var b = 70, A = e.bot.length - 13; b <= A; b += 98)
     a[r++] = b;
-  for (var x = t(), m = 0, B = x.length; m < B; m++)
-    a[r++] = i(x, m), e.sepfinder();
+  for (var w = t(), m = 0, B = w.length; m < B; m++)
+    a[r++] = i(w, m), e.sepfinder();
   if (e.usematrix) {
     a[r++] = "compsym", a[r++] = e.comp, a[r++] = e.options, Y2();
     var R = a[--r];
@@ -17794,8 +17780,8 @@ function Ml() {
       a[r++] = 0;
     e.ccrpad = t(), a[r++] = 1 / 0;
     for (var W = 0, e1 = e.ccpixx, G = e.ccpixs.length - 1; e1 < 0 ? W >= G : W <= G; W += e1)
-      e.i = W, w(e.cclpad), w(o(e.ccpixs, e.i, e.ccpixx)), w(e.ccrpad);
-    w(e.sep), w(e.linpixs), e.pixs = t(), e.pixy = ~~(e.pixs.length / e.pixx);
+      e.i = W, x(e.cclpad), x(o(e.ccpixs, e.i, e.ccpixx)), x(e.ccrpad);
+    x(e.sep), x(e.linpixs), e.pixs = t(), e.pixy = ~~(e.pixs.length / e.pixx);
     var H = /* @__PURE__ */ new Map([
       ["ren", "renmatrix"],
       ["pixs", e.pixs],
@@ -17840,8 +17826,8 @@ function El() {
   L(y);
   var g = C1();
   a[r++] = g, Ts();
-  var A = a[--r];
-  if (e.linsbs = i(A, "sbs"), e.linheight = i(i(A, "bhs"), 0) * 72, a[r++] = A, e.usematrix ? r-- : ve(), a[r++] = 1 / 0, a[r++] = 1, L(e.linsbs, function() {
+  var h = a[--r];
+  if (e.linsbs = i(h, "sbs"), e.linheight = i(i(h, "bhs"), 0) * 72, a[r++] = h, e.usematrix ? r-- : ve(), a[r++] = 1 / 0, a[r++] = 1, L(e.linsbs, function() {
     var $ = a[--r], n1 = a[--r], P = n1 == 0 ? 1 : 0;
     a[r++] = n1;
     for (var V = 0, J = $; V < J; V++)
@@ -17861,11 +17847,11 @@ function El() {
   }
   if (k(e.linktype, "a")) {
     if (e.s = ~~(n(e.linwidth - 2) / 11), e.p = ~~((e.s - 9) / 2), a[r++] = "x", a[r++] = (e.s - e.p - 1) * 11 + 10, e.p == 0) {
-      var h = a[--r];
-      a[r++] = n(h + 2);
+      var A = a[--r];
+      a[r++] = n(A + 2);
     }
-    var x = a[--r];
-    e[a[--r]] = n(x - 99);
+    var w = a[--r];
+    e[a[--r]] = n(w - 99);
   } else
     e.x = -7;
   if (!e.usematrix)
@@ -17900,10 +17886,10 @@ function El() {
     }
     e.linheight = ~~e.linheight, a[r++] = 1 / 0;
     for (var Y = 0, W = e.ccpixx, e1 = e.ccpixs.length - 1; W < 0 ? Y >= e1 : Y <= e1; Y += W)
-      e.i = Y, w(e.cclpad), w(o(e.ccpixs, e.i, e.ccpixx)), w(e.ccrpad);
-    w(e.linlpad), w(e.sep), w(e.linrpad);
+      e.i = Y, x(e.cclpad), x(o(e.ccpixs, e.i, e.ccpixx)), x(e.ccrpad);
+    x(e.linlpad), x(e.sep), x(e.linrpad);
     for (var G = 0, H = e.linheight; G < H; G++)
-      w(e.linlpad), w(e.linpixs), w(e.linrpad);
+      x(e.linlpad), x(e.linpixs), x(e.linrpad);
     e.pixs = t(), e.pixx = n(n(e.cclpad.length + e.ccpixx) + e.ccrpad.length), e.pixy = ~~(e.pixs.length / e.pixx);
     var U = /* @__PURE__ */ new Map([
       ["ren", "renmatrix"],
@@ -17926,12 +17912,12 @@ function jl() {
     l(v, 0, e.dmtx), a[r++] = v, a[r++] = v, a[r++] = e.dmtx.length, a[r++] = e.ai, a[r++] = 1 / 0;
     var d = a[--r], y = a[--r];
     a[r++] = d, L(y);
-    var g = t(), A = a[--r];
-    l(a[--r], A, g);
+    var g = t(), h = a[--r];
+    l(a[--r], h, g);
     var b = a[--r];
     a[r++] = b, a[r++] = b, a[r++] = e.dmtx.length + e.ai.length, a[r++] = e.val, a[r++] = 1 / 0;
-    var h = a[--r], x = a[--r];
-    a[r++] = h, L(x);
+    var A = a[--r], w = a[--r];
+    a[r++] = A, L(w);
     var m = t(), B = a[--r];
     if (l(a[--r], B, m), e.dmtx = a[--r], e.i != e.ais.length - 1 && i(e.fncs, e.i)) {
       var I = t(e.dmtx.length + 1);
@@ -17956,12 +17942,12 @@ function Cl() {
     l(v, 0, e.dmtx), a[r++] = v, a[r++] = v, a[r++] = e.dmtx.length, a[r++] = e.ai, a[r++] = 1 / 0;
     var d = a[--r], y = a[--r];
     a[r++] = d, L(y);
-    var g = t(), A = a[--r];
-    l(a[--r], A, g);
+    var g = t(), h = a[--r];
+    l(a[--r], h, g);
     var b = a[--r];
     a[r++] = b, a[r++] = b, a[r++] = e.dmtx.length + e.ai.length, a[r++] = e.val, a[r++] = 1 / 0;
-    var h = a[--r], x = a[--r];
-    a[r++] = h, L(x);
+    var A = a[--r], w = a[--r];
+    a[r++] = A, L(w);
     var m = t(), B = a[--r];
     if (l(a[--r], B, m), e.dmtx = a[--r], e.i != e.ais.length - 1 && i(e.fncs, e.i)) {
       var I = t(e.dmtx.length + 1);
@@ -17999,12 +17985,12 @@ function Ql() {
     l(v, 0, e.qrc), a[r++] = v, a[r++] = v, a[r++] = e.qrc.length, a[r++] = e.ai, a[r++] = 1 / 0;
     var d = a[--r], y = a[--r];
     a[r++] = d, L(y);
-    var g = t(), A = a[--r];
-    l(a[--r], A, g);
+    var g = t(), h = a[--r];
+    l(a[--r], h, g);
     var b = a[--r];
     a[r++] = b, a[r++] = b, a[r++] = e.qrc.length + e.ai.length, a[r++] = e.val, a[r++] = 1 / 0;
-    var h = a[--r], x = a[--r];
-    a[r++] = h, L(x);
+    var A = a[--r], w = a[--r];
+    a[r++] = A, L(w);
     var m = t(), B = a[--r];
     if (l(a[--r], B, m), e.qrc = a[--r], e.i != e.ais.length - 1 && i(e.fncs, e.i)) {
       var I = t(e.qrc.length + 1);
@@ -18040,12 +18026,12 @@ function Rl() {
     l(v, 0, e.dmtx), a[r++] = v, a[r++] = v, a[r++] = e.dmtx.length, a[r++] = e.ai, a[r++] = 1 / 0;
     var d = a[--r], y = a[--r];
     a[r++] = d, L(y);
-    var g = t(), A = a[--r];
-    l(a[--r], A, g);
+    var g = t(), h = a[--r];
+    l(a[--r], h, g);
     var b = a[--r];
     a[r++] = b, a[r++] = b, a[r++] = e.dmtx.length + e.ai.length, a[r++] = e.val, a[r++] = 1 / 0;
-    var h = a[--r], x = a[--r];
-    a[r++] = h, L(x);
+    var A = a[--r], w = a[--r];
+    a[r++] = A, L(w);
     var m = t(), B = a[--r];
     if (l(a[--r], B, m), e.dmtx = a[--r], e.i != e.ais.length - 1 && i(e.fncs, e.i)) {
       var I = t(e.dmtx.length + 1);
@@ -18060,13 +18046,13 @@ function Rl() {
   var R = a[--r];
   e[a[--r]] = R, s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || K1(), e = Object.getPrototypeOf(e);
 }
-function hn() {
-  if (e = Object.create(e), e.dontdraw = !1, e.textfont = "OCR-B", e.textsize = 10, e.textyoffset = -8, e.textxoffset = 0, e.validatecheck = !1, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], k(e.barcode, "") && (a[r++] = "bwipp.hibccode39emptyData#30861", a[r++] = "The data must not be empty", u()), Ne(hn), !hn.__30871__) {
+function An() {
+  if (e = Object.create(e), e.dontdraw = !1, e.textfont = "OCR-B", e.textsize = 10, e.textyoffset = -8, e.textxoffset = 0, e.validatecheck = !1, a[r++] = e, E1(), e.options = a[--r], e.barcode = a[--r], k(e.barcode, "") && (a[r++] = "bwipp.hibccode39emptyData#30861", a[r++] = "The data must not be empty", u()), Ne(An), !An.__30871__) {
     e = Object.create(e), e.barchars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%", e.charvals = /* @__PURE__ */ new Map();
     for (var c = 0; c <= 42; c += 1)
       s(e.charvals, o(e.barchars, c, 1), c);
-    for (var f in e) e.hasOwnProperty(f) && (hn.$ctx[f] = e[f]);
-    hn.__30871__ = 1, e = Object.getPrototypeOf(e);
+    for (var f in e) e.hasOwnProperty(f) && (An.$ctx[f] = e[f]);
+    An.__30871__ = 1, e = Object.getPrototypeOf(e);
   }
   for (var v = 0, d = e.barcode.length - 1; v <= d; v += 1) {
     var y = i(e.charvals, o(e.barcode, v, 1)) !== void 0;
@@ -18076,13 +18062,13 @@ function hn() {
     var g = a[--r];
     a[r++] = n(g - 1);
   }
-  var A = a[--r];
-  e[a[--r]] = A, e.checksum = 41;
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1)
+  var h = a[--r];
+  e[a[--r]] = h, e.checksum = 41;
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1)
     e.checksum = n(i(e.charvals, o(e.barcode, b, 1)) + e.checksum);
   e.checksum = e.checksum % 43, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.hibccode39badCheckDigit#30890", a[r++] = "Incorrect HIBC Code 39 check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen));
-  var x = C(n(e.barlen + 2));
-  l(x, 1, e.barcode), e.barcode = x, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), e.text = C(n(e.barlen + 4)), s(e.text, 0, 42), l(e.text, 1, e.barcode);
+  var w = C(n(e.barlen + 2));
+  l(w, 1, e.barcode), e.barcode = w, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), e.text = C(n(e.barlen + 4)), s(e.text, 0, 42), l(e.text, 1, e.barcode);
   var m = i(e.barcode, n(e.barlen + 1));
   a[r++] = e.text, a[r++] = n(e.barlen + 2), a[r++] = m, m == 32 && (r--, a[r++] = 95);
   var B = a[--r], I = a[--r];
@@ -18106,13 +18092,13 @@ function mn() {
     var g = a[--r];
     a[r++] = n(g - 1);
   }
-  var A = a[--r];
-  e[a[--r]] = A, e.checksum = 41;
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1)
+  var h = a[--r];
+  e[a[--r]] = h, e.checksum = 41;
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1)
     e.checksum = n(i(e.charvals, o(e.barcode, b, 1)) + e.checksum);
   e.checksum = e.checksum % 43, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.hibccode128badCheckDigit#30994", a[r++] = "Incorrect HIBC Code 128 check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen));
-  var x = C(n(e.barlen + 2));
-  l(x, 1, e.barcode), e.barcode = x, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), e.text = C(n(e.barlen + 4)), s(e.text, 0, 42), l(e.text, 1, e.barcode);
+  var w = C(n(e.barlen + 2));
+  l(w, 1, e.barcode), e.barcode = w, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), e.text = C(n(e.barlen + 4)), s(e.text, 0, 42), l(e.text, 1, e.barcode);
   var m = i(e.barcode, n(e.barlen + 1));
   a[r++] = e.text, a[r++] = n(e.barlen + 2), a[r++] = m, m == 32 && (r--, a[r++] = 95);
   var B = a[--r], I = a[--r];
@@ -18136,12 +18122,12 @@ function gn() {
     var g = a[--r];
     a[r++] = n(g - 1);
   }
-  var A = a[--r];
-  e[a[--r]] = A, e.checksum = 41;
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1)
+  var h = a[--r];
+  e[a[--r]] = h, e.checksum = 41;
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1)
     e.checksum = n(i(e.charvals, o(e.barcode, b, 1)) + e.checksum);
   e.checksum = e.checksum % 43, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.hibcdatamatrixBadCheckDigit#31093", a[r++] = "Incorrect HIBC Data Matrix check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen));
-  var x = e.barlen, m = C(n(x + 2));
+  var w = e.barlen, m = C(n(w + 2));
   l(m, 1, e.barcode), e.barcode = m, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), s(e.options, "dontdraw", !0), s(e.options, "validatecheck", !1), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, da();
   var B = a[--r], I = a[--r];
   e[I] = B, s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || K1(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
@@ -18162,12 +18148,12 @@ function un() {
     var g = a[--r];
     a[r++] = n(g - 1);
   }
-  var A = a[--r];
-  e[a[--r]] = A, e.checksum = 41;
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1)
+  var h = a[--r];
+  e[a[--r]] = h, e.checksum = 41;
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1)
     e.checksum = n(i(e.charvals, o(e.barcode, b, 1)) + e.checksum);
   e.checksum = e.checksum % 43, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.hibcdatamatrixrectangularBadCheckDigit#31184", a[r++] = "Incorrect HIBC Data Matrix Rectangular check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen));
-  var x = e.barlen, m = C(n(x + 2));
+  var w = e.barlen, m = C(n(w + 2));
   l(m, 1, e.barcode), e.barcode = m, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), s(e.options, "dontdraw", !0), s(e.options, "validatecheck", !1), s(e.options, "format", "rectangle"), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, da();
   var B = a[--r];
   e[a[--r]] = B, s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || K1(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
@@ -18188,13 +18174,13 @@ function wn() {
     var g = a[--r];
     a[r++] = n(g - 1);
   }
-  var A = a[--r];
-  e[a[--r]] = A, e.checksum = 41;
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1)
+  var h = a[--r];
+  e[a[--r]] = h, e.checksum = 41;
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1)
     e.checksum = n(i(e.charvals, o(e.barcode, b, 1)) + e.checksum);
   e.checksum = e.checksum % 43, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.hibcpdf417BadCheckDigit#31277", a[r++] = "Incorrect HIBC PDF417 check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen));
-  var x = C(n(e.barlen + 2));
-  l(x, 1, e.barcode), e.barcode = x, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), s(e.options, "dontdraw", !0), s(e.options, "columns", e.columns);
+  var w = C(n(e.barlen + 2));
+  l(w, 1, e.barcode), e.barcode = w, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), s(e.options, "dontdraw", !0), s(e.options, "columns", e.columns);
   var m = e.options;
   s(m, "validatecheck", !1);
   var B = e.options;
@@ -18218,13 +18204,13 @@ function xn() {
     var g = a[--r];
     a[r++] = n(g - 1);
   }
-  var A = a[--r];
-  e[a[--r]] = A, e.checksum = 41;
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1)
+  var h = a[--r];
+  e[a[--r]] = h, e.checksum = 41;
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1)
     e.checksum = n(i(e.charvals, o(e.barcode, b, 1)) + e.checksum);
   e.checksum = e.checksum % 43, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.hibcmicropdf417BadCheckDigit#31370", a[r++] = "Incorrect HIBC MicroPDF417 check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen));
-  var x = C(n(e.barlen + 2));
-  l(x, 1, e.barcode), e.barcode = x, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum));
+  var w = C(n(e.barlen + 2));
+  l(w, 1, e.barcode), e.barcode = w, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum));
   var m = e.options;
   s(m, "dontdraw", !0), s(e.options, "columns", e.columns), s(e.options, "validatecheck", !1);
   var B = e.options;
@@ -18248,13 +18234,13 @@ function yn() {
     var g = a[--r];
     a[r++] = n(g - 1);
   }
-  var A = a[--r];
-  e[a[--r]] = A, e.checksum = 41;
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1)
+  var h = a[--r];
+  e[a[--r]] = h, e.checksum = 41;
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1)
     e.checksum = n(i(e.charvals, o(e.barcode, b, 1)) + e.checksum);
   e.checksum = e.checksum % 43, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.hibcqrcodeBadCheckDigit#31462", a[r++] = "Incorrect HIBC QR Code check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen));
-  var x = C(n(e.barlen + 2));
-  l(x, 1, e.barcode), e.barcode = x, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), s(e.options, "dontdraw", !0), s(e.options, "validatecheck", !1), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, N2();
+  var w = C(n(e.barlen + 2));
+  l(w, 1, e.barcode), e.barcode = w, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), s(e.options, "dontdraw", !0), s(e.options, "validatecheck", !1), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, N2();
   var m = a[--r], B = a[--r];
   e[B] = m, s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || K1(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
 }
@@ -18274,13 +18260,13 @@ function kn() {
     var g = a[--r];
     a[r++] = n(g - 1);
   }
-  var A = a[--r];
-  e[a[--r]] = A, e.checksum = 41;
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1)
+  var h = a[--r];
+  e[a[--r]] = h, e.checksum = 41;
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1)
     e.checksum = n(i(e.charvals, o(e.barcode, b, 1)) + e.checksum);
   e.checksum = e.checksum % 43, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.hibccodablockfBadCheckDigit#31553", a[r++] = "Incorrect HIBC Codablock F check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen));
-  var x = C(n(e.barlen + 2));
-  l(x, 1, e.barcode), e.barcode = x, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), s(e.options, "dontdraw", !0), s(e.options, "validatecheck", !1), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, jt();
+  var w = C(n(e.barlen + 2));
+  l(w, 1, e.barcode), e.barcode = w, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), s(e.options, "dontdraw", !0), s(e.options, "validatecheck", !1), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, jt();
   var m = a[--r], B = a[--r];
   e[B] = m, s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || K1(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
 }
@@ -18300,13 +18286,13 @@ function In() {
     var g = a[--r];
     a[r++] = n(g - 1);
   }
-  var A = a[--r];
-  e[a[--r]] = A, e.checksum = 41;
-  for (var b = 0, h = n(e.barlen - 1); b <= h; b += 1)
+  var h = a[--r];
+  e[a[--r]] = h, e.checksum = 41;
+  for (var b = 0, A = n(e.barlen - 1); b <= A; b += 1)
     e.checksum = n(i(e.charvals, o(e.barcode, b, 1)) + e.checksum);
   e.checksum = e.checksum % 43, e.validatecheck && (i(e.barcode, e.barlen) != i(e.barchars, e.checksum) && (a[r++] = "bwipp.hibcazteccodeBadCheckDigit#31644", a[r++] = "Incorrect HIBC Aztec Code check digit provided", u()), e.barcode = o(e.barcode, 0, e.barlen));
-  var x = C(n(e.barlen + 2));
-  l(x, 1, e.barcode), e.barcode = x, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), s(e.options, "dontdraw", !0), s(e.options, "validatecheck", !1), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, ja();
+  var w = C(n(e.barlen + 2));
+  l(w, 1, e.barcode), e.barcode = w, s(e.barcode, 0, 43), s(e.barcode, n(e.barlen + 1), i(e.barchars, e.checksum)), s(e.options, "dontdraw", !0), s(e.options, "validatecheck", !1), a[r++] = "args", a[r++] = e.barcode, a[r++] = e.options, ja();
   var m = a[--r], B = a[--r];
   e[B] = m, s(e.args, "opt", e.options), a[r++] = e.args, e.dontdraw || K1(), e = Object.getPrototypeOf(e), e = Object.getPrototypeOf(e);
 }
@@ -18376,20 +18362,20 @@ function Nl() {
     var g = a[--r];
     a[r++] = g % 23, a[r++] = 3, e.encode(), e.check = a[--r];
   }
-  a[r++] = 1 / 0, w(e.finder), w(e.data), w(e.check), e.sbs = t(), e.txt = t(e.barlen);
-  for (var A = 0, b = e.barlen - 1; A <= b; A += 1)
-    e.i = A, s(e.txt, e.i, t([o(e.barcode, e.i, 1), 0, 0, "", 0]));
+  a[r++] = 1 / 0, x(e.finder), x(e.data), x(e.check), e.sbs = t(), e.txt = t(e.barlen);
+  for (var h = 0, b = e.barlen - 1; h <= b; h += 1)
+    e.i = h, s(e.txt, e.i, t([o(e.barcode, e.i, 1), 0, 0, "", 0]));
   a[r++] = 1 / 0;
-  var h = e.sbs;
+  var A = e.sbs;
   a[r++] = 1 / 0;
-  for (var x = 0, m = ~~((e.sbs.length + 1) / 2); x < m; x++)
+  for (var w = 0, m = ~~((e.sbs.length + 1) / 2); w < m; w++)
     a[r++] = e.height;
   var B = t();
   a[r++] = 1 / 0;
   for (var I = 0, M = ~~((e.sbs.length + 1) / 2); I < M; I++)
     a[r++] = 0;
   var R = t();
-  a[r++] = "ren", a[r++] = ve, a[r++] = "sbs", a[r++] = h, a[r++] = "bhs", a[r++] = B, a[r++] = "bbs", a[r++] = R, a[r++] = "txt", a[r++] = e.txt, a[r++] = "textxalign", a[r++] = "center", a[r++] = "opt", a[r++] = e.options;
+  a[r++] = "ren", a[r++] = ve, a[r++] = "sbs", a[r++] = A, a[r++] = "bhs", a[r++] = B, a[r++] = "bbs", a[r++] = R, a[r++] = "txt", a[r++] = e.txt, a[r++] = "textxalign", a[r++] = "center", a[r++] = "opt", a[r++] = e.options;
   var Q = C1();
   a[r++] = Q, e.dontdraw || ve(), e = Object.getPrototypeOf(e);
 }
@@ -18404,21 +18390,21 @@ function ve() {
     z.save();
     var v = z.currpos();
     if (z.translate(v.x, v.y), e.width != 0 && z.scale(e.width * 72 / e.pixx, 1), e.tl = t([-n(e.borderleft + e.borderwidth / 2), n(n(e.pixy + e.bordertop) + e.borderwidth / 2)]), e.tr = t([n(n(e.pixx + e.borderright) + e.borderwidth / 2), n(n(e.pixy + e.bordertop) + e.borderwidth / 2)]), e.bl = t([-n(e.borderleft + e.borderwidth / 2), -n(e.borderbottom + e.borderwidth / 2)]), e.br = t([n(n(e.pixx + e.borderright) + e.borderwidth / 2), -n(e.borderbottom + e.borderwidth / 2)]), e.showbearer) {
-      z.save(), z.newpath(), w(e.bl);
+      z.save(), z.newpath(), x(e.bl);
       var d = a[--r];
-      z.moveto(a[--r], d), w(e.br);
+      z.moveto(a[--r], d), x(e.br);
       var y = a[--r];
-      z.lineto(a[--r], y), w(e.tl);
+      z.lineto(a[--r], y), x(e.tl);
       var g = a[--r];
-      z.moveto(a[--r], g), w(e.tr);
-      var A = a[--r];
-      z.lineto(a[--r], A), v1(e.bordercolor, "unset") && z.setcolor(e.bordercolor), z.setlinewidth(n(e.borderwidth - e.inkspread * 2)), z.stroke(), z.restore();
+      z.moveto(a[--r], g), x(e.tr);
+      var h = a[--r];
+      z.lineto(a[--r], h), v1(e.bordercolor, "unset") && z.setcolor(e.bordercolor), z.setlinewidth(n(e.borderwidth - e.inkspread * 2)), z.stroke(), z.restore();
     } else if (e.showborder) {
-      z.save(), z.newpath(), w(e.bl);
+      z.save(), z.newpath(), x(e.bl);
       var b = a[--r];
       z.moveto(a[--r], b);
-      for (var h = t([e.br, e.tr, e.tl]), x = 0, m = h.length; x < m; x++) {
-        w(i(h, x));
+      for (var A = t([e.br, e.tr, e.tl]), w = 0, m = A.length; w < m; w++) {
+        x(i(A, w));
         var B = a[--r];
         z.lineto(a[--r], B);
       }
@@ -18428,7 +18414,7 @@ function ve() {
     for (var I = e.bars, M = 0, R = I.length; M < R; M++) {
       var Q = i(I, M);
       if (a[r++] = Q, Q != -1) {
-        w(a[--r]), z.newpath(), z.setlinewidth(a[--r]);
+        x(a[--r]), z.newpath(), z.setlinewidth(a[--r]);
         var S = a[--r];
         z.moveto(a[--r], S), z.rlineto(0, a[--r]), z.stroke();
       } else
@@ -18491,10 +18477,10 @@ function Uo(c, f, v, d, y) {
   if (d = d || {}, typeof d == "string") {
     var g = d.split(" ");
     d = {};
-    for (var A = 0; A < g.length; A++)
-      if (g[A]) {
-        var b = g[A].indexOf("=");
-        b == -1 ? g[A][0] == "!" ? d[g[A].substr(1)] = !1 : d[g[A]] = !0 : d[g[A].substr(0, b)] = g[A].substr(b + 1);
+    for (var h = 0; h < g.length; h++)
+      if (g[h]) {
+        var b = g[h].indexOf("=");
+        b == -1 ? g[h][0] == "!" ? d[g[h].substr(1)] = !1 : d[g[h]] = !0 : d[g[h].substr(0, b)] = g[h].substr(b + 1);
       }
   } else if (typeof d != "object" || d.constructor !== Object)
     throw new Error("bwipp.typeError: options not an object");
@@ -18502,10 +18488,10 @@ function Uo(c, f, v, d, y) {
     if (/[\u0100-\uffff]/.test(v))
       throw new Error("bwip-js: 16-bit chars not allowed with binarytext");
   } else /[\u0080-\uffff]/.test(v) && (v = unescape(encodeURIComponent(v)));
-  var h = /* @__PURE__ */ new Map();
-  for (var x in d)
-    d.hasOwnProperty(x) && h.set(x, d[x]);
-  return z = c, a = [v, h], r = 2, e = {
+  var A = /* @__PURE__ */ new Map();
+  for (var w in d)
+    d.hasOwnProperty(w) && A.set(w, d[w]);
+  return z = c, a = [v, A], r = 2, e = {
     bwipjs_dontdraw: d.dontdraw || y || !1
   }, f(), r ? a.splice(0, r) : !0;
 }
@@ -18594,7 +18580,7 @@ function Pn(c) {
     case "ean13":
       return ci;
     case "ean13composite":
-      return hl;
+      return Al;
     case "ean14":
       return zf;
     case "ean2":
@@ -18636,7 +18622,7 @@ function Pn(c) {
     case "hibccode128":
       return mn;
     case "hibccode39":
-      return hn;
+      return An;
     case "hibcdatamatrix":
       return gn;
     case "hibcdatamatrixrectangular":
@@ -18664,7 +18650,7 @@ function Pn(c) {
     case "itf14":
       return Xf;
     case "jabcode":
-      return Al;
+      return hl;
     case "japanpost":
       return pn;
     case "kix":
@@ -18720,7 +18706,7 @@ function Pn(c) {
     case "swissqrcode":
       return ll;
     case "symbol":
-      return An;
+      return hn;
     case "telepen":
       return Gi;
     case "telepennumeric":
@@ -18775,8 +18761,8 @@ function Po(c) {
   if (c.paddingleft = I(c.paddingleft, c.paddingwidth, c.padding, v), c.paddingright = I(c.paddingright, c.paddingwidth, c.padding, v), c.paddingtop = I(c.paddingtop, c.paddingheight, c.padding, d), c.paddingbottom = I(c.paddingbottom, c.paddingheight, c.padding, d), c.backgroundcolor) {
     var y = "" + c.backgroundcolor;
     if (/^[0-9a-fA-F]{8}$/.test(y)) {
-      var g = parseInt(y.substr(0, 2), 16) / 255, A = parseInt(y.substr(2, 2), 16) / 255, b = parseInt(y.substr(4, 2), 16) / 255, h = parseInt(y.substr(6, 2), 16) / 255, x = Math.floor((1 - g) * (1 - h) * 255).toString(16), m = Math.floor((1 - A) * (1 - h) * 255).toString(16), B = Math.floor((1 - b) * (1 - h) * 255).toString(16);
-      c.backgroundcolor = (x.length == 1 ? "0" : "") + x + (m.length == 1 ? "0" : "") + m + (B.length == 1 ? "0" : "") + B;
+      var g = parseInt(y.substr(0, 2), 16) / 255, h = parseInt(y.substr(2, 2), 16) / 255, b = parseInt(y.substr(4, 2), 16) / 255, A = parseInt(y.substr(6, 2), 16) / 255, w = Math.floor((1 - g) * (1 - A) * 255).toString(16), m = Math.floor((1 - h) * (1 - A) * 255).toString(16), B = Math.floor((1 - b) * (1 - A) * 255).toString(16);
+      c.backgroundcolor = (w.length == 1 ? "0" : "") + w + (m.length == 1 ? "0" : "") + m + (B.length == 1 ? "0" : "") + B;
     } else if (y[0] == "#" && (y = y.substr(1)), /^[0-9a-fA-F]{6}$/.test(y))
       c.backgroundcolor = y;
     else if (/^[0-9a-fA-F]{3}$/.test(y))
@@ -18813,28 +18799,28 @@ function Hs(c, f, v) {
   if (!d)
     throw new ReferenceError("bwip-js: bar code text not specified.");
   Po(f), v.setopts && v.setopts(f);
-  var y = f.scale || 2, g = +f.scaleX || y, A = +f.scaleY || g;
+  var y = f.scale || 2, g = +f.scaleX || y, h = +f.scaleY || g;
   f.rotate;
-  var b = new To(v), h = {};
-  for (var x in f)
-    Yl[x] || (h[x] = f[x]);
-  return h.alttext && (h.includetext = !0), +h.height && c != So && (h.height = h.height / 25.4 || 0.5), +h.width && (h.width = h.width / 25.4 || 0), b.scale(g, A), Uo(b, c, d, h), b.render();
+  var b = new To(v), A = {};
+  for (var w in f)
+    Yl[w] || (A[w] = f[w]);
+  return A.alttext && (A.includetext = !0), +A.height && c != So && (A.height = A.height / 25.4 || 0.5), +A.width && (A.width = A.width / 25.4 || 0), b.scale(g, h), Uo(b, c, d, A), b.render();
 }
 function zl(c, f, v) {
   arguments.length == 1 && (v = c, c = v.bcid, f = v.text);
   var d = Go();
   d.setopts(v);
-  for (var y = new To(d), g = Uo(y, Pn(c), f, v, !0), A = { pixs: 1, pixx: 1, pixy: 1, sbs: 1, bbs: 1, bhs: 1, width: 1, height: 1 }, b = 0; b < g.length; b++) {
-    var h = g[b];
-    if (h instanceof Map) {
-      for (var x = {}, m = h.keys(), B = h.size, I = 0; I < B; I++) {
+  for (var y = new To(d), g = Uo(y, Pn(c), f, v, !0), h = { pixs: 1, pixx: 1, pixy: 1, sbs: 1, bbs: 1, bhs: 1, width: 1, height: 1 }, b = 0; b < g.length; b++) {
+    var A = g[b];
+    if (A instanceof Map) {
+      for (var w = {}, m = A.keys(), B = A.size, I = 0; I < B; I++) {
         var M = m.next().value;
-        if (A[M]) {
-          var R = h.get(M);
-          R instanceof Array ? x[M] = R.b.slice(R.o, R.o + R.length) : x[M] = R;
+        if (h[M]) {
+          var R = A.get(M);
+          R instanceof Array ? w[M] = R.b.slice(R.o, R.o + R.length) : w[M] = R;
         }
       }
-      g[b] = x;
+      g[b] = w;
     } else
       g.splice(b--, 1);
   }
@@ -18842,41 +18828,41 @@ function zl(c, f, v) {
 }
 var To = function() {
   var c = Math.floor, f = Math.round, v = Math.ceil, d = Math.min, y = Math.max;
-  function g(A) {
+  function g(h) {
     if (this.constructor !== g)
-      return new g(A);
-    this.gstk = [], this.cmds = [], this.drawing = A, this.reset(), this.minx = this.miny = 1 / 0, this.maxx = this.maxy = -1 / 0;
+      return new g(h);
+    this.gstk = [], this.cmds = [], this.drawing = h, this.reset(), this.minx = this.miny = 1 / 0, this.maxx = this.maxy = -1 / 0;
   }
   return g.prototype.reset = function() {
     this.g_tdx = 0, this.g_tdy = 0, this.g_tsx = 1, this.g_tsy = 1, this.g_posx = 0, this.g_posy = 0, this.g_penw = 1, this.g_path = [], this.g_font = null, this.g_rgb = [0, 0, 0], this.g_clip = !1;
   }, g.prototype.save = function() {
-    var A = {};
+    var h = {};
     for (var b in this)
-      b.indexOf("g_") == 0 && (A[b] = h(this[b]));
-    this.gstk.push(A);
-    function h(x) {
-      if (x instanceof Array) {
-        for (var m = [], B = 0; B < x.length; B++)
-          m[B] = h(x[B]);
+      b.indexOf("g_") == 0 && (h[b] = A(this[b]));
+    this.gstk.push(h);
+    function A(w) {
+      if (w instanceof Array) {
+        for (var m = [], B = 0; B < w.length; B++)
+          m[B] = A(w[B]);
         return m;
       }
-      if (x instanceof Object) {
+      if (w instanceof Object) {
         var m = {};
-        for (var I in x)
-          m[I] = h(x[I]);
+        for (var I in w)
+          m[I] = A(w[I]);
         return m;
       }
-      return x;
+      return w;
     }
   }, g.prototype.restore = function() {
     if (!this.gstk.length)
       throw new Error("grestore: stack underflow");
-    var A = this.gstk.pop(), b = this;
-    this.g_clip && !A.g_clip && this.cmds.push(function() {
+    var h = this.gstk.pop(), b = this;
+    this.g_clip && !h.g_clip && this.cmds.push(function() {
       b.drawing.unclip();
     });
-    for (var h in A)
-      this[h] = A[h];
+    for (var A in h)
+      this[A] = h[A];
   }, g.prototype.currpos = function() {
     return {
       x: (this.g_posx - this.g_tdx) / this.g_tsx,
@@ -18884,131 +18870,131 @@ var To = function() {
     };
   }, g.prototype.currfont = function() {
     return this.g_font;
-  }, g.prototype.translate = function(A, b) {
-    this.g_tdx = this.g_tsx * A, this.g_tdy = this.g_tsy * b;
-  }, g.prototype.scale = function(A, b) {
-    this.g_tsx *= A, this.g_tsy *= b;
-    var h = this.drawing.scale(this.g_tsx, this.g_tsy);
-    h && h[0] && h[1] && (this.g_tsx = h[0], this.g_tsy = h[1]);
-  }, g.prototype.setlinewidth = function(A) {
-    this.g_penw = A;
-  }, g.prototype.selectfont = function(A, b) {
-    this.g_font = { FontName: this.jsstring(A), FontSize: +b };
+  }, g.prototype.translate = function(h, b) {
+    this.g_tdx = this.g_tsx * h, this.g_tdy = this.g_tsy * b;
+  }, g.prototype.scale = function(h, b) {
+    this.g_tsx *= h, this.g_tsy *= b;
+    var A = this.drawing.scale(this.g_tsx, this.g_tsy);
+    A && A[0] && A[1] && (this.g_tsx = A[0], this.g_tsy = A[1]);
+  }, g.prototype.setlinewidth = function(h) {
+    this.g_penw = h;
+  }, g.prototype.selectfont = function(h, b) {
+    this.g_font = { FontName: this.jsstring(h), FontSize: +b };
   }, g.prototype.getfont = function() {
     return this.g_font.FontName;
-  }, g.prototype.jsstring = function(A) {
-    return A instanceof Uint8Array ? String.fromCharCode.apply(null, A) : "" + A;
-  }, g.prototype.setcolor = function(A) {
-    if (A instanceof Uint8Array && (A = this.jsstring(A)), !!A) {
-      if (!/^(?:#?[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3})?|[0-9a-fA-F]{8})$/.test(A))
-        throw new Error("bwip-js: invalid color: " + A);
-      if (A[0] == "#" && (A = A.substr(1)), A.length == 3) {
-        var b = parseInt(A[0], 16), h = parseInt(A[1], 16), x = parseInt(A[2], 16);
-        this.g_rgb = [b << 4 | b, h << 4 | h, x << 4 | x];
-      } else if (A.length == 6) {
-        var b = parseInt(A.substr(0, 2), 16), h = parseInt(A.substr(2, 2), 16), x = parseInt(A.substr(4, 2), 16);
-        this.g_rgb = [b, h, x];
+  }, g.prototype.jsstring = function(h) {
+    return h instanceof Uint8Array ? String.fromCharCode.apply(null, h) : "" + h;
+  }, g.prototype.setcolor = function(h) {
+    if (h instanceof Uint8Array && (h = this.jsstring(h)), !!h) {
+      if (!/^(?:#?[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3})?|[0-9a-fA-F]{8})$/.test(h))
+        throw new Error("bwip-js: invalid color: " + h);
+      if (h[0] == "#" && (h = h.substr(1)), h.length == 3) {
+        var b = parseInt(h[0], 16), A = parseInt(h[1], 16), w = parseInt(h[2], 16);
+        this.g_rgb = [b << 4 | b, A << 4 | A, w << 4 | w];
+      } else if (h.length == 6) {
+        var b = parseInt(h.substr(0, 2), 16), A = parseInt(h.substr(2, 2), 16), w = parseInt(h.substr(4, 2), 16);
+        this.g_rgb = [b, A, w];
       } else {
-        var m = parseInt(A.substr(0, 2), 16) / 255, B = parseInt(A.substr(2, 2), 16) / 255, I = parseInt(A.substr(4, 2), 16) / 255, M = parseInt(A.substr(6, 2), 16) / 255, b = f((1 - m) * (1 - M) * 255), h = f((1 - B) * (1 - M) * 255), x = f((1 - I) * (1 - M) * 255);
-        this.g_rgb = [b, h, x];
+        var m = parseInt(h.substr(0, 2), 16) / 255, B = parseInt(h.substr(2, 2), 16) / 255, I = parseInt(h.substr(4, 2), 16) / 255, M = parseInt(h.substr(6, 2), 16) / 255, b = f((1 - m) * (1 - M) * 255), A = f((1 - B) * (1 - M) * 255), w = f((1 - I) * (1 - M) * 255);
+        this.g_rgb = [b, A, w];
       }
     }
-  }, g.prototype.setrgbcolor = function(A, b, h) {
-    this.g_rgb = [A, b, h];
+  }, g.prototype.setrgbcolor = function(h, b, A) {
+    this.g_rgb = [h, b, A];
   }, g.prototype.getRGB = function() {
-    var A = this.g_rgb[0].toString(16), b = this.g_rgb[1].toString(16), h = this.g_rgb[2].toString(16);
-    return "00".substr(A.length) + A + "00".substr(b.length) + b + "00".substr(h.length) + h;
+    var h = this.g_rgb[0].toString(16), b = this.g_rgb[1].toString(16), A = this.g_rgb[2].toString(16);
+    return "00".substr(h.length) + h + "00".substr(b.length) + b + "00".substr(A.length) + A;
   }, g.prototype.newpath = function() {
     this.g_path = [];
   }, g.prototype.closepath = function() {
-    var A = this.g_path, b = A.length;
+    var h = this.g_path, b = h.length;
     if (b) {
-      for (var h = b - 1; h >= 0 && A[h].op == "l"; h--) ;
-      if (h++, h < b - 1) {
-        for (var x = [], m = 1 / 0, B = 1 / 0, I = -1 / 0, M = -1 / 0, R = h; R < b; R++) {
-          var Q = A[R];
-          x.push([Q.x0, Q.y0]), m > Q.x0 && (m = Q.x0), I < Q.x0 && (I = Q.x0), B > Q.y0 && (B = Q.y0), M < Q.y0 && (M = Q.y0);
+      for (var A = b - 1; A >= 0 && h[A].op == "l"; A--) ;
+      if (A++, A < b - 1) {
+        for (var w = [], m = 1 / 0, B = 1 / 0, I = -1 / 0, M = -1 / 0, R = A; R < b; R++) {
+          var Q = h[R];
+          w.push([Q.x0, Q.y0]), m > Q.x0 && (m = Q.x0), I < Q.x0 && (I = Q.x0), B > Q.y0 && (B = Q.y0), M < Q.y0 && (M = Q.y0);
         }
-        var Q = A[b - 1], S = A[h];
-        (Q.x1 != S.x0 || Q.y1 != S.y0) && (x.push([Q.x1, Q.y1]), m > Q.x1 && (m = Q.x1), I < Q.x1 && (I = Q.x1), B > Q.y1 && (B = Q.y1), M < Q.y1 && (M = Q.y1)), A.splice(
-          h,
-          b - h,
-          { op: "p", x0: m, y0: B, x1: I, y1: M, poly: x }
+        var Q = h[b - 1], S = h[A];
+        (Q.x1 != S.x0 || Q.y1 != S.y0) && (w.push([Q.x1, Q.y1]), m > Q.x1 && (m = Q.x1), I < Q.x1 && (I = Q.x1), B > Q.y1 && (B = Q.y1), M < Q.y1 && (M = Q.y1)), h.splice(
+          A,
+          b - A,
+          { op: "p", x0: m, y0: B, x1: I, y1: M, poly: w }
         );
       } else
-        A.push({ op: "c" });
+        h.push({ op: "c" });
     }
-  }, g.prototype.moveto = function(A, b) {
-    this.g_posx = this.g_tdx + this.g_tsx * A, this.g_posy = this.g_tdy + this.g_tsy * b;
-  }, g.prototype.rmoveto = function(A, b) {
-    this.g_posx += this.g_tsx * A, this.g_posy += this.g_tsy * b;
-  }, g.prototype.lineto = function(A, b) {
-    var h = f(this.g_posx), x = f(this.g_posy);
-    this.g_posx = this.g_tdx + this.g_tsx * A, this.g_posy = this.g_tdy + this.g_tsy * b;
+  }, g.prototype.moveto = function(h, b) {
+    this.g_posx = this.g_tdx + this.g_tsx * h, this.g_posy = this.g_tdy + this.g_tsy * b;
+  }, g.prototype.rmoveto = function(h, b) {
+    this.g_posx += this.g_tsx * h, this.g_posy += this.g_tsy * b;
+  }, g.prototype.lineto = function(h, b) {
+    var A = f(this.g_posx), w = f(this.g_posy);
+    this.g_posx = this.g_tdx + this.g_tsx * h, this.g_posy = this.g_tdy + this.g_tsy * b;
     var m = f(this.g_posx), B = f(this.g_posy);
-    this.g_path.push({ op: "l", x0: h, y0: x, x1: m, y1: B });
-  }, g.prototype.rlineto = function(A, b) {
-    var h = f(this.g_posx), x = f(this.g_posy);
-    this.g_posx += this.g_tsx * A, this.g_posy += this.g_tsy * b;
+    this.g_path.push({ op: "l", x0: A, y0: w, x1: m, y1: B });
+  }, g.prototype.rlineto = function(h, b) {
+    var A = f(this.g_posx), w = f(this.g_posy);
+    this.g_posx += this.g_tsx * h, this.g_posy += this.g_tsy * b;
     var m = f(this.g_posx), B = f(this.g_posy);
-    this.g_path.push({ op: "l", x0: h, y0: x, x1: m, y1: B });
-  }, g.prototype.arc = function(A, b, h, x, m, B) {
-    if (x != m) {
-      if (x != 0 && x != 360 || m != 0 && m != 360)
-        throw new Error("arc: not a full circle (" + x + "," + m + ")");
-      A = this.g_tdx + this.g_tsx * A, b = this.g_tdy + this.g_tsy * b;
-      var I = h * this.g_tsx, M = h * this.g_tsy;
+    this.g_path.push({ op: "l", x0: A, y0: w, x1: m, y1: B });
+  }, g.prototype.arc = function(h, b, A, w, m, B) {
+    if (w != m) {
+      if (w != 0 && w != 360 || m != 0 && m != 360)
+        throw new Error("arc: not a full circle (" + w + "," + m + ")");
+      h = this.g_tdx + this.g_tsx * h, b = this.g_tdy + this.g_tsy * b;
+      var I = A * this.g_tsx, M = A * this.g_tsy;
       this.g_path.push({
         op: "e",
-        x0: A - I,
+        x0: h - I,
         y0: b - M,
-        x1: A + I,
+        x1: h + I,
         y1: b + M,
-        x: A,
+        x: h,
         y: b,
         rx: I,
         ry: M,
-        sa: x,
+        sa: w,
         ea: m,
         ccw: B
       });
     }
-  }, g.prototype.stringwidth = function(A) {
-    var b = this.g_tsx, h = this.g_tsy, x = +this.g_font.FontSize || 10;
-    A = this.toUCS2(this.jsstring(A));
-    var m = this.drawing.measure(A, this.g_font.FontName, x * b, x * h);
+  }, g.prototype.stringwidth = function(h) {
+    var b = this.g_tsx, A = this.g_tsy, w = +this.g_font.FontSize || 10;
+    h = this.toUCS2(this.jsstring(h));
+    var m = this.drawing.measure(h, this.g_font.FontName, w * b, w * A);
     return {
       w: m.width / b,
-      h: (m.ascent + m.descent) / h,
-      a: m.ascent / h,
-      d: m.descent / h
+      h: (m.ascent + m.descent) / A,
+      a: m.ascent / A,
+      d: m.descent / A
     };
-  }, g.prototype.charpath = function(A, b) {
-    var h = this.stringwidth(A);
-    this.rlineto(0, h.a), this.rlineto(h.w, 0), this.rlineto(0, -h.h);
+  }, g.prototype.charpath = function(h, b) {
+    var A = this.stringwidth(h);
+    this.rlineto(0, A.a), this.rlineto(A.w, 0), this.rlineto(0, -A.h);
   }, g.prototype.pathbbox = function() {
     if (!this.g_path.length) throw new Error("pathbbox: --nocurrentpoint--");
-    for (var A = this.g_path, b = 1 / 0, h = 1 / 0, x = -1 / 0, m = -1 / 0, B = 0; B < A.length; B++) {
-      var I = A[B];
-      I.op != "c" && (I.x0 < I.x1 ? (b > I.x0 && (b = I.x0), x < I.x1 && (x = I.x1)) : (b > I.x1 && (b = I.x1), x < I.x0 && (x = I.x0)), I.y0 < I.y1 ? (h > I.y0 && (h = I.y0), m < I.y1 && (m = I.y1)) : (h > I.y1 && (h = I.y1), m < I.y0 && (m = I.y0)));
+    for (var h = this.g_path, b = 1 / 0, A = 1 / 0, w = -1 / 0, m = -1 / 0, B = 0; B < h.length; B++) {
+      var I = h[B];
+      I.op != "c" && (I.x0 < I.x1 ? (b > I.x0 && (b = I.x0), w < I.x1 && (w = I.x1)) : (b > I.x1 && (b = I.x1), w < I.x0 && (w = I.x0)), I.y0 < I.y1 ? (A > I.y0 && (A = I.y0), m < I.y1 && (m = I.y1)) : (A > I.y1 && (A = I.y1), m < I.y0 && (m = I.y0)));
     }
     var M = {
       llx: (b - this.g_tdx) / this.g_tsx,
-      lly: (h - this.g_tdy) / this.g_tsy,
-      urx: (x - this.g_tdx) / this.g_tsx,
+      lly: (A - this.g_tdy) / this.g_tsy,
+      urx: (w - this.g_tdx) / this.g_tsx,
       ury: (m - this.g_tdy) / this.g_tsy
     };
     return M;
-  }, g.prototype.transform = function(A) {
-    for (var b = this.minx, h = this.maxy, x = 0; x < A.length; x++) {
-      var m = A[x];
-      m[0] = m[0] - b, m[1] = h - m[1];
+  }, g.prototype.transform = function(h) {
+    for (var b = this.minx, A = this.maxy, w = 0; w < h.length; w++) {
+      var m = h[w];
+      m[0] = m[0] - b, m[1] = A - m[1];
     }
   }, g.prototype.stroke = function() {
-    var A = this.g_tsx, b = this.g_tsy, h = this.g_path, x = this.getRGB();
+    var h = this.g_tsx, b = this.g_tsy, A = this.g_path, w = this.getRGB();
     this.g_path = [];
-    for (var m = c(this.g_penw * A + 0.66), B = c(this.g_penw * b + 0.66), I = 0; I < h.length; I++) {
-      var M = h[I];
+    for (var m = c(this.g_penw * h + 0.66), B = c(this.g_penw * b + 0.66), I = 0; I < A.length; I++) {
+      var M = A[I];
       if (M.op == "l") {
         if (M.x0 != M.x1 && M.y0 != M.y1)
           throw new Error("stroke: --not-orthogonal--");
@@ -19039,8 +19025,8 @@ var To = function() {
     }
     var i1 = this;
     this.cmds.push(function() {
-      for (var l1 = v(m / 2), _ = v(B / 2), h1 = m - l1, g1 = B - _, u1 = 0; u1 < h.length; u1++) {
-        var x1 = h[u1];
+      for (var l1 = v(m / 2), _ = v(B / 2), A1 = m - l1, g1 = B - _, u1 = 0; u1 < A.length; u1++) {
+        var x1 = A[u1];
         if (x1.op == "l") {
           var Q1 = [[x1.x0, x1.y0], [x1.x1, x1.y1]];
           i1.transform(Q1), i1.drawing.line(
@@ -19049,8 +19035,8 @@ var To = function() {
             Q1[1][0],
             Q1[1][1],
             x1.x0 == x1.x1 ? m : B,
-            x
-          ), i1.fill(x);
+            w
+          ), i1.fill(w);
         } else {
           var Q1 = x1.poly;
           i1.transform(Q1);
@@ -19061,34 +19047,34 @@ var To = function() {
             [F1 + l1 + 1, N1 + _ + 1],
             [F1 + l1 + 1, P1 - _]
           ]), i1.drawing.polygon([
-            [I1 + h1, P1 + g1],
-            [I1 + h1, N1 - g1 + 1],
-            [F1 - h1 + 1, N1 - g1 + 1],
-            [F1 - h1 + 1, P1 + g1]
-          ]), i1.drawing.fill(x);
+            [I1 + A1, P1 + g1],
+            [I1 + A1, N1 - g1 + 1],
+            [F1 - A1 + 1, N1 - g1 + 1],
+            [F1 - A1 + 1, P1 + g1]
+          ]), i1.drawing.fill(w);
         }
       }
     });
   }, g.prototype.fill = function() {
-    var A = this.g_path, b = this.getRGB();
+    var h = this.g_path, b = this.getRGB();
     this.g_path = [];
-    for (var h = 0; h < A.length; h++) {
-      var x = A[h];
-      if (x.op == "p") {
-        for (var m = 1 / 0, B = 1 / 0, I = -1 / 0, M = -1 / 0, R = x.poly, Q = 0; Q < R.length; Q++) {
+    for (var A = 0; A < h.length; A++) {
+      var w = h[A];
+      if (w.op == "p") {
+        for (var m = 1 / 0, B = 1 / 0, I = -1 / 0, M = -1 / 0, R = w.poly, Q = 0; Q < R.length; Q++) {
           var S = R[Q][0], T = R[Q][1];
           S < m && (m = S), S > I && (I = S), T < B && (B = T), T > M && (M = T);
         }
         this.bbox(m, B + 1, I - 1, M);
-      } else if (x.op == "e")
-        this.bbox(x.x - x.rx, x.y - x.ry, x.x + x.rx, x.y + x.ry);
+      } else if (w.op == "e")
+        this.bbox(w.x - w.rx, w.y - w.ry, w.x + w.rx, w.y + w.ry);
       else
         throw new Error("fill: --not-a-polygon--");
     }
     var Y = this;
     this.cmds.push(function() {
-      for (var W = 0; W < A.length; W++) {
-        var e1 = A[W];
+      for (var W = 0; W < h.length; W++) {
+        var e1 = h[W];
         if (e1.op == "p") {
           var G = e1.poly;
           Y.transform(G), Y.drawing.polygon(G);
@@ -19100,69 +19086,69 @@ var To = function() {
       Y.drawing.fill(b);
     });
   }, g.prototype.clip = function() {
-    var A = this.g_path;
+    var h = this.g_path;
     this.g_path = [], this.g_clip = !0;
     var b = this;
     this.cmds.push(function() {
-      for (var h = [], x = 0; x < A.length; x++) {
-        var m = A[x];
+      for (var A = [], w = 0; w < h.length; w++) {
+        var m = h[w];
         if (m.op == "p") {
           var B = m.poly;
-          b.transform(B), h.push(B);
+          b.transform(B), A.push(B);
         } else
           throw new Error("clip: only polygon regions supported");
       }
-      b.drawing.clip(h);
+      b.drawing.clip(A);
     });
-  }, g.prototype.maxicode = function(A) {
-    var b = this.g_tsx, h = this.g_tsy, x = this.getRGB(), m = 1.04 * b * 100, B = m / 30 | 0;
+  }, g.prototype.maxicode = function(h) {
+    var b = this.g_tsx, A = this.g_tsy, w = this.getRGB(), m = 1.04 * b * 100, B = m / 30 | 0;
     m - (B * 30 - 1) > 9 && B++;
     var I, M, R, Q;
-    R = b / 2 | 0, Q = h / 2 | 0, I = B - R, I & 1 && I--, M = (4 * h | 0) - Q;
+    R = b / 2 | 0, Q = A / 2 | 0, I = B - R, I & 1 && I--, M = (4 * A | 0) - Q;
     var S = I / 2 - 1, T = (S + 1) / 2 | 0, Y = M - 2 - 2 * T;
-    this.bbox(0, 0, B * 30 - R, h * 3 * 32 + h * 4 - Q);
+    this.bbox(0, 0, B * 30 - R, A * 3 * 32 + A * 4 - Q);
     var W = this;
     this.cmds.push(function() {
-      for (var e1 = 0; e1 < A.length; e1++) {
-        var G = A[e1], U = G % 30, $ = G / 30 | 0;
-        U *= B, U += $ & 1 ? B : B / 2, U = U | 0, $ = 33 - $, $ *= h * 3, $ += h * 2 - M / 2, $ = $ | 0;
+      for (var e1 = 0; e1 < h.length; e1++) {
+        var G = h[e1], U = G % 30, $ = G / 30 | 0;
+        U *= B, U += $ & 1 ? B : B / 2, U = U | 0, $ = 33 - $, $ *= A * 3, $ += A * 2 - M / 2, $ = $ | 0;
         var H = [[U - 0.5, $--]];
-        $ -= T - 1, H.push([U - 1 - S, $--]), $ -= Y, H.push([U - 1 - S, $--]), $ -= T - 1, H.push([U - 0.5, $++]), $ += T - 1, H.push([U + S, $++]), $ += Y, H.push([U + S, $++]), W.transform(H), W.drawing.hexagon(H, x);
+        $ -= T - 1, H.push([U - 1 - S, $--]), $ -= Y, H.push([U - 1 - S, $--]), $ -= T - 1, H.push([U - 0.5, $++]), $ += T - 1, H.push([U + S, $++]), $ += Y, H.push([U + S, $++]), W.transform(H), W.drawing.hexagon(H, w);
       }
-      W.drawing.fill(x);
-      var U = 14 * B + B / 2 + 0.01 | 0, $ = (12 * 4 + 3) * h - T / 2 + 0.01 | 0;
-      W.drawing.ellipse(U, $, 0.5774 * 3.5 * b + 0.01 | 0, 0.5774 * 3.5 * h + 0.01 | 0, !0), W.drawing.ellipse(U, $, 1.3359 * 3.5 * b + 0.01 | 0, 1.3359 * 3.5 * h + 0.01 | 0, !1), W.drawing.fill(x), W.drawing.ellipse(U, $, 2.1058 * 3.5 * b + 0.01 | 0, 2.1058 * 3.5 * h + 0.01 | 0, !0), W.drawing.ellipse(U, $, 2.8644 * 3.5 * b + 0.01 | 0, 2.8644 * 3.5 * h + 0.01 | 0, !1), W.drawing.fill(x), W.drawing.ellipse(U, $, 3.6229 * 3.5 * b + 0.01 | 0, 3.6229 * 3.5 * h + 0.01 | 0, !0), W.drawing.ellipse(U, $, 4.3814 * 3.5 * b + 0.01 | 0, 4.3814 * 3.5 * h + 0.01 | 0, !1), W.drawing.fill(x);
+      W.drawing.fill(w);
+      var U = 14 * B + B / 2 + 0.01 | 0, $ = (12 * 4 + 3) * A - T / 2 + 0.01 | 0;
+      W.drawing.ellipse(U, $, 0.5774 * 3.5 * b + 0.01 | 0, 0.5774 * 3.5 * A + 0.01 | 0, !0), W.drawing.ellipse(U, $, 1.3359 * 3.5 * b + 0.01 | 0, 1.3359 * 3.5 * A + 0.01 | 0, !1), W.drawing.fill(w), W.drawing.ellipse(U, $, 2.1058 * 3.5 * b + 0.01 | 0, 2.1058 * 3.5 * A + 0.01 | 0, !0), W.drawing.ellipse(U, $, 2.8644 * 3.5 * b + 0.01 | 0, 2.8644 * 3.5 * A + 0.01 | 0, !1), W.drawing.fill(w), W.drawing.ellipse(U, $, 3.6229 * 3.5 * b + 0.01 | 0, 3.6229 * 3.5 * A + 0.01 | 0, !0), W.drawing.ellipse(U, $, 4.3814 * 3.5 * b + 0.01 | 0, 4.3814 * 3.5 * A + 0.01 | 0, !1), W.drawing.fill(w);
     });
-  }, g.prototype.toUCS2 = function(A) {
-    return A.replace(
+  }, g.prototype.toUCS2 = function(h) {
+    return h.replace(
       /[\xc0-\xdf][\x80-\xbf]|[\xe0-\xff][\x80-\xbf]{2}/g,
       function(b) {
-        var h;
-        return b.length == 2 ? h = (b.charCodeAt(0) & 31) << 6 | b.charCodeAt(1) & 63 : h = (b.charCodeAt(0) & 15) << 12 | (b.charCodeAt(1) & 63) << 6 | b.charCodeAt(2) & 63, String.fromCharCode(h);
+        var A;
+        return b.length == 2 ? A = (b.charCodeAt(0) & 31) << 6 | b.charCodeAt(1) & 63 : A = (b.charCodeAt(0) & 15) << 12 | (b.charCodeAt(1) & 63) << 6 | b.charCodeAt(2) & 63, String.fromCharCode(A);
       }
     );
-  }, g.prototype.show = function(A, b, h) {
-    if (A.length) {
-      var x = this.g_tsx, m = this.g_tsy, B = this.g_font.FontName || "OCR-B", I = this.g_font.FontSize || 10, M = I * x, R = I * m, Q = this.g_posx, S = this.g_posy, T = this.getRGB();
-      A = this.toUCS2(this.jsstring(A)), b = x * b || 0, h = m * h || 0;
-      var Y = S + h, W = this.drawing.measure(A, B, M, R), e1 = W.width + (A.length - 1) * b;
+  }, g.prototype.show = function(h, b, A) {
+    if (h.length) {
+      var w = this.g_tsx, m = this.g_tsy, B = this.g_font.FontName || "OCR-B", I = this.g_font.FontSize || 10, M = I * w, R = I * m, Q = this.g_posx, S = this.g_posy, T = this.getRGB();
+      h = this.toUCS2(this.jsstring(h)), b = w * b || 0, A = m * A || 0;
+      var Y = S + A, W = this.drawing.measure(h, B, M, R), e1 = W.width + (h.length - 1) * b;
       this.bbox(Q, Y - W.descent + 1, Q + e1 - 1, Y + W.ascent), this.g_posx += e1;
       var G = this;
       G.cmds.push(function() {
         var H = Q - G.minx, U = G.maxy - S;
-        G.drawing.text(H, U, A, T, { name: B, width: M, height: R, dx: b });
+        G.drawing.text(H, U, h, T, { name: B, width: M, height: R, dx: b });
       });
     }
-  }, g.prototype.bbox = function(A, b, h, x) {
-    if (A > h) {
-      var m = A;
-      A = h, h = m;
+  }, g.prototype.bbox = function(h, b, A, w) {
+    if (h > A) {
+      var m = h;
+      h = A, A = m;
     }
-    if (b > x) {
+    if (b > w) {
       var m = b;
-      b = x, x = m;
+      b = w, w = m;
     }
-    A = c(A), b = c(b), h = v(h), x = v(x), this.minx > A && (this.minx = A), this.maxx < h && (this.maxx = h), this.miny > b && (this.miny = b), this.maxy < x && (this.maxy = x);
+    h = c(h), b = c(b), A = v(A), w = v(w), this.minx > h && (this.minx = h), this.maxx < A && (this.maxx = A), this.miny > b && (this.miny = b), this.maxy < w && (this.maxy = w);
   }, g.prototype.render = function() {
     if (this.minx === 1 / 0)
       return !1;
@@ -19172,24 +19158,24 @@ var To = function() {
       this.g_tsx,
       this.g_tsy
     );
-    for (var A = 0, b = this.cmds.length; A < b; A++)
-      this.cmds[A]();
+    for (var h = 0, b = this.cmds.length; h < b; h++)
+      this.cmds[h]();
     return this.drawing.end();
   }, g;
 }();
 function Go() {
-  var c = 0, f = 0, v = 0, d = 0, y = 0, g = 0, A = 0, b = 0, h, x, m, B, I, M, R, Q, S, T, Y, W;
+  var c = 0, f = 0, v = 0, d = 0, y = 0, g = 0, h = 0, b = 0, A, w, m, B, I, M, R, Q, S, T, Y, W;
   return {
     // setopts() is called after the options are fixed-up/normalized,
     // but before calling into BWIPP.
     // This method allows omitting the options in the constructor call.
     // The method is optional.
     setopts(P) {
-      h = P;
+      A = P;
     },
     // Ensure compliant bar codes by always using integer scaling factors.
     scale: function(P, V) {
-      return h.bcid == "swissqrcode" ? [P, V] : [P | 0 || 1, V | 0 || 1];
+      return A.bcid == "swissqrcode" ? [P, V] : [P | 0 || 1, V | 0 || 1];
     },
     // Measure text.  This and scale() are the only drawing primitives that
     // are called before init().
@@ -19199,17 +19185,17 @@ function Go() {
     // usually be the same, except when the scaling is not symetric.
     measure: function(P, V, J, X) {
       J = J | 0, X = X | 0;
-      for (var a1 = pt.lookup(V), i1 = 0, l1 = 0, _ = 0, h1 = 0, g1 = P.length; h1 < g1; h1++) {
-        var u1 = P.charCodeAt(h1), x1 = pt.getglyph(a1, u1, J, X);
-        l1 = Math.max(l1, x1.top), _ = Math.max(_, x1.height - x1.top), h1 == g1 - 1 ? i1 += x1.left + x1.width : i1 += x1.advance;
+      for (var a1 = pt.lookup(V), i1 = 0, l1 = 0, _ = 0, A1 = 0, g1 = P.length; A1 < g1; A1++) {
+        var u1 = P.charCodeAt(A1), x1 = pt.getglyph(a1, u1, J, X);
+        l1 = Math.max(l1, x1.top), _ = Math.max(_, x1.height - x1.top), A1 == g1 - 1 ? i1 += x1.left + x1.width : i1 += x1.advance;
       }
       return { width: i1, ascent: l1, descent: _ };
     },
     // width and height represent the maximum bounding box the graphics will occupy.
     // The dimensions are for an unrotated rendering.  Adjust as necessary.
     init: function(P, V) {
-      var J = h.paddingleft, X = h.paddingright, a1 = h.paddingtop, i1 = h.paddingbottom, l1 = h.rotate || "N";
-      if (P += J + X, V += a1 + i1, +h.sizelimit && +h.sizelimit < P * V)
+      var J = A.paddingleft, X = A.paddingright, a1 = A.paddingtop, i1 = A.paddingbottom, l1 = A.rotate || "N";
+      if (P += J + X, V += a1 + i1, +A.sizelimit && +A.sizelimit < P * V)
         throw new Error("Image size over limit");
       switch (l1) {
         // tx = w-y, ty = x
@@ -19231,8 +19217,8 @@ function Go() {
       }
       var _ = l1 == "L" || l1 == "R";
       B = _ ? V : P, I = _ ? P : V, M = J, R = a1, Y = [], Y.min = 1 / 0, W = null, Q = S = T = 0;
-      var h1 = this.image(B, I);
-      x = h1.buffer, m = h1.ispng ? 1 : 0;
+      var A1 = this.image(B, I);
+      w = A1.buffer, m = A1.ispng ? 1 : 0;
     },
     // Unconnected stroked lines are used to draw the bars in linear barcodes;
     // and the border around a linear barcode (e.g. ITF-14)
@@ -19249,9 +19235,9 @@ function Go() {
       Q = parseInt(i1.substr(0, 2), 16), S = parseInt(i1.substr(2, 2), 16), T = parseInt(i1.substr(4, 2), 16);
       var _ = a1 / 2 | 0;
       P == J ? (P = P - a1 + _, J = J + _ - 1) : (V = V - _, X = X + a1 - _ - 1);
-      for (var h1 = V; h1 <= X; h1++)
+      for (var A1 = V; A1 <= X; A1++)
         for (var g1 = P; g1 <= J; g1++)
-          e1(g1, h1, 255);
+          e1(g1, A1, 255);
     },
     // Polygons are used to draw the connected regions in a 2d barcode.
     // These will always be unstroked, filled, orthogonal shapes.
@@ -19268,13 +19254,13 @@ function Go() {
             for (var _ = i1 + 1; _ < l1; _++)
               G(a1, _);
         } else {
-          var a1 = P[J][0] | 0, h1 = P[X][0] | 0, i1 = P[J][1] | 0;
-          if (a1 < h1) {
+          var a1 = P[J][0] | 0, A1 = P[X][0] | 0, i1 = P[J][1] | 0;
+          if (a1 < A1) {
             var g1 = P[J == 0 ? V - 1 : J - 1][1], u1 = P[X == V - 1 ? 0 : X + 1][1];
-            g1 > i1 && G(a1, i1), u1 > i1 && G(h1, i1);
+            g1 > i1 && G(a1, i1), u1 > i1 && G(A1, i1);
           } else {
             var g1 = P[X == V - 1 ? 0 : X + 1][1], u1 = P[J == 0 ? V - 1 : J - 1][1];
-            g1 > i1 && G(h1, i1), u1 > i1 && G(a1, i1);
+            g1 > i1 && G(A1, i1), u1 > i1 && G(a1, i1);
           }
         }
     },
@@ -19290,12 +19276,12 @@ function Go() {
     hexagon: function(P, V) {
       var J = P[0][0] | 0, X = P[0][1] | 0, a1 = P[1][1] - P[0][1] | 0, i1 = P[2][1] - P[1][1] - 1 | 0, l1 = P[2][0] | 0, _ = P[4][0] | 0;
       Q = parseInt(V.substr(0, 2), 16), S = parseInt(V.substr(2, 2), 16), T = parseInt(V.substr(4, 2), 16), H(J, J + 1, X++);
-      for (var h1 = 1; h1 < a1; h1++)
-        H(J - 2 * h1, J + 1 + 2 * h1, X++);
-      for (var h1 = 0; h1 <= i1; h1++)
+      for (var A1 = 1; A1 < a1; A1++)
+        H(J - 2 * A1, J + 1 + 2 * A1, X++);
+      for (var A1 = 0; A1 <= i1; A1++)
         H(l1, _, X++);
-      for (var h1 = a1 - 1; h1 >= 1; h1--)
-        H(J - 2 * h1, J + 1 + 2 * h1, X++);
+      for (var A1 = a1 - 1; A1 >= 1; A1--)
+        H(J - 2 * A1, J + 1 + 2 * A1, X++);
       H(J, J + 1, X);
     },
     // An unstroked, filled ellipse.  Used by dotcode and maxicode at present.
@@ -19331,13 +19317,13 @@ function Go() {
     // dx is extra space requested between characters (usually zero).
     text: function(P, V, J, X, a1) {
       P = P | 0, V = V | 0, Q = parseInt(X.substr(0, 2), 16), S = parseInt(X.substr(2, 2), 16), T = parseInt(X.substr(4, 2), 16);
-      for (var i1 = pt.lookup(a1.name), l1 = a1.width | 0, _ = a1.height | 0, h1 = a1.dx | 0, g1 = 0; g1 < J.length; g1++) {
+      for (var i1 = pt.lookup(a1.name), l1 = a1.width | 0, _ = a1.height | 0, A1 = a1.dx | 0, g1 = 0; g1 < J.length; g1++) {
         for (var u1 = J.charCodeAt(g1), x1 = pt.getglyph(i1, u1, l1, _), Q1 = V - x1.top, I1 = x1.left, F1 = x1.width, P1 = x1.height, N1 = x1.bytes, H1 = x1.offset, D1 = 0; D1 < F1; D1++)
           for (var G1 = 0; G1 < P1; G1++) {
             var S1 = N1[H1 + G1 * F1 + D1];
             S1 && e1(P + I1 + D1, Q1 + G1, S1);
           }
-        P += x1.advance + h1;
+        P += x1.advance + A1;
       }
     },
     // Called after all drawing is complete.
@@ -19347,8 +19333,8 @@ function Go() {
   function e1(P, V, J) {
     if (!(W && n1(P, V))) {
       P += M, V += R;
-      var X = c * P + f * V + v * (B - 1) + d * (I - 1), a1 = y * P + g * V + A * (B - 1) + b * (I - 1), i1 = (a1 * B + X) * 4 + (a1 + 1) * m, l1 = x[i1 + 3] / 255, _ = J / 255, h1 = (1 - _) * l1, g1 = _ + h1;
-      x[i1 + 0] = (Q * _ + x[i1 + 0] * h1) / g1 | 0, x[i1 + 1] = (S * _ + x[i1 + 1] * h1) / g1 | 0, x[i1 + 2] = (T * _ + x[i1 + 2] * h1) / g1 | 0, x[i1 + 3] = 255 * g1 | 0;
+      var X = c * P + f * V + v * (B - 1) + d * (I - 1), a1 = y * P + g * V + h * (B - 1) + b * (I - 1), i1 = (a1 * B + X) * 4 + (a1 + 1) * m, l1 = w[i1 + 3] / 255, _ = J / 255, A1 = (1 - _) * l1, g1 = _ + A1;
+      w[i1 + 0] = (Q * _ + w[i1 + 0] * A1) / g1 | 0, w[i1 + 1] = (S * _ + w[i1 + 1] * A1) / g1 | 0, w[i1 + 2] = (T * _ + w[i1 + 2] * A1) / g1 | 0, w[i1 + 3] = 255 * g1 | 0;
     }
   }
   function G(P, V) {
@@ -19366,18 +19352,18 @@ function Go() {
           return g1 - u1;
         });
         for (var a1 = !1, i1 = 0, l1 = 0, _ = X.length; l1 < _; l1++) {
-          var h1 = X[l1];
-          a1 ? H(i1, h1 - 1, J) : i1 = h1, a1 = !a1;
+          var A1 = X[l1];
+          a1 ? H(i1, A1 - 1, J) : i1 = A1, a1 = !a1;
         }
       }
     }
   }
   function $(P, V, J, X, a1) {
     P = P | 0, V = V | 0, J = J | 0, X = X | 0;
-    var i1 = Math.abs(J - P), l1 = Math.abs(X - V), _ = l1 & 1, h1 = 4 * (1 - i1) * l1 * l1, g1 = 4 * (_ + 1) * i1 * i1, u1 = h1 + g1 + _ * i1 * i1, x1, Q1 = [], I1 = [];
+    var i1 = Math.abs(J - P), l1 = Math.abs(X - V), _ = l1 & 1, A1 = 4 * (1 - i1) * l1 * l1, g1 = 4 * (_ + 1) * i1 * i1, u1 = A1 + g1 + _ * i1 * i1, x1, Q1 = [], I1 = [];
     Q1.min = I1.min = 1 / 0, P > J && (P = J, J += i1), V > X && (V = X), V += (l1 + 1) / 2 | 0, X = V - _, i1 *= 8 * i1, _ = 8 * l1 * l1;
     do
-      H1(I1, J, V), N1(Q1, P, V), N1(Q1, P, X), H1(I1, J, X), x1 = 2 * u1, x1 >= h1 && (P++, J--, h1 += _, u1 += h1), x1 <= g1 && (V++, X--, g1 += i1, u1 += g1);
+      H1(I1, J, V), N1(Q1, P, V), N1(Q1, P, X), H1(I1, J, X), x1 = 2 * u1, x1 >= A1 && (P++, J--, A1 += _, u1 += A1), x1 <= g1 && (V++, X--, g1 += i1, u1 += g1);
     while (P <= J);
     for (; V - X < l1; )
       H1(I1, J + 1, V), N1(Q1, P - 1, V++), N1(Q1, P - 1, X), H1(I1, J + 1, X--);
@@ -19400,8 +19386,8 @@ function Go() {
     var J = W[V];
     if (!J)
       return !0;
-    J.sorted || (J.sort(function(_, h1) {
-      return _ - h1;
+    J.sorted || (J.sort(function(_, A1) {
+      return _ - A1;
     }), J.sorted = !0);
     for (var X = !1, a1 = 0, i1 = J.length; a1 < i1; a1++) {
       var l1 = J[a1];
@@ -19417,27 +19403,27 @@ function Go() {
 function Bn(c, f) {
   f && f instanceof HTMLCanvasElement && (c = f);
   var v, d = c.getContext("2d", { willReadFrequently: !0 }), y = Go();
-  y.image = b, y.end = h;
-  var g, A = y.setopts;
-  return y.setopts = function(x) {
-    g = x, A && A.call(y, x);
+  y.image = b, y.end = A;
+  var g, h = y.setopts;
+  return y.setopts = function(w) {
+    g = w, h && h.call(y, w);
   }, y;
-  function b(x, m) {
-    return c.width = x, c.height = m, d.setTransform(1, 0, 0, 1, 0, 0), /^[0-9a-fA-F]{6}$/.test("" + g.backgroundcolor) ? (d.fillStyle = "#" + g.backgroundcolor, d.fillRect(0, 0, x, m)) : d.clearRect(0, 0, x, m), v = d.getImageData(0, 0, x, m), { buffer: v.data, ispng: !1 };
+  function b(w, m) {
+    return c.width = w, c.height = m, d.setTransform(1, 0, 0, 1, 0, 0), /^[0-9a-fA-F]{6}$/.test("" + g.backgroundcolor) ? (d.fillStyle = "#" + g.backgroundcolor, d.fillRect(0, 0, w, m)) : d.clearRect(0, 0, w, m), v = d.getImageData(0, 0, w, m), { buffer: v.data, ispng: !1 };
   }
-  function h() {
+  function A() {
     return d.putImageData(v, 0, 0), c;
   }
 }
 function Yo() {
-  var c = 0, f = 0, v = 0, d = 0, y = 0, g = 0, A = 0, b = 0, h, x = "", m, B = "", I = [], M = {}, R, Q, S = 0.55228475 - 45e-5, T, Y, W, e1;
+  var c = 0, f = 0, v = 0, d = 0, y = 0, g = 0, h = 0, b = 0, A, w = "", m, B = "", I = [], M = {}, R, Q, S = 0.55228475 - 45e-5, T, Y, W, e1;
   return {
     // setopts() is called after the options are fixed-up/normalized,
     // but before calling into BWIPP.
     // This allows omitting the options in the constructor call.
     // It is also your last chance to amend the options before usage.
     setopts(H) {
-      h = H;
+      A = H;
     },
     // measure() and scale() are the only drawing primitives that are called before init().
     // Make no adjustments
@@ -19459,7 +19445,7 @@ function Yo() {
     // `width` and `height` represent the maximum bounding box the graphics will
     // occupy.  The dimensions are for an unrotated rendering.  Adjust as necessary.
     init(H, U) {
-      var $ = h.paddingleft, n1 = h.paddingright, P = h.paddingtop, V = h.paddingbottom, J = h.rotate || "N";
+      var $ = A.paddingleft, n1 = A.paddingright, P = A.paddingtop, V = A.paddingbottom, J = A.rotate || "N";
       switch (H += $ + n1, U += P + V, J) {
         // tx = w-y, ty = x
         case "R":
@@ -19530,7 +19516,7 @@ function Yo() {
     // regions. The built-in drawing uses even-odd for simplicity - we match that
     // to be consistent.
     fill(H) {
-      m && (x += m + '" fill="#' + H + '" fill-rule="evenodd"' + (B ? ' clip-path="url(#' + B + ')"' : "") + ` />
+      m && (w += m + '" fill="#' + H + '" fill-rule="evenodd"' + (B ? ' clip-path="url(#' + B + ')"' : "") + ` />
 `, m = null);
     },
     // Currently only used by swissqrcode.  The `polys` area is an array of
@@ -19559,11 +19545,11 @@ function Yo() {
     // dx is extra space requested between characters (usually zero).
     text(H, U, $, n1, P) {
       for (var V = pt.lookup(P.name), J = P.width | 0, X = P.height | 0, a1 = P.dx | 0, i1 = "", l1 = 0; l1 < $.length; l1++) {
-        var _ = $.charCodeAt(l1), h1 = pt.getpaths(V, _, J, X);
-        if (h1) {
-          if (h1.length) {
-            for (var g1 = 0, u1 = h1.length; g1 < u1; g1++) {
-              let x1 = h1[g1];
+        var _ = $.charCodeAt(l1), A1 = pt.getpaths(V, _, J, X);
+        if (A1) {
+          if (A1.length) {
+            for (var g1 = 0, u1 = A1.length; g1 < u1; g1++) {
+              let x1 = A1[g1];
               x1.type == "M" || x1.type == "L" ? i1 += x1.type + G(x1.x + H, U - x1.y) : x1.type == "Q" ? i1 += x1.type + G(x1.cx + H, U - x1.cy) + " " + G(x1.x + H, U - x1.y) : x1.type == "C" && (i1 += x1.type + G(x1.cx1 + H, U - x1.cy1) + " " + G(x1.cx2 + H, U - x1.cy2) + " " + G(x1.x + H, U - x1.y));
             }
             i1 += "Z";
@@ -19571,7 +19557,7 @@ function Yo() {
           H += pt.getglyph(V, _, J, X).advance + a1;
         }
       }
-      i1 && (x += '<path d="' + i1 + '" fill="#' + n1 + `" />
+      i1 && (w += '<path d="' + i1 + '" fill="#' + n1 + `" />
 `);
     },
     // Called after all drawing is complete.  The return value from this method
@@ -19581,26 +19567,26 @@ function Yo() {
       for (var U in M)
         H += M[U] + `" />
 `;
-      var $ = h.backgroundcolor;
+      var $ = A.backgroundcolor;
       return '<svg viewBox="0 0 ' + T + " " + Y + `" xmlns="http://www.w3.org/2000/svg">
 ` + (I.length ? "<defs>" + I.join("") + "</defs>" : "") + (/^[0-9A-Fa-f]{6}$/.test("" + $) ? '<rect width="100%" height="100%" fill="#' + $ + `" />
-` : "") + H + x + `</svg>
+` : "") + H + w + `</svg>
 `;
     }
   };
   function G(H, U) {
     H += W, U += e1;
-    var $ = c * H + f * U + v * (T - 1) + d * (Y - 1), n1 = y * H + g * U + A * (T - 1) + b * (Y - 1);
+    var $ = c * H + f * U + v * (T - 1) + d * (Y - 1), n1 = y * H + g * U + h * (T - 1) + b * (Y - 1);
     return "" + (($ | 0) == $ ? $ : $.toFixed(2)) + " " + ((n1 | 0) == n1 ? n1 : n1.toFixed(2));
   }
 }
 var pt = function() {
   var c = [], f = {}, v = {}, d = {}, y = 0;
   return d.next = d, d.prev = d, {
-    lookup: A,
+    lookup: h,
     monochrome: b,
-    getglyph: h,
-    getpaths: x,
+    getglyph: A,
+    getpaths: w,
     loadFont: g
   };
   function g(m) {
@@ -19618,7 +19604,7 @@ var pt = function() {
     var Q = c.push(R) - 1;
     return f[m.toUpperCase()] = Q, Q;
   }
-  function A(m) {
+  function h(m) {
     var B = f[m.toUpperCase()];
     return B === void 0 ? 1 : B;
   }
@@ -19626,7 +19612,7 @@ var pt = function() {
     if (m)
       throw new Error("bwipjs: monochrome fonts not implemented");
   }
-  function h(m, B, I, M) {
+  function A(m, B, I, M) {
     m = m | 0, B = B | 0, I = +I, M = +M, (!I || I < 8) && (I = 8), (!M || M < 8) && (M = I), (m < 0 || m >= c.length) && (m = 1), (!B || B < 32) && (B = 32);
     var R = "" + m + "c" + B + "w" + I + "h" + M, S = v[R];
     if (S) {
@@ -19654,7 +19640,7 @@ var pt = function() {
     var Y = d;
     return Y.next.prev = S, S.next = Y.next, S.prev = Y, Y.next = S, S;
   }
-  function x(m, B, I, M) {
+  function w(m, B, I, M) {
     m = m | 0, B = B | 0, I = +I, M = +M, (!I || I < 8) && (I = 8), (!M || M < 8) && (M = I), (m < 0 || m >= c.length) && (m = 1), (!B || B < 32) && (B = 32);
     var R = c[m];
     return Un.GetPaths(
@@ -19669,7 +19655,7 @@ function ql() {
   return pt.loadFont.apply(pt, Array.prototype.slice.call(arguments));
 }
 var Un = /* @__PURE__ */ function() {
-  var c = 1, f = 2, v = 3, d = 4, y = 0, g = 3, A = 1, b = 10, h = Math.floor, x = Math.ceil, m = Math.sqrt, B = Math.abs;
+  var c = 1, f = 2, v = 3, d = 4, y = 0, g = 3, h = 1, b = 10, A = Math.floor, w = Math.ceil, m = Math.sqrt, B = Math.abs;
   function I(p) {
     for (var j = [], E = 0; E < p; E++)
       j.push({});
@@ -19776,7 +19762,7 @@ var Un = /* @__PURE__ */ function() {
     var N = W(p, E[1], E[0]), q = n1(N, 19, 0);
     return q ? (Q(p, E[1] + q), e1(p)) : Y();
   }
-  function h1(p, j, E) {
+  function A1(p, j, E) {
     var N, q, o1, O;
     if (p.data = j, p.fontstart = E, p.cff = Y(), N = l1(j, E, [99, 109, 97, 112]), p.loca = l1(j, E, [108, 111, 99, 97]), p.head = l1(j, E, [104, 101, 97, 100]), p.glyf = l1(j, E, [103, 108, 121, 102]), p.hhea = l1(j, E, [104, 104, 101, 97]), p.hmtx = l1(j, E, [104, 109, 116, 120]), p.kern = l1(j, E, [107, 101, 114, 110]), !N || !p.head || !p.hhea || !p.hmtx)
       return 0;
@@ -19784,13 +19770,13 @@ var Un = /* @__PURE__ */ function() {
       if (!p.loca)
         return 0;
     } else {
-      var t1, F, Z, c1, r1 = 2, D = 0, A1 = 0, p1 = 0;
-      if (c1 = l1(j, E, [67, 70, 70, 32]), !c1 || (p.fontdicts = Y(), p.fdselect = Y(), p.cff = j.subarray(c1), p.cff.cursor = 0, t1 = p.cff, S(t1, 2), Q(t1, M(t1)), e1(t1), Z = e1(t1), F = V(Z, 0), e1(t1), p.gsubrs = e1(t1), D = n1(F, 17, D), r1 = n1(F, 262, r1), A1 = n1(F, 292, A1), p1 = n1(F, 293, p1), p.subrs = _(t1, F), r1 != 2) || D == 0)
+      var t1, F, Z, c1, r1 = 2, D = 0, h1 = 0, p1 = 0;
+      if (c1 = l1(j, E, [67, 70, 70, 32]), !c1 || (p.fontdicts = Y(), p.fdselect = Y(), p.cff = j.subarray(c1), p.cff.cursor = 0, t1 = p.cff, S(t1, 2), Q(t1, M(t1)), e1(t1), Z = e1(t1), F = V(Z, 0), e1(t1), p.gsubrs = e1(t1), D = n1(F, 17, D), r1 = n1(F, 262, r1), h1 = n1(F, 292, h1), p1 = n1(F, 293, p1), p.subrs = _(t1, F), r1 != 2) || D == 0)
         return 0;
-      if (A1) {
+      if (h1) {
         if (!p1)
           return 0;
-        Q(t1, A1), p.fontdicts = e1(t1), p.fdselect = W(t1, p1, t1.length - p1);
+        Q(t1, h1), p.fontdicts = e1(t1), p.fdselect = W(t1, p1, t1.length - p1);
       }
       Q(t1, D), p.charstrings = e1(t1);
     }
@@ -19799,7 +19785,7 @@ var Un = /* @__PURE__ */ function() {
       switch (X(j, K)) {
         case g:
           switch (X(j, K + 2)) {
-            case A:
+            case h:
             case b:
               p.index_map = N + i1(j, K + 4);
               break;
@@ -19824,16 +19810,16 @@ var Un = /* @__PURE__ */ function() {
       if (q == 2)
         return 0;
       if (q == 4) {
-        var F = X(E, N + 6) >> 1, Z = X(E, N + 8) >> 1, c1 = X(E, N + 10), r1 = X(E, N + 12) >> 1, D = N + 14, A1 = D;
+        var F = X(E, N + 6) >> 1, Z = X(E, N + 8) >> 1, c1 = X(E, N + 10), r1 = X(E, N + 12) >> 1, D = N + 14, h1 = D;
         if (j > 65535)
           return 0;
-        for (j >= X(E, A1 + r1 * 2) && (A1 += r1 * 2), A1 -= 2; c1; ) {
+        for (j >= X(E, h1 + r1 * 2) && (h1 += r1 * 2), h1 -= 2; c1; ) {
           Z >>= 1;
-          var p1 = X(E, A1 + Z * 2);
-          j > p1 && (A1 += Z * 2), --c1;
+          var p1 = X(E, h1 + Z * 2);
+          j > p1 && (h1 += Z * 2), --c1;
         }
-        A1 += 2;
-        var K, f1, d1 = A1 - D >>> 1;
+        h1 += 2;
+        var K, f1, d1 = h1 - D >>> 1;
         return f1 = X(E, N + 14 + F * 2 + 2 + 2 * d1), j < f1 ? 0 : (K = X(E, N + 14 + F * 6 + 2 + 2 * d1), K == 0 ? j + a1(E, N + 14 + F * 4 + 2 + 2 * d1) : X(E, K + (j - f1) * 2 + N + 14 + F * 6 + 2 + 2 * d1));
       } else if (q == 12 || q == 13) {
         for (var s1 = i1(E, N + 12), w1 = 0, k1 = s1; w1 < k1; ) {
@@ -19886,7 +19872,7 @@ var Un = /* @__PURE__ */ function() {
       return null;
     var q = [], o1 = a1(E, N);
     if (o1 > 0) {
-      var O = 0, t1, F, Z = 0, c1, r1, D, A1 = 0, p1, K = 0, f1, d1, s1, w1, k1, B1, O1, U1, j1 = N + 10, L1 = X(E, N + 10 + o1 * 2), T1 = E.subarray(N + 10 + o1 * 2 + 2 + L1), Y1 = 0;
+      var O = 0, t1, F, Z = 0, c1, r1, D, h1 = 0, p1, K = 0, f1, d1, s1, w1, k1, B1, O1, U1, j1 = N + 10, L1 = X(E, N + 10 + o1 * 2), T1 = E.subarray(N + 10 + o1 * 2 + 2 + L1), Y1 = 0;
       for (r1 = 1 + X(E, j1 + o1 * 2 - 2), c1 = r1 + 2 * o1, q = I(c1), D = 0, t1 = 0, p1 = c1 - r1, F = 0; F < r1; ++F)
         t1 == 0 ? (O = T1[Y1++], O & 8 && (t1 = T1[Y1++])) : --t1, q[p1 + F].type = O;
       for (f1 = 0, F = 0; F < r1; ++F) {
@@ -19899,8 +19885,8 @@ var Un = /* @__PURE__ */ function() {
       }
       for (d1 = 0, F = 0; F < r1; ++F) {
         if (O = q[p1 + F].type, O & 4) {
-          var he = T1[Y1++];
-          d1 += O & 32 ? he : -he;
+          var Ae = T1[Y1++];
+          d1 += O & 32 ? Ae : -Ae;
         } else
           O & 32 || (d1 = d1 + J(T1[Y1] * 256 + T1[Y1 + 1]), Y1 += 2);
         q[p1 + F].y = d1;
@@ -19910,7 +19896,7 @@ var Un = /* @__PURE__ */ function() {
         O = q[p1 + F].type, f1 = q[p1 + F].x, d1 = q[p1 + F].y, D == F ? (F != 0 && (re = I1(
           q,
           re,
-          A1,
+          h1,
           K,
           k1,
           B1,
@@ -19918,18 +19904,18 @@ var Un = /* @__PURE__ */ function() {
           U1,
           s1,
           w1
-        )), K = !(O & 1), K ? (O1 = f1, U1 = d1, q[p1 + F + 1].type & 1 ? (k1 = q[p1 + F + 1].x, B1 = q[p1 + F + 1].y, ++F) : (k1 = f1 + q[p1 + F + 1].x >> 1, B1 = d1 + q[p1 + F + 1].y >> 1)) : (k1 = f1, B1 = d1), u1(q[re++], c, k1, B1, 0, 0), A1 = 0, D = 1 + X(E, j1 + Z * 2), ++Z) : O & 1 ? (A1 ? u1(q[re++], v, f1, d1, s1, w1) : u1(q[re++], f, f1, d1, 0, 0), A1 = 0) : (A1 && u1(
+        )), K = !(O & 1), K ? (O1 = f1, U1 = d1, q[p1 + F + 1].type & 1 ? (k1 = q[p1 + F + 1].x, B1 = q[p1 + F + 1].y, ++F) : (k1 = f1 + q[p1 + F + 1].x >> 1, B1 = d1 + q[p1 + F + 1].y >> 1)) : (k1 = f1, B1 = d1), u1(q[re++], c, k1, B1, 0, 0), h1 = 0, D = 1 + X(E, j1 + Z * 2), ++Z) : O & 1 ? (h1 ? u1(q[re++], v, f1, d1, s1, w1) : u1(q[re++], f, f1, d1, 0, 0), h1 = 0) : (h1 && u1(
           q[re++],
           v,
           s1 + f1 >> 1,
           w1 + d1 >> 1,
           s1,
           w1
-        ), s1 = f1, w1 = d1, A1 = 1);
+        ), s1 = f1, w1 = d1, h1 = 1);
       q.length = I1(
         q,
         re,
-        A1,
+        h1,
         K,
         k1,
         B1,
@@ -19946,7 +19932,7 @@ var Un = /* @__PURE__ */ function() {
         if (je.length > 0) {
           for (var F = 0, xe = je.length; F < xe; ++F) {
             var ye = je[F], f1, d1;
-            f1 = ye.x, d1 = ye.y, ye.x = h(c1 * (R1[0] * f1 + R1[2] * d1 + R1[4])), ye.y = h(r1 * (R1[1] * f1 + R1[3] * d1 + R1[5])), f1 = ye.cx, d1 = ye.cy, ye.cx = h(c1 * (R1[0] * f1 + R1[2] * d1 + R1[4])), ye.cy = h(r1 * (R1[1] * f1 + R1[3] * d1 + R1[5]));
+            f1 = ye.x, d1 = ye.y, ye.x = A(c1 * (R1[0] * f1 + R1[2] * d1 + R1[4])), ye.y = A(r1 * (R1[1] * f1 + R1[3] * d1 + R1[5])), f1 = ye.cx, d1 = ye.cy, ye.cx = A(c1 * (R1[0] * f1 + R1[2] * d1 + R1[4])), ye.cy = A(r1 * (R1[1] * f1 + R1[3] * d1 + R1[5]));
           }
           q = q.concat(je);
         }
@@ -19994,7 +19980,7 @@ var Un = /* @__PURE__ */ function() {
     return _(p.cff, V(p.fontdicts, F));
   }
   function J1(p, j, E) {
-    var N = 1, q = 0, o1 = 0, O = 0, t1, F, Z, c1 = 0, r1, D = [], A1 = [], p1 = p.subrs, K, f1;
+    var N = 1, q = 0, o1 = 0, O = 0, t1, F, Z, c1 = 0, r1, D = [], h1 = [], p1 = p.subrs, K, f1;
     for (K = V(p.charstrings, j); K.cursor < K.length; ) {
       switch (F = 0, r1 = 1, Z = M(K), Z) {
         case 19:
@@ -20158,19 +20144,19 @@ var Un = /* @__PURE__ */ function() {
         case 10:
           c1 || (p.fdselect.length && (p1 = Z1(p, j)), c1 = 1);
         case 29:
-          if (O < 1 || (t1 = D[--O] | 0, o1 >= 10) || (A1[o1++] = K, K = _1(Z == 10 ? p1 : p.gsubrs, t1), K.length == 0))
+          if (O < 1 || (t1 = D[--O] | 0, o1 >= 10) || (h1[o1++] = K, K = _1(Z == 10 ? p1 : p.gsubrs, t1), K.length == 0))
             return 0;
           K.cursor = 0, r1 = 0;
           break;
         case 11:
           if (o1 <= 0)
             return 0;
-          K = A1[--o1], r1 = 0;
+          K = h1[--o1], r1 = 0;
           break;
         case 14:
           return H1(E), 1;
         case 12:
-          var d1, s1, w1, k1, B1, O1, U1, j1, L1, T1, Y1, ne, he, re, Me = M(K);
+          var d1, s1, w1, k1, B1, O1, U1, j1, L1, T1, Y1, ne, Ae, re, Me = M(K);
           switch (Me) {
             case 34:
               if (O < 7)
@@ -20190,7 +20176,7 @@ var Un = /* @__PURE__ */ function() {
             case 37:
               if (O < 11)
                 return 0;
-              d1 = D[0], U1 = D[1], s1 = D[2], j1 = D[3], w1 = D[4], L1 = D[5], k1 = D[6], T1 = D[7], B1 = D[8], Y1 = D[9], O1 = ne = D[10], he = d1 + s1 + w1 + k1 + B1, re = U1 + j1 + L1 + T1 + Y1, B(he) > B(re) ? ne = -re : O1 = -he, S1(E, d1, U1, s1, j1, w1, L1), S1(E, k1, T1, B1, Y1, O1, ne);
+              d1 = D[0], U1 = D[1], s1 = D[2], j1 = D[3], w1 = D[4], L1 = D[5], k1 = D[6], T1 = D[7], B1 = D[8], Y1 = D[9], O1 = ne = D[10], Ae = d1 + s1 + w1 + k1 + B1, re = U1 + j1 + L1 + T1 + Y1, B(Ae) > B(re) ? ne = -re : O1 = -Ae, S1(E, d1, U1, s1, j1, w1, L1), S1(E, k1, T1, B1, Y1, O1, ne);
               break;
             default:
               return 0;
@@ -20251,10 +20237,10 @@ var Un = /* @__PURE__ */ function() {
   function fe(p, j, E, N, q, o1) {
     var O = {};
     return Q1(p, j, O) ? {
-      x0: h(O.x0 * E + q),
-      y0: h(-O.y1 * N + o1),
-      x1: x(O.x1 * E + q),
-      y1: x(-O.y0 * N + o1)
+      x0: A(O.x0 * E + q),
+      y0: A(-O.y1 * N + o1),
+      x1: w(O.x1 * E + q),
+      y1: w(-O.y0 * N + o1)
     } : { x0: 0, y0: 0, x1: 0, y1: 0 };
   }
   function Te(p, j, E) {
@@ -20278,16 +20264,16 @@ var Un = /* @__PURE__ */ function() {
         var O = N.fx;
         O < E && (O >= 0 ? (V1(p, O, N, O, q, O, o1), V1(j, O + 1, N, O, q, O, o1)) : V1(j, 0, N, O, q, O, o1));
       } else {
-        var O = N.fx, t1 = N.fdx, F = O + t1, Z, c1, r1, D, A1 = N.fdy;
+        var O = N.fx, t1 = N.fdx, F = O + t1, Z, c1, r1, D, h1 = N.fdy;
         if (N.sy > q ? (Z = O + t1 * (N.sy - q), r1 = N.sy) : (Z = O, r1 = q), N.ey < o1 ? (c1 = O + t1 * (N.ey - q), D = N.ey) : (c1 = F, D = o1), Z >= 0 && c1 >= 0 && Z < E && c1 < E)
           if ((Z | 0) == (c1 | 0)) {
             var p1 = D - r1, K = Z | 0;
             p[K] += N.direction * (1 - (Z - K + (c1 - K)) / 2) * p1, j[K + 1] += N.direction * p1;
           } else {
             var f1, K, d1, s1, w1, k1, B1, O1;
-            for (Z > c1 && (r1 = o1 - (r1 - q), D = o1 - (D - q), f1 = r1, r1 = D, D = f1, f1 = c1, c1 = Z, Z = f1, t1 = -t1, A1 = -A1, f1 = O, O = F, F = f1), d1 = Z | 0, s1 = c1 | 0, w1 = (d1 + 1 - O) * A1 + q, B1 = N.direction, O1 = B1 * (w1 - r1), p[d1] += O1 * (1 - (Z - d1 + (d1 + 1 - d1)) / 2), k1 = B1 * A1, K = d1 + 1; K < s1; ++K)
+            for (Z > c1 && (r1 = o1 - (r1 - q), D = o1 - (D - q), f1 = r1, r1 = D, D = f1, f1 = c1, c1 = Z, Z = f1, t1 = -t1, h1 = -h1, f1 = O, O = F, F = f1), d1 = Z | 0, s1 = c1 | 0, w1 = (d1 + 1 - O) * h1 + q, B1 = N.direction, O1 = B1 * (w1 - r1), p[d1] += O1 * (1 - (Z - d1 + (d1 + 1 - d1)) / 2), k1 = B1 * h1, K = d1 + 1; K < s1; ++K)
               p[K] += O1 + k1 / 2, O1 += k1;
-            w1 += A1 * (s1 - (d1 + 1)), p[s1] += O1 + B1 * (1 - (s1 - s1 + (c1 - s1)) / 2) * (D - w1), j[s1 + 1] += B1 * (D - r1);
+            w1 += h1 * (s1 - (d1 + 1)), p[s1] += O1 + B1 * (1 - (s1 - s1 + (c1 - s1)) / 2) * (D - w1), j[s1 + 1] += B1 * (D - r1);
           }
         else
           for (var K = 0; K < E; ++K) {
@@ -20300,7 +20286,7 @@ var Un = /* @__PURE__ */ function() {
   }
   function ue(p, j, E, N, q, o1) {
     q |= 0, o1 |= 0;
-    var O = null, t1, F = o1, Z = 0, c1, r1 = new Float32Array(p.w * 2 + 1), D = r1.subarray(p.w), A1 = 0;
+    var O = null, t1, F = o1, Z = 0, c1, r1 = new Float32Array(p.w * 2 + 1), D = r1.subarray(p.w), h1 = 0;
     for (j[E].y0 = o1 + p.h + 1; Z < p.h; ) {
       var p1 = F + 0, K = F + 1, f1 = O;
       if (r1.fill)
@@ -20309,8 +20295,8 @@ var Un = /* @__PURE__ */ function() {
         for (var d1 = 0, s1 = r1.length; d1 < s1; d1++) r1[d1] = 0;
       for (; f1; )
         t1 = f1, f1 = t1.next, t1.ey <= p1 && (t1.direction = 0);
-      for (; j[A1].y0 <= K; )
-        j[A1].y0 != j[A1].y1 && (t1 = Te(j[A1], q, p1), t1.next = O, O = t1), ++A1;
+      for (; j[h1].y0 <= K; )
+        j[h1].y0 != j[h1].y1 && (t1 = Te(j[h1], q, p1), t1.next = O, O = t1), ++h1;
       O && Ce(r1, D, p.w, O, p1);
       for (var c1 = 0, w1 = 0; c1 < p.w; ++c1) {
         var k1, B1;
@@ -20328,7 +20314,7 @@ var Un = /* @__PURE__ */ function() {
       E != q && (p[q] = N);
     }
   }
-  function Ae(p, j, E) {
+  function he(p, j, E) {
     for (; E > 12; ) {
       var N, q, o1, O, t1, F = E >> 1, Z = p[j].y0 < p[j + F].y0, c1 = p[j + F].y0 < p[j + E - 1].y0;
       for (Z != c1 && (q = p[j].y0 < p[j + E - 11].y0, t1 = q == c1 ? 0 : E - 1, N = p[j + t1], p[j + t1] = p[j + F], p[j + F] = N), N = p[j], p[j] = p[j + F], p[j + F] = N, o1 = 1, O = E - 1; ; ) {
@@ -20340,19 +20326,19 @@ var Un = /* @__PURE__ */ function() {
           break;
         N = p[j + o1], p[j + o1] = p[j + O], p[j + O] = N, ++o1, --O;
       }
-      O < E - o1 ? (Ae(p, j, O), j += o1, E -= o1) : (Ae(p, j + o1, E - o1), E = O);
+      O < E - o1 ? (he(p, j, O), j += o1, E -= o1) : (he(p, j + o1, E - o1), E = O);
     }
   }
   function Fe(p, j) {
-    Ae(p, 0, j), De(p, j);
+    he(p, 0, j), De(p, j);
   }
   function ce(p, j, E, N, q, o1, O, t1, F, Z) {
-    var c1 = -q, r1, D, A1, p1, K, f1, d1 = 1;
-    for (D = 0, A1 = 0; A1 < E.length; ++A1)
-      D += E[A1];
-    for (r1 = I(D + 1), D = 0, f1 = 0, A1 = 0; A1 < E.length; ++A1) {
+    var c1 = -q, r1, D, h1, p1, K, f1, d1 = 1;
+    for (D = 0, h1 = 0; h1 < E.length; ++h1)
+      D += E[h1];
+    for (r1 = I(D + 1), D = 0, f1 = 0, h1 = 0; h1 < E.length; ++h1) {
       var s1 = f1;
-      for (f1 += E[A1], p1 = E[A1] - 1, K = 0; K < E[A1]; p1 = K++) {
+      for (f1 += E[h1], p1 = E[h1] - 1, K = 0; K < E[h1]; p1 = K++) {
         var w1 = K, k1 = p1;
         j[s1 + p1].y != j[s1 + K].y && (r1[D].invert = 0, j[s1 + p1].y > j[s1 + K].y && (r1[D].invert = 1, w1 = p1, k1 = K), r1[D].x0 = j[s1 + w1].x * N + o1, r1[D].y0 = (j[s1 + w1].y * c1 + O) * d1, r1[D].x1 = j[s1 + k1].x * N + o1, r1[D].y1 = (j[s1 + k1].y * c1 + O) * d1, ++D);
       }
@@ -20384,10 +20370,10 @@ var Un = /* @__PURE__ */ function() {
     )) : p.push({ x: o1, y: O })), 1;
   }
   function le(p, j, E, N, q, o1, O, t1, F, Z, c1) {
-    var r1 = N - j, D = q - E, A1 = o1 - N, p1 = O - q, K = t1 - o1, f1 = F - O, d1 = t1 - j, s1 = F - E, w1 = m(r1 * r1 + D * D) + m(A1 * A1 + p1 * p1) + m(K * K + f1 * f1), k1 = m(d1 * d1 + s1 * s1), B1 = w1 * w1 - k1 * k1;
+    var r1 = N - j, D = q - E, h1 = o1 - N, p1 = O - q, K = t1 - o1, f1 = F - O, d1 = t1 - j, s1 = F - E, w1 = m(r1 * r1 + D * D) + m(h1 * h1 + p1 * p1) + m(K * K + f1 * f1), k1 = m(d1 * d1 + s1 * s1), B1 = w1 * w1 - k1 * k1;
     if (!(c1 > 16))
       if (B1 > Z) {
-        var O1 = (j + N) / 2, U1 = (E + q) / 2, j1 = (N + o1) / 2, L1 = (q + O) / 2, T1 = (o1 + t1) / 2, Y1 = (O + F) / 2, ne = (O1 + j1) / 2, he = (U1 + L1) / 2, re = (j1 + T1) / 2, Me = (L1 + Y1) / 2, z1 = (ne + re) / 2, Ee = (he + Me) / 2;
+        var O1 = (j + N) / 2, U1 = (E + q) / 2, j1 = (N + o1) / 2, L1 = (q + O) / 2, T1 = (o1 + t1) / 2, Y1 = (O + F) / 2, ne = (O1 + j1) / 2, Ae = (U1 + L1) / 2, re = (j1 + T1) / 2, Me = (L1 + Y1) / 2, z1 = (ne + re) / 2, Ee = (Ae + Me) / 2;
         le(
           p,
           j,
@@ -20395,7 +20381,7 @@ var Un = /* @__PURE__ */ function() {
           O1,
           U1,
           ne,
-          he,
+          Ae,
           z1,
           Ee,
           Z,
@@ -20473,7 +20459,7 @@ var Un = /* @__PURE__ */ function() {
   }
   function a2(p) {
     var j = {};
-    if (!h1(j, p, 0))
+    if (!A1(j, p, 0))
       return null;
     var E = be(j);
     return j.ascent = E.ascent, j.descent = E.descent, j.linegap = E.linegap, j;
@@ -20493,7 +20479,7 @@ var Un = /* @__PURE__ */ function() {
       };
       Qe(D, 0.35, t1, q, o1, 0, 0, F.x0, F.y0);
     }
-    var A1 = pe(p, O);
+    var h1 = pe(p, O);
     return {
       glyph: O,
       pixels: r1,
@@ -20501,7 +20487,7 @@ var Un = /* @__PURE__ */ function() {
       height: c1,
       top: -F.y0,
       left: F.x0,
-      advance: h(A1.advanceWidth * q)
+      advance: A(h1.advanceWidth * q)
     };
   }
   function Le(p, j, E, N) {
@@ -20511,7 +20497,7 @@ var Un = /* @__PURE__ */ function() {
       return null;
     var t1 = ie(p, O), F = pe(p, O), Z = 0, c1 = 0, r1 = [];
     if (t1)
-      for (var D = 0, A1 = t1.length; D < A1; D++) {
+      for (var D = 0, h1 = t1.length; D < h1; D++) {
         var p1 = t1[D], K;
         if (p1.type == c)
           K = { type: "M", x: p1.x * q, y: p1.y * o1 };
@@ -20574,8 +20560,25 @@ const Oo = {
   FontLib: pt,
   BWIPJS_VERSION: Ul,
   BWIPP_VERSION: Sl
-};
-class Xl {
+}, Jl = `#label.f89x36 {
+  flex-direction: row;
+  width: 79mm;
+  height: 32mm;
+  margin: 2.5mm 0 0 3mm;
+}
+#label.f89x36 .logo.vertical {
+  display: block;
+}
+#label.f89x36 .logo.horizontal {
+  display: none;
+}
+#label.f89x36 .block3 {
+  writing-mode: sideways-lr;
+}
+
+/*# sourceMappingURL=89x36.css.map */
+`;
+class Wl {
   constructor(f) {
     Qo(this, "config", {
       unique_code: null,
@@ -20599,13 +20602,20 @@ class Xl {
       v.fonts.ready.then(() => {
         setTimeout(() => {
           f.contentWindow.print();
-        }, 500);
+        }, 1e3);
       });
     }), v.head.appendChild(d);
-    const y = document.createElement("style");
-    y.innerText = "html { font-family: 'Roboto Condensed', 'Roboto', sans-serif; } html, body { margin: 0; padding: 0; } @page { size: auto; margin: 0; }", v.body.appendChild(y);
-    const g = new Ho(this.config);
-    v.body.appendChild(g);
+    function y(A) {
+      let [w, m] = A.split("x");
+      return {
+        width: w || null,
+        height: m || null
+      };
+    }
+    const g = y(this.config.size), h = document.createElement("style");
+    h.innerText = `html { font-family: 'Roboto Condensed', 'Roboto', sans-serif; } html, body { margin: 0; padding: 0; } @page { size: ${g.width}mm ${g.height}mm; margin: 0; }`, v.body.appendChild(h);
+    const b = new Ho(this.config);
+    v.body.appendChild(b);
   }
 }
 class Ho extends HTMLElement {
@@ -20617,6 +20627,7 @@ class Ho extends HTMLElement {
     d.textContent = `
       :host { font-family: 'Roboto Condensed', 'Roboto', sans-serif; }
       ${Sf}
+      ${Jl}
     `, this.shadowRoot.appendChild(d), this.shadowRoot.appendChild(v);
     const y = "f";
     this.shadowRoot.querySelector("#label").className = y.concat(this.config.size.trim()), this.shadowRoot.querySelector(".logo.vertical").src = Pf, this.shadowRoot.querySelector(".logo.horizontal").src = Uf, this.setTextContent(".title", this.config.title), this.setTextContent(".author", this.config.author), this.setTextContent(".unique-code", this.config.unique_code), this.setTextContent(".internal-code", `#${this.config.internal_code}`), this.setTextContent(".isbn", `ISBN ${this.config.isbn}`), Oo.toCanvas(this.shadowRoot.querySelector(".qrcode"), {
@@ -20634,5 +20645,5 @@ class Ho extends HTMLElement {
 }
 customElements.define("biblio-label", Ho);
 export {
-  Xl as BookLabel
+  Wl as BookLabel
 };

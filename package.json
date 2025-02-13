@@ -1,7 +1,7 @@
 {
 	"name": "bibliogram-booklabel",
 	"private": true,
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"description": "A JavaScript library for generating and printing book labels",
 	"main": "./dist/booklabel.umd.cjs",
@@ -14,7 +14,7 @@
 	"scripts": {
 		"dev": "vite",
 		"preview": "vite preview",
-		"build:css": "sass src/bibliolabel.scss src/bibliolabel.css",
+		"build:css": "sass src/bibliolabel.scss src/bibliolabel.css && sass src/label-sizes:src/label-sizes",
   	"build": "npm run build:css && vite build"
 	},
 	"devDependencies": {

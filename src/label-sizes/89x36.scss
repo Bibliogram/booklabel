@@ -1,0 +1,20 @@
+#label {
+  &.f89x36 {
+    flex-direction: row;
+    width: 79mm;
+    height: 32mm;
+    margin: 2.5mm 0 0 3mm;
+
+    .logo.vertical {
+      display: block;
+    }
+
+    .logo.horizontal {
+      display: none;
+    }
+
+    .block3 {
+      writing-mode: sideways-lr;
+    }
+  }
+}
