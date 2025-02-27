@@ -95,7 +95,7 @@ class BookLabelElement extends HTMLElement {
 
     BwipJs.toCanvas(this.shadowRoot.querySelector(".qrcode"), {
       bcid: 'qrcode',
-      text: `https://backoffice.bibliogram.it/locate/hex/${this.config.unique_code}`
+      text: `https://locate.bibliogram.it/buid/${this.config.unique_code}`
     });
     BwipJs.toCanvas(this.shadowRoot.querySelector(".barcode"), {
       bcid: 'code128',

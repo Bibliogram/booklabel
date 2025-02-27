@@ -1,7 +1,7 @@
 {
 	"name": "bibliogram-booklabel",
 	"private": true,
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"type": "module",
 	"description": "A JavaScript library for generating and printing Bibliogram's book labels",
 	"main": "./dist/booklabel.js",

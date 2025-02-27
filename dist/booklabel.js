@@ -20441,7 +20441,7 @@ class Ho extends HTMLElement {
     const y = "f";
     this.shadowRoot.querySelector("#label").className = y.concat(this.config.size.trim()), this.shadowRoot.querySelector(".logo.vertical").src = Pf, this.shadowRoot.querySelector(".logo.horizontal").src = Uf, this.setTextContent(".title", this.config.title), this.setTextContent(".author", this.config.author), this.setTextContent(".unique-code", this.config.unique_code), this.setTextContent(".internal-code", `#${this.config.internal_code}`), this.setTextContent(".isbn", `ISBN ${this.config.isbn}`), Oo.toCanvas(this.shadowRoot.querySelector(".qrcode"), {
       bcid: "qrcode",
-      text: `https://backoffice.bibliogram.it/locate/hex/${this.config.unique_code}`
+      text: `https://locate.bibliogram.it/buid/${this.config.unique_code}`
     }), Oo.toCanvas(this.shadowRoot.querySelector(".barcode"), {
       bcid: "code128",
       text: this.config.unique_code,
